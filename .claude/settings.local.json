@@ -1,8 +1,17 @@
 {
   "permissions": {
     "allow": [
-      "Bash(python3 *)",
-      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8501)"
+      "Bash(npm --version)",
+      "Bash(pnpm create *)",
+      "Bash(pnpm install *)",
+      "Bash(pnpm add *)",
+      "Bash(npx tailwindcss *)",
+      "Bash(npx tsc *)",
+      "Bash(npx vite *)"
     ]
-  }
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "databricks"
+  ]
 }

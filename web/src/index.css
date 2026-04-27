@@ -1,0 +1,135 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap");
+
+:root {
+  color-scheme: dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background: #060b14;
+  color: #e2eaf6;
+  font-family: "Inter", system-ui, sans-serif;
+  letter-spacing: -0.005em;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+@layer utilities {
+  .glow-teal { text-shadow: 0 0 12px rgba(0,212,170,0.7); }
+  .glow-red  { text-shadow: 0 0 14px rgba(239,68,68,0.75); }
+  .glow-amber{ text-shadow: 0 0 12px rgba(245,158,11,0.65); }
+  .glow-purple { text-shadow: 0 0 12px rgba(139,92,246,0.7); }
+
+  .text-display {
+    font-weight: 800;
+    letter-spacing: -0.03em;
+  }
+
+  .scanlines {
+    background-image: repeating-linear-gradient(
+      0deg, transparent, transparent 2px,
+      rgba(0,0,0,0.06) 2px, rgba(0,0,0,0.06) 4px
+    );
+  }
+
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(30,45,66,0.18) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(30,45,66,0.18) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* ambient radial glows */
+  .ambient-glow::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 12% 18%, rgba(0,212,170,0.06), transparent 40%),
+      radial-gradient(circle at 88% 8%, rgba(139,92,246,0.05), transparent 35%),
+      radial-gradient(circle at 70% 90%, rgba(59,130,246,0.05), transparent 40%);
+    z-index: 0;
+  }
+}
+
+/* Hide scrollbar visual chrome but keep scroll */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: #1e2d42;
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover { background: #2a3f5e; }
+
+/* Range input dark theme */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  background: #1e2d42;
+  border-radius: 4px;
+  outline: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #00d4aa;
+  cursor: pointer;
+  box-shadow: 0 0 0 4px rgba(0,212,170,0.15);
+}
+input[type="range"]::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #00d4aa;
+  cursor: pointer;
+  border: none;
+}
+
+/* recharts tooltip overrides */
+.recharts-default-tooltip {
+  background: #0d1521 !important;
+  border: 1px solid #2a3f5e !important;
+  border-radius: 8px !important;
+  color: #e2eaf6 !important;
+}
+.recharts-tooltip-label,
+.recharts-tooltip-item {
+  color: #e2eaf6 !important;
+}
+
+/* pulsing dot */
+@keyframes dot-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.5; }
+}
+.dot-pulse { animation: dot-pulse 1.6s ease-in-out infinite; }
+
+/* shimmer */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.shimmer {
+  background: linear-gradient(90deg, transparent, rgba(0,212,170,0.2), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s linear infinite;
+}
