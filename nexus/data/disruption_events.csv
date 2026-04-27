@@ -1,0 +1,351 @@
+event_id,timestamp,port_id,port_name,disruption_type,description,severity,duration_hours,affected_shipments,economic_loss_usd,cascade_nodes,r_number,recovery_hours,antibody_match,detection_method,status
+DIS-0001,2023-12-20 00:00,LK-CMB,Colombo,customs_delay,Customs clearance delay — documentation backlog,0.523,48,121,446588,2,2.13,64,AB-0002,document_intel,resolved
+DIS-0002,2024-09-26 00:00,IN-JNPT,Nhava Sheva (JNPT),customs_delay,Customs clearance delay — documentation backlog,0.627,24,157,1516762,1,1.23,47,AB-0002,immune_memory,monitoring
+DIS-0003,2023-06-09 00:00,ZA-DUR,Durban,equipment_failure,Crane/equipment failure — berth throughput reduced,0.717,24,156,1290663,4,3.22,52,AB-0003,sensor_network,ongoing
+DIS-0004,2025-03-15 00:00,ZA-DUR,Durban,equipment_failure,Crane/equipment failure — berth throughput reduced,0.543,12,352,4772471,3,1.5,18,AB-0002,manual,ongoing
+DIS-0005,2025-01-25 00:00,IN-KOL,Kolkata Port,labor_strike,Labor union strike — port operations halted,0.727,48,356,806105,1,2.28,102,AB-0004,crowdsource,monitoring
+DIS-0006,2023-11-13 00:00,TH-LCH,Laem Chabang,equipment_failure,Crane/equipment failure — berth throughput reduced,0.541,168,254,2124763,3,2.13,321,AB-0005,immune_memory,monitoring
+DIS-0007,2023-05-07 00:00,IN-KND,Kandla Port,geopolitical_tension,Geopolitical tension — route advisory issued,0.866,120,433,1248699,7,2.23,269,AB-0002,immune_memory,ongoing
+DIS-0008,2025-04-29 00:00,IN-KOC,Kochi Port,fuel_price_spike,Fuel price spike — bunker surcharge increased,0.398,48,498,5399410,0,1.16,101,AB-0001,document_intel,resolved
+DIS-0009,2024-06-26 00:00,CN-SZX,Shenzhen,weather_cyclone,Cyclone warning — vessel rerouting required,0.878,24,20,298479,3,0.9,45,AB-0005,sensor_network,resolved
+DIS-0010,2024-08-20 00:00,IN-KOL,Kolkata Port,cyber_attack,Cyber attack on port community system,0.797,48,106,737580,3,1.08,110,AB-0002,immune_memory,resolved
+DIS-0011,2023-09-22 00:00,DE-HAM,Hamburg,weather_cyclone,Cyclone warning — vessel rerouting required,0.944,12,373,4823306,7,0.57,25,AB-0002,sensor_network,ongoing
+DIS-0012,2025-01-18 00:00,US-LAX,Los Angeles,cyber_attack,Cyber attack on port community system,0.587,120,158,793400,3,2.95,177,AB-0003,sensor_network,ongoing
+DIS-0013,2023-12-27 00:00,ZA-DUR,Durban,geopolitical_tension,Geopolitical tension — route advisory issued,0.832,8,385,5711548,5,2.5,10,AB-0005,immune_memory,resolved
+DIS-0014,2024-01-12 00:00,TH-LCH,Laem Chabang,pandemic_restriction,Pandemic-related port restriction,0.556,24,275,913265,0,3.18,43,AB-0003,immune_memory,ongoing
+DIS-0015,2023-12-10 00:00,CN-SHA,Shanghai,customs_delay,Customs clearance delay — documentation backlog,0.44,48,314,4385556,1,0.89,58,AB-0005,sensor_network,monitoring
+DIS-0016,2023-01-02 00:00,CN-SHA,Shanghai,labor_strike,Labor union strike — port operations halted,0.736,48,266,1261705,2,3.11,85,NEW,sensor_network,ongoing
+DIS-0017,2024-12-31 00:00,IN-VIZ,Visakhapatnam Port,fuel_price_spike,Fuel price spike — bunker surcharge increased,0.613,24,277,1599296,4,2.33,46,AB-0004,crowdsource,ongoing
+DIS-0018,2023-10-10 00:00,CN-SZX,Shenzhen,cyber_attack,Cyber attack on port community system,0.791,72,148,807053,3,1.13,164,NEW,document_intel,resolved
+DIS-0019,2023-04-21 00:00,IN-PAR,Paradip Port,labor_strike,Labor union strike — port operations halted,0.72,336,389,4627609,2,1.54,745,AB-0005,crowdsource,resolved
+DIS-0020,2023-04-15 00:00,IN-MUN,Mundra Port,container_shortage,Container shortage — 40ft HC unavailable,0.655,336,460,6221627,5,2.19,687,AB-0001,crowdsource,resolved
+DIS-0021,2024-05-18 00:00,JP-YOK,Yokohama,customs_delay,Customs clearance delay — documentation backlog,0.423,12,24,299659,2,0.65,27,AB-0005,immune_memory,monitoring
+DIS-0022,2023-07-13 00:00,IN-HAZ,Hazira Port,port_congestion,Port congestion — vessel queuing exceeds 48h,0.654,12,188,826928,3,2.06,29,NEW,immune_memory,resolved
+DIS-0023,2023-04-07 00:00,DE-HAM,Hamburg,customs_delay,Customs clearance delay — documentation backlog,0.442,4,315,1359633,1,0.46,5,AB-0002,immune_memory,resolved
+DIS-0024,2023-05-05 00:00,IN-KND,Kandla Port,cyber_attack,Cyber attack on port community system,0.736,120,309,2816206,2,2.22,181,AB-0003,sensor_network,resolved
+DIS-0025,2024-10-26 00:00,IN-VIZ,Visakhapatnam Port,geopolitical_tension,Geopolitical tension — route advisory issued,0.819,72,405,5539932,3,3.01,100,AB-0001,crowdsource,resolved
+DIS-0026,2025-03-10 00:00,LK-CMB,Colombo,warehouse_fire,Warehouse fire — cargo damaged/destroyed,0.949,48,198,2258789,1,1.31,86,NEW,crowdsource,monitoring
+DIS-0027,2024-10-05 00:00,LK-CMB,Colombo,weather_cyclone,Cyclone warning — vessel rerouting required,0.891,48,207,1923509,8,3.33,90,AB-0005,crowdsource,resolved
+DIS-0028,2024-05-01 00:00,US-LAX,Los Angeles,port_congestion,Port congestion — vessel queuing exceeds 48h,0.776,48,466,4166325,6,2.62,74,AB-0005,immune_memory,resolved
+DIS-0029,2024-12-13 00:00,IN-MUN,Mundra Port,geopolitical_tension,Geopolitical tension — route advisory issued,0.902,12,107,1292743,4,1.03,20,AB-0005,crowdsource,resolved
+DIS-0030,2024-02-13 00:00,KR-BUS,Busan,cyber_attack,Cyber attack on port community system,0.794,48,340,911878,2,0.58,90,AB-0004,sensor_network,resolved
+DIS-0031,2024-06-28 00:00,ZA-DUR,Durban,weather_cyclone,Cyclone warning — vessel rerouting required,0.9,168,315,2252413,4,1.24,304,AB-0004,manual,resolved
+DIS-0032,2024-01-28 00:00,IN-HAZ,Hazira Port,geopolitical_tension,Geopolitical tension — route advisory issued,0.775,336,34,163557,1,1.99,546,AB-0005,immune_memory,resolved
+DIS-0033,2023-11-15 00:00,CN-SHA,Shanghai,geopolitical_tension,Geopolitical tension — route advisory issued,0.944,168,71,592716,3,1.54,234,AB-0002,immune_memory,ongoing
+DIS-0034,2023-12-09 00:00,CN-SZX,Shenzhen,labor_strike,Labor union strike — port operations halted,0.846,12,481,1214428,8,2.73,25,AB-0002,manual,ongoing
+DIS-0035,2023-02-07 00:00,IN-VIZ,Visakhapatnam Port,labor_strike,Labor union strike — port operations halted,0.82,12,92,642058,4,2.32,24,AB-0002,immune_memory,resolved
+DIS-0036,2023-01-30 00:00,IN-HAZ,Hazira Port,warehouse_fire,Warehouse fire — cargo damaged/destroyed,0.687,24,431,2574645,6,1.92,33,AB-0002,sensor_network,monitoring
+DIS-0037,2023-05-02 00:00,NL-RTM,Rotterdam,rail_disruption,Rail network disruption — ICD connectivity lost,0.59,24,71,558373,3,2.02,31,AB-0002,manual,ongoing
+DIS-0038,2024-04-17 00:00,US-NYC,New York/New Jersey,warehouse_fire,Warehouse fire — cargo damaged/destroyed,0.906,24,485,1947329,1,1.01,34,AB-0004,immune_memory,resolved
+DIS-0039,2024-01-29 00:00,CN-SZX,Shenzhen,fuel_price_spike,Fuel price spike — bunker surcharge increased,0.509,12,292,2906616,0,2.61,28,AB-0002,sensor_network,resolved
+DIS-0040,2024-06-03 00:00,CN-NGB,Ningbo,equipment_failure,Crane/equipment failure — berth throughput reduced,0.446,168,112,1621117,1,1.17,419,AB-0002,document_intel,ongoing
+DIS-0041,2024-12-18 00:00,ZA-DUR,Durban,port_congestion,Port congestion — vessel queuing exceeds 48h,0.733,72,78,639087,7,3.26,177,NEW,immune_memory,resolved
+DIS-0042,2024-12-07 00:00,CN-NGB,Ningbo,weather_cyclone,Cyclone warning — vessel rerouting required,0.79,168,60,402742,6,2.07,281,NEW,sensor_network,resolved
+DIS-0043,2023-11-09 00:00,NL-RTM,Rotterdam,rail_disruption,Rail network disruption — ICD connectivity lost,0.623,8,175,1736714,2,2.76,14,NEW,manual,resolved
+DIS-0044,2023-03-27 00:00,IN-KOC,Kochi Port,port_congestion,Port congestion — vessel queuing exceeds 48h,0.78,4,268,1600177,1,1.91,5,AB-0005,sensor_network,resolved
+DIS-0045,2023-04-16 00:00,IN-KOL,Kolkata Port,labor_strike,Labor union strike — port operations halted,0.529,168,256,2393454,1,1.44,359,AB-0004,crowdsource,resolved
+DIS-0046,2024-02-07 00:00,NL-RTM,Rotterdam,container_shortage,Container shortage — 40ft HC unavailable,0.446,48,97,632074,1,0.73,84,AB-0004,sensor_network,ongoing
+DIS-0047,2024-06-17 00:00,IN-KOC,Kochi Port,fuel_price_spike,Fuel price spike — bunker surcharge increased,0.42,12,414,2472065,1,0.99,21,AB-0001,manual,resolved
+DIS-0048,2024-11-22 00:00,LK-CMB,Colombo,fuel_price_spike,Fuel price spike — bunker surcharge increased,0.351,120,165,1841101,1,1.2,202,AB-0002,sensor_network,resolved
+DIS-0049,2023-10-31 00:00,ZA-DUR,Durban,geopolitical_tension,Geopolitical tension — route advisory issued,0.842,12,426,3411664,5,0.8,16,AB-0002,sensor_network,resolved
+DIS-0050,2023-01-29 00:00,IN-PAR,Paradip Port,fuel_price_spike,Fuel price spike — bunker surcharge increased,0.278,72,383,4156832,1,0.62,134,AB-0005,sensor_network,ongoing
+DIS-0051,2024-06-15 00:00,DE-HAM,Hamburg,customs_delay,Customs clearance delay — documentation backlog,0.673,48,32,154045,1,3.46,60,AB-0005,sensor_network,resolved
+DIS-0052,2024-10-18 00:00,JP-YOK,Yokohama,warehouse_fire,Warehouse fire — cargo damaged/destroyed,0.872,48,368,2998032,8,1.61,104,AB-0005,sensor_network,resolved
+DIS-0053,2023-10-29 00:00,AE-DXB,Dubai (Jebel Ali),rail_disruption,Rail network disruption — ICD connectivity lost,0.489,72,189,2558566,0,0.48,135,NEW,sensor_network,resolved
+DIS-0054,2023-09-13 00:00,US-LAX,Los Angeles,container_shortage,Container shortage — 40ft HC unavailable,0.68,48,171,1774850,7,1.33,96,AB-0001,document_intel,ongoing
+DIS-0055,2024-10-12 00:00,IN-KND,Kandla Port,port_congestion,Port congestion — vessel queuing exceeds 48h,0.786,168,426,1348144,1,1.95,342,NEW,sensor_network,monitoring
+DIS-0056,2023-03-06 00:00,AE-DXB,Dubai (Jebel Ali),labor_strike,Labor union strike — port operations halted,0.805,8,264,1970824,6,1.04,14,AB-0004,manual,resolved
+DIS-0057,2023-05-29 00:00,IN-JNPT,Nhava Sheva (JNPT),weather_cyclone,Cyclone warning — vessel rerouting required,0.846,120,176,1809707,4,0.84,273,AB-0001,immune_memory,monitoring
+DIS-0058,2023-10-16 00:00,CN-SZX,Shenzhen,weather_cyclone,Cyclone warning — vessel rerouting required,1.0,48,472,4936232,4,2.37,104,AB-0004,document_intel,resolved
+DIS-0059,2025-04-30 00:00,KR-BUS,Busan,cyber_attack,Cyber attack on port community system,0.624,72,471,6220791,2,1.49,104,AB-0004,sensor_network,ongoing
+DIS-0060,2024-01-10 00:00,IN-PAR,Paradip Port,weather_cyclone,Cyclone warning — vessel rerouting required,0.782,24,163,1986395,5,0.52,29,AB-0001,manual,resolved
+DIS-0061,2024-12-03 00:00,IN-TUT,Tuticorin Port,labor_strike,Labor union strike — port operations halted,0.775,48,255,1640818,7,0.51,101,NEW,sensor_network,resolved
+DIS-0062,2025-01-20 00:00,IN-JNPT,Nhava Sheva (JNPT),equipment_failure,Crane/equipment failure — berth throughput reduced,0.435,8,445,2544317,2,0.57,11,NEW,immune_memory,ongoing
+DIS-0063,2023-03-04 00:00,LK-CMB,Colombo,container_shortage,Container shortage — 40ft HC unavailable,0.555,72,306,3503214,3,1.39,150,NEW,sensor_network,resolved
+DIS-0064,2024-02-16 00:00,IN-CHN,Chennai Port,equipment_failure,Crane/equipment failure — berth throughput reduced,0.481,48,148,1685774,3,0.3,87,AB-0001,document_intel,resolved
+DIS-0065,2023-01-17 00:00,IN-JNPT,Nhava Sheva (JNPT),cyber_attack,Cyber attack on port community system,0.817,48,208,484793,7,1.97,96,AB-0001,manual,monitoring
+DIS-0066,2024-12-28 00:00,NL-RTM,Rotterdam,fuel_price_spike,Fuel price spike — bunker surcharge increased,0.379,24,192,913877,1,0.72,57,AB-0002,manual,monitoring
+DIS-0067,2024-11-18 00:00,DE-HAM,Hamburg,weather_cyclone,Cyclone warning — vessel rerouting required,1.0,24,245,1156092,2,2.57,37,AB-0005,document_intel,resolved
+DIS-0068,2023-12-15 00:00,SG-SIN,Singapore,weather_cyclone,Cyclone warning — vessel rerouting required,0.825,168,95,389466,3,1.95,337,AB-0003,crowdsource,resolved
+DIS-0069,2023-05-21 00:00,IN-MUN,Mundra Port,pandemic_restriction,Pandemic-related port restriction,0.554,72,387,3291608,2,3.33,136,AB-0004,sensor_network,ongoing
+DIS-0070,2024-08-22 00:00,IN-KND,Kandla Port,rail_disruption,Rail network disruption — ICD connectivity lost,0.505,168,457,6208980,2,2.4,375,AB-0003,crowdsource,resolved
+DIS-0071,2023-06-12 00:00,KR-BUS,Busan,equipment_failure,Crane/equipment failure — berth throughput reduced,0.706,12,360,974674,3,2.73,29,AB-0005,immune_memory,ongoing
+DIS-0072,2023-11-01 00:00,US-NYC,New York/New Jersey,container_shortage,Container shortage — 40ft HC unavailable,0.424,72,142,1721044,0,0.83,117,AB-0001,sensor_network,ongoing
+DIS-0073,2025-01-23 00:00,KR-BUS,Busan,port_congestion,Port congestion — vessel queuing exceeds 48h,0.768,120,410,1092153,3,1.84,283,NEW,immune_memory,resolved
+DIS-0074,2023-10-09 00:00,IN-KND,Kandla Port,weather_cyclone,Cyclone warning — vessel rerouting required,0.883,24,353,1918917,6,2.39,40,AB-0005,sensor_network,resolved
+DIS-0075,2025-03-22 00:00,MY-PTG,Port Klang,pandemic_restriction,Pandemic-related port restriction,0.681,24,333,1087350,1,3.4,40,NEW,sensor_network,monitoring
+DIS-0076,2023-07-29 00:00,IN-TUT,Tuticorin Port,port_congestion,Port congestion — vessel queuing exceeds 48h,0.791,72,400,4047740,5,0.98,99,AB-0004,sensor_network,resolved
+DIS-0077,2025-03-01 00:00,AE-DXB,Dubai (Jebel Ali),warehouse_fire,Warehouse fire — cargo damaged/destroyed,0.784,4,103,1103797,4,3.49,9,AB-0005,crowdsource,ongoing
+DIS-0078,2023-11-23 00:00,IN-KOC,Kochi Port,cyber_attack,Cyber attack on port community system,0.628,72,167,1794198,2,3.08,158,AB-0002,immune_memory,resolved
+DIS-0079,2024-07-24 00:00,IN-TUT,Tuticorin Port,cyber_attack,Cyber attack on port community system,0.563,24,49,165428,1,0.52,42,NEW,manual,resolved
+DIS-0080,2024-10-29 00:00,CN-NGB,Ningbo,fuel_price_spike,Fuel price spike — bunker surcharge increased,0.527,72,115,580826,1,2.65,101,AB-0003,manual,monitoring
+DIS-0081,2024-08-18 00:00,IN-KOL,Kolkata Port,weather_cyclone,Cyclone warning — vessel rerouting required,0.87,48,500,3236506,2,3.29,112,NEW,sensor_network,monitoring
+DIS-0082,2023-08-20 00:00,SG-SIN,Singapore,fuel_price_spike,Fuel price spike — bunker surcharge increased,0.265,72,146,1722727,0,0.49,174,AB-0004,immune_memory,resolved
+DIS-0083,2024-09-15 00:00,US-LAX,Los Angeles,cyber_attack,Cyber attack on port community system,0.73,12,192,591129,8,1.81,29,AB-0001,document_intel,resolved
+DIS-0084,2023-12-28 00:00,NL-RTM,Rotterdam,pandemic_restriction,Pandemic-related port restriction,0.828,48,176,2075722,2,2.34,99,AB-0002,immune_memory,resolved
+DIS-0085,2024-12-01 00:00,IN-CHN,Chennai Port,warehouse_fire,Warehouse fire — cargo damaged/destroyed,0.961,12,102,1348612,1,3.24,15,AB-0001,crowdsource,resolved
+DIS-0086,2025-04-29 00:00,US-LAX,Los Angeles,pandemic_restriction,Pandemic-related port restriction,0.652,24,158,1177532,6,3.5,47,AB-0001,immune_memory,monitoring
+DIS-0087,2024-10-02 00:00,US-LAX,Los Angeles,container_shortage,Container shortage — 40ft HC unavailable,0.566,48,280,2685844,0,1.81,81,AB-0001,crowdsource,resolved
+DIS-0088,2025-01-23 00:00,KR-BUS,Busan,port_congestion,Port congestion — vessel queuing exceeds 48h,0.713,72,490,3156277,2,3.41,114,AB-0004,immune_memory,resolved
+DIS-0089,2023-09-30 00:00,IN-PAR,Paradip Port,warehouse_fire,Warehouse fire — cargo damaged/destroyed,1.0,72,30,342059,6,1.67,166,AB-0004,sensor_network,resolved
+DIS-0090,2024-04-01 00:00,IN-CHN,Chennai Port,cyber_attack,Cyber attack on port community system,0.726,8,282,754142,5,1.2,14,AB-0003,document_intel,resolved
+DIS-0091,2023-02-18 00:00,IN-HAZ,Hazira Port,port_congestion,Port congestion — vessel queuing exceeds 48h,0.784,48,163,2415405,2,2.38,72,AB-0004,sensor_network,ongoing
+DIS-0092,2024-07-25 00:00,CN-NGB,Ningbo,weather_cyclone,Cyclone warning — vessel rerouting required,0.917,24,67,201989,8,1.76,44,AB-0002,manual,monitoring
+DIS-0093,2024-01-23 00:00,IN-KOL,Kolkata Port,equipment_failure,Crane/equipment failure — berth throughput reduced,0.519,72,393,4074038,2,3.27,93,AB-0005,crowdsource,resolved
+DIS-0094,2024-11-23 00:00,CN-NGB,Ningbo,fuel_price_spike,Fuel price spike — bunker surcharge increased,0.453,24,151,1461120,0,1.03,59,AB-0005,document_intel,resolved
+DIS-0095,2024-09-20 00:00,SG-SIN,Singapore,weather_cyclone,Cyclone warning — vessel rerouting required,0.974,24,421,3795910,3,3.0,49,NEW,sensor_network,resolved
+DIS-0096,2024-02-02 00:00,IN-MUN,Mundra Port,geopolitical_tension,Geopolitical tension — route advisory issued,0.757,24,46,519029,6,3.36,48,AB-0005,document_intel,monitoring
+DIS-0097,2023-09-21 00:00,IN-KND,Kandla Port,pandemic_restriction,Pandemic-related port restriction,0.77,72,250,1909225,3,2.32,145,AB-0003,crowdsource,resolved
+DIS-0098,2025-04-20 00:00,IN-HAZ,Hazira Port,labor_strike,Labor union strike — port operations halted,0.66,24,243,1522237,2,0.63,34,AB-0005,sensor_network,ongoing
+DIS-0099,2023-07-25 00:00,KR-BUS,Busan,cyber_attack,Cyber attack on port community system,0.831,72,100,1139572,8,2.54,174,AB-0003,sensor_network,resolved
+DIS-0100,2023-12-16 00:00,IN-KND,Kandla Port,container_shortage,Container shortage — 40ft HC unavailable,0.466,72,421,1504117,2,0.84,138,AB-0003,crowdsource,resolved
+DIS-0101,2024-02-22 00:00,US-LAX,Los Angeles,customs_delay,Customs clearance delay — documentation backlog,0.659,48,198,2006953,5,1.88,113,AB-0002,sensor_network,monitoring
+DIS-0102,2024-10-23 00:00,AE-DXB,Dubai (Jebel Ali),pandemic_restriction,Pandemic-related port restriction,0.661,12,432,4659939,1,2.02,21,AB-0002,sensor_network,resolved
+DIS-0103,2023-01-13 00:00,KR-BUS,Busan,container_shortage,Container shortage — 40ft HC unavailable,0.647,72,390,5171285,8,0.78,104,AB-0003,sensor_network,resolved
+DIS-0104,2023-03-11 00:00,IN-PAR,Paradip Port,port_congestion,Port congestion — vessel queuing exceeds 48h,0.576,168,165,1268327,1,0.74,287,AB-0002,immune_memory,monitoring
+DIS-0105,2023-09-08 00:00,IN-KOC,Kochi Port,pandemic_restriction,Pandemic-related port restriction,0.673,24,255,3176437,2,1.37,44,AB-0001,sensor_network,resolved
+DIS-0106,2023-04-15 00:00,US-LAX,Los Angeles,equipment_failure,Crane/equipment failure — berth throughput reduced,0.678,336,469,6141962,1,0.68,537,AB-0003,document_intel,resolved
+DIS-0107,2024-02-02 00:00,IN-TUT,Tuticorin Port,customs_delay,Customs clearance delay — documentation backlog,0.458,72,42,526153,0,0.38,177,AB-0001,document_intel,resolved
+DIS-0108,2024-05-23 00:00,US-NYC,New York/New Jersey,customs_delay,Customs clearance delay — documentation backlog,0.552,72,431,2974383,1,1.83,176,AB-0003,document_intel,resolved
+DIS-0109,2024-07-28 00:00,CN-SHA,Shanghai,customs_delay,Customs clearance delay — documentation backlog,0.487,24,97,210448,0,1.16,31,AB-0002,immune_memory,ongoing
+DIS-0110,2024-03-26 00:00,LK-CMB,Colombo,port_congestion,Port congestion — vessel queuing exceeds 48h,0.886,24,36,148780,6,1.46,31,AB-0003,sensor_network,resolved
+DIS-0111,2024-11-19 00:00,AE-DXB,Dubai (Jebel Ali),geopolitical_tension,Geopolitical tension — route advisory issued,0.718,72,243,1635350,7,0.73,162,AB-0005,sensor_network,ongoing
+DIS-0112,2023-08-30 00:00,CN-SHA,Shanghai,warehouse_fire,Warehouse fire — cargo damaged/destroyed,1.0,168,245,3531060,5,1.2,359,AB-0003,manual,resolved
+DIS-0113,2024-03-16 00:00,US-LAX,Los Angeles,rail_disruption,Rail network disruption — ICD connectivity lost,0.664,72,37,206323,8,2.6,169,AB-0004,immune_memory,resolved
+DIS-0114,2023-01-21 00:00,IN-PAR,Paradip Port,container_shortage,Container shortage — 40ft HC unavailable,0.619,48,59,220504,5,1.2,63,AB-0004,sensor_network,resolved
+DIS-0115,2023-01-04 00:00,CN-NGB,Ningbo,weather_cyclone,Cyclone warning — vessel rerouting required,0.902,120,61,575387,3,2.8,276,AB-0005,document_intel,monitoring
+DIS-0116,2024-03-11 00:00,IN-TUT,Tuticorin Port,pandemic_restriction,Pandemic-related port restriction,0.563,12,213,446525,2,1.5,19,AB-0004,document_intel,monitoring
+DIS-0117,2024-06-19 00:00,CN-NGB,Ningbo,weather_cyclone,Cyclone warning — vessel rerouting required,0.743,8,332,2083058,6,2.86,14,AB-0002,immune_memory,ongoing
+DIS-0118,2023-08-06 00:00,IN-KOC,Kochi Port,pandemic_restriction,Pandemic-related port restriction,0.603,24,63,842046,2,3.45,56,AB-0001,immune_memory,resolved
+DIS-0119,2023-08-14 00:00,IN-PAR,Paradip Port,pandemic_restriction,Pandemic-related port restriction,0.528,12,313,1373470,3,2.6,22,AB-0001,immune_memory,ongoing
+DIS-0120,2023-10-11 00:00,IN-MUN,Mundra Port,labor_strike,Labor union strike — port operations halted,0.789,8,100,680219,5,1.33,17,AB-0003,crowdsource,resolved
+DIS-0121,2023-03-16 00:00,SG-SIN,Singapore,warehouse_fire,Warehouse fire — cargo damaged/destroyed,1.0,72,177,995601,5,1.23,94,AB-0001,manual,monitoring
+DIS-0122,2023-12-03 00:00,NL-RTM,Rotterdam,rail_disruption,Rail network disruption — ICD connectivity lost,0.819,72,163,506137,1,2.99,104,AB-0005,crowdsource,resolved
+DIS-0123,2023-04-09 00:00,US-LAX,Los Angeles,pandemic_restriction,Pandemic-related port restriction,0.647,72,287,2029241,3,2.66,157,AB-0003,immune_memory,resolved
+DIS-0124,2024-11-15 00:00,SG-SIN,Singapore,rail_disruption,Rail network disruption — ICD connectivity lost,0.293,336,475,6984414,1,1.06,694,NEW,document_intel,resolved
+DIS-0125,2023-09-04 00:00,ZA-DUR,Durban,fuel_price_spike,Fuel price spike — bunker surcharge increased,0.218,12,478,1270395,3,0.98,15,AB-0004,immune_memory,resolved
+DIS-0126,2025-03-05 00:00,MY-PTG,Port Klang,fuel_price_spike,Fuel price spike — bunker surcharge increased,0.517,4,344,4162582,1,1.05,7,AB-0005,sensor_network,monitoring
+DIS-0127,2024-01-10 00:00,IN-KOL,Kolkata Port,warehouse_fire,Warehouse fire — cargo damaged/destroyed,0.911,24,457,4977620,1,1.33,59,AB-0004,immune_memory,ongoing
+DIS-0128,2024-12-16 00:00,IN-PAR,Paradip Port,weather_cyclone,Cyclone warning — vessel rerouting required,0.852,120,231,2880226,5,0.95,287,AB-0002,document_intel,resolved
+DIS-0129,2023-11-24 00:00,IN-TUT,Tuticorin Port,geopolitical_tension,Geopolitical tension — route advisory issued,0.774,120,205,1616054,6,2.92,213,AB-0001,document_intel,resolved
+DIS-0130,2023-03-19 00:00,IN-MUN,Mundra Port,customs_delay,Customs clearance delay — documentation backlog,0.539,8,488,1156926,0,3.49,19,AB-0005,manual,resolved
+DIS-0131,2024-11-23 00:00,IN-KOC,Kochi Port,warehouse_fire,Warehouse fire — cargo damaged/destroyed,0.941,48,139,1037218,2,2.29,69,AB-0005,immune_memory,resolved
+DIS-0132,2024-02-04 00:00,JP-YOK,Yokohama,rail_disruption,Rail network disruption — ICD connectivity lost,0.679,168,226,1697707,3,2.93,206,AB-0003,immune_memory,ongoing
+DIS-0133,2023-08-07 00:00,IN-KND,Kandla Port,warehouse_fire,Warehouse fire — cargo damaged/destroyed,0.823,168,475,4493464,3,1.85,416,AB-0002,manual,ongoing
+DIS-0134,2024-03-05 00:00,MY-PTG,Port Klang,fuel_price_spike,Fuel price spike — bunker surcharge increased,0.524,12,417,2813194,2,2.67,22,AB-0001,immune_memory,resolved
+DIS-0135,2025-04-19 00:00,KR-BUS,Busan,customs_delay,Customs clearance delay — documentation backlog,0.682,24,241,2361781,7,2.1,57,AB-0002,document_intel,ongoing
+DIS-0136,2023-04-30 00:00,TH-LCH,Laem Chabang,weather_cyclone,Cyclone warning — vessel rerouting required,0.942,336,348,2025010,8,0.86,453,NEW,immune_memory,monitoring
+DIS-0137,2023-12-05 00:00,IN-MUN,Mundra Port,container_shortage,Container shortage — 40ft HC unavailable,0.511,168,207,2376330,3,2.01,286,AB-0004,sensor_network,resolved
+DIS-0138,2024-06-06 00:00,IN-HAZ,Hazira Port,warehouse_fire,Warehouse fire — cargo damaged/destroyed,0.952,336,42,538322,2,2.35,516,NEW,immune_memory,resolved
+DIS-0139,2025-04-17 00:00,IN-HAZ,Hazira Port,weather_cyclone,Cyclone warning — vessel rerouting required,1.0,8,103,727465,6,0.55,14,AB-0004,document_intel,monitoring
+DIS-0140,2024-03-25 00:00,IN-KOC,Kochi Port,rail_disruption,Rail network disruption — ICD connectivity lost,0.624,12,428,6050799,4,0.69,19,AB-0005,immune_memory,ongoing
+DIS-0141,2025-03-17 00:00,IN-VIZ,Visakhapatnam Port,cyber_attack,Cyber attack on port community system,0.561,48,395,1852315,1,3.05,88,AB-0005,sensor_network,ongoing
+DIS-0142,2023-05-24 00:00,NL-RTM,Rotterdam,equipment_failure,Crane/equipment failure — berth throughput reduced,0.638,48,366,1130959,2,1.59,60,AB-0003,manual,ongoing
+DIS-0143,2023-05-18 00:00,ZA-DUR,Durban,customs_delay,Customs clearance delay — documentation backlog,0.754,120,252,882535,2,1.17,176,AB-0003,immune_memory,resolved
+DIS-0144,2023-09-21 00:00,MY-PTG,Port Klang,container_shortage,Container shortage — 40ft HC unavailable,0.523,24,461,4352196,0,3.43,40,NEW,immune_memory,resolved
+DIS-0145,2025-03-20 00:00,JP-YOK,Yokohama,labor_strike,Labor union strike — port operations halted,0.711,48,125,990888,7,2.03,106,AB-0002,crowdsource,resolved
+DIS-0146,2025-04-15 00:00,IN-PAR,Paradip Port,warehouse_fire,Warehouse fire — cargo damaged/destroyed,0.958,12,36,369929,3,0.53,27,AB-0005,manual,resolved
+DIS-0147,2023-08-17 00:00,NL-RTM,Rotterdam,warehouse_fire,Warehouse fire — cargo damaged/destroyed,0.832,4,232,2128139,8,3.14,9,AB-0002,document_intel,resolved
+DIS-0148,2025-04-17 00:00,JP-YOK,Yokohama,warehouse_fire,Warehouse fire — cargo damaged/destroyed,1.0,48,199,1579236,3,3.22,65,AB-0003,crowdsource,resolved
+DIS-0149,2025-02-08 00:00,IN-KND,Kandla Port,cyber_attack,Cyber attack on port community system,0.66,48,402,2240125,4,1.96,101,AB-0003,manual,monitoring
+DIS-0150,2024-02-04 00:00,US-LAX,Los Angeles,cyber_attack,Cyber attack on port community system,0.659,24,165,1767534,5,2.16,38,NEW,immune_memory,resolved
+DIS-0151,2025-02-21 00:00,CN-SHA,Shanghai,warehouse_fire,Warehouse fire — cargo damaged/destroyed,0.688,72,122,1440789,2,2.89,93,AB-0002,crowdsource,resolved
+DIS-0152,2023-09-29 00:00,US-LAX,Los Angeles,customs_delay,Customs clearance delay — documentation backlog,0.427,72,269,1532406,0,1.02,116,AB-0001,crowdsource,resolved
+DIS-0153,2024-03-04 00:00,CN-NGB,Ningbo,labor_strike,Labor union strike — port operations halted,0.751,12,316,2351054,7,0.76,28,NEW,immune_memory,resolved
+DIS-0154,2024-10-11 00:00,IN-KOL,Kolkata Port,container_shortage,Container shortage — 40ft HC unavailable,0.715,8,56,449794,5,2.87,15,NEW,manual,ongoing
+DIS-0155,2024-06-20 00:00,SG-SIN,Singapore,pandemic_restriction,Pandemic-related port restriction,0.658,168,191,2002098,6,1.12,284,AB-0004,crowdsource,resolved
+DIS-0156,2025-04-16 00:00,IN-HAZ,Hazira Port,container_shortage,Container shortage — 40ft HC unavailable,0.644,24,367,1567619,5,3.19,51,AB-0003,immune_memory,resolved
+DIS-0157,2023-08-10 00:00,US-LAX,Los Angeles,container_shortage,Container shortage — 40ft HC unavailable,0.736,12,492,1429826,6,1.79,19,AB-0003,immune_memory,ongoing
+DIS-0158,2024-12-02 00:00,LK-CMB,Colombo,fuel_price_spike,Fuel price spike — bunker surcharge increased,0.363,8,101,1306946,1,1.15,17,AB-0002,immune_memory,resolved
+DIS-0159,2023-08-03 00:00,US-NYC,New York/New Jersey,equipment_failure,Crane/equipment failure — berth throughput reduced,0.651,48,105,1557383,8,2.79,92,NEW,sensor_network,monitoring
+DIS-0160,2023-01-25 00:00,MY-PTG,Port Klang,container_shortage,Container shortage — 40ft HC unavailable,0.691,120,297,1237430,6,2.13,271,AB-0003,document_intel,monitoring
+DIS-0161,2023-06-08 00:00,CN-SZX,Shenzhen,cyber_attack,Cyber attack on port community system,0.719,48,475,4475675,4,1.66,60,AB-0002,crowdsource,resolved
+DIS-0162,2024-01-28 00:00,IN-TUT,Tuticorin Port,fuel_price_spike,Fuel price spike — bunker surcharge increased,0.414,72,173,1196463,0,1.0,105,AB-0002,sensor_network,monitoring
+DIS-0163,2024-10-24 00:00,KR-BUS,Busan,port_congestion,Port congestion — vessel queuing exceeds 48h,0.37,12,466,3159811,2,0.87,28,AB-0003,document_intel,resolved
+DIS-0164,2024-11-06 00:00,CN-SZX,Shenzhen,port_congestion,Port congestion — vessel queuing exceeds 48h,0.697,48,370,4725562,6,3.39,92,NEW,manual,ongoing
+DIS-0165,2023-10-30 00:00,SG-SIN,Singapore,equipment_failure,Crane/equipment failure — berth throughput reduced,0.451,48,382,5098738,0,0.9,75,AB-0002,sensor_network,resolved
+DIS-0166,2023-12-19 00:00,IN-PAR,Paradip Port,pandemic_restriction,Pandemic-related port restriction,0.68,12,348,3192890,6,1.42,16,AB-0004,immune_memory,resolved
+DIS-0167,2024-08-16 00:00,CN-NGB,Ningbo,geopolitical_tension,Geopolitical tension — route advisory issued,0.816,12,251,2962766,5,1.19,26,AB-0002,document_intel,resolved
+DIS-0168,2023-02-18 00:00,IN-HAZ,Hazira Port,customs_delay,Customs clearance delay — documentation backlog,0.323,24,309,730224,1,0.87,32,AB-0002,sensor_network,resolved
+DIS-0169,2024-05-01 00:00,TH-LCH,Laem Chabang,fuel_price_spike,Fuel price spike — bunker surcharge increased,0.364,48,402,2688215,2,1.19,62,AB-0005,immune_memory,ongoing
+DIS-0170,2024-06-24 00:00,MY-PTG,Port Klang,port_congestion,Port congestion — vessel queuing exceeds 48h,0.579,72,318,3248074,2,2.31,143,AB-0003,sensor_network,resolved
+DIS-0171,2024-04-16 00:00,IN-KND,Kandla Port,warehouse_fire,Warehouse fire — cargo damaged/destroyed,0.905,120,288,1564691,7,0.81,230,AB-0003,manual,ongoing
+DIS-0172,2024-06-25 00:00,NL-RTM,Rotterdam,rail_disruption,Rail network disruption — ICD connectivity lost,0.564,168,178,854011,1,2.52,253,NEW,sensor_network,ongoing
+DIS-0173,2024-02-21 00:00,TH-LCH,Laem Chabang,labor_strike,Labor union strike — port operations halted,0.698,72,328,2809668,1,3.18,123,NEW,document_intel,ongoing
+DIS-0174,2023-12-31 00:00,IN-HAZ,Hazira Port,fuel_price_spike,Fuel price spike — bunker surcharge increased,0.604,12,301,865682,6,1.98,18,AB-0004,document_intel,resolved
+DIS-0175,2023-02-28 00:00,CN-SZX,Shenzhen,customs_delay,Customs clearance delay — documentation backlog,0.39,48,338,3025088,2,0.52,72,AB-0001,sensor_network,resolved
+DIS-0176,2023-01-03 00:00,CN-SHA,Shanghai,fuel_price_spike,Fuel price spike — bunker surcharge increased,0.419,120,388,4958342,2,0.99,281,AB-0001,crowdsource,resolved
+DIS-0177,2023-09-08 00:00,IN-KOC,Kochi Port,geopolitical_tension,Geopolitical tension — route advisory issued,0.773,48,216,519195,8,1.88,71,AB-0003,sensor_network,resolved
+DIS-0178,2024-10-04 00:00,JP-YOK,Yokohama,equipment_failure,Crane/equipment failure — berth throughput reduced,0.621,8,294,2853079,6,1.74,15,AB-0003,document_intel,monitoring
+DIS-0179,2023-02-06 00:00,US-NYC,New York/New Jersey,warehouse_fire,Warehouse fire — cargo damaged/destroyed,0.918,120,389,1452915,8,0.52,209,AB-0001,document_intel,ongoing
+DIS-0180,2023-07-29 00:00,IN-TUT,Tuticorin Port,warehouse_fire,Warehouse fire — cargo damaged/destroyed,0.981,120,21,157858,7,1.56,162,AB-0005,sensor_network,ongoing
+DIS-0181,2023-04-15 00:00,CN-NGB,Ningbo,customs_delay,Customs clearance delay — documentation backlog,0.681,48,278,2740249,8,1.59,73,AB-0005,sensor_network,resolved
+DIS-0182,2025-01-24 00:00,IN-KOC,Kochi Port,warehouse_fire,Warehouse fire — cargo damaged/destroyed,0.905,24,353,1981350,1,3.44,55,AB-0002,document_intel,ongoing
+DIS-0183,2023-04-27 00:00,IN-CHN,Chennai Port,weather_cyclone,Cyclone warning — vessel rerouting required,0.847,4,209,763660,2,2.46,8,AB-0003,immune_memory,monitoring
+DIS-0184,2025-02-16 00:00,SG-SIN,Singapore,customs_delay,Customs clearance delay — documentation backlog,0.724,168,19,133573,4,1.3,356,NEW,manual,resolved
+DIS-0185,2024-06-15 00:00,IN-MUN,Mundra Port,container_shortage,Container shortage — 40ft HC unavailable,0.614,72,118,1707722,1,2.08,110,AB-0003,immune_memory,monitoring
+DIS-0186,2024-08-23 00:00,LK-CMB,Colombo,labor_strike,Labor union strike — port operations halted,0.812,8,245,3306813,8,1.26,14,AB-0004,immune_memory,resolved
+DIS-0187,2025-01-01 00:00,ZA-DUR,Durban,container_shortage,Container shortage — 40ft HC unavailable,0.612,12,304,821694,1,2.3,19,AB-0005,crowdsource,resolved
+DIS-0188,2024-06-27 00:00,ZA-DUR,Durban,geopolitical_tension,Geopolitical tension — route advisory issued,0.667,12,462,5831146,6,1.72,27,NEW,immune_memory,resolved
+DIS-0189,2023-06-05 00:00,NL-RTM,Rotterdam,weather_cyclone,Cyclone warning — vessel rerouting required,0.639,48,87,761869,1,1.09,82,AB-0001,crowdsource,resolved
+DIS-0190,2024-02-19 00:00,NL-RTM,Rotterdam,rail_disruption,Rail network disruption — ICD connectivity lost,0.405,48,71,547545,2,1.09,77,AB-0001,immune_memory,monitoring
+DIS-0191,2023-09-28 00:00,IN-PAR,Paradip Port,container_shortage,Container shortage — 40ft HC unavailable,0.693,48,500,7108042,1,1.77,58,AB-0001,sensor_network,resolved
+DIS-0192,2023-02-17 00:00,KR-BUS,Busan,fuel_price_spike,Fuel price spike — bunker surcharge increased,0.29,48,483,7041113,0,1.13,81,NEW,document_intel,resolved
+DIS-0193,2023-12-23 00:00,MY-PTG,Port Klang,weather_cyclone,Cyclone warning — vessel rerouting required,0.881,24,48,332271,7,2.02,55,AB-0003,document_intel,resolved
+DIS-0194,2024-03-31 00:00,ZA-DUR,Durban,fuel_price_spike,Fuel price spike — bunker surcharge increased,0.349,24,242,2217375,1,0.48,56,AB-0002,document_intel,resolved
+DIS-0195,2024-05-25 00:00,IN-PAR,Paradip Port,weather_cyclone,Cyclone warning — vessel rerouting required,0.765,8,430,6334906,8,3.21,14,AB-0004,document_intel,resolved
+DIS-0196,2023-03-14 00:00,CN-SZX,Shenzhen,geopolitical_tension,Geopolitical tension — route advisory issued,0.817,72,399,5264044,2,2.37,138,AB-0002,document_intel,resolved
+DIS-0197,2023-01-07 00:00,MY-PTG,Port Klang,cyber_attack,Cyber attack on port community system,0.782,168,451,4326081,8,0.55,239,AB-0005,immune_memory,resolved
+DIS-0198,2023-12-18 00:00,IN-VIZ,Visakhapatnam Port,equipment_failure,Crane/equipment failure — berth throughput reduced,0.532,48,167,2407181,2,2.84,101,AB-0001,sensor_network,monitoring
+DIS-0199,2024-12-18 00:00,JP-YOK,Yokohama,rail_disruption,Rail network disruption — ICD connectivity lost,0.546,48,409,1703044,1,2.96,97,NEW,immune_memory,ongoing
+DIS-0200,2024-06-22 00:00,CN-SZX,Shenzhen,equipment_failure,Crane/equipment failure — berth throughput reduced,0.507,24,33,222110,1,2.79,30,AB-0005,manual,resolved
+DIS-0201,2023-06-02 00:00,MY-PTG,Port Klang,labor_strike,Labor union strike — port operations halted,0.622,48,125,479670,6,1.31,111,AB-0003,document_intel,ongoing
+DIS-0202,2023-01-11 00:00,IN-KOL,Kolkata Port,weather_cyclone,Cyclone warning — vessel rerouting required,0.77,4,338,3848576,8,2.13,4,AB-0005,crowdsource,resolved
+DIS-0203,2023-09-18 00:00,IN-PAR,Paradip Port,fuel_price_spike,Fuel price spike — bunker surcharge increased,0.485,12,90,1206436,1,0.76,24,NEW,immune_memory,monitoring
+DIS-0204,2024-05-12 00:00,TH-LCH,Laem Chabang,equipment_failure,Crane/equipment failure — berth throughput reduced,0.516,12,469,1093958,0,1.15,22,AB-0001,sensor_network,ongoing
+DIS-0205,2025-04-06 00:00,US-LAX,Los Angeles,pandemic_restriction,Pandemic-related port restriction,0.608,48,311,2817003,6,1.46,115,AB-0002,immune_memory,ongoing
+DIS-0206,2025-03-03 00:00,MY-PTG,Port Klang,labor_strike,Labor union strike — port operations halted,0.765,24,221,921665,8,1.81,54,AB-0005,sensor_network,resolved
+DIS-0207,2024-07-27 00:00,MY-PTG,Port Klang,labor_strike,Labor union strike — port operations halted,0.533,48,33,249426,1,0.55,83,AB-0003,crowdsource,resolved
+DIS-0208,2024-02-16 00:00,LK-CMB,Colombo,equipment_failure,Crane/equipment failure — berth throughput reduced,0.461,48,226,3137211,1,0.69,74,AB-0003,sensor_network,resolved
+DIS-0209,2024-12-18 00:00,IN-VIZ,Visakhapatnam Port,weather_cyclone,Cyclone warning — vessel rerouting required,0.822,8,423,5326137,6,0.64,17,NEW,sensor_network,resolved
+DIS-0210,2023-04-16 00:00,ZA-DUR,Durban,warehouse_fire,Warehouse fire — cargo damaged/destroyed,0.636,72,161,1332556,3,1.71,125,AB-0005,sensor_network,ongoing
+DIS-0211,2024-09-24 00:00,MY-PTG,Port Klang,port_congestion,Port congestion — vessel queuing exceeds 48h,0.505,72,478,4464503,1,2.71,149,AB-0003,document_intel,resolved
+DIS-0212,2024-09-15 00:00,IN-KND,Kandla Port,weather_cyclone,Cyclone warning — vessel rerouting required,0.91,72,385,3699387,2,1.91,135,AB-0003,sensor_network,monitoring
+DIS-0213,2024-10-27 00:00,AE-DXB,Dubai (Jebel Ali),cyber_attack,Cyber attack on port community system,0.892,12,323,738363,7,2.4,22,NEW,immune_memory,ongoing
+DIS-0214,2025-01-28 00:00,IN-HAZ,Hazira Port,rail_disruption,Rail network disruption — ICD connectivity lost,0.782,4,170,2036928,5,0.91,7,AB-0005,document_intel,ongoing
+DIS-0215,2023-05-16 00:00,TH-LCH,Laem Chabang,customs_delay,Customs clearance delay — documentation backlog,0.49,4,175,2391631,2,0.68,8,AB-0005,immune_memory,resolved
+DIS-0216,2023-09-18 00:00,NL-RTM,Rotterdam,port_congestion,Port congestion — vessel queuing exceeds 48h,0.435,12,390,3879844,1,0.43,18,AB-0001,sensor_network,ongoing
+DIS-0217,2025-01-11 00:00,TH-LCH,Laem Chabang,customs_delay,Customs clearance delay — documentation backlog,0.473,12,272,2140451,3,0.7,14,AB-0001,sensor_network,monitoring
+DIS-0218,2024-11-10 00:00,DE-HAM,Hamburg,pandemic_restriction,Pandemic-related port restriction,0.656,72,118,1125896,2,0.57,101,AB-0004,crowdsource,monitoring
+DIS-0219,2023-06-01 00:00,US-LAX,Los Angeles,pandemic_restriction,Pandemic-related port restriction,0.732,72,334,2002637,1,1.78,117,AB-0002,sensor_network,monitoring
+DIS-0220,2024-07-22 00:00,CN-SZX,Shenzhen,equipment_failure,Crane/equipment failure — berth throughput reduced,0.501,24,108,1167599,0,1.22,29,AB-0003,immune_memory,resolved
+DIS-0221,2024-05-02 00:00,IN-JNPT,Nhava Sheva (JNPT),labor_strike,Labor union strike — port operations halted,0.658,48,403,4165084,4,1.59,108,AB-0004,sensor_network,resolved
+DIS-0222,2025-04-25 00:00,US-NYC,New York/New Jersey,port_congestion,Port congestion — vessel queuing exceeds 48h,0.62,24,259,1215812,5,1.78,43,AB-0001,sensor_network,resolved
+DIS-0223,2025-03-09 00:00,KR-BUS,Busan,customs_delay,Customs clearance delay — documentation backlog,0.673,336,278,3968343,5,1.53,605,NEW,sensor_network,monitoring
+DIS-0224,2024-07-16 00:00,LK-CMB,Colombo,port_congestion,Port congestion — vessel queuing exceeds 48h,0.67,24,423,6284845,7,3.12,47,AB-0002,immune_memory,resolved
+DIS-0225,2023-08-21 00:00,CN-SHA,Shanghai,warehouse_fire,Warehouse fire — cargo damaged/destroyed,0.877,24,486,5550570,2,2.75,31,AB-0005,manual,resolved
+DIS-0226,2023-01-26 00:00,KR-BUS,Busan,weather_cyclone,Cyclone warning — vessel rerouting required,0.817,8,487,6141258,5,1.2,15,AB-0002,sensor_network,resolved
+DIS-0227,2023-05-29 00:00,CN-SHA,Shanghai,container_shortage,Container shortage — 40ft HC unavailable,0.603,24,273,3972537,3,2.46,51,AB-0003,sensor_network,monitoring
+DIS-0228,2023-11-10 00:00,AE-DXB,Dubai (Jebel Ali),cyber_attack,Cyber attack on port community system,0.654,4,284,905016,5,1.15,6,AB-0004,immune_memory,resolved
+DIS-0229,2024-05-03 00:00,MY-PTG,Port Klang,cyber_attack,Cyber attack on port community system,0.713,24,62,657559,6,2.12,54,AB-0005,crowdsource,monitoring
+DIS-0230,2023-01-02 00:00,NL-RTM,Rotterdam,geopolitical_tension,Geopolitical tension — route advisory issued,0.854,48,432,3536253,4,2.53,102,AB-0002,sensor_network,ongoing
+DIS-0231,2024-02-26 00:00,CN-SZX,Shenzhen,port_congestion,Port congestion — vessel queuing exceeds 48h,0.646,24,157,2211253,2,0.93,36,AB-0001,document_intel,monitoring
+DIS-0232,2023-09-04 00:00,IN-VIZ,Visakhapatnam Port,warehouse_fire,Warehouse fire — cargo damaged/destroyed,0.854,12,128,1066702,4,2.45,15,AB-0005,crowdsource,resolved
+DIS-0233,2023-06-26 00:00,MY-PTG,Port Klang,port_congestion,Port congestion — vessel queuing exceeds 48h,0.632,48,158,737160,6,0.93,83,AB-0003,manual,resolved
+DIS-0234,2024-06-19 00:00,CN-SZX,Shenzhen,pandemic_restriction,Pandemic-related port restriction,0.569,4,251,2643424,3,3.33,7,AB-0001,sensor_network,monitoring
+DIS-0235,2023-12-03 00:00,US-LAX,Los Angeles,warehouse_fire,Warehouse fire — cargo damaged/destroyed,0.981,4,78,1114258,8,1.71,4,AB-0002,document_intel,resolved
+DIS-0236,2024-07-12 00:00,IN-VIZ,Visakhapatnam Port,weather_cyclone,Cyclone warning — vessel rerouting required,0.841,48,468,3173144,6,2.38,77,AB-0004,document_intel,resolved
+DIS-0237,2025-01-07 00:00,NL-RTM,Rotterdam,cyber_attack,Cyber attack on port community system,0.625,72,365,4241302,4,3.18,104,AB-0004,document_intel,resolved
+DIS-0238,2023-02-05 00:00,CN-SHA,Shanghai,geopolitical_tension,Geopolitical tension — route advisory issued,0.764,168,485,1446011,7,1.34,400,AB-0002,sensor_network,resolved
+DIS-0239,2023-08-06 00:00,MY-PTG,Port Klang,port_congestion,Port congestion — vessel queuing exceeds 48h,0.536,24,255,745085,1,0.96,41,NEW,immune_memory,resolved
+DIS-0240,2025-02-20 00:00,IN-JNPT,Nhava Sheva (JNPT),rail_disruption,Rail network disruption — ICD connectivity lost,0.492,48,176,1633966,3,0.43,74,AB-0005,crowdsource,resolved
+DIS-0241,2023-10-11 00:00,LK-CMB,Colombo,container_shortage,Container shortage — 40ft HC unavailable,0.547,120,90,220149,0,3.2,269,AB-0001,sensor_network,monitoring
+DIS-0242,2023-11-13 00:00,IN-HAZ,Hazira Port,customs_delay,Customs clearance delay — documentation backlog,0.562,120,158,1074047,3,1.93,286,AB-0002,sensor_network,resolved
+DIS-0243,2025-04-01 00:00,AE-DXB,Dubai (Jebel Ali),rail_disruption,Rail network disruption — ICD connectivity lost,0.52,336,71,259608,3,2.55,793,AB-0002,immune_memory,resolved
+DIS-0244,2023-11-01 00:00,US-LAX,Los Angeles,geopolitical_tension,Geopolitical tension — route advisory issued,0.797,168,255,657819,3,1.43,361,AB-0004,sensor_network,resolved
+DIS-0245,2024-07-08 00:00,CN-SHA,Shanghai,cyber_attack,Cyber attack on port community system,0.714,8,380,5489889,7,2.17,14,AB-0004,immune_memory,resolved
+DIS-0246,2023-03-03 00:00,IN-PAR,Paradip Port,rail_disruption,Rail network disruption — ICD connectivity lost,0.456,48,481,3293239,1,1.09,69,AB-0003,sensor_network,resolved
+DIS-0247,2024-11-03 00:00,IN-KOC,Kochi Port,customs_delay,Customs clearance delay — documentation backlog,0.676,48,146,699326,4,2.85,70,AB-0004,immune_memory,resolved
+DIS-0248,2023-01-15 00:00,NL-RTM,Rotterdam,fuel_price_spike,Fuel price spike — bunker surcharge increased,0.291,48,227,2499697,3,0.5,91,NEW,crowdsource,resolved
+DIS-0249,2023-05-14 00:00,IN-MUN,Mundra Port,container_shortage,Container shortage — 40ft HC unavailable,0.628,48,389,2107463,5,3.24,83,AB-0003,sensor_network,monitoring
+DIS-0250,2024-06-19 00:00,IN-HAZ,Hazira Port,cyber_attack,Cyber attack on port community system,0.611,48,127,1124517,1,1.16,79,AB-0001,immune_memory,resolved
+DIS-0251,2023-01-20 00:00,IN-PAR,Paradip Port,geopolitical_tension,Geopolitical tension — route advisory issued,0.743,24,212,1057255,6,0.97,35,AB-0005,manual,resolved
+DIS-0252,2024-03-13 00:00,IN-KOL,Kolkata Port,equipment_failure,Crane/equipment failure — berth throughput reduced,0.372,24,348,3259096,2,1.06,48,AB-0004,immune_memory,ongoing
+DIS-0253,2023-08-16 00:00,IN-MUN,Mundra Port,equipment_failure,Crane/equipment failure — berth throughput reduced,0.715,12,491,3890603,2,3.15,23,AB-0002,document_intel,resolved
+DIS-0254,2023-06-21 00:00,IN-MUN,Mundra Port,weather_cyclone,Cyclone warning — vessel rerouting required,0.87,24,110,589969,7,1.91,57,AB-0001,crowdsource,ongoing
+DIS-0255,2023-09-25 00:00,IN-JNPT,Nhava Sheva (JNPT),weather_cyclone,Cyclone warning — vessel rerouting required,0.942,8,411,5895616,4,1.95,14,AB-0002,immune_memory,resolved
+DIS-0256,2025-01-27 00:00,AE-DXB,Dubai (Jebel Ali),geopolitical_tension,Geopolitical tension — route advisory issued,0.851,24,145,990412,1,2.96,53,AB-0002,manual,resolved
+DIS-0257,2023-06-29 00:00,DE-HAM,Hamburg,fuel_price_spike,Fuel price spike — bunker surcharge increased,0.344,12,167,1866657,0,0.61,24,NEW,crowdsource,resolved
+DIS-0258,2024-08-01 00:00,IN-HAZ,Hazira Port,cyber_attack,Cyber attack on port community system,0.686,72,483,5801788,8,2.64,97,AB-0004,sensor_network,ongoing
+DIS-0259,2023-07-04 00:00,US-NYC,New York/New Jersey,container_shortage,Container shortage — 40ft HC unavailable,0.432,12,214,2640490,2,0.36,22,AB-0001,crowdsource,ongoing
+DIS-0260,2024-07-03 00:00,DE-HAM,Hamburg,warehouse_fire,Warehouse fire — cargo damaged/destroyed,0.959,168,87,1266960,8,1.11,334,AB-0003,sensor_network,monitoring
+DIS-0261,2023-12-20 00:00,IN-KOL,Kolkata Port,pandemic_restriction,Pandemic-related port restriction,0.77,48,462,4195585,5,3.17,70,AB-0005,manual,ongoing
+DIS-0262,2023-03-19 00:00,IN-CHN,Chennai Port,fuel_price_spike,Fuel price spike — bunker surcharge increased,0.694,72,253,2602290,8,0.53,97,AB-0003,immune_memory,resolved
+DIS-0263,2023-11-22 00:00,TH-LCH,Laem Chabang,warehouse_fire,Warehouse fire — cargo damaged/destroyed,0.984,48,125,262846,8,2.68,66,AB-0005,immune_memory,resolved
+DIS-0264,2023-09-12 00:00,CN-SHA,Shanghai,container_shortage,Container shortage — 40ft HC unavailable,0.564,48,106,333721,1,2.24,110,AB-0004,document_intel,resolved
+DIS-0265,2024-08-26 00:00,MY-PTG,Port Klang,container_shortage,Container shortage — 40ft HC unavailable,0.629,24,461,3389278,6,2.4,54,AB-0001,manual,ongoing
+DIS-0266,2025-04-11 00:00,IN-TUT,Tuticorin Port,fuel_price_spike,Fuel price spike — bunker surcharge increased,0.476,8,276,1858998,1,0.97,11,AB-0002,crowdsource,monitoring
+DIS-0267,2024-01-16 00:00,IN-KOL,Kolkata Port,fuel_price_spike,Fuel price spike — bunker surcharge increased,0.287,48,124,544972,2,0.97,76,AB-0001,immune_memory,resolved
+DIS-0268,2023-06-26 00:00,US-NYC,New York/New Jersey,fuel_price_spike,Fuel price spike — bunker surcharge increased,0.495,24,101,1181232,0,0.7,38,NEW,immune_memory,resolved
+DIS-0269,2024-01-04 00:00,CN-SZX,Shenzhen,container_shortage,Container shortage — 40ft HC unavailable,0.65,72,171,2516566,4,2.86,122,AB-0001,crowdsource,resolved
+DIS-0270,2025-03-27 00:00,JP-YOK,Yokohama,labor_strike,Labor union strike — port operations halted,0.876,336,70,503555,3,1.68,513,AB-0005,immune_memory,ongoing
+DIS-0271,2024-11-28 00:00,TH-LCH,Laem Chabang,fuel_price_spike,Fuel price spike — bunker surcharge increased,0.381,8,292,1305889,0,1.09,18,AB-0004,immune_memory,ongoing
+DIS-0272,2024-08-29 00:00,IN-KOC,Kochi Port,fuel_price_spike,Fuel price spike — bunker surcharge increased,0.401,48,184,1342389,0,0.88,119,AB-0001,immune_memory,resolved
+DIS-0273,2025-01-04 00:00,IN-KOC,Kochi Port,weather_cyclone,Cyclone warning — vessel rerouting required,0.824,48,154,362835,2,3.31,116,AB-0004,immune_memory,resolved
+DIS-0274,2024-05-31 00:00,US-LAX,Los Angeles,equipment_failure,Crane/equipment failure — berth throughput reduced,0.419,48,33,346299,1,0.6,115,AB-0004,immune_memory,resolved
+DIS-0275,2023-07-17 00:00,US-NYC,New York/New Jersey,weather_cyclone,Cyclone warning — vessel rerouting required,0.885,12,34,192163,8,2.61,19,NEW,sensor_network,monitoring
+DIS-0276,2024-10-01 00:00,IN-JNPT,Nhava Sheva (JNPT),geopolitical_tension,Geopolitical tension — route advisory issued,0.934,48,22,52197,8,1.81,86,AB-0003,sensor_network,monitoring
+DIS-0277,2023-12-02 00:00,IN-PAR,Paradip Port,pandemic_restriction,Pandemic-related port restriction,0.759,12,197,1512149,6,1.57,25,AB-0002,sensor_network,monitoring
+DIS-0278,2024-12-13 00:00,AE-DXB,Dubai (Jebel Ali),labor_strike,Labor union strike — port operations halted,0.816,12,455,5771503,7,1.98,15,AB-0004,immune_memory,monitoring
+DIS-0279,2024-10-02 00:00,IN-KND,Kandla Port,customs_delay,Customs clearance delay — documentation backlog,0.651,72,89,863032,5,0.6,86,AB-0005,sensor_network,resolved
+DIS-0280,2023-04-07 00:00,US-NYC,New York/New Jersey,pandemic_restriction,Pandemic-related port restriction,0.461,24,365,4632199,1,0.65,32,AB-0002,immune_memory,resolved
+DIS-0281,2025-01-03 00:00,NL-RTM,Rotterdam,weather_cyclone,Cyclone warning — vessel rerouting required,0.804,72,435,6249045,5,2.23,153,AB-0004,sensor_network,resolved
+DIS-0282,2023-10-29 00:00,IN-JNPT,Nhava Sheva (JNPT),fuel_price_spike,Fuel price spike — bunker surcharge increased,0.287,24,222,1654297,3,1.13,51,AB-0004,immune_memory,resolved
+DIS-0283,2024-09-30 00:00,CN-SHA,Shanghai,equipment_failure,Crane/equipment failure — berth throughput reduced,0.537,168,114,262186,2,3.15,333,AB-0003,immune_memory,resolved
+DIS-0284,2023-03-26 00:00,IN-TUT,Tuticorin Port,equipment_failure,Crane/equipment failure — berth throughput reduced,0.38,120,283,2760561,3,0.55,161,NEW,sensor_network,resolved
+DIS-0285,2024-10-07 00:00,IN-KOC,Kochi Port,cyber_attack,Cyber attack on port community system,0.831,168,333,4186045,3,0.81,351,AB-0004,crowdsource,resolved
+DIS-0286,2025-02-09 00:00,NL-RTM,Rotterdam,weather_cyclone,Cyclone warning — vessel rerouting required,0.798,120,26,116879,5,1.89,174,AB-0003,manual,resolved
+DIS-0287,2024-07-05 00:00,CN-NGB,Ningbo,labor_strike,Labor union strike — port operations halted,0.778,4,439,4433329,3,1.3,5,AB-0005,sensor_network,resolved
+DIS-0288,2023-09-28 00:00,IN-TUT,Tuticorin Port,rail_disruption,Rail network disruption — ICD connectivity lost,0.483,48,466,4333156,2,0.43,71,AB-0004,document_intel,resolved
+DIS-0289,2024-07-19 00:00,IN-VIZ,Visakhapatnam Port,pandemic_restriction,Pandemic-related port restriction,0.593,168,494,5626539,0,2.47,250,NEW,document_intel,resolved
+DIS-0290,2023-04-24 00:00,ZA-DUR,Durban,fuel_price_spike,Fuel price spike — bunker surcharge increased,0.702,12,91,1037704,3,0.96,25,AB-0001,crowdsource,resolved
+DIS-0291,2023-05-08 00:00,US-NYC,New York/New Jersey,equipment_failure,Crane/equipment failure — berth throughput reduced,0.528,24,465,1648009,0,0.86,55,NEW,document_intel,ongoing
+DIS-0292,2023-09-09 00:00,ZA-DUR,Durban,container_shortage,Container shortage — 40ft HC unavailable,0.604,24,330,2631826,3,2.16,48,AB-0001,immune_memory,monitoring
+DIS-0293,2024-01-11 00:00,MY-PTG,Port Klang,labor_strike,Labor union strike — port operations halted,0.651,8,116,977027,2,2.98,15,AB-0005,sensor_network,resolved
+DIS-0294,2023-06-24 00:00,IN-KOL,Kolkata Port,pandemic_restriction,Pandemic-related port restriction,0.707,24,26,106867,2,2.85,54,AB-0004,crowdsource,resolved
+DIS-0295,2024-12-20 00:00,US-NYC,New York/New Jersey,pandemic_restriction,Pandemic-related port restriction,0.71,168,107,976444,1,1.7,298,AB-0003,manual,resolved
+DIS-0296,2023-08-21 00:00,US-LAX,Los Angeles,equipment_failure,Crane/equipment failure — berth throughput reduced,0.478,12,487,2908449,1,0.79,20,AB-0001,sensor_network,monitoring
+DIS-0297,2023-04-26 00:00,JP-YOK,Yokohama,weather_cyclone,Cyclone warning — vessel rerouting required,0.87,24,51,698697,8,2.57,49,AB-0003,document_intel,resolved
+DIS-0298,2023-04-15 00:00,MY-PTG,Port Klang,warehouse_fire,Warehouse fire — cargo damaged/destroyed,0.871,24,467,1176579,8,1.72,55,AB-0003,document_intel,monitoring
+DIS-0299,2023-06-01 00:00,IN-HAZ,Hazira Port,fuel_price_spike,Fuel price spike — bunker surcharge increased,0.376,48,204,1864359,3,0.81,69,AB-0004,sensor_network,resolved
+DIS-0300,2023-06-20 00:00,IN-JNPT,Nhava Sheva (JNPT),customs_delay,Customs clearance delay — documentation backlog,0.429,24,68,659901,1,0.44,33,AB-0004,document_intel,resolved
+DIS-0301,2023-09-20 00:00,NL-RTM,Rotterdam,port_congestion,Port congestion — vessel queuing exceeds 48h,0.651,72,125,805445,4,1.0,122,NEW,sensor_network,resolved
+DIS-0302,2023-09-03 00:00,SG-SIN,Singapore,warehouse_fire,Warehouse fire — cargo damaged/destroyed,0.973,12,104,709964,3,2.19,27,AB-0005,immune_memory,resolved
+DIS-0303,2024-04-17 00:00,DE-HAM,Hamburg,pandemic_restriction,Pandemic-related port restriction,0.725,24,142,1904363,1,2.58,33,AB-0001,crowdsource,resolved
+DIS-0304,2025-02-13 00:00,MY-PTG,Port Klang,port_congestion,Port congestion — vessel queuing exceeds 48h,0.77,72,245,2129334,1,1.44,165,AB-0001,sensor_network,resolved
+DIS-0305,2024-03-20 00:00,SG-SIN,Singapore,container_shortage,Container shortage — 40ft HC unavailable,0.524,24,102,783280,0,0.5,45,AB-0004,immune_memory,resolved
+DIS-0306,2025-03-18 00:00,AE-DXB,Dubai (Jebel Ali),labor_strike,Labor union strike — port operations halted,0.863,336,234,3352312,2,2.4,671,AB-0005,immune_memory,monitoring
+DIS-0307,2023-02-09 00:00,CN-SHA,Shanghai,warehouse_fire,Warehouse fire — cargo damaged/destroyed,0.896,120,454,2301014,8,0.77,204,AB-0002,document_intel,resolved
+DIS-0308,2024-03-01 00:00,IN-VIZ,Visakhapatnam Port,warehouse_fire,Warehouse fire — cargo damaged/destroyed,0.728,12,190,2032527,2,0.99,23,AB-0004,immune_memory,resolved
+DIS-0309,2023-08-05 00:00,MY-PTG,Port Klang,rail_disruption,Rail network disruption — ICD connectivity lost,0.754,24,460,4505558,7,0.6,34,AB-0003,document_intel,ongoing
+DIS-0310,2024-06-22 00:00,IN-PAR,Paradip Port,equipment_failure,Crane/equipment failure — berth throughput reduced,0.58,48,346,2533242,2,2.74,60,AB-0004,sensor_network,resolved
+DIS-0311,2023-02-21 00:00,CN-SZX,Shenzhen,rail_disruption,Rail network disruption — ICD connectivity lost,0.535,168,241,1180250,0,2.83,230,AB-0003,document_intel,monitoring
+DIS-0312,2024-11-02 00:00,KR-BUS,Busan,geopolitical_tension,Geopolitical tension — route advisory issued,0.644,8,409,5292100,5,1.34,14,AB-0003,document_intel,ongoing
+DIS-0313,2025-02-04 00:00,US-LAX,Los Angeles,geopolitical_tension,Geopolitical tension — route advisory issued,0.788,24,100,287303,7,2.83,44,AB-0002,document_intel,resolved
+DIS-0314,2023-03-14 00:00,LK-CMB,Colombo,container_shortage,Container shortage — 40ft HC unavailable,0.647,24,158,2265998,2,2.76,44,AB-0001,immune_memory,resolved
+DIS-0315,2024-08-14 00:00,IN-VIZ,Visakhapatnam Port,equipment_failure,Crane/equipment failure — berth throughput reduced,0.46,24,142,629905,2,0.32,45,AB-0005,crowdsource,monitoring
+DIS-0316,2024-03-11 00:00,IN-KOC,Kochi Port,weather_cyclone,Cyclone warning — vessel rerouting required,0.749,72,309,2266384,5,0.53,156,AB-0001,document_intel,resolved
+DIS-0317,2024-04-16 00:00,IN-JNPT,Nhava Sheva (JNPT),container_shortage,Container shortage — 40ft HC unavailable,0.509,72,181,2205188,2,1.24,92,AB-0004,document_intel,resolved
+DIS-0318,2024-12-13 00:00,US-NYC,New York/New Jersey,fuel_price_spike,Fuel price spike — bunker surcharge increased,0.467,72,259,2595067,1,1.14,91,AB-0005,document_intel,resolved
+DIS-0319,2023-08-13 00:00,CN-SZX,Shenzhen,customs_delay,Customs clearance delay — documentation backlog,0.52,48,18,218018,1,0.81,115,AB-0005,immune_memory,resolved
+DIS-0320,2023-11-29 00:00,AE-DXB,Dubai (Jebel Ali),cyber_attack,Cyber attack on port community system,0.532,12,162,1797699,2,2.95,20,AB-0001,document_intel,resolved
+DIS-0321,2024-12-24 00:00,LK-CMB,Colombo,customs_delay,Customs clearance delay — documentation backlog,0.413,8,273,3968433,3,0.6,18,NEW,immune_memory,ongoing
+DIS-0322,2024-01-06 00:00,TH-LCH,Laem Chabang,labor_strike,Labor union strike — port operations halted,0.836,24,69,352568,3,3.3,58,NEW,sensor_network,resolved
+DIS-0323,2023-10-11 00:00,IN-MUN,Mundra Port,customs_delay,Customs clearance delay — documentation backlog,0.53,24,296,1715886,2,1.96,52,NEW,sensor_network,monitoring
+DIS-0324,2023-02-04 00:00,CN-SHA,Shanghai,container_shortage,Container shortage — 40ft HC unavailable,0.575,24,40,151228,1,3.2,36,NEW,document_intel,resolved
+DIS-0325,2023-03-17 00:00,IN-PAR,Paradip Port,labor_strike,Labor union strike — port operations halted,0.796,336,275,1372905,2,1.85,761,AB-0003,sensor_network,monitoring
+DIS-0326,2024-10-12 00:00,IN-VIZ,Visakhapatnam Port,geopolitical_tension,Geopolitical tension — route advisory issued,0.89,12,352,3467209,1,3.32,23,AB-0004,document_intel,resolved
+DIS-0327,2024-08-07 00:00,IN-KOC,Kochi Port,cyber_attack,Cyber attack on port community system,0.665,24,206,1422380,7,1.5,38,AB-0003,document_intel,ongoing
+DIS-0328,2023-03-01 00:00,IN-CHN,Chennai Port,cyber_attack,Cyber attack on port community system,0.71,48,278,2505361,2,3.44,119,AB-0001,sensor_network,resolved
+DIS-0329,2024-01-08 00:00,IN-MUN,Mundra Port,geopolitical_tension,Geopolitical tension — route advisory issued,0.868,4,97,1279234,7,3.17,8,AB-0003,sensor_network,resolved
+DIS-0330,2024-08-23 00:00,MY-PTG,Port Klang,rail_disruption,Rail network disruption — ICD connectivity lost,0.693,8,302,1623742,7,2.96,13,AB-0005,document_intel,resolved
+DIS-0331,2023-04-13 00:00,DE-HAM,Hamburg,warehouse_fire,Warehouse fire — cargo damaged/destroyed,0.846,336,197,684126,3,2.13,698,NEW,sensor_network,ongoing
+DIS-0332,2024-03-30 00:00,IN-KOL,Kolkata Port,fuel_price_spike,Fuel price spike — bunker surcharge increased,0.397,48,391,3633787,2,0.97,116,AB-0002,sensor_network,resolved
+DIS-0333,2025-03-13 00:00,IN-PAR,Paradip Port,port_congestion,Port congestion — vessel queuing exceeds 48h,0.63,8,110,1193611,7,1.66,15,AB-0003,immune_memory,monitoring
+DIS-0334,2023-10-19 00:00,IN-JNPT,Nhava Sheva (JNPT),fuel_price_spike,Fuel price spike — bunker surcharge increased,0.615,24,311,4239962,1,2.29,35,AB-0002,crowdsource,resolved
+DIS-0335,2023-04-07 00:00,DE-HAM,Hamburg,cyber_attack,Cyber attack on port community system,0.576,48,313,1294163,2,2.21,90,AB-0003,sensor_network,resolved
+DIS-0336,2024-05-08 00:00,IN-TUT,Tuticorin Port,container_shortage,Container shortage — 40ft HC unavailable,0.676,120,170,1978275,5,3.14,214,AB-0005,immune_memory,resolved
+DIS-0337,2023-09-16 00:00,SG-SIN,Singapore,customs_delay,Customs clearance delay — documentation backlog,0.61,72,73,426323,2,0.57,163,NEW,sensor_network,resolved
+DIS-0338,2024-05-20 00:00,KR-BUS,Busan,warehouse_fire,Warehouse fire — cargo damaged/destroyed,1.0,72,183,1170048,1,2.05,179,AB-0004,manual,resolved
+DIS-0339,2023-11-15 00:00,TH-LCH,Laem Chabang,pandemic_restriction,Pandemic-related port restriction,0.693,48,74,456969,2,2.55,59,AB-0002,document_intel,resolved
+DIS-0340,2024-11-09 00:00,MY-PTG,Port Klang,weather_cyclone,Cyclone warning — vessel rerouting required,0.851,4,278,3500321,3,2.73,5,AB-0005,immune_memory,resolved
+DIS-0341,2024-01-07 00:00,DE-HAM,Hamburg,container_shortage,Container shortage — 40ft HC unavailable,0.539,12,364,3156206,3,3.09,26,AB-0005,sensor_network,resolved
+DIS-0342,2023-07-14 00:00,ZA-DUR,Durban,equipment_failure,Crane/equipment failure — berth throughput reduced,0.624,24,198,1826750,8,2.41,34,AB-0001,sensor_network,resolved
+DIS-0343,2023-06-12 00:00,DE-HAM,Hamburg,weather_cyclone,Cyclone warning — vessel rerouting required,0.832,8,209,760171,7,2.29,10,AB-0001,crowdsource,monitoring
+DIS-0344,2025-03-15 00:00,TH-LCH,Laem Chabang,pandemic_restriction,Pandemic-related port restriction,0.657,4,183,371944,5,2.86,8,AB-0001,sensor_network,ongoing
+DIS-0345,2023-06-30 00:00,IN-CHN,Chennai Port,equipment_failure,Crane/equipment failure — berth throughput reduced,0.399,120,36,209000,3,0.43,229,AB-0004,sensor_network,resolved
+DIS-0346,2023-03-04 00:00,ZA-DUR,Durban,customs_delay,Customs clearance delay — documentation backlog,0.569,12,81,347376,3,2.38,24,AB-0005,sensor_network,resolved
+DIS-0347,2023-08-31 00:00,IN-CHN,Chennai Port,equipment_failure,Crane/equipment failure — berth throughput reduced,0.604,24,480,4848332,4,1.62,48,AB-0003,document_intel,ongoing
+DIS-0348,2023-09-17 00:00,IN-PAR,Paradip Port,fuel_price_spike,Fuel price spike — bunker surcharge increased,0.396,24,49,135209,0,0.48,59,AB-0003,immune_memory,resolved
+DIS-0349,2023-01-07 00:00,CN-NGB,Ningbo,container_shortage,Container shortage — 40ft HC unavailable,0.701,336,84,1121761,6,2.06,451,AB-0002,crowdsource,monitoring
+DIS-0350,2023-10-15 00:00,IN-PAR,Paradip Port,cyber_attack,Cyber attack on port community system,0.73,72,109,732597,6,1.24,155,AB-0004,immune_memory,resolved

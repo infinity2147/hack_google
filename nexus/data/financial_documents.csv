@@ -1,0 +1,501 @@
+doc_id,doc_type,supplier,port_id,country,route,amount,expected_amount,deviation,payment_terms,date,signals,status,anomaly_score,commodity,currency
+IN-2025-00001,Insurance Certificate,Yokohama Precision Instruments,JP-YOK,JP,JP-YOK → IN-HAZ,247403,231515,0.0686,Net 30,2025-08-08,Minor deviation from baseline,review,0.391,Pharmaceuticals,INR
+PU-2026-00002,Purchase Order,Durban Mining Corp.,ZA-DUR,ZA,ZA-DUR → IN-JNPT,514412,510826,0.007,Net 15,2026-01-22,,normal,0.032,Steel & Iron,SGD
+PU-2025-00003,Purchase Order,Rotterdam Chemicals BV,NL-RTM,NL,NL-RTM → IN-KND,63817,59925,0.0649,LC at Sight,2025-08-18,Seasonal adjustment,review,0.252,Steel & Iron,INR
+IN-2025-00004,Invoice,Bangalore Biotech Solutions,IN-BLR,IN,IN-BLR → IN-CHN,703555,705804,-0.0032,LC at Sight,2025-07-03,,normal,0.017,Medical Devices,SGD
+IN-2026-00005,Invoice,Shanghai Electronics Co. Ltd.,CN-SHA,CN,CN-SHA → IN-KND,925331,788228,0.1739,LC 60 Days,2026-03-13,Cost overrun >10%|Insurance premium adjustment,alert,0.76,Electronics,EUR
+PA-2025-00006,Packing List,Yokohama Precision Instruments,JP-YOK,JP,JP-YOK → IN-KND,309041,232376,0.3299,LC at Sight,2025-07-06,Compliance review needed|Material substitution flagged|Critical cost overrun >20%|Insurance premium spike|Sanctions list match,critical,1.0,Automobile Parts,USD
+BI-2026-00007,Bill of Lading,Bangalore Biotech Solutions,IN-BLR,IN,IN-BLR → IN-KOC,721457,592592,0.2175,Net 15,2026-03-03,Critical cost overrun >20%|Expedited shipping requested|Insurance premium spike|New intermediary entity detected|Payment terms changed,critical,1.0,Steel & Iron,EUR
+IN-2025-00008,Invoice,Bangalore Biotech Solutions,IN-BLR,IN,IN-BLR → IN-PAR,663826,627210,0.0584,LC 60 Days,2025-06-27,Seasonal adjustment,review,0.336,Pharmaceuticals,EUR
+BI-2026-00009,Bill of Lading,Singapore Tech Pte. Ltd.,SG-SIN,SG,SG-SIN → IN-KOC,453016,460730,-0.0167,Net 60,2026-02-01,,normal,0.088,Machinery,EUR
+IN-2026-00010,Insurance Certificate,Gujarat Chemical Industries,IN-MUN,IN,IN-MUN → IN-MUN,37900,35396,0.0707,Advance Payment,2026-03-14,,review,0.276,Pharmaceuticals,INR
+IN-2025-00011,Insurance Certificate,Shenzhen Micro-Tech Industries,CN-SZX,CN,CN-SZX → IN-KOC,602047,638140,-0.0566,Net 30,2025-11-21,Minor deviation from baseline,review,0.26,Agricultural Products,INR
+PA-2025-00012,Packing List,Mumbai Pharma Exports Pvt. Ltd.,IN-JNPT,IN,IN-JNPT → IN-PAR,224234,246931,-0.0919,LC 60 Days,2025-09-25,,review,0.549,Steel & Iron,INR
+PU-2025-00013,Purchase Order,Durban Mining Corp.,ZA-DUR,ZA,ZA-DUR → IN-KND,350198,360494,-0.0286,Net 45,2025-12-29,,normal,0.099,Machinery,INR
+LE-2026-00014,Letter of Credit,Gujarat Chemical Industries,IN-MUN,IN,IN-MUN → IN-PAR,243426,233007,0.0447,Advance Payment,2026-03-23,,normal,0.237,Textiles & Garments,INR
+CU-2025-00015,Customs Declaration,Tata Steel Processing,IN-MUM,IN,IN-MUM → IN-KND,60756,58831,0.0327,LC 60 Days,2025-11-18,,normal,0.181,Pharmaceuticals,INR
+PU-2025-00016,Purchase Order,Gujarat Chemical Industries,IN-MUN,IN,IN-MUN → IN-VIZ,636248,680827,-0.0655,Net 60,2025-11-14,,review,0.261,Agricultural Products,SGD
+IN-2025-00017,Invoice,Durban Mining Corp.,ZA-DUR,ZA,ZA-DUR → IN-TUT,891420,765368,0.1647,Net 15,2025-06-04,Carrier change mid-route|Minor tariff reclassification,alert,0.665,Petroleum Products,USD
+LE-2026-00018,Letter of Credit,Singapore Tech Pte. Ltd.,SG-SIN,SG,SG-SIN → IN-KOL,145804,137072,0.0637,Advance Payment,2026-01-14,Minor deviation from baseline,review,0.326,Medical Devices,SGD
+PU-2026-00019,Purchase Order,Yokohama Precision Instruments,JP-YOK,JP,JP-YOK → IN-PAR,280852,285440,-0.0161,Net 15,2026-01-15,,normal,0.063,Automobile Parts,USD
+IN-2025-00020,Insurance Certificate,Ningbo Machinery Works,CN-NGB,CN,CN-NGB → IN-CHN,111371,104860,0.0621,Net 30,2025-06-17,,review,0.328,Medical Devices,INR
+PA-2025-00021,Packing List,Ningbo Machinery Works,CN-NGB,CN,CN-NGB → IN-HAZ,88529,101351,-0.1265,LC at Sight,2025-10-28,Route surcharge detected|Cost overrun >10%|Insurance premium adjustment,alert,0.674,Electronics,EUR
+CU-2026-00022,Customs Declaration,Gujarat Chemical Industries,IN-MUN,IN,IN-MUN → IN-KOL,917736,728101,0.2605,Advance Payment,2026-03-17,Critical cost overrun >20%|Insurance premium spike|Expedited shipping requested,critical,1.0,Medical Devices,EUR
+PA-2025-00023,Packing List,Shenzhen Micro-Tech Industries,CN-SZX,CN,CN-SZX → IN-VIZ,567590,572479,-0.0085,Net 15,2025-11-22,,normal,0.028,Textiles & Garments,EUR
+LE-2025-00024,Letter of Credit,Busan Steel Trading Co.,KR-BUS,KR,KR-BUS → IN-MUN,244359,231906,0.0537,Net 15,2025-10-17,Seasonal adjustment,review,0.32,Machinery,SGD
+BI-2025-00025,Bill of Lading,Shenzhen Micro-Tech Industries,CN-SZX,CN,CN-SZX → IN-MUN,141292,142415,-0.0079,Net 30,2025-10-09,,normal,0.043,Food Products,SGD
+PU-2025-00026,Purchase Order,Shenzhen Micro-Tech Industries,CN-SZX,CN,CN-SZX → IN-VIZ,165573,158953,0.0416,Net 60,2025-11-29,,normal,0.212,Medical Devices,INR
+PU-2026-00027,Purchase Order,Shenzhen Micro-Tech Industries,CN-SZX,CN,CN-SZX → IN-KND,671553,645414,0.0405,Net 60,2026-03-17,,normal,0.214,Machinery,INR
+IN-2025-00028,Insurance Certificate,Rotterdam Chemicals BV,NL-RTM,NL,NL-RTM → IN-MUN,431511,433714,-0.0051,Net 15,2025-10-05,,normal,0.017,Electronics,INR
+PU-2025-00029,Purchase Order,Singapore Tech Pte. Ltd.,SG-SIN,SG,SG-SIN → IN-CHN,200750,307233,-0.3466,Net 30,2025-12-09,Expedited shipping requested|Insurance premium spike,critical,1.0,Electronics,USD
+IN-2025-00030,Insurance Certificate,Yokohama Precision Instruments,JP-YOK,JP,JP-YOK → IN-VIZ,482413,379630,0.2707,Net 60,2025-07-21,Compliance review needed|Material substitution flagged,critical,0.916,Textiles & Garments,SGD
+PA-2025-00031,Packing List,Dubai Petrochemicals LLC,AE-DXB,AE,AE-DXB → IN-KOL,244122,181709,0.3435,Net 60,2025-08-09,Insurance premium spike|Critical cost overrun >20%|Sanctions list match,critical,1.0,Automobile Parts,SGD
+CU-2025-00032,Customs Declaration,Dubai Petrochemicals LLC,AE-DXB,AE,AE-DXB → IN-KOL,147383,177290,-0.1687,Advance Payment,2025-11-13,Route surcharge detected,alert,0.891,Plastics,SGD
+IN-2025-00033,Invoice,Colombo Textiles Ltd.,LK-CMB,LK,LK-CMB → IN-MUN,566927,492847,0.1503,Net 45,2025-09-28,Insurance premium adjustment|Cost overrun >10%,alert,0.479,Machinery,SGD
+LE-2025-00034,Letter of Credit,Chennai Auto Components Ltd.,IN-CHN,IN,IN-CHN → IN-HAZ,283764,241425,0.1754,Net 30,2025-09-15,Cost overrun >10%|Carrier change mid-route|Quantity discrepancy,alert,0.739,Textiles & Garments,INR
+IN-2025-00035,Insurance Certificate,Tata Steel Processing,IN-MUM,IN,IN-MUM → IN-PAR,698240,643243,0.0855,Net 60,2025-07-06,,review,0.508,Agricultural Products,USD
+BI-2025-00036,Bill of Lading,Laem Chabang Seafood Processing,TH-LCH,TH,TH-LCH → IN-HAZ,511741,747031,-0.315,LC at Sight,2025-10-15,Payment terms changed|Compliance review needed|Critical cost overrun >20%,critical,1.0,Textiles & Garments,EUR
+PA-2026-00037,Packing List,Hamburg Industrial Supply GmbH,DE-HAM,DE,DE-HAM → IN-MUN,69742,90030,-0.2253,LC at Sight,2026-01-08,Payment terms changed|Critical cost overrun >20%|Sanctions list match|Expedited shipping requested,critical,1.0,Machinery,USD
+PA-2025-00038,Packing List,Shanghai Electronics Co. Ltd.,CN-SHA,CN,CN-SHA → IN-KOL,422111,321912,0.3113,Net 60,2025-08-21,Payment terms changed|Material substitution flagged|Critical cost overrun >20%|Insurance premium spike,critical,0.944,Steel & Iron,EUR
+IN-2025-00039,Invoice,Hamburg Industrial Supply GmbH,DE-HAM,DE,DE-HAM → IN-KND,338417,367945,-0.0803,Advance Payment,2025-11-24,,review,0.432,Textiles & Garments,EUR
+CU-2026-00040,Customs Declaration,Dubai Petrochemicals LLC,AE-DXB,AE,AE-DXB → IN-TUT,454460,502077,-0.0948,Advance Payment,2026-01-28,Seasonal adjustment,review,0.454,Medical Devices,USD
+LE-2025-00041,Letter of Credit,Laem Chabang Seafood Processing,TH-LCH,TH,TH-LCH → IN-KOL,287407,285085,0.0081,Net 15,2025-09-07,,normal,0.027,Medical Devices,EUR
+CU-2026-00042,Customs Declaration,Singapore Tech Pte. Ltd.,SG-SIN,SG,SG-SIN → IN-MUN,541037,539953,0.002,Net 45,2026-01-21,,normal,0.008,Electronics,EUR
+PU-2026-00043,Purchase Order,Chennai Auto Components Ltd.,IN-CHN,IN,IN-CHN → IN-KND,495220,446387,0.1094,LC 60 Days,2026-01-09,Carrier change mid-route|Cost overrun >10%,alert,0.458,Pharmaceuticals,INR
+CU-2025-00044,Customs Declaration,Shenzhen Micro-Tech Industries,CN-SZX,CN,CN-SZX → IN-TUT,241173,267719,-0.0992,Net 45,2025-08-27,,review,0.465,Agricultural Products,SGD
+BI-2025-00045,Bill of Lading,Hamburg Industrial Supply GmbH,DE-HAM,DE,DE-HAM → IN-VIZ,316876,433057,-0.2683,LC 60 Days,2025-10-17,Payment terms changed|Sanctions list match|Critical cost overrun >20%,critical,1.0,Textiles & Garments,INR
+CU-2025-00046,Customs Declaration,Chennai Auto Components Ltd.,IN-CHN,IN,IN-CHN → IN-PAR,713474,534866,0.3339,LC 60 Days,2025-12-14,Insurance premium spike|Critical cost overrun >20%|Expedited shipping requested|New intermediary entity detected,critical,1.0,Food Products,SGD
+BI-2025-00047,Bill of Lading,Ningbo Machinery Works,CN-NGB,CN,CN-NGB → IN-PAR,339884,338333,0.0046,Net 15,2025-08-02,,normal,0.026,Chemical Products,USD
+CU-2026-00048,Customs Declaration,Port Klang Palm Oil Exports,MY-PTG,MY,MY-PTG → IN-KOC,632302,666854,-0.0518,LC at Sight,2026-03-06,,review,0.227,Petroleum Products,SGD
+BI-2026-00049,Bill of Lading,Busan Steel Trading Co.,KR-BUS,KR,KR-BUS → IN-KOC,567822,521435,0.089,Net 30,2026-02-10,,review,0.499,Steel & Iron,USD
+BI-2026-00050,Bill of Lading,Hamburg Industrial Supply GmbH,DE-HAM,DE,DE-HAM → IN-HAZ,488629,510159,-0.0422,Net 30,2026-02-15,,normal,0.189,Steel & Iron,USD
+CU-2025-00051,Customs Declaration,Bangalore Biotech Solutions,IN-BLR,IN,IN-BLR → IN-KOL,875180,795247,0.1005,LC 60 Days,2025-08-09,Minor tariff reclassification|Cost overrun >10%|Quantity discrepancy,alert,0.365,Medical Devices,EUR
+CU-2026-00052,Customs Declaration,Singapore Tech Pte. Ltd.,SG-SIN,SG,SG-SIN → IN-JNPT,957245,785675,0.2184,Net 30,2026-02-03,Payment terms changed|Sanctions list match,critical,1.0,Agricultural Products,INR
+LE-2025-00053,Letter of Credit,Rotterdam Chemicals BV,NL-RTM,NL,NL-RTM → IN-HAZ,697902,641907,0.0872,Net 60,2025-11-06,Seasonal adjustment,review,0.328,Medical Devices,USD
+CU-2025-00054,Customs Declaration,Bangalore Biotech Solutions,IN-BLR,IN,IN-BLR → IN-KOC,862466,735974,0.1719,LC at Sight,2025-11-26,Quantity discrepancy|Minor tariff reclassification,alert,0.966,Machinery,SGD
+PA-2025-00055,Packing List,Gujarat Chemical Industries,IN-MUN,IN,IN-MUN → IN-MUN,515502,715685,-0.2797,Net 60,2025-10-15,Insurance premium spike|Critical cost overrun >20%|New intermediary entity detected,critical,1.0,Petroleum Products,EUR
+LE-2025-00056,Letter of Credit,Mumbai Pharma Exports Pvt. Ltd.,IN-JNPT,IN,IN-JNPT → IN-KOL,47386,43899,0.0794,Net 60,2025-09-27,,review,0.471,Petroleum Products,INR
+PA-2025-00057,Packing List,Port Klang Palm Oil Exports,MY-PTG,MY,MY-PTG → IN-MUN,823529,654058,0.2591,Advance Payment,2025-11-24,Compliance review needed|Critical cost overrun >20%|New intermediary entity detected|Material substitution flagged,critical,1.0,Electronics,SGD
+LE-2025-00058,Letter of Credit,Colombo Textiles Ltd.,LK-CMB,LK,LK-CMB → IN-KOC,766808,791413,-0.0311,Net 30,2025-09-27,,normal,0.164,Steel & Iron,EUR
+IN-2026-00059,Invoice,Mumbai Pharma Exports Pvt. Ltd.,IN-JNPT,IN,IN-JNPT → IN-CHN,729229,724654,0.0063,Net 30,2026-03-21,,normal,0.023,Textiles & Garments,EUR
+CU-2025-00060,Customs Declaration,Shanghai Electronics Co. Ltd.,CN-SHA,CN,CN-SHA → IN-PAR,207881,215967,-0.0374,LC at Sight,2025-06-19,,normal,0.138,Pharmaceuticals,EUR
+LE-2025-00061,Letter of Credit,Yokohama Precision Instruments,JP-YOK,JP,JP-YOK → IN-KOL,270405,287704,-0.0601,Net 60,2025-10-14,Minor deviation from baseline,review,0.284,Petroleum Products,SGD
+BI-2026-00062,Bill of Lading,Bangalore Biotech Solutions,IN-BLR,IN,IN-BLR → IN-PAR,433856,432697,0.0027,Net 45,2026-02-09,,normal,0.009,Machinery,USD
+BI-2026-00063,Bill of Lading,Singapore Tech Pte. Ltd.,SG-SIN,SG,SG-SIN → IN-JNPT,59144,61526,-0.0387,Advance Payment,2026-03-26,,normal,0.166,Machinery,INR
+PU-2025-00064,Purchase Order,Busan Steel Trading Co.,KR-BUS,KR,KR-BUS → IN-CHN,452419,536182,-0.1562,Net 15,2025-12-13,Minor tariff reclassification,alert,0.668,Medical Devices,USD
+IN-2025-00065,Insurance Certificate,Chennai Auto Components Ltd.,IN-CHN,IN,IN-CHN → IN-KOL,563541,564265,-0.0013,Advance Payment,2025-11-12,,normal,0.005,Petroleum Products,SGD
+IN-2025-00066,Invoice,Port Klang Palm Oil Exports,MY-PTG,MY,MY-PTG → IN-VIZ,929176,734388,0.2652,Net 60,2025-12-30,New intermediary entity detected|Payment terms changed|Material substitution flagged,critical,0.947,Food Products,EUR
+IN-2026-00067,Insurance Certificate,Chennai Auto Components Ltd.,IN-CHN,IN,IN-CHN → IN-PAR,37950,46054,-0.176,Advance Payment,2026-02-15,Cost overrun >10%|Insurance premium adjustment,alert,0.766,Medical Devices,EUR
+PA-2026-00068,Packing List,Chennai Auto Components Ltd.,IN-CHN,IN,IN-CHN → IN-JNPT,362584,482378,-0.2483,Net 45,2026-03-20,Critical cost overrun >20%|Material substitution flagged|Payment terms changed,critical,1.0,Agricultural Products,SGD
+PA-2025-00069,Packing List,Laem Chabang Seafood Processing,TH-LCH,TH,TH-LCH → IN-PAR,400218,413327,-0.0317,Net 30,2025-11-25,,normal,0.098,Pharmaceuticals,INR
+PA-2025-00070,Packing List,Port Klang Palm Oil Exports,MY-PTG,MY,MY-PTG → IN-TUT,144701,171605,-0.1568,Net 45,2025-11-30,Cost overrun >10%|Carrier change mid-route|Route surcharge detected,alert,0.684,Electronics,EUR
+IN-2026-00071,Insurance Certificate,Singapore Tech Pte. Ltd.,SG-SIN,SG,SG-SIN → IN-VIZ,568250,557881,0.0186,Net 15,2026-01-08,,normal,0.072,Medical Devices,EUR
+CU-2025-00072,Customs Declaration,Busan Steel Trading Co.,KR-BUS,KR,KR-BUS → IN-KOL,378963,409008,-0.0735,Net 15,2025-06-09,,review,0.364,Automobile Parts,USD
+IN-2025-00073,Insurance Certificate,Ningbo Machinery Works,CN-NGB,CN,CN-NGB → IN-VIZ,275208,311936,-0.1177,Advance Payment,2025-10-24,Cost overrun >10%|Carrier change mid-route|Insurance premium adjustment,alert,0.528,Electronics,USD
+LE-2025-00074,Letter of Credit,Port Klang Palm Oil Exports,MY-PTG,MY,MY-PTG → IN-CHN,776112,760057,0.0211,Net 15,2025-08-03,,normal,0.111,Chemical Products,USD
+CU-2025-00075,Customs Declaration,Gujarat Chemical Industries,IN-MUN,IN,IN-MUN → IN-HAZ,740057,777862,-0.0486,Net 60,2025-08-16,,normal,0.236,Machinery,INR
+LE-2025-00076,Letter of Credit,Durban Mining Corp.,ZA-DUR,ZA,ZA-DUR → IN-PAR,142289,143573,-0.0089,Advance Payment,2025-09-05,,normal,0.035,Petroleum Products,USD
+LE-2025-00077,Letter of Credit,Singapore Tech Pte. Ltd.,SG-SIN,SG,SG-SIN → IN-TUT,39608,42373,-0.0653,LC at Sight,2025-12-07,Seasonal adjustment,review,0.313,Pharmaceuticals,SGD
+CU-2025-00078,Customs Declaration,Hamburg Industrial Supply GmbH,DE-HAM,DE,DE-HAM → IN-TUT,591352,503616,0.1742,Net 30,2025-11-13,Carrier change mid-route|Minor tariff reclassification,alert,0.986,Textiles & Garments,INR
+PA-2025-00079,Packing List,Shanghai Electronics Co. Ltd.,CN-SHA,CN,CN-SHA → IN-CHN,642081,680461,-0.0564,LC 60 Days,2025-07-29,Seasonal adjustment,review,0.243,Petroleum Products,EUR
+LE-2025-00080,Letter of Credit,Hamburg Industrial Supply GmbH,DE-HAM,DE,DE-HAM → IN-VIZ,206581,202557,0.0199,Advance Payment,2025-12-21,,normal,0.077,Agricultural Products,SGD
+IN-2026-00081,Insurance Certificate,Durban Mining Corp.,ZA-DUR,ZA,ZA-DUR → IN-PAR,296972,308148,-0.0363,Net 60,2026-02-16,,normal,0.173,Textiles & Garments,USD
+PU-2026-00082,Purchase Order,Tata Steel Processing,IN-MUM,IN,IN-MUM → IN-HAZ,268315,258109,0.0395,LC at Sight,2026-03-10,,normal,0.124,Automobile Parts,SGD
+BI-2026-00083,Bill of Lading,Hamburg Industrial Supply GmbH,DE-HAM,DE,DE-HAM → IN-KND,212013,217603,-0.0257,Net 15,2026-01-11,,normal,0.115,Petroleum Products,INR
+LE-2025-00084,Letter of Credit,Shanghai Electronics Co. Ltd.,CN-SHA,CN,CN-SHA → IN-JNPT,451803,466871,-0.0323,LC at Sight,2025-12-12,,normal,0.116,Chemical Products,EUR
+PA-2025-00085,Packing List,Durban Mining Corp.,ZA-DUR,ZA,ZA-DUR → IN-MUN,193617,257413,-0.2478,Advance Payment,2025-06-09,Insurance premium spike|Payment terms changed|Expedited shipping requested,critical,0.948,Steel & Iron,EUR
+IN-2026-00086,Invoice,Singapore Tech Pte. Ltd.,SG-SIN,SG,SG-SIN → IN-KOC,550016,525733,0.0462,Net 60,2026-02-04,,normal,0.146,Automobile Parts,SGD
+CU-2025-00087,Customs Declaration,Shanghai Electronics Co. Ltd.,CN-SHA,CN,CN-SHA → IN-VIZ,81570,90332,-0.097,Advance Payment,2025-06-20,,review,0.317,Medical Devices,EUR
+PU-2025-00088,Purchase Order,Bangalore Biotech Solutions,IN-BLR,IN,IN-BLR → IN-CHN,180666,165713,0.0902,LC at Sight,2025-11-12,,review,0.428,Medical Devices,INR
+PA-2026-00089,Packing List,Hamburg Industrial Supply GmbH,DE-HAM,DE,DE-HAM → IN-KND,820058,652354,0.2571,Net 15,2026-01-11,Critical cost overrun >20%|Sanctions list match|Compliance review needed,critical,1.0,Textiles & Garments,EUR
+IN-2025-00090,Insurance Certificate,Rotterdam Chemicals BV,NL-RTM,NL,NL-RTM → IN-KND,422310,450671,-0.0629,Net 30,2025-10-24,,review,0.37,Chemical Products,USD
+BI-2026-00091,Bill of Lading,Bangalore Biotech Solutions,IN-BLR,IN,IN-BLR → IN-MUN,680245,645182,0.0543,Net 30,2026-03-24,Seasonal adjustment,review,0.201,Agricultural Products,INR
+PU-2026-00092,Purchase Order,Shenzhen Micro-Tech Industries,CN-SZX,CN,CN-SZX → IN-TUT,766131,616725,0.2423,LC 60 Days,2026-03-27,Sanctions list match|New intermediary entity detected|Insurance premium spike|Payment terms changed|Critical cost overrun >20%,critical,0.938,Plastics,EUR
+CU-2026-00093,Customs Declaration,Durban Mining Corp.,ZA-DUR,ZA,ZA-DUR → IN-PAR,745840,768446,-0.0294,Net 45,2026-02-15,,normal,0.113,Pharmaceuticals,USD
+BI-2025-00094,Bill of Lading,Gujarat Chemical Industries,IN-MUN,IN,IN-MUN → IN-MUN,563089,546316,0.0307,Net 45,2025-08-07,,normal,0.141,Medical Devices,SGD
+PA-2025-00095,Packing List,Gujarat Chemical Industries,IN-MUN,IN,IN-MUN → IN-MUN,169419,160104,0.0582,Net 15,2025-12-21,,review,0.278,Textiles & Garments,USD
+PU-2026-00096,Purchase Order,Shenzhen Micro-Tech Industries,CN-SZX,CN,CN-SZX → IN-MUN,81504,85903,-0.0512,Net 45,2026-02-16,Seasonal adjustment,review,0.248,Food Products,INR
+LE-2025-00097,Letter of Credit,Port Klang Palm Oil Exports,MY-PTG,MY,MY-PTG → IN-PAR,250413,199805,0.2533,LC 60 Days,2025-08-29,Material substitution flagged|Sanctions list match|Expedited shipping requested|Insurance premium spike|Payment terms changed,critical,0.981,Automobile Parts,INR
+IN-2025-00098,Insurance Certificate,Rotterdam Chemicals BV,NL-RTM,NL,NL-RTM → IN-TUT,6763,5674,0.192,Advance Payment,2025-09-30,Minor tariff reclassification,alert,0.923,Steel & Iron,INR
+IN-2025-00099,Insurance Certificate,Dubai Petrochemicals LLC,AE-DXB,AE,AE-DXB → IN-HAZ,64660,68447,-0.0553,LC at Sight,2025-11-18,Minor deviation from baseline,review,0.275,Petroleum Products,EUR
+LE-2025-00100,Letter of Credit,Rotterdam Chemicals BV,NL-RTM,NL,NL-RTM → IN-PAR,759846,762859,-0.004,Net 15,2025-12-29,,normal,0.022,Chemical Products,INR
+IN-2025-00101,Insurance Certificate,Dubai Petrochemicals LLC,AE-DXB,AE,AE-DXB → IN-TUT,612679,579492,0.0573,Net 30,2025-10-18,Seasonal adjustment,review,0.231,Steel & Iron,EUR
+PU-2025-00102,Purchase Order,Shenzhen Micro-Tech Industries,CN-SZX,CN,CN-SZX → IN-KOL,641532,694722,-0.0766,Net 30,2025-06-05,Minor deviation from baseline,review,0.291,Petroleum Products,SGD
+BI-2025-00103,Bill of Lading,Mumbai Pharma Exports Pvt. Ltd.,IN-JNPT,IN,IN-JNPT → IN-CHN,584171,606753,-0.0372,LC at Sight,2025-11-05,,normal,0.187,Pharmaceuticals,SGD
+LE-2026-00104,Letter of Credit,Yokohama Precision Instruments,JP-YOK,JP,JP-YOK → IN-KOC,771146,726422,0.0616,LC 60 Days,2026-02-24,,review,0.186,Pharmaceuticals,SGD
+LE-2026-00105,Letter of Credit,Shenzhen Micro-Tech Industries,CN-SZX,CN,CN-SZX → IN-MUN,303024,324186,-0.0653,Net 60,2026-01-23,Seasonal adjustment,review,0.318,Automobile Parts,EUR
+BI-2025-00106,Bill of Lading,Hamburg Industrial Supply GmbH,DE-HAM,DE,DE-HAM → IN-KND,325848,375301,-0.1318,Net 60,2025-07-13,Quantity discrepancy|Minor tariff reclassification|Cost overrun >10%,alert,0.508,Plastics,SGD
+LE-2025-00107,Letter of Credit,Busan Steel Trading Co.,KR-BUS,KR,KR-BUS → IN-CHN,40071,36978,0.0836,Net 45,2025-06-23,,review,0.4,Food Products,EUR
+IN-2025-00108,Insurance Certificate,Shenzhen Micro-Tech Industries,CN-SZX,CN,CN-SZX → IN-HAZ,403927,455793,-0.1138,Net 45,2025-12-25,Quantity discrepancy,alert,0.483,Food Products,INR
+IN-2026-00109,Insurance Certificate,Busan Steel Trading Co.,KR-BUS,KR,KR-BUS → IN-PAR,765782,619485,0.2362,Net 30,2026-03-17,Sanctions list match|New intermediary entity detected|Expedited shipping requested|Payment terms changed,critical,1.0,Machinery,EUR
+BI-2025-00110,Bill of Lading,Bangalore Biotech Solutions,IN-BLR,IN,IN-BLR → IN-KOC,764083,766052,-0.0026,Net 30,2025-07-23,,normal,0.012,Agricultural Products,EUR
+CU-2025-00111,Customs Declaration,Chennai Auto Components Ltd.,IN-CHN,IN,IN-CHN → IN-TUT,13777,12747,0.0808,LC at Sight,2025-08-21,Minor deviation from baseline,review,0.332,Petroleum Products,INR
+LE-2026-00112,Letter of Credit,Yokohama Precision Instruments,JP-YOK,JP,JP-YOK → IN-JNPT,156166,161996,-0.036,LC at Sight,2026-02-01,,normal,0.161,Petroleum Products,USD
+CU-2025-00113,Customs Declaration,Hamburg Industrial Supply GmbH,DE-HAM,DE,DE-HAM → IN-KND,418933,400204,0.0468,Net 30,2025-10-09,,normal,0.22,Automobile Parts,SGD
+CU-2026-00114,Customs Declaration,Ningbo Machinery Works,CN-NGB,CN,CN-NGB → IN-JNPT,858849,725293,0.1841,Net 45,2026-03-05,Cost overrun >10%|Insurance premium adjustment,alert,0.735,Steel & Iron,EUR
+IN-2026-00115,Invoice,Durban Mining Corp.,ZA-DUR,ZA,ZA-DUR → IN-PAR,511217,573592,-0.1087,Net 15,2026-03-14,Route surcharge detected,alert,0.601,Machinery,USD
+IN-2025-00116,Invoice,Rotterdam Chemicals BV,NL-RTM,NL,NL-RTM → IN-MUN,463083,477426,-0.03,Net 60,2025-11-18,,normal,0.098,Food Products,EUR
+LE-2025-00117,Letter of Credit,Shanghai Electronics Co. Ltd.,CN-SHA,CN,CN-SHA → IN-KOL,249322,253753,-0.0175,Advance Payment,2025-10-03,,normal,0.077,Pharmaceuticals,USD
+LE-2026-00118,Letter of Credit,Ningbo Machinery Works,CN-NGB,CN,CN-NGB → IN-KND,245261,250445,-0.0207,LC at Sight,2026-02-27,,normal,0.091,Petroleum Products,EUR
+BI-2025-00119,Bill of Lading,Gujarat Chemical Industries,IN-MUN,IN,IN-MUN → IN-CHN,757392,713588,0.0614,Net 15,2025-08-03,Minor deviation from baseline,review,0.19,Plastics,INR
+IN-2026-00120,Insurance Certificate,Laem Chabang Seafood Processing,TH-LCH,TH,TH-LCH → IN-KOC,374008,357370,0.0466,Net 30,2026-01-20,,normal,0.269,Electronics,EUR
+PA-2025-00121,Packing List,Singapore Tech Pte. Ltd.,SG-SIN,SG,SG-SIN → IN-PAR,630199,687469,-0.0833,LC at Sight,2025-12-14,Minor deviation from baseline,review,0.413,Machinery,USD
+LE-2025-00122,Letter of Credit,Gujarat Chemical Industries,IN-MUN,IN,IN-MUN → IN-KOC,267175,234215,0.1407,LC 60 Days,2025-12-18,Carrier change mid-route|Route surcharge detected|Cost overrun >10%,alert,0.498,Agricultural Products,INR
+PA-2025-00123,Packing List,Singapore Tech Pte. Ltd.,SG-SIN,SG,SG-SIN → IN-CHN,67825,67574,0.0037,Net 45,2025-07-30,,normal,0.012,Food Products,EUR
+PA-2025-00124,Packing List,Chennai Auto Components Ltd.,IN-CHN,IN,IN-CHN → IN-KOL,563532,531274,0.0607,LC 60 Days,2025-09-26,,review,0.357,Automobile Parts,SGD
+IN-2026-00125,Invoice,Bangalore Biotech Solutions,IN-BLR,IN,IN-BLR → IN-VIZ,35521,26937,0.3187,LC at Sight,2026-03-05,Compliance review needed|New intermediary entity detected|Critical cost overrun >20%,critical,1.0,Textiles & Garments,INR
+BI-2025-00126,Bill of Lading,Ningbo Machinery Works,CN-NGB,CN,CN-NGB → IN-TUT,338653,408191,-0.1704,Advance Payment,2025-10-06,Minor tariff reclassification,alert,0.772,Electronics,SGD
+CU-2025-00127,Customs Declaration,Hamburg Industrial Supply GmbH,DE-HAM,DE,DE-HAM → IN-VIZ,485673,426512,0.1387,LC 60 Days,2025-08-21,Quantity discrepancy,alert,0.806,Medical Devices,EUR
+BI-2026-00128,Bill of Lading,Hamburg Industrial Supply GmbH,DE-HAM,DE,DE-HAM → IN-MUN,766942,748388,0.0248,Net 30,2026-01-25,,normal,0.106,Electronics,SGD
+PU-2025-00129,Purchase Order,Laem Chabang Seafood Processing,TH-LCH,TH,TH-LCH → IN-JNPT,399225,340496,0.1725,LC 60 Days,2025-11-01,Carrier change mid-route|Route surcharge detected|Cost overrun >10%,alert,0.814,Agricultural Products,USD
+CU-2026-00130,Customs Declaration,Laem Chabang Seafood Processing,TH-LCH,TH,TH-LCH → IN-KOC,378528,350827,0.079,Net 30,2026-02-19,Minor deviation from baseline,review,0.47,Steel & Iron,EUR
+PA-2025-00131,Packing List,Gujarat Chemical Industries,IN-MUN,IN,IN-MUN → IN-CHN,45376,45512,-0.003,Net 60,2025-11-24,,normal,0.018,Automobile Parts,EUR
+PU-2025-00132,Purchase Order,Rotterdam Chemicals BV,NL-RTM,NL,NL-RTM → IN-JNPT,171818,192436,-0.1071,Net 60,2025-10-17,Minor tariff reclassification|Quantity discrepancy|Cost overrun >10%,alert,0.363,Automobile Parts,INR
+IN-2026-00133,Insurance Certificate,Chennai Auto Components Ltd.,IN-CHN,IN,IN-CHN → IN-VIZ,367485,434051,-0.1534,LC at Sight,2026-02-14,Cost overrun >10%|Insurance premium adjustment,alert,0.544,Automobile Parts,SGD
+IN-2026-00134,Insurance Certificate,Gujarat Chemical Industries,IN-MUN,IN,IN-MUN → IN-MUN,179874,176156,0.0211,Advance Payment,2026-03-03,,normal,0.07,Pharmaceuticals,INR
+IN-2025-00135,Invoice,Laem Chabang Seafood Processing,TH-LCH,TH,TH-LCH → IN-KOL,324939,315673,0.0294,Net 60,2025-11-30,,normal,0.117,Medical Devices,EUR
+CU-2026-00136,Customs Declaration,Port Klang Palm Oil Exports,MY-PTG,MY,MY-PTG → IN-HAZ,147841,172767,-0.1443,LC at Sight,2026-01-05,Minor tariff reclassification|Route surcharge detected|Quantity discrepancy,alert,0.695,Food Products,USD
+IN-2026-00137,Invoice,Singapore Tech Pte. Ltd.,SG-SIN,SG,SG-SIN → IN-PAR,125741,126137,-0.0031,Net 30,2026-02-10,,normal,0.011,Plastics,EUR
+PU-2025-00138,Purchase Order,Busan Steel Trading Co.,KR-BUS,KR,KR-BUS → IN-MUN,185553,192877,-0.038,Net 30,2025-12-06,,normal,0.209,Machinery,INR
+IN-2025-00139,Insurance Certificate,Gujarat Chemical Industries,IN-MUN,IN,IN-MUN → IN-PAR,344220,338708,0.0163,Net 15,2025-11-15,,normal,0.068,Steel & Iron,SGD
+BI-2025-00140,Bill of Lading,Mumbai Pharma Exports Pvt. Ltd.,IN-JNPT,IN,IN-JNPT → IN-TUT,499018,536626,-0.0701,Advance Payment,2025-07-20,,review,0.376,Pharmaceuticals,EUR
+IN-2025-00141,Invoice,Rotterdam Chemicals BV,NL-RTM,NL,NL-RTM → IN-KOL,190857,200434,-0.0478,Advance Payment,2025-08-30,,normal,0.219,Textiles & Garments,USD
+PA-2026-00142,Packing List,Colombo Textiles Ltd.,LK-CMB,LK,LK-CMB → IN-MUN,597701,627997,-0.0482,Net 15,2026-01-30,,normal,0.266,Medical Devices,SGD
+BI-2025-00143,Bill of Lading,Shenzhen Micro-Tech Industries,CN-SZX,CN,CN-SZX → IN-PAR,666222,728478,-0.0855,Net 15,2025-06-25,Seasonal adjustment,review,0.499,Pharmaceuticals,USD
+PA-2025-00144,Packing List,Yokohama Precision Instruments,JP-YOK,JP,JP-YOK → IN-HAZ,202682,289558,-0.3,Advance Payment,2025-10-26,Material substitution flagged|New intermediary entity detected,critical,1.0,Plastics,INR
+IN-2026-00145,Invoice,Colombo Textiles Ltd.,LK-CMB,LK,LK-CMB → IN-KND,589504,583002,0.0112,Advance Payment,2026-03-16,,normal,0.041,Agricultural Products,SGD
+PA-2025-00146,Packing List,Hamburg Industrial Supply GmbH,DE-HAM,DE,DE-HAM → IN-VIZ,533685,631907,-0.1554,Net 45,2025-06-28,Quantity discrepancy|Cost overrun >10%,alert,0.7,Automobile Parts,SGD
+PA-2026-00147,Packing List,Tata Steel Processing,IN-MUM,IN,IN-MUM → IN-JNPT,786170,719908,0.092,Net 60,2026-01-25,,review,0.545,Chemical Products,USD
+PU-2025-00148,Purchase Order,Hamburg Industrial Supply GmbH,DE-HAM,DE,DE-HAM → IN-JNPT,158868,128343,0.2378,LC 60 Days,2025-09-09,Insurance premium spike|Payment terms changed|Sanctions list match|Material substitution flagged|Critical cost overrun >20%,critical,1.0,Medical Devices,USD
+BI-2025-00149,Bill of Lading,Bangalore Biotech Solutions,IN-BLR,IN,IN-BLR → IN-CHN,42027,55981,-0.2493,Net 60,2025-06-12,Sanctions list match|Expedited shipping requested|Critical cost overrun >20%|Compliance review needed,critical,1.0,Textiles & Garments,SGD
+IN-2025-00150,Invoice,Port Klang Palm Oil Exports,MY-PTG,MY,MY-PTG → IN-KOL,724874,672319,0.0782,Net 60,2025-10-28,Minor deviation from baseline,review,0.307,Machinery,SGD
+BI-2026-00151,Bill of Lading,Mumbai Pharma Exports Pvt. Ltd.,IN-JNPT,IN,IN-JNPT → IN-PAR,25338,24030,0.0544,Net 60,2026-03-14,,review,0.295,Automobile Parts,USD
+BI-2026-00152,Bill of Lading,Singapore Tech Pte. Ltd.,SG-SIN,SG,SG-SIN → IN-JNPT,503600,524675,-0.0402,Net 30,2026-02-06,,normal,0.218,Plastics,SGD
+CU-2025-00153,Customs Declaration,Laem Chabang Seafood Processing,TH-LCH,TH,TH-LCH → IN-KOL,364684,337554,0.0804,Net 45,2025-06-16,Minor deviation from baseline,review,0.4,Agricultural Products,INR
+BI-2025-00154,Bill of Lading,Bangalore Biotech Solutions,IN-BLR,IN,IN-BLR → IN-VIZ,91078,86282,0.0556,Net 45,2025-07-29,Seasonal adjustment,review,0.247,Medical Devices,EUR
+CU-2025-00155,Customs Declaration,Durban Mining Corp.,ZA-DUR,ZA,ZA-DUR → IN-KND,523737,559389,-0.0637,Net 30,2025-12-24,Minor deviation from baseline,review,0.192,Automobile Parts,EUR
+BI-2025-00156,Bill of Lading,Durban Mining Corp.,ZA-DUR,ZA,ZA-DUR → IN-PAR,313140,376948,-0.1693,Net 45,2025-06-26,Minor tariff reclassification|Carrier change mid-route,alert,0.925,Agricultural Products,SGD
+PA-2026-00157,Packing List,Durban Mining Corp.,ZA-DUR,ZA,ZA-DUR → IN-KND,633710,619318,0.0232,Net 30,2026-03-24,,normal,0.118,Petroleum Products,INR
+IN-2025-00158,Insurance Certificate,Dubai Petrochemicals LLC,AE-DXB,AE,AE-DXB → IN-MUN,470025,475673,-0.0119,Advance Payment,2025-06-02,,normal,0.06,Automobile Parts,EUR
+BI-2026-00159,Bill of Lading,Ningbo Machinery Works,CN-NGB,CN,CN-NGB → IN-KOL,659986,650701,0.0143,Advance Payment,2026-02-26,,normal,0.063,Agricultural Products,USD
+PA-2025-00160,Packing List,Laem Chabang Seafood Processing,TH-LCH,TH,TH-LCH → IN-CHN,169919,160768,0.0569,Net 30,2025-07-29,,review,0.291,Petroleum Products,INR
+PU-2025-00161,Purchase Order,Hamburg Industrial Supply GmbH,DE-HAM,DE,DE-HAM → IN-MUN,697376,676339,0.0311,LC at Sight,2025-09-18,,normal,0.138,Plastics,USD
+CU-2025-00162,Customs Declaration,Port Klang Palm Oil Exports,MY-PTG,MY,MY-PTG → IN-KOC,121987,114367,0.0666,LC at Sight,2025-07-27,Seasonal adjustment,review,0.25,Chemical Products,EUR
+CU-2025-00163,Customs Declaration,Ningbo Machinery Works,CN-NGB,CN,CN-NGB → IN-KND,310685,473756,-0.3442,Net 60,2025-12-27,Material substitution flagged|Critical cost overrun >20%|New intermediary entity detected|Payment terms changed|Sanctions list match,critical,1.0,Petroleum Products,USD
+IN-2025-00164,Insurance Certificate,Yokohama Precision Instruments,JP-YOK,JP,JP-YOK → IN-KOC,424079,445603,-0.0483,Net 45,2025-09-15,,normal,0.242,Automobile Parts,EUR
+BI-2025-00165,Bill of Lading,Bangalore Biotech Solutions,IN-BLR,IN,IN-BLR → IN-MUN,89677,91440,-0.0193,LC 60 Days,2025-07-19,,normal,0.108,Machinery,SGD
+PA-2025-00166,Packing List,Laem Chabang Seafood Processing,TH-LCH,TH,TH-LCH → IN-JNPT,667000,733428,-0.0906,Net 60,2025-11-19,,review,0.514,Textiles & Garments,USD
+IN-2025-00167,Insurance Certificate,Tata Steel Processing,IN-MUM,IN,IN-MUM → IN-TUT,373634,383223,-0.025,LC at Sight,2025-08-08,,normal,0.146,Machinery,SGD
+BI-2026-00168,Bill of Lading,Durban Mining Corp.,ZA-DUR,ZA,ZA-DUR → IN-KOL,418767,402712,0.0399,Advance Payment,2026-03-23,,normal,0.203,Medical Devices,SGD
+BI-2026-00169,Bill of Lading,Durban Mining Corp.,ZA-DUR,ZA,ZA-DUR → IN-HAZ,377018,289653,0.3016,Net 60,2026-03-07,Compliance review needed|Sanctions list match|Critical cost overrun >20%|Material substitution flagged,critical,1.0,Food Products,SGD
+LE-2025-00170,Letter of Credit,Yokohama Precision Instruments,JP-YOK,JP,JP-YOK → IN-VIZ,49936,55248,-0.0961,Net 45,2025-09-15,Minor deviation from baseline,review,0.318,Machinery,SGD
+IN-2025-00171,Invoice,Port Klang Palm Oil Exports,MY-PTG,MY,MY-PTG → IN-VIZ,788853,682551,0.1557,Net 45,2025-12-14,Quantity discrepancy|Minor tariff reclassification,alert,0.664,Chemical Products,INR
+CU-2025-00172,Customs Declaration,Rotterdam Chemicals BV,NL-RTM,NL,NL-RTM → IN-PAR,314239,369650,-0.1499,Net 15,2025-10-08,Carrier change mid-route,alert,0.478,Automobile Parts,USD
+IN-2025-00173,Invoice,Tata Steel Processing,IN-MUM,IN,IN-MUM → IN-KOL,810695,647186,0.2526,Net 45,2025-09-30,Sanctions list match|Material substitution flagged|Payment terms changed|Insurance premium spike,critical,1.0,Food Products,USD
+PU-2025-00174,Purchase Order,Gujarat Chemical Industries,IN-MUN,IN,IN-MUN → IN-MUN,639785,605613,0.0564,LC at Sight,2025-10-04,,review,0.233,Machinery,SGD
+BI-2025-00175,Bill of Lading,Shanghai Electronics Co. Ltd.,CN-SHA,CN,CN-SHA → IN-VIZ,388428,318740,0.2186,Net 60,2025-11-24,Expedited shipping requested|Sanctions list match,critical,1.0,Electronics,SGD
+BI-2025-00176,Bill of Lading,Busan Steel Trading Co.,KR-BUS,KR,KR-BUS → IN-CHN,695092,704444,-0.0133,LC at Sight,2025-09-28,,normal,0.056,Electronics,USD
+LE-2025-00177,Letter of Credit,Shanghai Electronics Co. Ltd.,CN-SHA,CN,CN-SHA → IN-PAR,750167,633990,0.1832,Net 45,2025-06-24,Minor tariff reclassification,alert,1.0,Textiles & Garments,USD
+IN-2025-00178,Invoice,Ningbo Machinery Works,CN-NGB,CN,CN-NGB → IN-KOL,360308,334041,0.0786,LC at Sight,2025-06-06,,review,0.362,Plastics,SGD
+CU-2025-00179,Customs Declaration,Durban Mining Corp.,ZA-DUR,ZA,ZA-DUR → IN-MUN,273615,405377,-0.325,Net 15,2025-06-04,New intermediary entity detected|Payment terms changed|Insurance premium spike|Expedited shipping requested,critical,1.0,Machinery,USD
+BI-2025-00180,Bill of Lading,Hamburg Industrial Supply GmbH,DE-HAM,DE,DE-HAM → IN-KOL,603479,559759,0.0781,Advance Payment,2025-12-25,Minor deviation from baseline,review,0.256,Petroleum Products,SGD
+IN-2025-00181,Invoice,Gujarat Chemical Industries,IN-MUN,IN,IN-MUN → IN-PAR,818854,636847,0.2858,Net 30,2025-10-18,Expedited shipping requested|Material substitution flagged|New intermediary entity detected,critical,1.0,Machinery,USD
+CU-2025-00182,Customs Declaration,Gujarat Chemical Industries,IN-MUN,IN,IN-MUN → IN-KND,690295,655267,0.0535,Net 45,2025-06-12,,review,0.228,Pharmaceuticals,USD
+PA-2025-00183,Packing List,Mumbai Pharma Exports Pvt. Ltd.,IN-JNPT,IN,IN-JNPT → IN-KOC,400016,371088,0.078,Net 45,2025-09-05,Minor deviation from baseline,review,0.372,Medical Devices,INR
+CU-2026-00184,Customs Declaration,Tata Steel Processing,IN-MUM,IN,IN-MUM → IN-VIZ,210365,248263,-0.1527,Net 60,2026-01-06,Carrier change mid-route|Quantity discrepancy|Insurance premium adjustment,alert,0.853,Plastics,EUR
+LE-2025-00185,Letter of Credit,Gujarat Chemical Industries,IN-MUN,IN,IN-MUN → IN-HAZ,258866,223253,0.1595,LC 60 Days,2025-10-13,Route surcharge detected,alert,0.811,Food Products,EUR
+CU-2025-00186,Customs Declaration,Laem Chabang Seafood Processing,TH-LCH,TH,TH-LCH → IN-JNPT,18771,19458,-0.0353,LC at Sight,2025-07-11,,normal,0.117,Machinery,USD
+CU-2025-00187,Customs Declaration,Dubai Petrochemicals LLC,AE-DXB,AE,AE-DXB → IN-KND,243710,330660,-0.263,Advance Payment,2025-06-05,Sanctions list match|Payment terms changed,critical,0.877,Agricultural Products,INR
+CU-2025-00188,Customs Declaration,Shanghai Electronics Co. Ltd.,CN-SHA,CN,CN-SHA → IN-PAR,276900,277903,-0.0036,Net 30,2025-09-18,,normal,0.019,Electronics,INR
+LE-2025-00189,Letter of Credit,Singapore Tech Pte. Ltd.,SG-SIN,SG,SG-SIN → IN-KOC,304817,327420,-0.069,Net 45,2025-07-01,Seasonal adjustment,review,0.219,Steel & Iron,USD
+IN-2025-00190,Insurance Certificate,Shenzhen Micro-Tech Industries,CN-SZX,CN,CN-SZX → IN-MUN,433712,430900,0.0065,Net 30,2025-07-02,,normal,0.039,Machinery,INR
+IN-2025-00191,Invoice,Mumbai Pharma Exports Pvt. Ltd.,IN-JNPT,IN,IN-JNPT → IN-HAZ,553393,493872,0.1205,Net 15,2025-07-09,Route surcharge detected,alert,0.374,Machinery,EUR
+LE-2025-00192,Letter of Credit,Chennai Auto Components Ltd.,IN-CHN,IN,IN-CHN → IN-TUT,171385,167912,0.0207,Net 15,2025-07-19,,normal,0.092,Machinery,EUR
+PU-2025-00193,Purchase Order,Chennai Auto Components Ltd.,IN-CHN,IN,IN-CHN → IN-KND,146320,174763,-0.1628,LC at Sight,2025-07-26,Route surcharge detected|Insurance premium adjustment,alert,0.605,Textiles & Garments,EUR
+PU-2025-00194,Purchase Order,Singapore Tech Pte. Ltd.,SG-SIN,SG,SG-SIN → IN-MUN,307789,263140,0.1697,Net 15,2025-07-05,Quantity discrepancy,alert,0.927,Agricultural Products,USD
+IN-2025-00195,Invoice,Tata Steel Processing,IN-MUM,IN,IN-MUM → IN-VIZ,711621,731210,-0.0268,Net 15,2025-07-30,,normal,0.157,Automobile Parts,INR
+BI-2025-00196,Bill of Lading,Tata Steel Processing,IN-MUM,IN,IN-MUM → IN-JNPT,674700,647883,0.0414,Net 45,2025-07-21,,normal,0.19,Machinery,EUR
+PU-2026-00197,Purchase Order,Gujarat Chemical Industries,IN-MUN,IN,IN-MUN → IN-TUT,427066,519915,-0.1786,LC 60 Days,2026-02-02,Insurance premium adjustment|Quantity discrepancy|Minor tariff reclassification,alert,0.732,Agricultural Products,SGD
+LE-2025-00198,Letter of Credit,Mumbai Pharma Exports Pvt. Ltd.,IN-JNPT,IN,IN-JNPT → IN-VIZ,771574,747649,0.032,Net 30,2025-09-24,,normal,0.106,Electronics,INR
+PA-2025-00199,Packing List,Tata Steel Processing,IN-MUM,IN,IN-MUM → IN-HAZ,112662,103980,0.0835,LC 60 Days,2025-07-16,Seasonal adjustment,review,0.431,Automobile Parts,INR
+IN-2025-00200,Insurance Certificate,Laem Chabang Seafood Processing,TH-LCH,TH,TH-LCH → IN-PAR,333974,353453,-0.0551,LC at Sight,2025-12-19,Minor deviation from baseline,review,0.327,Electronics,EUR
+IN-2025-00201,Insurance Certificate,Mumbai Pharma Exports Pvt. Ltd.,IN-JNPT,IN,IN-JNPT → IN-MUN,688708,664573,0.0363,Net 15,2025-09-10,,normal,0.134,Automobile Parts,INR
+IN-2026-00202,Invoice,Tata Steel Processing,IN-MUM,IN,IN-MUM → IN-PAR,482390,423933,0.1379,Net 15,2026-02-14,Cost overrun >10%,alert,0.538,Steel & Iron,SGD
+BI-2025-00203,Bill of Lading,Port Klang Palm Oil Exports,MY-PTG,MY,MY-PTG → IN-VIZ,667428,724673,-0.079,Net 15,2025-10-04,Seasonal adjustment,review,0.247,Petroleum Products,SGD
+LE-2025-00204,Letter of Credit,Rotterdam Chemicals BV,NL-RTM,NL,NL-RTM → IN-CHN,694589,624417,0.1124,Advance Payment,2025-06-30,Cost overrun >10%|Insurance premium adjustment|Carrier change mid-route,alert,0.417,Food Products,EUR
+IN-2025-00205,Invoice,Dubai Petrochemicals LLC,AE-DXB,AE,AE-DXB → IN-PAR,521803,526540,-0.009,Net 45,2025-12-05,,normal,0.05,Electronics,INR
+LE-2025-00206,Letter of Credit,Chennai Auto Components Ltd.,IN-CHN,IN,IN-CHN → IN-KOL,577470,579055,-0.0027,Net 30,2025-07-05,,normal,0.009,Machinery,EUR
+PA-2026-00207,Packing List,Rotterdam Chemicals BV,NL-RTM,NL,NL-RTM → IN-PAR,736246,765351,-0.038,Advance Payment,2026-01-03,,normal,0.2,Machinery,INR
+PA-2025-00208,Packing List,Port Klang Palm Oil Exports,MY-PTG,MY,MY-PTG → IN-JNPT,469043,424894,0.1039,Net 60,2025-07-31,Carrier change mid-route,alert,0.445,Automobile Parts,SGD
+CU-2025-00209,Customs Declaration,Gujarat Chemical Industries,IN-MUN,IN,IN-MUN → IN-MUN,102106,102317,-0.0021,Net 15,2025-08-16,,normal,0.009,Machinery,INR
+IN-2025-00210,Invoice,Singapore Tech Pte. Ltd.,SG-SIN,SG,SG-SIN → IN-JNPT,575174,527223,0.0909,Advance Payment,2025-12-18,,review,0.495,Petroleum Products,SGD
+IN-2025-00211,Invoice,Tata Steel Processing,IN-MUM,IN,IN-MUM → IN-PAR,755241,730760,0.0335,Net 45,2025-09-21,,normal,0.131,Steel & Iron,INR
+BI-2025-00212,Bill of Lading,Dubai Petrochemicals LLC,AE-DXB,AE,AE-DXB → IN-TUT,573713,650334,-0.1178,Net 15,2025-10-06,Insurance premium adjustment,alert,0.624,Steel & Iron,SGD
+PU-2025-00213,Purchase Order,Tata Steel Processing,IN-MUM,IN,IN-MUM → IN-JNPT,650828,639148,0.0183,Net 15,2025-08-16,,normal,0.098,Electronics,USD
+PA-2025-00214,Packing List,Laem Chabang Seafood Processing,TH-LCH,TH,TH-LCH → IN-HAZ,100086,115954,-0.1368,Net 15,2025-10-15,Cost overrun >10%|Route surcharge detected|Minor tariff reclassification,alert,0.566,Medical Devices,USD
+CU-2026-00215,Customs Declaration,Ningbo Machinery Works,CN-NGB,CN,CN-NGB → IN-VIZ,675383,647670,0.0428,Net 45,2026-03-14,,normal,0.249,Steel & Iron,SGD
+PU-2026-00216,Purchase Order,Hamburg Industrial Supply GmbH,DE-HAM,DE,DE-HAM → IN-CHN,317815,303332,0.0477,Net 15,2026-02-10,,normal,0.282,Electronics,USD
+PA-2025-00217,Packing List,Port Klang Palm Oil Exports,MY-PTG,MY,MY-PTG → IN-JNPT,246054,326214,-0.2457,Net 45,2025-08-04,Expedited shipping requested|Material substitution flagged|Critical cost overrun >20%,critical,0.789,Petroleum Products,SGD
+BI-2025-00218,Bill of Lading,Hamburg Industrial Supply GmbH,DE-HAM,DE,DE-HAM → IN-PAR,348760,399416,-0.1268,Net 45,2025-06-20,Insurance premium adjustment,alert,0.513,Chemical Products,USD
+LE-2025-00219,Letter of Credit,Hamburg Industrial Supply GmbH,DE-HAM,DE,DE-HAM → IN-KOL,434039,359271,0.2081,Net 30,2025-12-27,Expedited shipping requested|New intermediary entity detected,critical,0.659,Chemical Products,USD
+IN-2026-00220,Insurance Certificate,Chennai Auto Components Ltd.,IN-CHN,IN,IN-CHN → IN-VIZ,33886,30220,0.1213,Net 30,2026-01-28,Route surcharge detected|Minor tariff reclassification,alert,0.368,Medical Devices,INR
+PA-2025-00221,Packing List,Hamburg Industrial Supply GmbH,DE-HAM,DE,DE-HAM → IN-KOL,174692,170653,0.0237,Net 45,2025-09-02,,normal,0.092,Machinery,SGD
+CU-2026-00222,Customs Declaration,Port Klang Palm Oil Exports,MY-PTG,MY,MY-PTG → IN-KND,233275,225822,0.033,Net 60,2026-01-15,,normal,0.146,Plastics,EUR
+IN-2026-00223,Insurance Certificate,Port Klang Palm Oil Exports,MY-PTG,MY,MY-PTG → IN-MUN,405688,395467,0.0258,Net 60,2026-01-02,,normal,0.135,Medical Devices,INR
+IN-2025-00224,Invoice,Mumbai Pharma Exports Pvt. Ltd.,IN-JNPT,IN,IN-JNPT → IN-JNPT,554279,752142,-0.2631,Net 60,2025-07-17,Insurance premium spike|Sanctions list match|Expedited shipping requested,critical,1.0,Textiles & Garments,EUR
+LE-2026-00225,Letter of Credit,Hamburg Industrial Supply GmbH,DE-HAM,DE,DE-HAM → IN-KOL,321901,250444,0.2853,Net 30,2026-03-14,New intermediary entity detected|Expedited shipping requested,critical,1.0,Food Products,SGD
+IN-2026-00226,Insurance Certificate,Dubai Petrochemicals LLC,AE-DXB,AE,AE-DXB → IN-KOC,484246,428787,0.1293,Advance Payment,2026-01-31,Quantity discrepancy|Minor tariff reclassification,alert,0.61,Petroleum Products,USD
+BI-2025-00227,Bill of Lading,Singapore Tech Pte. Ltd.,SG-SIN,SG,SG-SIN → IN-KOL,51514,47821,0.0772,LC at Sight,2025-08-13,,review,0.326,Plastics,INR
+IN-2025-00228,Insurance Certificate,Dubai Petrochemicals LLC,AE-DXB,AE,AE-DXB → IN-KND,513738,711908,-0.2784,Net 60,2025-07-22,Insurance premium spike|Compliance review needed|Payment terms changed|New intermediary entity detected,critical,0.888,Food Products,SGD
+BI-2025-00229,Bill of Lading,Dubai Petrochemicals LLC,AE-DXB,AE,AE-DXB → IN-MUN,31518,34887,-0.0966,Net 15,2025-08-11,Minor deviation from baseline,review,0.427,Chemical Products,SGD
+LE-2025-00230,Letter of Credit,Ningbo Machinery Works,CN-NGB,CN,CN-NGB → IN-CHN,719141,799621,-0.1006,LC 60 Days,2025-08-09,Route surcharge detected,alert,0.592,Electronics,INR
+CU-2026-00231,Customs Declaration,Mumbai Pharma Exports Pvt. Ltd.,IN-JNPT,IN,IN-JNPT → IN-KOC,305362,405689,-0.2473,LC 60 Days,2026-01-18,New intermediary entity detected|Critical cost overrun >20%|Expedited shipping requested|Material substitution flagged,critical,1.0,Electronics,INR
+PA-2025-00232,Packing List,Tata Steel Processing,IN-MUM,IN,IN-MUM → IN-KOC,780381,677066,0.1526,Net 15,2025-11-14,Minor tariff reclassification|Cost overrun >10%,alert,0.912,Petroleum Products,USD
+BI-2025-00233,Bill of Lading,Bangalore Biotech Solutions,IN-BLR,IN,IN-BLR → IN-HAZ,55542,42731,0.2998,Net 60,2025-06-12,Compliance review needed|Critical cost overrun >20%|Insurance premium spike|Sanctions list match,critical,1.0,Textiles & Garments,EUR
+IN-2025-00234,Insurance Certificate,Tata Steel Processing,IN-MUM,IN,IN-MUM → IN-HAZ,570433,577905,-0.0129,Net 30,2025-12-03,,normal,0.048,Medical Devices,EUR
+CU-2026-00235,Customs Declaration,Yokohama Precision Instruments,JP-YOK,JP,JP-YOK → IN-KND,441681,430778,0.0253,Net 30,2026-02-08,,normal,0.129,Medical Devices,INR
+BI-2025-00236,Bill of Lading,Durban Mining Corp.,ZA-DUR,ZA,ZA-DUR → IN-VIZ,349172,330878,0.0553,Net 45,2025-11-07,,review,0.324,Textiles & Garments,USD
+BI-2025-00237,Bill of Lading,Bangalore Biotech Solutions,IN-BLR,IN,IN-BLR → IN-VIZ,573417,430250,0.3328,Net 15,2025-12-16,Payment terms changed|Sanctions list match|Critical cost overrun >20%|Material substitution flagged,critical,1.0,Pharmaceuticals,USD
+PU-2025-00238,Purchase Order,Laem Chabang Seafood Processing,TH-LCH,TH,TH-LCH → IN-JNPT,891371,691774,0.2885,Net 60,2025-07-17,Expedited shipping requested|Compliance review needed|Insurance premium spike|New intermediary entity detected,critical,1.0,Agricultural Products,EUR
+IN-2025-00239,Insurance Certificate,Laem Chabang Seafood Processing,TH-LCH,TH,TH-LCH → IN-JNPT,680895,578478,0.177,Net 15,2025-07-17,Insurance premium adjustment|Quantity discrepancy|Minor tariff reclassification,alert,0.903,Medical Devices,USD
+LE-2025-00240,Letter of Credit,Bangalore Biotech Solutions,IN-BLR,IN,IN-BLR → IN-CHN,272961,294454,-0.073,LC at Sight,2025-07-03,,review,0.373,Plastics,SGD
+PU-2025-00241,Purchase Order,Rotterdam Chemicals BV,NL-RTM,NL,NL-RTM → IN-KND,384622,368605,0.0435,Advance Payment,2025-09-22,,normal,0.191,Machinery,SGD
+PA-2025-00242,Packing List,Singapore Tech Pte. Ltd.,SG-SIN,SG,SG-SIN → IN-PAR,319644,240883,0.327,Net 45,2025-07-15,Compliance review needed|Critical cost overrun >20%|Sanctions list match|Expedited shipping requested|Payment terms changed,critical,1.0,Machinery,USD
+CU-2025-00243,Customs Declaration,Tata Steel Processing,IN-MUM,IN,IN-MUM → IN-KOC,619470,648867,-0.0453,Net 15,2025-10-04,,normal,0.137,Steel & Iron,USD
+PU-2026-00244,Purchase Order,Port Klang Palm Oil Exports,MY-PTG,MY,MY-PTG → IN-KOL,722965,730062,-0.0097,LC at Sight,2026-03-13,,normal,0.035,Chemical Products,EUR
+PA-2025-00245,Packing List,Tata Steel Processing,IN-MUM,IN,IN-MUM → IN-PAR,777117,772444,0.0061,Net 60,2025-11-14,,normal,0.033,Chemical Products,USD
+LE-2025-00246,Letter of Credit,Rotterdam Chemicals BV,NL-RTM,NL,NL-RTM → IN-KND,307195,379512,-0.1906,Advance Payment,2025-07-09,Carrier change mid-route,alert,1.0,Agricultural Products,EUR
+CU-2025-00247,Customs Declaration,Hamburg Industrial Supply GmbH,DE-HAM,DE,DE-HAM → IN-JNPT,773011,585384,0.3205,Net 45,2025-06-17,Compliance review needed|Insurance premium spike|Sanctions list match|New intermediary entity detected|Payment terms changed,critical,1.0,Electronics,USD
+IN-2026-00248,Insurance Certificate,Shenzhen Micro-Tech Industries,CN-SZX,CN,CN-SZX → IN-PAR,445487,452779,-0.0161,LC 60 Days,2026-03-10,,normal,0.053,Machinery,USD
+LE-2026-00249,Letter of Credit,Colombo Textiles Ltd.,LK-CMB,LK,LK-CMB → IN-KOC,714830,677633,0.0549,Net 45,2026-01-27,Minor deviation from baseline,review,0.295,Textiles & Garments,SGD
+PU-2026-00250,Purchase Order,Dubai Petrochemicals LLC,AE-DXB,AE,AE-DXB → IN-CHN,23005,25207,-0.0874,Net 45,2026-02-09,,review,0.46,Electronics,USD
+BI-2026-00251,Bill of Lading,Durban Mining Corp.,ZA-DUR,ZA,ZA-DUR → IN-KOC,668256,748817,-0.1076,Net 15,2026-02-02,Insurance premium adjustment|Quantity discrepancy|Minor tariff reclassification,alert,0.57,Chemical Products,INR
+IN-2025-00252,Insurance Certificate,Ningbo Machinery Works,CN-NGB,CN,CN-NGB → IN-VIZ,589643,565158,0.0433,LC at Sight,2025-08-04,,normal,0.229,Machinery,EUR
+CU-2025-00253,Customs Declaration,Tata Steel Processing,IN-MUM,IN,IN-MUM → IN-MUN,503628,509081,-0.0107,LC 60 Days,2025-10-27,,normal,0.063,Agricultural Products,SGD
+PA-2025-00254,Packing List,Tata Steel Processing,IN-MUM,IN,IN-MUM → IN-CHN,745882,651154,0.1455,Net 15,2025-09-05,Insurance premium adjustment|Quantity discrepancy,alert,0.496,Plastics,USD
+IN-2025-00255,Insurance Certificate,Shanghai Electronics Co. Ltd.,CN-SHA,CN,CN-SHA → IN-JNPT,235719,240693,-0.0207,LC at Sight,2025-07-08,,normal,0.087,Medical Devices,INR
+LE-2025-00256,Letter of Credit,Gujarat Chemical Industries,IN-MUN,IN,IN-MUN → IN-KOL,467647,438057,0.0675,Advance Payment,2025-11-08,Minor deviation from baseline,review,0.218,Steel & Iron,SGD
+IN-2025-00257,Invoice,Busan Steel Trading Co.,KR-BUS,KR,KR-BUS → IN-HAZ,313121,237456,0.3186,Net 30,2025-06-19,Expedited shipping requested|Sanctions list match,critical,1.0,Agricultural Products,INR
+CU-2025-00258,Customs Declaration,Bangalore Biotech Solutions,IN-BLR,IN,IN-BLR → IN-KOL,422482,446988,-0.0548,Advance Payment,2025-10-17,Minor deviation from baseline,review,0.17,Textiles & Garments,EUR
+BI-2025-00259,Bill of Lading,Singapore Tech Pte. Ltd.,SG-SIN,SG,SG-SIN → IN-CHN,507771,487585,0.0414,Net 45,2025-09-01,,normal,0.124,Petroleum Products,USD
+PU-2025-00260,Purchase Order,Yokohama Precision Instruments,JP-YOK,JP,JP-YOK → IN-JNPT,76782,68664,0.1182,Net 60,2025-10-24,Cost overrun >10%|Route surcharge detected,alert,0.403,Pharmaceuticals,INR
+IN-2025-00261,Invoice,Singapore Tech Pte. Ltd.,SG-SIN,SG,SG-SIN → IN-KND,17295,20033,-0.1367,Net 15,2025-09-11,Cost overrun >10%|Route surcharge detected|Quantity discrepancy,alert,0.494,Electronics,USD
+PU-2026-00262,Purchase Order,Singapore Tech Pte. Ltd.,SG-SIN,SG,SG-SIN → IN-PAR,278768,251332,0.1092,Net 60,2026-02-19,Insurance premium adjustment,alert,0.409,Steel & Iron,SGD
+PA-2026-00263,Packing List,Bangalore Biotech Solutions,IN-BLR,IN,IN-BLR → IN-MUN,29639,29438,0.0068,LC at Sight,2026-01-11,,normal,0.021,Automobile Parts,SGD
+PU-2026-00264,Purchase Order,Durban Mining Corp.,ZA-DUR,ZA,ZA-DUR → IN-HAZ,474306,515979,-0.0808,Net 30,2026-02-16,,review,0.247,Steel & Iron,SGD
+IN-2025-00265,Invoice,Colombo Textiles Ltd.,LK-CMB,LK,LK-CMB → IN-CHN,66358,66402,-0.0007,Advance Payment,2025-07-14,,normal,0.003,Pharmaceuticals,EUR
+BI-2025-00266,Bill of Lading,Yokohama Precision Instruments,JP-YOK,JP,JP-YOK → IN-PAR,195789,181016,0.0816,Net 15,2025-09-20,Minor deviation from baseline,review,0.443,Steel & Iron,INR
+LE-2025-00267,Letter of Credit,Dubai Petrochemicals LLC,AE-DXB,AE,AE-DXB → IN-KND,151352,159920,-0.0536,Net 15,2025-12-30,Seasonal adjustment,review,0.27,Food Products,USD
+BI-2025-00268,Bill of Lading,Hamburg Industrial Supply GmbH,DE-HAM,DE,DE-HAM → IN-CHN,601638,635115,-0.0527,LC 60 Days,2025-10-02,Minor deviation from baseline,review,0.198,Agricultural Products,SGD
+CU-2025-00269,Customs Declaration,Port Klang Palm Oil Exports,MY-PTG,MY,MY-PTG → IN-PAR,865673,773493,0.1192,Advance Payment,2025-09-29,Insurance premium adjustment|Carrier change mid-route|Minor tariff reclassification,alert,0.634,Agricultural Products,INR
+LE-2026-00270,Letter of Credit,Dubai Petrochemicals LLC,AE-DXB,AE,AE-DXB → IN-MUN,60512,64222,-0.0578,Advance Payment,2026-01-07,Seasonal adjustment,review,0.29,Petroleum Products,SGD
+LE-2025-00271,Letter of Credit,Gujarat Chemical Industries,IN-MUN,IN,IN-MUN → IN-MUN,446039,428597,0.0407,Net 45,2025-10-04,,normal,0.167,Plastics,USD
+LE-2025-00272,Letter of Credit,Gujarat Chemical Industries,IN-MUN,IN,IN-MUN → IN-HAZ,190044,190273,-0.0012,Net 60,2025-11-22,,normal,0.004,Textiles & Garments,USD
+LE-2025-00273,Letter of Credit,Durban Mining Corp.,ZA-DUR,ZA,ZA-DUR → IN-KOL,176589,174343,0.0129,Net 30,2025-10-20,,normal,0.075,Chemical Products,USD
+BI-2026-00274,Bill of Lading,Busan Steel Trading Co.,KR-BUS,KR,KR-BUS → IN-PAR,496816,535140,-0.0716,LC at Sight,2026-01-24,,review,0.366,Plastics,INR
+LE-2025-00275,Letter of Credit,Colombo Textiles Ltd.,LK-CMB,LK,LK-CMB → IN-MUN,279702,315373,-0.1131,Net 15,2025-09-25,Carrier change mid-route|Insurance premium adjustment,alert,0.452,Medical Devices,USD
+LE-2025-00276,Letter of Credit,Hamburg Industrial Supply GmbH,DE-HAM,DE,DE-HAM → IN-KOC,29311,30180,-0.0288,Net 45,2025-08-15,,normal,0.102,Chemical Products,INR
+BI-2025-00277,Bill of Lading,Laem Chabang Seafood Processing,TH-LCH,TH,TH-LCH → IN-CHN,255301,307374,-0.1694,Net 30,2025-07-11,Minor tariff reclassification|Quantity discrepancy|Insurance premium adjustment,alert,0.922,Plastics,USD
+BI-2026-00278,Bill of Lading,Durban Mining Corp.,ZA-DUR,ZA,ZA-DUR → IN-JNPT,476863,512436,-0.0694,Net 60,2026-01-13,Minor deviation from baseline,review,0.35,Petroleum Products,USD
+BI-2025-00279,Bill of Lading,Laem Chabang Seafood Processing,TH-LCH,TH,TH-LCH → IN-VIZ,548852,536517,0.023,LC at Sight,2025-09-02,,normal,0.073,Textiles & Garments,SGD
+IN-2026-00280,Insurance Certificate,Hamburg Industrial Supply GmbH,DE-HAM,DE,DE-HAM → IN-JNPT,622379,587592,0.0592,Net 60,2026-01-20,Seasonal adjustment,review,0.289,Food Products,USD
+LE-2025-00281,Letter of Credit,Busan Steel Trading Co.,KR-BUS,KR,KR-BUS → IN-JNPT,692685,660988,0.048,LC at Sight,2025-07-05,,normal,0.218,Machinery,EUR
+BI-2025-00282,Bill of Lading,Shenzhen Micro-Tech Industries,CN-SZX,CN,CN-SZX → IN-KOC,542885,583540,-0.0697,Net 45,2025-11-26,,review,0.39,Food Products,USD
+CU-2026-00283,Customs Declaration,Yokohama Precision Instruments,JP-YOK,JP,JP-YOK → IN-JNPT,347679,370622,-0.0619,Advance Payment,2026-01-15,Minor deviation from baseline,review,0.199,Plastics,EUR
+PA-2026-00284,Packing List,Chennai Auto Components Ltd.,IN-CHN,IN,IN-CHN → IN-HAZ,249221,342462,-0.2723,Net 60,2026-02-15,Critical cost overrun >20%|Insurance premium spike|Payment terms changed|Material substitution flagged,critical,1.0,Petroleum Products,INR
+BI-2025-00285,Bill of Lading,Gujarat Chemical Industries,IN-MUN,IN,IN-MUN → IN-PAR,749951,669831,0.1196,Net 30,2025-12-27,Quantity discrepancy,alert,0.671,Chemical Products,EUR
+LE-2025-00286,Letter of Credit,Bangalore Biotech Solutions,IN-BLR,IN,IN-BLR → IN-KOL,488968,563505,-0.1323,Advance Payment,2025-12-02,Quantity discrepancy|Minor tariff reclassification,alert,0.551,Automobile Parts,INR
+PA-2025-00287,Packing List,Bangalore Biotech Solutions,IN-BLR,IN,IN-BLR → IN-CHN,624034,669920,-0.0685,Net 60,2025-12-21,Seasonal adjustment,review,0.257,Food Products,EUR
+CU-2025-00288,Customs Declaration,Gujarat Chemical Industries,IN-MUN,IN,IN-MUN → IN-KOC,19806,21274,-0.069,LC at Sight,2025-07-05,Minor deviation from baseline,review,0.255,Steel & Iron,SGD
+BI-2025-00289,Bill of Lading,Shanghai Electronics Co. Ltd.,CN-SHA,CN,CN-SHA → IN-MUN,470882,676777,-0.3042,LC at Sight,2025-06-30,Compliance review needed|Material substitution flagged|Payment terms changed|New intermediary entity detected|Expedited shipping requested,critical,1.0,Petroleum Products,EUR
+PU-2025-00290,Purchase Order,Busan Steel Trading Co.,KR-BUS,KR,KR-BUS → IN-KOC,277108,320954,-0.1366,LC 60 Days,2025-10-11,Cost overrun >10%|Quantity discrepancy,alert,0.609,Plastics,EUR
+IN-2025-00291,Invoice,Hamburg Industrial Supply GmbH,DE-HAM,DE,DE-HAM → IN-TUT,294947,219916,0.3412,LC 60 Days,2025-12-08,New intermediary entity detected|Compliance review needed|Material substitution flagged|Critical cost overrun >20%|Expedited shipping requested,critical,1.0,Textiles & Garments,INR
+PU-2026-00292,Purchase Order,Shenzhen Micro-Tech Industries,CN-SZX,CN,CN-SZX → IN-HAZ,807064,667287,0.2095,Net 45,2026-03-22,Material substitution flagged|Sanctions list match|Compliance review needed|Expedited shipping requested|New intermediary entity detected,critical,0.713,Steel & Iron,SGD
+IN-2026-00293,Insurance Certificate,Ningbo Machinery Works,CN-NGB,CN,CN-NGB → IN-MUN,838591,779832,0.0753,Net 60,2026-01-17,Seasonal adjustment,review,0.293,Textiles & Garments,EUR
+LE-2025-00294,Letter of Credit,Colombo Textiles Ltd.,LK-CMB,LK,LK-CMB → IN-PAR,347326,347255,0.0002,LC 60 Days,2025-09-29,,normal,0.001,Automobile Parts,USD
+IN-2025-00295,Invoice,Singapore Tech Pte. Ltd.,SG-SIN,SG,SG-SIN → IN-KOL,596844,669595,-0.1086,Net 30,2025-10-11,Insurance premium adjustment|Carrier change mid-route|Minor tariff reclassification,alert,0.468,Food Products,SGD
+LE-2025-00296,Letter of Credit,Port Klang Palm Oil Exports,MY-PTG,MY,MY-PTG → IN-TUT,263817,244939,0.0771,LC at Sight,2025-10-15,,review,0.36,Textiles & Garments,SGD
+IN-2025-00297,Insurance Certificate,Shenzhen Micro-Tech Industries,CN-SZX,CN,CN-SZX → IN-VIZ,112584,94983,0.1853,LC 60 Days,2025-06-14,Route surcharge detected|Carrier change mid-route,alert,0.953,Food Products,EUR
+CU-2026-00298,Customs Declaration,Bangalore Biotech Solutions,IN-BLR,IN,IN-BLR → IN-JNPT,677074,565740,0.1968,Advance Payment,2026-01-25,Cost overrun >10%,alert,1.0,Textiles & Garments,EUR
+PA-2026-00299,Packing List,Laem Chabang Seafood Processing,TH-LCH,TH,TH-LCH → IN-JNPT,569699,569166,0.0009,Net 60,2026-01-21,,normal,0.004,Pharmaceuticals,INR
+CU-2025-00300,Customs Declaration,Shanghai Electronics Co. Ltd.,CN-SHA,CN,CN-SHA → IN-MUN,518647,407795,0.2718,Advance Payment,2025-08-27,Expedited shipping requested|Insurance premium spike|New intermediary entity detected|Compliance review needed,critical,0.821,Electronics,EUR
+BI-2026-00301,Bill of Lading,Bangalore Biotech Solutions,IN-BLR,IN,IN-BLR → IN-HAZ,111571,111963,-0.0035,Net 60,2026-01-19,,normal,0.014,Petroleum Products,EUR
+IN-2025-00302,Insurance Certificate,Mumbai Pharma Exports Pvt. Ltd.,IN-JNPT,IN,IN-JNPT → IN-KOL,343096,330503,0.0381,Advance Payment,2025-08-25,,normal,0.222,Automobile Parts,INR
+PU-2025-00303,Purchase Order,Chennai Auto Components Ltd.,IN-CHN,IN,IN-CHN → IN-JNPT,181279,214109,-0.1533,Net 60,2025-12-14,Route surcharge detected,alert,0.745,Steel & Iron,USD
+PA-2025-00304,Packing List,Hamburg Industrial Supply GmbH,DE-HAM,DE,DE-HAM → IN-MUN,26278,24079,0.0913,LC 60 Days,2025-12-03,,review,0.523,Plastics,SGD
+BI-2025-00305,Bill of Lading,Dubai Petrochemicals LLC,AE-DXB,AE,AE-DXB → IN-KOL,187586,178788,0.0492,Advance Payment,2025-12-13,,normal,0.171,Medical Devices,EUR
+PU-2025-00306,Purchase Order,Colombo Textiles Ltd.,LK-CMB,LK,LK-CMB → IN-KOL,765949,668550,0.1457,Net 15,2025-08-26,Carrier change mid-route|Quantity discrepancy,alert,0.795,Petroleum Products,EUR
+BI-2025-00307,Bill of Lading,Chennai Auto Components Ltd.,IN-CHN,IN,IN-CHN → IN-VIZ,596549,540566,0.1036,Net 60,2025-06-12,Insurance premium adjustment|Quantity discrepancy,alert,0.424,Food Products,EUR
+PU-2025-00308,Purchase Order,Durban Mining Corp.,ZA-DUR,ZA,ZA-DUR → IN-PAR,13370,15795,-0.1535,Net 60,2025-10-09,Insurance premium adjustment,alert,0.732,Petroleum Products,USD
+IN-2025-00309,Insurance Certificate,Yokohama Precision Instruments,JP-YOK,JP,JP-YOK → IN-PAR,335715,369080,-0.0904,Net 30,2025-07-23,Minor deviation from baseline,review,0.359,Agricultural Products,EUR
+LE-2025-00310,Letter of Credit,Gujarat Chemical Industries,IN-MUN,IN,IN-MUN → IN-CHN,653875,601604,0.0869,Net 60,2025-09-28,,review,0.422,Agricultural Products,INR
+PA-2025-00311,Packing List,Laem Chabang Seafood Processing,TH-LCH,TH,TH-LCH → IN-JNPT,615873,580080,0.0617,Net 30,2025-07-20,Minor deviation from baseline,review,0.27,Agricultural Products,USD
+LE-2026-00312,Letter of Credit,Colombo Textiles Ltd.,LK-CMB,LK,LK-CMB → IN-PAR,370844,359800,0.0307,Net 30,2026-03-11,,normal,0.119,Chemical Products,USD
+IN-2026-00313,Insurance Certificate,Laem Chabang Seafood Processing,TH-LCH,TH,TH-LCH → IN-CHN,598337,575479,0.0397,Net 15,2026-03-01,,normal,0.189,Machinery,INR
+IN-2026-00314,Invoice,Chennai Auto Components Ltd.,IN-CHN,IN,IN-CHN → IN-KOL,181503,187293,-0.0309,LC at Sight,2026-03-11,,normal,0.18,Chemical Products,EUR
+CU-2026-00315,Customs Declaration,Singapore Tech Pte. Ltd.,SG-SIN,SG,SG-SIN → IN-HAZ,757660,706656,0.0722,LC 60 Days,2026-03-09,Minor deviation from baseline,review,0.407,Agricultural Products,EUR
+BI-2025-00316,Bill of Lading,Busan Steel Trading Co.,KR-BUS,KR,KR-BUS → IN-KOL,258242,220370,0.1719,Net 15,2025-09-11,Minor tariff reclassification|Cost overrun >10%,alert,1.0,Pharmaceuticals,EUR
+CU-2025-00317,Customs Declaration,Ningbo Machinery Works,CN-NGB,CN,CN-NGB → IN-TUT,702525,712313,-0.0137,Advance Payment,2025-09-13,,normal,0.048,Machinery,USD
+BI-2026-00318,Bill of Lading,Laem Chabang Seafood Processing,TH-LCH,TH,TH-LCH → IN-MUN,377256,376553,0.0019,Net 45,2026-02-04,,normal,0.009,Textiles & Garments,USD
+IN-2025-00319,Invoice,Tata Steel Processing,IN-MUM,IN,IN-MUM → IN-KOC,676816,746415,-0.0932,LC at Sight,2025-06-29,,review,0.409,Electronics,INR
+CU-2026-00320,Customs Declaration,Durban Mining Corp.,ZA-DUR,ZA,ZA-DUR → IN-TUT,88426,82084,0.0773,Net 15,2026-01-26,Seasonal adjustment,review,0.244,Textiles & Garments,SGD
+PU-2025-00321,Purchase Order,Gujarat Chemical Industries,IN-MUN,IN,IN-MUN → IN-VIZ,519106,520748,-0.0032,Net 15,2025-07-24,,normal,0.013,Pharmaceuticals,INR
+PU-2025-00322,Purchase Order,Rotterdam Chemicals BV,NL-RTM,NL,NL-RTM → IN-TUT,537675,622727,-0.1366,Net 15,2025-12-22,Minor tariff reclassification,alert,0.639,Plastics,INR
+PA-2025-00323,Packing List,Rotterdam Chemicals BV,NL-RTM,NL,NL-RTM → IN-KOL,96282,99918,-0.0364,Net 30,2025-12-04,,normal,0.151,Agricultural Products,EUR
+PU-2025-00324,Purchase Order,Singapore Tech Pte. Ltd.,SG-SIN,SG,SG-SIN → IN-TUT,320560,332428,-0.0357,Advance Payment,2025-08-25,,normal,0.136,Electronics,SGD
+IN-2025-00325,Insurance Certificate,Mumbai Pharma Exports Pvt. Ltd.,IN-JNPT,IN,IN-JNPT → IN-CHN,693693,726017,-0.0445,Net 15,2025-08-30,,normal,0.225,Automobile Parts,USD
+PA-2026-00326,Packing List,Colombo Textiles Ltd.,LK-CMB,LK,LK-CMB → IN-TUT,479250,453270,0.0573,LC 60 Days,2026-01-04,Minor deviation from baseline,review,0.18,Chemical Products,INR
+PU-2025-00327,Purchase Order,Chennai Auto Components Ltd.,IN-CHN,IN,IN-CHN → IN-KND,504970,450545,0.1208,LC 60 Days,2025-10-14,Minor tariff reclassification,alert,0.458,Electronics,USD
+IN-2026-00328,Invoice,Shenzhen Micro-Tech Industries,CN-SZX,CN,CN-SZX → IN-JNPT,143326,129228,0.1091,Net 30,2026-03-17,Minor tariff reclassification,alert,0.539,Steel & Iron,USD
+PA-2025-00329,Packing List,Singapore Tech Pte. Ltd.,SG-SIN,SG,SG-SIN → IN-KND,340310,283460,0.2006,Net 60,2025-08-06,Expedited shipping requested|Insurance premium spike|Material substitution flagged,critical,0.98,Automobile Parts,EUR
+PU-2025-00330,Purchase Order,Hamburg Industrial Supply GmbH,DE-HAM,DE,DE-HAM → IN-KOL,604789,589049,0.0267,LC at Sight,2025-06-12,,normal,0.086,Plastics,SGD
+LE-2025-00331,Letter of Credit,Rotterdam Chemicals BV,NL-RTM,NL,NL-RTM → IN-CHN,425185,323853,0.3129,Net 60,2025-11-30,Material substitution flagged|Payment terms changed,critical,1.0,Medical Devices,USD
+IN-2025-00332,Insurance Certificate,Singapore Tech Pte. Ltd.,SG-SIN,SG,SG-SIN → IN-KOL,115624,140598,-0.1776,Net 60,2025-07-19,Minor tariff reclassification|Cost overrun >10%,alert,0.622,Petroleum Products,EUR
+PA-2025-00333,Packing List,Dubai Petrochemicals LLC,AE-DXB,AE,AE-DXB → IN-KOC,296886,278060,0.0677,Net 60,2025-06-10,,review,0.372,Medical Devices,INR
+CU-2026-00334,Customs Declaration,Hamburg Industrial Supply GmbH,DE-HAM,DE,DE-HAM → IN-JNPT,561737,540801,0.0387,Net 15,2026-01-18,,normal,0.174,Electronics,EUR
+IN-2025-00335,Insurance Certificate,Shanghai Electronics Co. Ltd.,CN-SHA,CN,CN-SHA → IN-KOC,673320,692330,-0.0275,Advance Payment,2025-06-25,,normal,0.161,Chemical Products,SGD
+LE-2025-00336,Letter of Credit,Dubai Petrochemicals LLC,AE-DXB,AE,AE-DXB → IN-MUN,636978,558816,0.1399,LC at Sight,2025-08-28,Quantity discrepancy,alert,0.83,Chemical Products,INR
+CU-2025-00337,Customs Declaration,Singapore Tech Pte. Ltd.,SG-SIN,SG,SG-SIN → IN-KOC,298807,276605,0.0803,Advance Payment,2025-12-17,Minor deviation from baseline,review,0.321,Automobile Parts,INR
+PU-2026-00338,Purchase Order,Busan Steel Trading Co.,KR-BUS,KR,KR-BUS → IN-KOL,703841,689737,0.0204,Net 45,2026-01-26,,normal,0.086,Steel & Iron,EUR
+IN-2025-00339,Invoice,Colombo Textiles Ltd.,LK-CMB,LK,LK-CMB → IN-VIZ,102801,105145,-0.0223,Net 60,2025-07-06,,normal,0.103,Textiles & Garments,USD
+IN-2025-00340,Invoice,Laem Chabang Seafood Processing,TH-LCH,TH,TH-LCH → IN-CHN,399570,613114,-0.3483,Net 60,2025-09-11,Critical cost overrun >20%|New intermediary entity detected|Expedited shipping requested|Material substitution flagged,critical,1.0,Plastics,INR
+PU-2026-00341,Purchase Order,Mumbai Pharma Exports Pvt. Ltd.,IN-JNPT,IN,IN-JNPT → IN-KOL,515986,550954,-0.0635,Net 45,2026-01-12,,review,0.321,Plastics,USD
+BI-2025-00342,Bill of Lading,Durban Mining Corp.,ZA-DUR,ZA,ZA-DUR → IN-MUN,226396,213857,0.0586,Net 45,2025-09-08,Minor deviation from baseline,review,0.337,Food Products,SGD
+LE-2025-00343,Letter of Credit,Shanghai Electronics Co. Ltd.,CN-SHA,CN,CN-SHA → IN-KOL,272273,284689,-0.0436,Net 60,2025-12-01,,normal,0.203,Machinery,SGD
+IN-2025-00344,Insurance Certificate,Rotterdam Chemicals BV,NL-RTM,NL,NL-RTM → IN-KOL,111372,137768,-0.1916,Net 15,2025-09-09,Quantity discrepancy|Carrier change mid-route|Minor tariff reclassification,alert,0.735,Steel & Iron,USD
+IN-2025-00345,Invoice,Yokohama Precision Instruments,JP-YOK,JP,JP-YOK → IN-JNPT,381689,384083,-0.0062,Net 60,2025-12-20,,normal,0.031,Automobile Parts,USD
+PA-2025-00346,Packing List,Chennai Auto Components Ltd.,IN-CHN,IN,IN-CHN → IN-KOL,219347,183870,0.1929,Net 45,2025-08-11,Route surcharge detected|Minor tariff reclassification,alert,1.0,Pharmaceuticals,SGD
+PA-2025-00347,Packing List,Singapore Tech Pte. Ltd.,SG-SIN,SG,SG-SIN → IN-KND,718195,633797,0.1332,Net 30,2025-10-08,Quantity discrepancy,alert,0.459,Steel & Iron,SGD
+BI-2025-00348,Bill of Lading,Bangalore Biotech Solutions,IN-BLR,IN,IN-BLR → IN-MUN,639021,476525,0.341,Net 15,2025-10-20,Sanctions list match|Insurance premium spike|Payment terms changed,critical,1.0,Medical Devices,INR
+IN-2025-00349,Invoice,Busan Steel Trading Co.,KR-BUS,KR,KR-BUS → IN-JNPT,91260,81402,0.1211,Net 60,2025-06-25,Minor tariff reclassification,alert,0.379,Steel & Iron,INR
+LE-2025-00350,Letter of Credit,Hamburg Industrial Supply GmbH,DE-HAM,DE,DE-HAM → IN-KOL,231769,242663,-0.0449,Advance Payment,2025-06-01,,normal,0.181,Textiles & Garments,INR
+IN-2025-00351,Insurance Certificate,Laem Chabang Seafood Processing,TH-LCH,TH,TH-LCH → IN-MUN,397484,451035,-0.1187,Net 15,2025-08-06,Cost overrun >10%|Insurance premium adjustment,alert,0.676,Machinery,EUR
+IN-2025-00352,Insurance Certificate,Durban Mining Corp.,ZA-DUR,ZA,ZA-DUR → IN-JNPT,798149,791025,0.009,Net 15,2025-09-01,,normal,0.05,Steel & Iron,USD
+BI-2025-00353,Bill of Lading,Tata Steel Processing,IN-MUM,IN,IN-MUM → IN-VIZ,389585,398611,-0.0226,LC at Sight,2025-12-14,,normal,0.125,Chemical Products,EUR
+PA-2025-00354,Packing List,Mumbai Pharma Exports Pvt. Ltd.,IN-JNPT,IN,IN-JNPT → IN-KOC,599139,542977,0.1034,Advance Payment,2025-10-26,Minor tariff reclassification|Route surcharge detected,alert,0.337,Textiles & Garments,INR
+PA-2026-00355,Packing List,Hamburg Industrial Supply GmbH,DE-HAM,DE,DE-HAM → IN-CHN,244028,203848,0.1971,Net 60,2026-01-12,Minor tariff reclassification,alert,0.85,Machinery,INR
+CU-2025-00356,Customs Declaration,Mumbai Pharma Exports Pvt. Ltd.,IN-JNPT,IN,IN-JNPT → IN-KOC,845317,721302,0.1719,Net 30,2025-06-01,Quantity discrepancy,alert,0.547,Textiles & Garments,USD
+CU-2025-00357,Customs Declaration,Durban Mining Corp.,ZA-DUR,ZA,ZA-DUR → IN-MUN,84778,75384,0.1246,Net 30,2025-10-04,Cost overrun >10%,alert,0.631,Petroleum Products,SGD
+IN-2026-00358,Invoice,Durban Mining Corp.,ZA-DUR,ZA,ZA-DUR → IN-VIZ,244688,232137,0.0541,Advance Payment,2026-02-15,Minor deviation from baseline,review,0.263,Plastics,EUR
+CU-2026-00359,Customs Declaration,Rotterdam Chemicals BV,NL-RTM,NL,NL-RTM → IN-KOL,184906,171480,0.0783,LC at Sight,2026-03-18,Minor deviation from baseline,review,0.262,Electronics,EUR
+PU-2026-00360,Purchase Order,Gujarat Chemical Industries,IN-MUN,IN,IN-MUN → IN-KOL,152289,165428,-0.0794,Net 45,2026-02-21,,review,0.248,Food Products,USD
+CU-2025-00361,Customs Declaration,Dubai Petrochemicals LLC,AE-DXB,AE,AE-DXB → IN-PAR,466358,418151,0.1153,Advance Payment,2025-10-12,Quantity discrepancy|Minor tariff reclassification,alert,0.645,Electronics,SGD
+IN-2025-00362,Invoice,Shenzhen Micro-Tech Industries,CN-SZX,CN,CN-SZX → IN-HAZ,173574,173280,0.0017,LC at Sight,2025-10-10,,normal,0.008,Textiles & Garments,USD
+PU-2025-00363,Purchase Order,Hamburg Industrial Supply GmbH,DE-HAM,DE,DE-HAM → IN-KOC,562229,485178,0.1588,Net 15,2025-07-05,Minor tariff reclassification,alert,0.681,Chemical Products,INR
+IN-2026-00364,Invoice,Singapore Tech Pte. Ltd.,SG-SIN,SG,SG-SIN → IN-KOC,133541,137597,-0.0295,Advance Payment,2026-03-01,,normal,0.113,Automobile Parts,USD
+CU-2025-00365,Customs Declaration,Gujarat Chemical Industries,IN-MUN,IN,IN-MUN → IN-TUT,543111,688214,-0.2108,Net 30,2025-11-24,Expedited shipping requested|New intermediary entity detected|Payment terms changed,critical,1.0,Pharmaceuticals,SGD
+IN-2025-00366,Invoice,Gujarat Chemical Industries,IN-MUN,IN,IN-MUN → IN-PAR,731051,686914,0.0643,LC at Sight,2025-08-27,Minor deviation from baseline,review,0.201,Chemical Products,EUR
+IN-2025-00367,Insurance Certificate,Busan Steel Trading Co.,KR-BUS,KR,KR-BUS → IN-PAR,163464,157184,0.04,Net 30,2025-07-22,,normal,0.202,Textiles & Garments,EUR
+PU-2025-00368,Purchase Order,Chennai Auto Components Ltd.,IN-CHN,IN,IN-CHN → IN-KOC,257400,241641,0.0652,Net 60,2025-08-21,,review,0.197,Medical Devices,EUR
+BI-2026-00369,Bill of Lading,Shenzhen Micro-Tech Industries,CN-SZX,CN,CN-SZX → IN-VIZ,610272,479511,0.2727,Net 15,2026-01-12,Material substitution flagged|Expedited shipping requested,critical,0.973,Agricultural Products,SGD
+PU-2026-00370,Purchase Order,Bangalore Biotech Solutions,IN-BLR,IN,IN-BLR → IN-TUT,255345,316468,-0.1931,LC 60 Days,2026-01-01,Carrier change mid-route|Route surcharge detected|Minor tariff reclassification,alert,0.853,Machinery,EUR
+LE-2026-00371,Letter of Credit,Hamburg Industrial Supply GmbH,DE-HAM,DE,DE-HAM → IN-CHN,700980,658094,0.0652,Net 15,2026-03-09,Seasonal adjustment,review,0.384,Petroleum Products,SGD
+PU-2025-00372,Purchase Order,Dubai Petrochemicals LLC,AE-DXB,AE,AE-DXB → IN-JNPT,645978,576078,0.1213,Advance Payment,2025-06-22,Cost overrun >10%|Carrier change mid-route,alert,0.388,Agricultural Products,EUR
+IN-2025-00373,Invoice,Dubai Petrochemicals LLC,AE-DXB,AE,AE-DXB → IN-PAR,120881,122409,-0.0125,LC at Sight,2025-11-09,,normal,0.074,Textiles & Garments,USD
+CU-2025-00374,Customs Declaration,Yokohama Precision Instruments,JP-YOK,JP,JP-YOK → IN-TUT,39196,37902,0.0341,Net 45,2025-06-12,,normal,0.197,Food Products,INR
+LE-2025-00375,Letter of Credit,Yokohama Precision Instruments,JP-YOK,JP,JP-YOK → IN-VIZ,924098,727154,0.2708,Net 60,2025-11-19,Sanctions list match|Compliance review needed|Expedited shipping requested,critical,1.0,Agricultural Products,SGD
+LE-2025-00376,Letter of Credit,Singapore Tech Pte. Ltd.,SG-SIN,SG,SG-SIN → IN-MUN,557333,557111,0.0004,Net 15,2025-06-03,,normal,0.002,Machinery,SGD
+LE-2026-00377,Letter of Credit,Laem Chabang Seafood Processing,TH-LCH,TH,TH-LCH → IN-HAZ,723444,706339,0.0242,Net 15,2026-01-25,,normal,0.106,Chemical Products,EUR
+BI-2025-00378,Bill of Lading,Busan Steel Trading Co.,KR-BUS,KR,KR-BUS → IN-VIZ,182954,175488,0.0425,Advance Payment,2025-09-14,,normal,0.168,Textiles & Garments,USD
+PU-2025-00379,Purchase Order,Laem Chabang Seafood Processing,TH-LCH,TH,TH-LCH → IN-VIZ,357612,346253,0.0328,Net 30,2025-08-13,,normal,0.155,Steel & Iron,EUR
+CU-2025-00380,Customs Declaration,Singapore Tech Pte. Ltd.,SG-SIN,SG,SG-SIN → IN-JNPT,97880,99386,-0.0152,Net 45,2025-06-23,,normal,0.052,Chemical Products,EUR
+LE-2026-00381,Letter of Credit,Dubai Petrochemicals LLC,AE-DXB,AE,AE-DXB → IN-KOC,681767,613826,0.1107,Advance Payment,2026-03-19,Minor tariff reclassification|Carrier change mid-route,alert,0.426,Automobile Parts,USD
+LE-2025-00382,Letter of Credit,Ningbo Machinery Works,CN-NGB,CN,CN-NGB → IN-KOL,671116,680099,-0.0132,Net 30,2025-09-29,,normal,0.074,Electronics,INR
+PA-2025-00383,Packing List,Colombo Textiles Ltd.,LK-CMB,LK,LK-CMB → IN-JNPT,275362,291449,-0.0552,Net 15,2025-09-18,Minor deviation from baseline,review,0.184,Pharmaceuticals,USD
+IN-2026-00384,Invoice,Laem Chabang Seafood Processing,TH-LCH,TH,TH-LCH → IN-KOC,680236,742268,-0.0836,Net 30,2026-03-28,Minor deviation from baseline,review,0.407,Pharmaceuticals,EUR
+CU-2025-00385,Customs Declaration,Rotterdam Chemicals BV,NL-RTM,NL,NL-RTM → IN-TUT,221479,251088,-0.1179,Net 60,2025-09-27,Carrier change mid-route|Minor tariff reclassification|Insurance premium adjustment,alert,0.43,Steel & Iron,USD
+IN-2025-00386,Insurance Certificate,Mumbai Pharma Exports Pvt. Ltd.,IN-JNPT,IN,IN-JNPT → IN-PAR,724582,755226,-0.0406,Net 30,2025-09-14,,normal,0.193,Steel & Iron,INR
+CU-2026-00387,Customs Declaration,Durban Mining Corp.,ZA-DUR,ZA,ZA-DUR → IN-CHN,222160,223820,-0.0074,Net 45,2026-03-16,,normal,0.044,Chemical Products,INR
+CU-2026-00388,Customs Declaration,Mumbai Pharma Exports Pvt. Ltd.,IN-JNPT,IN,IN-JNPT → IN-MUN,10554,9950,0.0607,Net 15,2026-02-21,Seasonal adjustment,review,0.322,Machinery,INR
+IN-2025-00389,Insurance Certificate,Yokohama Precision Instruments,JP-YOK,JP,JP-YOK → IN-KND,141030,135438,0.0413,LC 60 Days,2025-06-10,,normal,0.132,Agricultural Products,SGD
+LE-2026-00390,Letter of Credit,Busan Steel Trading Co.,KR-BUS,KR,KR-BUS → IN-JNPT,724095,719405,0.0065,Advance Payment,2026-03-11,,normal,0.032,Agricultural Products,EUR
+BI-2025-00391,Bill of Lading,Singapore Tech Pte. Ltd.,SG-SIN,SG,SG-SIN → IN-TUT,481140,435205,0.1055,Advance Payment,2025-09-15,Cost overrun >10%|Carrier change mid-route,alert,0.342,Pharmaceuticals,INR
+BI-2026-00392,Bill of Lading,Shanghai Electronics Co. Ltd.,CN-SHA,CN,CN-SHA → IN-KOC,539804,499332,0.0811,Net 45,2026-01-21,,review,0.446,Machinery,EUR
+PA-2025-00393,Packing List,Colombo Textiles Ltd.,LK-CMB,LK,LK-CMB → IN-MUN,656830,724190,-0.093,Net 45,2025-12-01,,review,0.503,Automobile Parts,EUR
+BI-2025-00394,Bill of Lading,Singapore Tech Pte. Ltd.,SG-SIN,SG,SG-SIN → IN-PAR,311446,326857,-0.0472,Net 45,2025-10-28,,normal,0.23,Pharmaceuticals,EUR
+PU-2026-00395,Purchase Order,Singapore Tech Pte. Ltd.,SG-SIN,SG,SG-SIN → IN-KOC,223010,187255,0.1909,Net 45,2026-01-28,Cost overrun >10%|Quantity discrepancy,alert,0.991,Textiles & Garments,INR
+PU-2025-00396,Purchase Order,Shanghai Electronics Co. Ltd.,CN-SHA,CN,CN-SHA → IN-KND,431166,381607,0.1299,LC at Sight,2025-12-04,Route surcharge detected|Minor tariff reclassification|Carrier change mid-route,alert,0.685,Electronics,USD
+PA-2025-00397,Packing List,Ningbo Machinery Works,CN-NGB,CN,CN-NGB → IN-KND,190523,212872,-0.105,Net 60,2025-12-20,Quantity discrepancy|Carrier change mid-route,alert,0.419,Plastics,EUR
+IN-2025-00398,Invoice,Bangalore Biotech Solutions,IN-BLR,IN,IN-BLR → IN-KOC,342970,344497,-0.0044,Net 15,2025-10-08,,normal,0.021,Pharmaceuticals,SGD
+IN-2026-00399,Invoice,Colombo Textiles Ltd.,LK-CMB,LK,LK-CMB → IN-VIZ,112606,111878,0.0065,LC at Sight,2026-01-24,,normal,0.033,Automobile Parts,SGD
+IN-2025-00400,Insurance Certificate,Hamburg Industrial Supply GmbH,DE-HAM,DE,DE-HAM → IN-CHN,550136,737496,-0.254,Advance Payment,2025-08-13,Sanctions list match|Payment terms changed|Material substitution flagged|Insurance premium spike|Critical cost overrun >20%,critical,1.0,Medical Devices,EUR
+PU-2025-00401,Purchase Order,Shenzhen Micro-Tech Industries,CN-SZX,CN,CN-SZX → IN-TUT,403160,372768,0.0815,Net 45,2025-11-07,Minor deviation from baseline,review,0.286,Machinery,EUR
+CU-2025-00402,Customs Declaration,Gujarat Chemical Industries,IN-MUN,IN,IN-MUN → IN-KOL,824985,727974,0.1333,Net 30,2025-07-20,Route surcharge detected,alert,0.67,Medical Devices,EUR
+CU-2025-00403,Customs Declaration,Shanghai Electronics Co. Ltd.,CN-SHA,CN,CN-SHA → IN-TUT,944991,741515,0.2744,Advance Payment,2025-06-19,Material substitution flagged|Sanctions list match|Compliance review needed|Critical cost overrun >20%|Insurance premium spike,critical,0.893,Chemical Products,SGD
+LE-2025-00404,Letter of Credit,Durban Mining Corp.,ZA-DUR,ZA,ZA-DUR → IN-PAR,50164,48939,0.025,Advance Payment,2025-08-21,,normal,0.128,Electronics,USD
+PA-2026-00405,Packing List,Rotterdam Chemicals BV,NL-RTM,NL,NL-RTM → IN-CHN,109617,124443,-0.1191,Net 45,2026-03-23,Carrier change mid-route|Route surcharge detected|Cost overrun >10%,alert,0.583,Medical Devices,INR
+BI-2025-00406,Bill of Lading,Bangalore Biotech Solutions,IN-BLR,IN,IN-BLR → IN-TUT,300775,314288,-0.043,Net 45,2025-09-30,,normal,0.238,Electronics,INR
+CU-2025-00407,Customs Declaration,Port Klang Palm Oil Exports,MY-PTG,MY,MY-PTG → IN-KOL,693981,701360,-0.0105,LC 60 Days,2025-07-30,,normal,0.058,Electronics,USD
+PU-2025-00408,Purchase Order,Tata Steel Processing,IN-MUM,IN,IN-MUM → IN-MUN,400271,547350,-0.2687,Net 60,2025-06-06,New intermediary entity detected|Expedited shipping requested,critical,1.0,Medical Devices,USD
+IN-2025-00409,Invoice,Shenzhen Micro-Tech Industries,CN-SZX,CN,CN-SZX → IN-HAZ,212015,188168,0.1267,LC 60 Days,2025-06-27,Cost overrun >10%|Insurance premium adjustment|Quantity discrepancy,alert,0.755,Plastics,SGD
+BI-2026-00410,Bill of Lading,Rotterdam Chemicals BV,NL-RTM,NL,NL-RTM → IN-HAZ,230605,221781,0.0398,LC 60 Days,2026-03-06,,normal,0.229,Medical Devices,INR
+PA-2026-00411,Packing List,Gujarat Chemical Industries,IN-MUN,IN,IN-MUN → IN-JNPT,105156,82139,0.2802,Net 15,2026-02-15,New intermediary entity detected|Payment terms changed|Material substitution flagged,critical,1.0,Petroleum Products,USD
+PA-2025-00412,Packing List,Port Klang Palm Oil Exports,MY-PTG,MY,MY-PTG → IN-TUT,811753,789202,0.0286,LC at Sight,2025-11-24,,normal,0.16,Chemical Products,EUR
+CU-2025-00413,Customs Declaration,Bangalore Biotech Solutions,IN-BLR,IN,IN-BLR → IN-KND,404360,396857,0.0189,Advance Payment,2025-10-21,,normal,0.08,Petroleum Products,SGD
+PU-2026-00414,Purchase Order,Mumbai Pharma Exports Pvt. Ltd.,IN-JNPT,IN,IN-JNPT → IN-KOC,431751,389218,0.1093,Net 15,2026-02-20,Quantity discrepancy,alert,0.596,Pharmaceuticals,EUR
+BI-2025-00415,Bill of Lading,Busan Steel Trading Co.,KR-BUS,KR,KR-BUS → IN-VIZ,385519,397609,-0.0304,Advance Payment,2025-08-21,,normal,0.152,Textiles & Garments,EUR
+PU-2025-00416,Purchase Order,Gujarat Chemical Industries,IN-MUN,IN,IN-MUN → IN-HAZ,920282,731767,0.2576,Net 30,2025-10-15,Sanctions list match|Payment terms changed|Insurance premium spike|Compliance review needed|New intermediary entity detected,critical,0.897,Pharmaceuticals,SGD
+IN-2025-00417,Invoice,Shenzhen Micro-Tech Industries,CN-SZX,CN,CN-SZX → IN-MUN,105467,100357,0.0509,Net 15,2025-10-15,Minor deviation from baseline,review,0.267,Food Products,SGD
+LE-2026-00418,Letter of Credit,Durban Mining Corp.,ZA-DUR,ZA,ZA-DUR → IN-PAR,543275,447967,0.2128,LC 60 Days,2026-03-15,Material substitution flagged|Critical cost overrun >20%|Payment terms changed,critical,0.652,Textiles & Garments,EUR
+PA-2026-00419,Packing List,Yokohama Precision Instruments,JP-YOK,JP,JP-YOK → IN-TUT,663242,697776,-0.0495,Net 30,2026-02-23,,normal,0.237,Petroleum Products,SGD
+IN-2026-00420,Invoice,Mumbai Pharma Exports Pvt. Ltd.,IN-JNPT,IN,IN-JNPT → IN-MUN,33871,32430,0.0444,LC at Sight,2026-02-12,,normal,0.19,Medical Devices,SGD
+PU-2025-00421,Purchase Order,Tata Steel Processing,IN-MUM,IN,IN-MUM → IN-CHN,373093,399718,-0.0666,Advance Payment,2025-10-16,,review,0.392,Textiles & Garments,SGD
+PA-2025-00422,Packing List,Rotterdam Chemicals BV,NL-RTM,NL,NL-RTM → IN-MUN,586783,509358,0.152,LC at Sight,2025-09-24,Quantity discrepancy,alert,0.559,Electronics,EUR
+IN-2026-00423,Invoice,Mumbai Pharma Exports Pvt. Ltd.,IN-JNPT,IN,IN-JNPT → IN-JNPT,64645,68128,-0.0511,LC 60 Days,2026-02-22,,review,0.276,Machinery,USD
+IN-2025-00424,Insurance Certificate,Rotterdam Chemicals BV,NL-RTM,NL,NL-RTM → IN-MUN,311724,297872,0.0465,Net 15,2025-10-02,,normal,0.165,Medical Devices,SGD
+LE-2026-00425,Letter of Credit,Busan Steel Trading Co.,KR-BUS,KR,KR-BUS → IN-KOL,199705,244450,-0.183,LC at Sight,2026-01-28,Route surcharge detected|Minor tariff reclassification,alert,0.679,Machinery,INR
+LE-2025-00426,Letter of Credit,Chennai Auto Components Ltd.,IN-CHN,IN,IN-CHN → IN-TUT,425577,394309,0.0793,Net 15,2025-09-15,Minor deviation from baseline,review,0.428,Food Products,SGD
+LE-2026-00427,Letter of Credit,Yokohama Precision Instruments,JP-YOK,JP,JP-YOK → IN-VIZ,755779,730814,0.0342,Net 15,2026-02-15,,normal,0.103,Steel & Iron,INR
+IN-2025-00428,Insurance Certificate,Rotterdam Chemicals BV,NL-RTM,NL,NL-RTM → IN-CHN,746792,732839,0.019,LC 60 Days,2025-07-28,,normal,0.09,Steel & Iron,EUR
+CU-2025-00429,Customs Declaration,Dubai Petrochemicals LLC,AE-DXB,AE,AE-DXB → IN-KOL,566011,511995,0.1055,Net 60,2025-10-09,Insurance premium adjustment|Cost overrun >10%|Route surcharge detected,alert,0.515,Electronics,EUR
+PU-2026-00430,Purchase Order,Rotterdam Chemicals BV,NL-RTM,NL,NL-RTM → IN-TUT,263329,397892,-0.3382,Net 45,2026-02-02,Material substitution flagged|Insurance premium spike|New intermediary entity detected,critical,1.0,Steel & Iron,INR
+CU-2025-00431,Customs Declaration,Yokohama Precision Instruments,JP-YOK,JP,JP-YOK → IN-VIZ,252112,267979,-0.0592,Advance Payment,2025-09-14,,review,0.241,Petroleum Products,USD
+IN-2025-00432,Insurance Certificate,Busan Steel Trading Co.,KR-BUS,KR,KR-BUS → IN-KOC,559170,573754,-0.0254,LC at Sight,2025-06-15,,normal,0.146,Steel & Iron,EUR
+PU-2025-00433,Purchase Order,Ningbo Machinery Works,CN-NGB,CN,CN-NGB → IN-JNPT,456667,486153,-0.0607,Advance Payment,2025-11-04,Minor deviation from baseline,review,0.227,Food Products,EUR
+IN-2025-00434,Insurance Certificate,Singapore Tech Pte. Ltd.,SG-SIN,SG,SG-SIN → IN-CHN,709497,699482,0.0143,Net 60,2025-10-23,,normal,0.072,Automobile Parts,EUR
+PU-2026-00435,Purchase Order,Bangalore Biotech Solutions,IN-BLR,IN,IN-BLR → IN-KOL,428858,368642,0.1633,Net 45,2026-01-28,Carrier change mid-route|Minor tariff reclassification|Insurance premium adjustment,alert,0.844,Steel & Iron,USD
+PU-2025-00436,Purchase Order,Laem Chabang Seafood Processing,TH-LCH,TH,TH-LCH → IN-MUN,128565,132328,-0.0284,Net 15,2025-06-15,,normal,0.113,Textiles & Garments,INR
+IN-2025-00437,Insurance Certificate,Mumbai Pharma Exports Pvt. Ltd.,IN-JNPT,IN,IN-JNPT → IN-VIZ,321450,320522,0.0029,LC at Sight,2025-09-30,,normal,0.013,Electronics,SGD
+PA-2025-00438,Packing List,Port Klang Palm Oil Exports,MY-PTG,MY,MY-PTG → IN-KOC,569518,497178,0.1455,Net 30,2025-11-20,Quantity discrepancy|Cost overrun >10%,alert,0.723,Plastics,USD
+IN-2026-00439,Invoice,Bangalore Biotech Solutions,IN-BLR,IN,IN-BLR → IN-KOL,178405,165574,0.0775,LC 60 Days,2026-03-09,Minor deviation from baseline,review,0.373,Agricultural Products,INR
+PA-2025-00440,Packing List,Bangalore Biotech Solutions,IN-BLR,IN,IN-BLR → IN-KOL,91430,100530,-0.0905,LC at Sight,2025-09-14,,review,0.517,Steel & Iron,SGD
+IN-2026-00441,Invoice,Bangalore Biotech Solutions,IN-BLR,IN,IN-BLR → IN-CHN,359951,403258,-0.1074,Net 30,2026-01-13,Insurance premium adjustment|Quantity discrepancy|Route surcharge detected,alert,0.468,Food Products,EUR
+CU-2025-00442,Customs Declaration,Durban Mining Corp.,ZA-DUR,ZA,ZA-DUR → IN-VIZ,81508,86575,-0.0585,Net 45,2025-07-15,Seasonal adjustment,review,0.29,Petroleum Products,EUR
+PU-2025-00443,Purchase Order,Gujarat Chemical Industries,IN-MUN,IN,IN-MUN → IN-PAR,310200,299554,0.0355,Net 45,2025-11-17,,normal,0.184,Electronics,USD
+PU-2026-00444,Purchase Order,Bangalore Biotech Solutions,IN-BLR,IN,IN-BLR → IN-JNPT,452657,350013,0.2933,LC 60 Days,2026-03-21,Compliance review needed|Material substitution flagged|Payment terms changed|Expedited shipping requested,critical,1.0,Electronics,USD
+IN-2026-00445,Invoice,Durban Mining Corp.,ZA-DUR,ZA,ZA-DUR → IN-KOC,631727,524677,0.204,Net 45,2026-01-13,Compliance review needed|Insurance premium spike|Payment terms changed,critical,1.0,Medical Devices,INR
+LE-2025-00446,Letter of Credit,Ningbo Machinery Works,CN-NGB,CN,CN-NGB → IN-MUN,725905,686074,0.0581,Net 60,2025-10-02,Seasonal adjustment,review,0.225,Machinery,USD
+LE-2025-00447,Letter of Credit,Colombo Textiles Ltd.,LK-CMB,LK,LK-CMB → IN-KOC,145847,113383,0.2863,Advance Payment,2025-08-10,Material substitution flagged|Payment terms changed|Sanctions list match,critical,1.0,Agricultural Products,INR
+CU-2025-00448,Customs Declaration,Shenzhen Micro-Tech Industries,CN-SZX,CN,CN-SZX → IN-PAR,316850,312400,0.0142,Advance Payment,2025-10-12,,normal,0.045,Electronics,SGD
+IN-2026-00449,Insurance Certificate,Dubai Petrochemicals LLC,AE-DXB,AE,AE-DXB → IN-TUT,528937,505945,0.0454,LC 60 Days,2026-02-06,,normal,0.24,Electronics,USD
+BI-2025-00450,Bill of Lading,Durban Mining Corp.,ZA-DUR,ZA,ZA-DUR → IN-CHN,179652,223769,-0.1972,LC 60 Days,2025-12-12,Quantity discrepancy|Insurance premium adjustment,alert,0.705,Machinery,INR
+IN-2025-00451,Insurance Certificate,Dubai Petrochemicals LLC,AE-DXB,AE,AE-DXB → IN-HAZ,38443,43211,-0.1103,Net 45,2025-09-27,Route surcharge detected,alert,0.522,Pharmaceuticals,INR
+IN-2025-00452,Invoice,Port Klang Palm Oil Exports,MY-PTG,MY,MY-PTG → IN-KOL,545375,506656,0.0764,LC 60 Days,2025-10-12,Minor deviation from baseline,review,0.436,Chemical Products,USD
+CU-2026-00453,Customs Declaration,Ningbo Machinery Works,CN-NGB,CN,CN-NGB → IN-CHN,428273,400603,0.0691,Net 60,2026-01-13,Seasonal adjustment,review,0.383,Automobile Parts,USD
+LE-2025-00454,Letter of Credit,Gujarat Chemical Industries,IN-MUN,IN,IN-MUN → IN-PAR,369363,360088,0.0258,Net 15,2025-12-02,,normal,0.126,Plastics,SGD
+PU-2025-00455,Purchase Order,Colombo Textiles Ltd.,LK-CMB,LK,LK-CMB → IN-KOC,153721,205677,-0.2526,Advance Payment,2025-07-20,Insurance premium spike|New intermediary entity detected,critical,1.0,Machinery,USD
+BI-2025-00456,Bill of Lading,Laem Chabang Seafood Processing,TH-LCH,TH,TH-LCH → IN-CHN,572358,609544,-0.061,LC at Sight,2025-07-16,,review,0.312,Machinery,INR
+PA-2026-00457,Packing List,Rotterdam Chemicals BV,NL-RTM,NL,NL-RTM → IN-VIZ,45017,36061,0.2484,Net 60,2026-01-28,Payment terms changed|Compliance review needed|Material substitution flagged,critical,1.0,Steel & Iron,SGD
+BI-2025-00458,Bill of Lading,Laem Chabang Seafood Processing,TH-LCH,TH,TH-LCH → IN-HAZ,647366,695657,-0.0694,LC at Sight,2025-11-11,,review,0.356,Pharmaceuticals,INR
+PA-2026-00459,Packing List,Hamburg Industrial Supply GmbH,DE-HAM,DE,DE-HAM → IN-KOL,468044,568310,-0.1764,Net 15,2026-01-26,Quantity discrepancy,alert,0.663,Petroleum Products,EUR
+IN-2025-00460,Insurance Certificate,Busan Steel Trading Co.,KR-BUS,KR,KR-BUS → IN-HAZ,410508,376796,0.0895,Net 60,2025-07-16,Seasonal adjustment,review,0.313,Textiles & Garments,SGD
+PA-2025-00461,Packing List,Ningbo Machinery Works,CN-NGB,CN,CN-NGB → IN-HAZ,556941,586374,-0.0502,Advance Payment,2025-07-23,Seasonal adjustment,review,0.204,Pharmaceuticals,EUR
+IN-2026-00462,Invoice,Durban Mining Corp.,ZA-DUR,ZA,ZA-DUR → IN-JNPT,516477,502382,0.0281,Net 60,2026-01-25,,normal,0.106,Textiles & Garments,USD
+IN-2025-00463,Invoice,Ningbo Machinery Works,CN-NGB,CN,CN-NGB → IN-JNPT,228874,232963,-0.0176,Advance Payment,2025-09-07,,normal,0.102,Food Products,USD
+BI-2025-00464,Bill of Lading,Chennai Auto Components Ltd.,IN-CHN,IN,IN-CHN → IN-VIZ,550743,683422,-0.1941,Net 15,2025-11-23,Minor tariff reclassification,alert,0.788,Automobile Parts,SGD
+BI-2025-00465,Bill of Lading,Ningbo Machinery Works,CN-NGB,CN,CN-NGB → IN-CHN,147333,137685,0.0701,Net 60,2025-09-25,,review,0.357,Plastics,EUR
+BI-2026-00466,Bill of Lading,Shanghai Electronics Co. Ltd.,CN-SHA,CN,CN-SHA → IN-KND,313061,296374,0.0563,Advance Payment,2026-01-10,,review,0.2,Electronics,EUR
+BI-2025-00467,Bill of Lading,Shenzhen Micro-Tech Industries,CN-SZX,CN,CN-SZX → IN-VIZ,717330,672608,0.0665,Net 60,2025-10-24,Seasonal adjustment,review,0.247,Agricultural Products,SGD
+PA-2025-00468,Packing List,Bangalore Biotech Solutions,IN-BLR,IN,IN-BLR → IN-JNPT,618006,608277,0.016,Net 15,2025-11-19,,normal,0.079,Textiles & Garments,SGD
+CU-2025-00469,Customs Declaration,Shanghai Electronics Co. Ltd.,CN-SHA,CN,CN-SHA → IN-KOC,364227,450161,-0.1909,Net 15,2025-08-01,Cost overrun >10%|Route surcharge detected|Minor tariff reclassification,alert,1.0,Steel & Iron,SGD
+IN-2025-00470,Invoice,Mumbai Pharma Exports Pvt. Ltd.,IN-JNPT,IN,IN-JNPT → IN-VIZ,73102,70824,0.0322,LC 60 Days,2025-09-06,,normal,0.102,Steel & Iron,EUR
+LE-2026-00471,Letter of Credit,Dubai Petrochemicals LLC,AE-DXB,AE,AE-DXB → IN-KND,532880,567406,-0.0608,LC 60 Days,2026-03-24,,review,0.315,Electronics,SGD
+BI-2025-00472,Bill of Lading,Gujarat Chemical Industries,IN-MUN,IN,IN-MUN → IN-JNPT,707722,736394,-0.0389,LC 60 Days,2025-08-23,,normal,0.194,Electronics,USD
+IN-2025-00473,Invoice,Dubai Petrochemicals LLC,AE-DXB,AE,AE-DXB → IN-CHN,293902,300732,-0.0227,Net 30,2025-07-01,,normal,0.104,Medical Devices,INR
+LE-2025-00474,Letter of Credit,Tata Steel Processing,IN-MUM,IN,IN-MUM → IN-TUT,255525,225506,0.1331,Net 45,2025-12-16,Cost overrun >10%|Quantity discrepancy|Insurance premium adjustment,alert,0.589,Textiles & Garments,SGD
+BI-2025-00475,Bill of Lading,Mumbai Pharma Exports Pvt. Ltd.,IN-JNPT,IN,IN-JNPT → IN-HAZ,725549,656031,0.106,LC 60 Days,2025-11-19,Minor tariff reclassification|Insurance premium adjustment,alert,0.335,Steel & Iron,USD
+PU-2025-00476,Purchase Order,Tata Steel Processing,IN-MUM,IN,IN-MUM → IN-MUN,406935,586701,-0.3064,Net 30,2025-08-01,Insurance premium spike|Critical cost overrun >20%,critical,1.0,Machinery,USD
+BI-2025-00477,Bill of Lading,Port Klang Palm Oil Exports,MY-PTG,MY,MY-PTG → IN-KOC,47148,49839,-0.054,Net 15,2025-09-22,Minor deviation from baseline,review,0.196,Machinery,INR
+CU-2025-00478,Customs Declaration,Shenzhen Micro-Tech Industries,CN-SZX,CN,CN-SZX → IN-CHN,184174,191618,-0.0388,LC 60 Days,2025-08-03,,normal,0.131,Plastics,INR
+BI-2025-00479,Bill of Lading,Port Klang Palm Oil Exports,MY-PTG,MY,MY-PTG → IN-JNPT,496368,628985,-0.2108,LC 60 Days,2025-07-29,Compliance review needed|Sanctions list match|Expedited shipping requested,critical,0.777,Chemical Products,INR
+IN-2025-00480,Invoice,Shanghai Electronics Co. Ltd.,CN-SHA,CN,CN-SHA → IN-KOL,375918,387368,-0.0296,Net 15,2025-07-31,,normal,0.154,Textiles & Garments,SGD
+BI-2025-00481,Bill of Lading,Dubai Petrochemicals LLC,AE-DXB,AE,AE-DXB → IN-KOC,253179,187625,0.3494,LC 60 Days,2025-11-22,Expedited shipping requested|Compliance review needed,critical,1.0,Food Products,SGD
+IN-2026-00482,Invoice,Singapore Tech Pte. Ltd.,SG-SIN,SG,SG-SIN → IN-PAR,638440,718826,-0.1118,Net 30,2026-03-09,Cost overrun >10%,alert,0.458,Chemical Products,EUR
+PA-2025-00483,Packing List,Mumbai Pharma Exports Pvt. Ltd.,IN-JNPT,IN,IN-JNPT → IN-KOC,389201,384791,0.0115,LC at Sight,2025-11-30,,normal,0.067,Electronics,SGD
+BI-2025-00484,Bill of Lading,Ningbo Machinery Works,CN-NGB,CN,CN-NGB → IN-KND,462841,545744,-0.1519,Net 30,2025-10-09,Quantity discrepancy|Carrier change mid-route|Minor tariff reclassification,alert,0.855,Food Products,USD
+PA-2025-00485,Packing List,Durban Mining Corp.,ZA-DUR,ZA,ZA-DUR → IN-CHN,330439,403729,-0.1815,Net 60,2025-10-09,Cost overrun >10%,alert,0.579,Petroleum Products,EUR
+IN-2025-00486,Insurance Certificate,Port Klang Palm Oil Exports,MY-PTG,MY,MY-PTG → IN-KOC,85288,97982,-0.1296,Advance Payment,2025-11-23,Route surcharge detected,alert,0.615,Chemical Products,SGD
+PA-2025-00487,Packing List,Colombo Textiles Ltd.,LK-CMB,LK,LK-CMB → IN-KND,195712,175236,0.1168,Net 15,2025-09-06,Minor tariff reclassification,alert,0.597,Chemical Products,EUR
+PA-2026-00488,Packing List,Yokohama Precision Instruments,JP-YOK,JP,JP-YOK → IN-PAR,755156,675497,0.1179,LC 60 Days,2026-01-10,Minor tariff reclassification|Route surcharge detected|Insurance premium adjustment,alert,0.537,Electronics,USD
+IN-2025-00489,Invoice,Ningbo Machinery Works,CN-NGB,CN,CN-NGB → IN-KND,210782,160075,0.3168,Net 45,2025-09-08,Critical cost overrun >20%|Sanctions list match|Compliance review needed,critical,1.0,Machinery,EUR
+IN-2025-00490,Invoice,Gujarat Chemical Industries,IN-MUN,IN,IN-MUN → IN-JNPT,770960,716978,0.0753,Net 60,2025-11-21,,review,0.395,Plastics,EUR
+PA-2025-00491,Packing List,Gujarat Chemical Industries,IN-MUN,IN,IN-MUN → IN-KOC,268752,236952,0.1342,Net 15,2025-07-23,Quantity discrepancy,alert,0.729,Pharmaceuticals,EUR
+PA-2025-00492,Packing List,Durban Mining Corp.,ZA-DUR,ZA,ZA-DUR → IN-KOL,49332,47915,0.0296,Net 30,2025-08-22,,normal,0.12,Food Products,SGD
+PU-2025-00493,Purchase Order,Colombo Textiles Ltd.,LK-CMB,LK,LK-CMB → IN-CHN,487940,395660,0.2332,LC at Sight,2025-07-05,Compliance review needed|Payment terms changed,critical,1.0,Plastics,USD
+CU-2025-00494,Customs Declaration,Dubai Petrochemicals LLC,AE-DXB,AE,AE-DXB → IN-HAZ,704591,681297,0.0342,Net 45,2025-07-01,,normal,0.152,Automobile Parts,USD
+LE-2025-00495,Letter of Credit,Ningbo Machinery Works,CN-NGB,CN,CN-NGB → IN-VIZ,44639,53356,-0.1634,LC at Sight,2025-08-09,Carrier change mid-route,alert,0.78,Chemical Products,SGD
+BI-2025-00496,Bill of Lading,Shenzhen Micro-Tech Industries,CN-SZX,CN,CN-SZX → IN-TUT,686913,631854,0.0871,Advance Payment,2025-11-19,Seasonal adjustment,review,0.421,Petroleum Products,INR
+PU-2025-00497,Purchase Order,Yokohama Precision Instruments,JP-YOK,JP,JP-YOK → IN-CHN,80936,118377,-0.3163,Advance Payment,2025-07-04,Expedited shipping requested|Sanctions list match|Insurance premium spike,critical,0.987,Food Products,SGD
+IN-2025-00498,Invoice,Laem Chabang Seafood Processing,TH-LCH,TH,TH-LCH → IN-VIZ,619943,635367,-0.0243,Advance Payment,2025-10-06,,normal,0.142,Plastics,SGD
+PA-2025-00499,Packing List,Mumbai Pharma Exports Pvt. Ltd.,IN-JNPT,IN,IN-JNPT → IN-PAR,717013,782776,-0.084,Net 60,2025-06-30,,review,0.342,Plastics,SGD
+IN-2026-00500,Invoice,Dubai Petrochemicals LLC,AE-DXB,AE,AE-DXB → IN-KOL,83627,89226,-0.0627,LC 60 Days,2026-03-17,,review,0.355,Medical Devices,EUR

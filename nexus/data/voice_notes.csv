@@ -1,0 +1,251 @@
+note_id,timestamp,location_name,node_id,lat,lon,language,category,duration_sec,contributor_id,credibility_score,verified,severity,nearby_reports
+VN-00001,2026-03-17 09:18:00,Hyderabad ORR Junction,IN-HYD,17.39,78.49,Kannada,strike,15,CROWD-0016,0.666,False,0.333,3
+VN-00002,2026-03-16 00:00:00,Hyderabad ORR Junction,IN-HYD,17.39,78.49,Gujarati,strike,21,CROWD-0128,0.858,False,0.577,15
+VN-00003,2026-03-25 06:16:00,Bangalore Whitefield Industrial,IN-BLR,12.97,77.59,Marathi,congestion,25,CROWD-0143,0.805,False,0.574,2
+VN-00004,2026-03-06 18:05:00,Mumbai-Pune Expressway,IN-MUM,18.75,73.25,Telugu,strike,21,CROWD-0001,0.813,True,0.247,9
+VN-00005,2026-03-14 12:58:00,Kolkata Dock Complex,IN-KOL,22.55,88.33,Hindi,weather,22,CROWD-0123,0.519,False,0.466,23
+VN-00006,2026-03-15 22:01:00,Delhi ICD Tughlakabad,IN-DEL,28.61,77.21,Bengali,weather,13,CROWD-0104,0.741,False,0.142,15
+VN-00007,2026-03-07 00:12:00,Nhava Sheva Port Gate 4,IN-JNPT,18.95,72.95,Gujarati,congestion,6,CROWD-0002,0.485,False,0.073,10
+VN-00008,2026-03-07 07:44:00,Pune Chakan MIDC,IN-PUN,18.52,73.86,Bengali,congestion,17,CROWD-0028,0.641,False,0.311,8
+VN-00009,2026-03-21 01:18:00,Delhi ICD Tughlakabad,IN-DEL,28.61,77.21,Kannada,customs_delay,16,CROWD-0040,0.98,False,0.196,6
+VN-00010,2026-03-17 02:37:00,Kochi Port Approach Road,IN-KOC,9.93,76.27,Marathi,accident,15,CROWD-0046,0.525,False,0.119,15
+VN-00011,2026-03-27 08:34:00,Ahmedabad-Kandla Highway,IN-AMD,23.02,72.57,Marathi,congestion,7,CROWD-0025,1.0,True,0.379,11
+VN-00012,2026-03-21 22:12:00,Ahmedabad-Kandla Highway,IN-AMD,23.02,72.57,Marathi,customs_delay,5,CROWD-0042,0.854,False,0.486,25
+VN-00013,2026-03-30 20:15:00,Chennai Harbor Road,IN-CHN,13.1,80.3,Gujarati,strike,5,CROWD-0071,0.682,False,0.243,24
+VN-00014,2026-03-11 13:02:00,Kochi Port Approach Road,IN-KOC,9.93,76.27,Kannada,accident,6,CROWD-0005,0.591,True,0.749,2
+VN-00015,2026-03-23 02:59:00,Kolkata Dock Complex,IN-KOL,22.55,88.33,Tamil,congestion,24,CROWD-0085,1.0,False,0.536,14
+VN-00016,2026-03-27 00:55:00,Ahmedabad-Kandla Highway,IN-AMD,23.02,72.57,Telugu,equipment_failure,22,CROWD-0056,0.819,False,0.3,16
+VN-00017,2026-03-14 21:39:00,Nhava Sheva Port Gate 4,IN-JNPT,18.95,72.95,English,congestion,16,CROWD-0102,0.441,True,0.296,15
+VN-00018,2026-03-23 03:16:00,Vizag Outer Harbor,IN-VIZ,17.69,83.29,Gujarati,accident,28,CROWD-0113,0.674,True,0.573,22
+VN-00019,2026-03-03 00:44:00,Delhi ICD Tughlakabad,IN-DEL,28.61,77.21,Bengali,equipment_failure,8,CROWD-0144,0.62,True,0.746,12
+VN-00020,2026-03-21 17:35:00,Mundra Port Container Yard,IN-MUN,22.77,69.71,English,congestion,24,CROWD-0083,0.33,True,0.276,15
+VN-00021,2026-03-23 18:33:00,Ahmedabad-Kandla Highway,IN-AMD,23.02,72.57,Telugu,strike,29,CROWD-0048,0.582,False,0.296,19
+VN-00022,2026-03-23 06:30:00,Hyderabad ORR Junction,IN-HYD,17.39,78.49,Kannada,road_block,15,CROWD-0136,0.618,False,0.538,21
+VN-00023,2026-03-27 08:32:00,Ahmedabad-Kandla Highway,IN-AMD,23.02,72.57,Kannada,strike,25,CROWD-0003,1.0,False,0.535,23
+VN-00024,2026-03-16 01:52:00,Vizag Outer Harbor,IN-VIZ,17.69,83.29,Hindi,road_block,17,CROWD-0119,0.524,False,0.222,14
+VN-00025,2026-03-20 22:27:00,Mundra Port Container Yard,IN-MUN,22.77,69.71,Bengali,equipment_failure,28,CROWD-0030,0.249,True,0.479,3
+VN-00026,2026-03-16 20:40:00,Chennai Harbor Road,IN-CHN,13.1,80.3,Tamil,congestion,9,CROWD-0109,0.694,False,0.845,11
+VN-00027,2026-03-01 11:05:00,Chennai Harbor Road,IN-CHN,13.1,80.3,Marathi,road_block,11,CROWD-0060,0.668,False,0.164,1
+VN-00028,2026-03-07 21:18:00,Vizag Outer Harbor,IN-VIZ,17.69,83.29,English,weather,22,CROWD-0023,0.922,False,0.327,24
+VN-00029,2026-03-11 06:01:00,Kochi Port Approach Road,IN-KOC,9.93,76.27,Telugu,weather,24,CROWD-0135,1.0,False,0.56,3
+VN-00030,2026-03-28 20:23:00,Nhava Sheva Port Gate 4,IN-JNPT,18.95,72.95,Tamil,weather,25,CROWD-0122,0.666,False,0.39,9
+VN-00031,2026-03-03 10:24:00,Pune Chakan MIDC,IN-PUN,18.52,73.86,Tamil,road_block,7,CROWD-0034,0.755,True,0.171,1
+VN-00032,2026-03-27 07:29:00,Ahmedabad-Kandla Highway,IN-AMD,23.02,72.57,English,congestion,23,CROWD-0060,0.858,True,0.46,16
+VN-00033,2026-03-29 00:04:00,Kolkata Dock Complex,IN-KOL,22.55,88.33,Tamil,road_block,12,CROWD-0008,0.771,False,0.726,20
+VN-00034,2026-03-23 17:57:00,Pune Chakan MIDC,IN-PUN,18.52,73.86,Telugu,equipment_failure,16,CROWD-0103,0.85,True,0.726,19
+VN-00035,2026-03-14 16:55:00,Mumbai-Pune Expressway,IN-MUM,18.75,73.25,Hindi,customs_delay,10,CROWD-0037,0.903,False,0.624,5
+VN-00036,2026-03-10 08:38:00,Nhava Sheva Port Gate 4,IN-JNPT,18.95,72.95,Tamil,equipment_failure,27,CROWD-0044,0.635,False,0.622,18
+VN-00037,2026-03-14 09:43:00,Vizag Outer Harbor,IN-VIZ,17.69,83.29,Marathi,weather,28,CROWD-0035,0.817,True,0.515,7
+VN-00038,2026-03-07 18:00:00,Vizag Outer Harbor,IN-VIZ,17.69,83.29,Kannada,customs_delay,11,CROWD-0037,0.539,True,0.623,18
+VN-00039,2026-03-02 20:32:00,Hyderabad ORR Junction,IN-HYD,17.39,78.49,Telugu,weather,5,CROWD-0083,0.641,True,0.196,7
+VN-00040,2026-03-09 01:09:00,Pune Chakan MIDC,IN-PUN,18.52,73.86,Tamil,strike,17,CROWD-0096,0.415,False,0.232,5
+VN-00041,2026-03-12 07:38:00,Bangalore Whitefield Industrial,IN-BLR,12.97,77.59,Hindi,strike,13,CROWD-0128,0.85,False,0.218,19
+VN-00042,2026-03-13 03:17:00,Mundra Port Container Yard,IN-MUN,22.77,69.71,Marathi,accident,12,CROWD-0099,0.755,False,0.375,11
+VN-00043,2026-03-28 00:06:00,Nhava Sheva Port Gate 4,IN-JNPT,18.95,72.95,Kannada,customs_delay,14,CROWD-0149,0.891,False,0.584,17
+VN-00044,2026-03-01 07:49:00,Hyderabad ORR Junction,IN-HYD,17.39,78.49,Bengali,equipment_failure,19,CROWD-0028,0.632,True,0.542,5
+VN-00045,2026-03-26 09:55:00,Delhi ICD Tughlakabad,IN-DEL,28.61,77.21,Marathi,weather,20,CROWD-0087,0.52,False,0.61,21
+VN-00046,2026-03-02 00:27:00,Nhava Sheva Port Gate 4,IN-JNPT,18.95,72.95,Bengali,congestion,28,CROWD-0050,0.256,False,0.396,18
+VN-00047,2026-03-24 22:12:00,Pune Chakan MIDC,IN-PUN,18.52,73.86,English,customs_delay,8,CROWD-0134,1.0,False,0.115,17
+VN-00048,2026-03-13 10:33:00,Chennai Harbor Road,IN-CHN,13.1,80.3,Tamil,strike,18,CROWD-0058,0.881,False,0.291,7
+VN-00049,2026-03-13 04:49:00,Ahmedabad-Kandla Highway,IN-AMD,23.02,72.57,Hindi,customs_delay,26,CROWD-0100,1.0,True,0.536,9
+VN-00050,2026-03-17 19:15:00,Pune Chakan MIDC,IN-PUN,18.52,73.86,Kannada,accident,5,CROWD-0134,0.603,True,0.117,20
+VN-00051,2026-03-19 06:50:00,Hyderabad ORR Junction,IN-HYD,17.39,78.49,Hindi,strike,22,CROWD-0042,0.768,True,0.454,8
+VN-00052,2026-03-01 09:29:00,Mundra Port Container Yard,IN-MUN,22.77,69.71,Kannada,weather,5,CROWD-0006,0.774,False,0.311,5
+VN-00053,2026-03-04 02:29:00,Kochi Port Approach Road,IN-KOC,9.93,76.27,Telugu,road_block,5,CROWD-0106,1.0,True,0.22,22
+VN-00054,2026-03-05 00:33:00,Mumbai-Pune Expressway,IN-MUM,18.75,73.25,Kannada,road_block,27,CROWD-0042,1.0,False,0.642,19
+VN-00055,2026-03-28 10:02:00,Ahmedabad-Kandla Highway,IN-AMD,23.02,72.57,Kannada,weather,9,CROWD-0053,0.53,True,0.28,20
+VN-00056,2026-03-28 03:25:00,Kolkata Dock Complex,IN-KOL,22.55,88.33,English,equipment_failure,13,CROWD-0093,0.677,True,0.309,25
+VN-00057,2026-03-02 01:22:00,Mumbai-Pune Expressway,IN-MUM,18.75,73.25,Hindi,congestion,28,CROWD-0054,0.791,False,0.237,17
+VN-00058,2026-03-10 03:17:00,Mundra Port Container Yard,IN-MUN,22.77,69.71,Telugu,weather,5,CROWD-0043,0.445,False,0.319,14
+VN-00059,2026-03-04 00:55:00,Delhi ICD Tughlakabad,IN-DEL,28.61,77.21,Gujarati,customs_delay,14,CROWD-0018,0.855,False,0.483,11
+VN-00060,2026-03-29 11:41:00,Hyderabad ORR Junction,IN-HYD,17.39,78.49,Marathi,accident,23,CROWD-0081,1.0,False,0.497,18
+VN-00061,2026-03-28 16:09:00,Nhava Sheva Port Gate 4,IN-JNPT,18.95,72.95,Gujarati,weather,10,CROWD-0092,0.777,False,0.305,24
+VN-00062,2026-03-25 19:40:00,Ahmedabad-Kandla Highway,IN-AMD,23.02,72.57,Gujarati,accident,10,CROWD-0123,0.829,True,0.195,8
+VN-00063,2026-03-13 00:05:00,Pune Chakan MIDC,IN-PUN,18.52,73.86,Tamil,equipment_failure,27,CROWD-0088,0.678,True,0.329,2
+VN-00064,2026-03-30 23:14:00,Kolkata Dock Complex,IN-KOL,22.55,88.33,Hindi,weather,26,CROWD-0070,1.0,False,0.528,21
+VN-00065,2026-03-17 12:48:00,Vizag Outer Harbor,IN-VIZ,17.69,83.29,Gujarati,equipment_failure,21,CROWD-0032,0.766,True,0.514,22
+VN-00066,2026-03-26 10:21:00,Mundra Port Container Yard,IN-MUN,22.77,69.71,Hindi,customs_delay,10,CROWD-0139,0.669,True,0.14,24
+VN-00067,2026-03-14 20:16:00,Bangalore Whitefield Industrial,IN-BLR,12.97,77.59,Tamil,weather,17,CROWD-0026,0.829,False,0.16,23
+VN-00068,2026-03-19 11:55:00,Ahmedabad-Kandla Highway,IN-AMD,23.02,72.57,Bengali,congestion,12,CROWD-0148,0.761,False,0.616,24
+VN-00069,2026-03-22 12:36:00,Vizag Outer Harbor,IN-VIZ,17.69,83.29,Gujarati,weather,11,CROWD-0023,0.729,False,0.2,20
+VN-00070,2026-03-25 17:49:00,Pune Chakan MIDC,IN-PUN,18.52,73.86,Gujarati,equipment_failure,27,CROWD-0132,0.539,False,0.266,15
+VN-00071,2026-03-29 04:28:00,Bangalore Whitefield Industrial,IN-BLR,12.97,77.59,Gujarati,strike,17,CROWD-0015,0.772,True,0.395,25
+VN-00072,2026-03-15 19:32:00,Delhi ICD Tughlakabad,IN-DEL,28.61,77.21,Bengali,road_block,29,CROWD-0005,0.421,False,0.535,11
+VN-00073,2026-03-17 17:27:00,Pune Chakan MIDC,IN-PUN,18.52,73.86,Tamil,congestion,6,CROWD-0100,0.66,True,0.397,14
+VN-00074,2026-03-09 19:34:00,Mumbai-Pune Expressway,IN-MUM,18.75,73.25,English,weather,29,CROWD-0110,0.841,False,0.304,16
+VN-00075,2026-03-11 06:03:00,Mumbai-Pune Expressway,IN-MUM,18.75,73.25,Telugu,road_block,15,CROWD-0066,1.0,True,0.338,2
+VN-00076,2026-03-22 22:39:00,Nhava Sheva Port Gate 4,IN-JNPT,18.95,72.95,Gujarati,strike,6,CROWD-0053,0.637,False,0.296,6
+VN-00077,2026-03-20 09:04:00,Hyderabad ORR Junction,IN-HYD,17.39,78.49,Hindi,accident,28,CROWD-0118,0.75,True,0.331,16
+VN-00078,2026-03-01 20:00:00,Mumbai-Pune Expressway,IN-MUM,18.75,73.25,English,strike,6,CROWD-0082,0.668,True,0.174,16
+VN-00079,2026-03-15 08:30:00,Mundra Port Container Yard,IN-MUN,22.77,69.71,Hindi,road_block,25,CROWD-0115,0.52,False,0.388,24
+VN-00080,2026-03-14 09:43:00,Bangalore Whitefield Industrial,IN-BLR,12.97,77.59,Hindi,strike,11,CROWD-0091,0.549,False,0.654,1
+VN-00081,2026-03-02 10:33:00,Bangalore Whitefield Industrial,IN-BLR,12.97,77.59,Gujarati,congestion,24,CROWD-0111,0.567,True,0.469,19
+VN-00082,2026-03-14 22:20:00,Mumbai-Pune Expressway,IN-MUM,18.75,73.25,Kannada,weather,23,CROWD-0035,0.527,False,0.68,1
+VN-00083,2026-03-30 19:10:00,Pune Chakan MIDC,IN-PUN,18.52,73.86,Marathi,equipment_failure,6,CROWD-0072,0.683,False,0.786,25
+VN-00084,2026-03-03 10:36:00,Hyderabad ORR Junction,IN-HYD,17.39,78.49,English,accident,23,CROWD-0072,0.593,True,0.557,22
+VN-00085,2026-03-11 22:21:00,Vizag Outer Harbor,IN-VIZ,17.69,83.29,Bengali,equipment_failure,23,CROWD-0066,0.742,False,0.315,17
+VN-00086,2026-03-18 10:55:00,Pune Chakan MIDC,IN-PUN,18.52,73.86,English,accident,23,CROWD-0124,1.0,True,0.358,17
+VN-00087,2026-03-05 11:27:00,Pune Chakan MIDC,IN-PUN,18.52,73.86,Kannada,strike,15,CROWD-0027,0.845,False,0.844,4
+VN-00088,2026-03-03 02:36:00,Nhava Sheva Port Gate 4,IN-JNPT,18.95,72.95,Telugu,customs_delay,13,CROWD-0095,0.635,True,0.53,19
+VN-00089,2026-03-03 16:36:00,Nhava Sheva Port Gate 4,IN-JNPT,18.95,72.95,Kannada,customs_delay,24,CROWD-0051,0.831,False,0.447,3
+VN-00090,2026-03-13 11:16:00,Kochi Port Approach Road,IN-KOC,9.93,76.27,Gujarati,accident,20,CROWD-0146,0.587,True,0.67,23
+VN-00091,2026-03-03 04:19:00,Nhava Sheva Port Gate 4,IN-JNPT,18.95,72.95,Tamil,strike,26,CROWD-0051,0.771,False,0.283,3
+VN-00092,2026-03-08 07:04:00,Pune Chakan MIDC,IN-PUN,18.52,73.86,Bengali,customs_delay,29,CROWD-0129,0.394,False,0.301,24
+VN-00093,2026-03-10 22:22:00,Nhava Sheva Port Gate 4,IN-JNPT,18.95,72.95,Tamil,equipment_failure,23,CROWD-0079,0.9,False,0.556,14
+VN-00094,2026-03-05 09:15:00,Kolkata Dock Complex,IN-KOL,22.55,88.33,English,congestion,19,CROWD-0136,0.65,False,0.206,5
+VN-00095,2026-03-08 22:14:00,Bangalore Whitefield Industrial,IN-BLR,12.97,77.59,Gujarati,strike,9,CROWD-0145,0.35,False,0.392,10
+VN-00096,2026-03-11 06:57:00,Bangalore Whitefield Industrial,IN-BLR,12.97,77.59,Telugu,customs_delay,11,CROWD-0032,0.767,True,0.414,11
+VN-00097,2026-03-27 09:47:00,Kolkata Dock Complex,IN-KOL,22.55,88.33,Hindi,customs_delay,22,CROWD-0061,0.875,True,0.494,20
+VN-00098,2026-03-29 05:16:00,Chennai Harbor Road,IN-CHN,13.1,80.3,Gujarati,strike,28,CROWD-0017,0.545,False,0.281,2
+VN-00099,2026-03-09 10:11:00,Bangalore Whitefield Industrial,IN-BLR,12.97,77.59,Telugu,road_block,12,CROWD-0036,0.949,False,0.585,11
+VN-00100,2026-03-01 12:17:00,Bangalore Whitefield Industrial,IN-BLR,12.97,77.59,Kannada,accident,20,CROWD-0114,0.628,False,0.462,17
+VN-00101,2026-03-27 08:44:00,Hyderabad ORR Junction,IN-HYD,17.39,78.49,Kannada,customs_delay,13,CROWD-0006,0.881,True,0.548,11
+VN-00102,2026-03-06 12:47:00,Vizag Outer Harbor,IN-VIZ,17.69,83.29,Tamil,strike,25,CROWD-0003,0.5,False,0.092,19
+VN-00103,2026-03-18 03:09:00,Kochi Port Approach Road,IN-KOC,9.93,76.27,Bengali,weather,13,CROWD-0100,0.694,False,0.463,6
+VN-00104,2026-03-10 22:54:00,Pune Chakan MIDC,IN-PUN,18.52,73.86,Gujarati,equipment_failure,17,CROWD-0116,0.477,False,0.374,23
+VN-00105,2026-03-03 09:46:00,Mundra Port Container Yard,IN-MUN,22.77,69.71,Telugu,equipment_failure,22,CROWD-0075,0.701,False,0.367,15
+VN-00106,2026-03-24 08:02:00,Hyderabad ORR Junction,IN-HYD,17.39,78.49,Marathi,weather,7,CROWD-0056,0.514,False,0.296,7
+VN-00107,2026-03-23 12:29:00,Bangalore Whitefield Industrial,IN-BLR,12.97,77.59,English,congestion,16,CROWD-0021,0.43,False,0.169,21
+VN-00108,2026-03-10 09:26:00,Mumbai-Pune Expressway,IN-MUM,18.75,73.25,Telugu,road_block,17,CROWD-0013,0.631,False,0.624,8
+VN-00109,2026-03-30 18:23:00,Chennai Harbor Road,IN-CHN,13.1,80.3,Gujarati,strike,5,CROWD-0017,0.684,False,0.185,21
+VN-00110,2026-03-23 22:29:00,Vizag Outer Harbor,IN-VIZ,17.69,83.29,Hindi,equipment_failure,12,CROWD-0055,0.693,True,0.401,9
+VN-00111,2026-03-23 21:54:00,Mumbai-Pune Expressway,IN-MUM,18.75,73.25,Marathi,congestion,23,CROWD-0037,0.746,True,0.51,24
+VN-00112,2026-03-13 06:27:00,Kochi Port Approach Road,IN-KOC,9.93,76.27,English,customs_delay,5,CROWD-0142,1.0,False,0.318,14
+VN-00113,2026-03-16 19:59:00,Mundra Port Container Yard,IN-MUN,22.77,69.71,Marathi,congestion,16,CROWD-0025,0.835,True,0.367,3
+VN-00114,2026-03-02 05:33:00,Delhi ICD Tughlakabad,IN-DEL,28.61,77.21,Kannada,road_block,18,CROWD-0077,0.734,False,0.457,21
+VN-00115,2026-03-09 04:08:00,Kolkata Dock Complex,IN-KOL,22.55,88.33,Marathi,road_block,19,CROWD-0079,0.744,False,0.336,14
+VN-00116,2026-03-26 05:40:00,Hyderabad ORR Junction,IN-HYD,17.39,78.49,Gujarati,customs_delay,18,CROWD-0138,0.536,True,0.416,7
+VN-00117,2026-03-14 02:44:00,Kochi Port Approach Road,IN-KOC,9.93,76.27,Marathi,customs_delay,26,CROWD-0019,0.637,False,0.475,18
+VN-00118,2026-03-27 19:17:00,Nhava Sheva Port Gate 4,IN-JNPT,18.95,72.95,Gujarati,weather,8,CROWD-0075,0.898,False,0.667,20
+VN-00119,2026-03-24 05:37:00,Delhi ICD Tughlakabad,IN-DEL,28.61,77.21,Hindi,weather,23,CROWD-0016,0.886,True,0.414,8
+VN-00120,2026-03-02 18:16:00,Nhava Sheva Port Gate 4,IN-JNPT,18.95,72.95,Kannada,congestion,29,CROWD-0037,0.893,True,0.382,21
+VN-00121,2026-03-05 12:15:00,Vizag Outer Harbor,IN-VIZ,17.69,83.29,Kannada,weather,28,CROWD-0098,0.876,False,0.176,12
+VN-00122,2026-03-01 13:52:00,Nhava Sheva Port Gate 4,IN-JNPT,18.95,72.95,Marathi,road_block,11,CROWD-0060,0.775,False,0.761,5
+VN-00123,2026-03-05 07:57:00,Kochi Port Approach Road,IN-KOC,9.93,76.27,Kannada,equipment_failure,11,CROWD-0053,0.754,True,0.406,6
+VN-00124,2026-03-21 21:18:00,Hyderabad ORR Junction,IN-HYD,17.39,78.49,Kannada,strike,9,CROWD-0104,0.527,False,0.517,24
+VN-00125,2026-03-16 20:36:00,Vizag Outer Harbor,IN-VIZ,17.69,83.29,Marathi,equipment_failure,30,CROWD-0136,0.86,False,0.733,8
+VN-00126,2026-03-05 15:46:00,Mumbai-Pune Expressway,IN-MUM,18.75,73.25,Gujarati,congestion,29,CROWD-0098,0.567,False,0.448,12
+VN-00127,2026-03-25 06:59:00,Mumbai-Pune Expressway,IN-MUM,18.75,73.25,Hindi,road_block,11,CROWD-0086,0.96,True,0.535,16
+VN-00128,2026-03-30 18:55:00,Ahmedabad-Kandla Highway,IN-AMD,23.02,72.57,Hindi,accident,30,CROWD-0081,1.0,False,0.797,9
+VN-00129,2026-03-09 18:19:00,Vizag Outer Harbor,IN-VIZ,17.69,83.29,Telugu,equipment_failure,27,CROWD-0116,0.741,False,0.367,8
+VN-00130,2026-03-18 05:59:00,Kochi Port Approach Road,IN-KOC,9.93,76.27,Kannada,strike,9,CROWD-0059,0.764,False,0.268,6
+VN-00131,2026-03-13 21:17:00,Bangalore Whitefield Industrial,IN-BLR,12.97,77.59,Tamil,congestion,20,CROWD-0147,0.223,False,0.211,5
+VN-00132,2026-03-11 01:05:00,Nhava Sheva Port Gate 4,IN-JNPT,18.95,72.95,English,weather,17,CROWD-0149,0.592,False,0.163,15
+VN-00133,2026-03-22 22:50:00,Pune Chakan MIDC,IN-PUN,18.52,73.86,Gujarati,strike,18,CROWD-0149,0.64,False,0.332,16
+VN-00134,2026-03-18 13:26:00,Mumbai-Pune Expressway,IN-MUM,18.75,73.25,Telugu,congestion,28,CROWD-0034,0.805,False,0.636,1
+VN-00135,2026-03-13 03:53:00,Delhi ICD Tughlakabad,IN-DEL,28.61,77.21,Gujarati,strike,20,CROWD-0148,0.666,True,0.57,23
+VN-00136,2026-03-11 19:12:00,Kolkata Dock Complex,IN-KOL,22.55,88.33,Kannada,weather,28,CROWD-0043,0.497,True,0.647,9
+VN-00137,2026-03-09 18:53:00,Mundra Port Container Yard,IN-MUN,22.77,69.71,Bengali,accident,8,CROWD-0142,0.616,True,0.442,5
+VN-00138,2026-03-28 03:45:00,Chennai Harbor Road,IN-CHN,13.1,80.3,Tamil,weather,7,CROWD-0076,0.937,True,0.585,9
+VN-00139,2026-03-01 04:55:00,Pune Chakan MIDC,IN-PUN,18.52,73.86,Bengali,weather,29,CROWD-0074,0.682,True,0.197,25
+VN-00140,2026-03-04 15:33:00,Pune Chakan MIDC,IN-PUN,18.52,73.86,Gujarati,equipment_failure,27,CROWD-0130,0.798,False,0.366,17
+VN-00141,2026-03-10 23:05:00,Nhava Sheva Port Gate 4,IN-JNPT,18.95,72.95,Kannada,customs_delay,10,CROWD-0142,1.0,False,0.559,24
+VN-00142,2026-03-07 09:01:00,Hyderabad ORR Junction,IN-HYD,17.39,78.49,Telugu,equipment_failure,29,CROWD-0024,0.728,False,0.328,19
+VN-00143,2026-03-05 04:46:00,Kochi Port Approach Road,IN-KOC,9.93,76.27,Tamil,road_block,17,CROWD-0059,0.618,False,0.813,5
+VN-00144,2026-03-06 00:26:00,Vizag Outer Harbor,IN-VIZ,17.69,83.29,Gujarati,customs_delay,12,CROWD-0084,0.353,False,0.224,23
+VN-00145,2026-03-15 07:51:00,Hyderabad ORR Junction,IN-HYD,17.39,78.49,Marathi,accident,23,CROWD-0091,0.679,False,0.091,3
+VN-00146,2026-03-21 18:41:00,Ahmedabad-Kandla Highway,IN-AMD,23.02,72.57,Bengali,accident,21,CROWD-0092,0.882,True,0.141,12
+VN-00147,2026-03-07 19:42:00,Hyderabad ORR Junction,IN-HYD,17.39,78.49,Hindi,customs_delay,6,CROWD-0097,0.803,False,0.242,17
+VN-00148,2026-03-11 16:05:00,Pune Chakan MIDC,IN-PUN,18.52,73.86,Bengali,weather,26,CROWD-0042,0.847,True,0.142,17
+VN-00149,2026-03-05 10:56:00,Mumbai-Pune Expressway,IN-MUM,18.75,73.25,Gujarati,accident,29,CROWD-0145,0.745,True,0.504,1
+VN-00150,2026-03-15 16:47:00,Vizag Outer Harbor,IN-VIZ,17.69,83.29,Bengali,equipment_failure,7,CROWD-0103,0.875,False,0.2,19
+VN-00151,2026-03-26 03:39:00,Kochi Port Approach Road,IN-KOC,9.93,76.27,Kannada,strike,10,CROWD-0121,0.983,False,0.526,1
+VN-00152,2026-03-12 05:51:00,Nhava Sheva Port Gate 4,IN-JNPT,18.95,72.95,Bengali,accident,24,CROWD-0083,0.578,False,0.67,25
+VN-00153,2026-03-09 07:50:00,Mumbai-Pune Expressway,IN-MUM,18.75,73.25,Kannada,congestion,9,CROWD-0115,0.585,False,0.397,7
+VN-00154,2026-03-16 04:22:00,Pune Chakan MIDC,IN-PUN,18.52,73.86,Kannada,equipment_failure,14,CROWD-0047,0.978,False,0.389,18
+VN-00155,2026-03-16 22:33:00,Kolkata Dock Complex,IN-KOL,22.55,88.33,Gujarati,equipment_failure,8,CROWD-0097,0.478,True,0.288,18
+VN-00156,2026-03-23 10:47:00,Bangalore Whitefield Industrial,IN-BLR,12.97,77.59,Kannada,strike,22,CROWD-0019,0.447,False,0.278,9
+VN-00157,2026-03-03 18:22:00,Delhi ICD Tughlakabad,IN-DEL,28.61,77.21,Gujarati,strike,21,CROWD-0062,0.692,True,0.393,9
+VN-00158,2026-03-17 09:18:00,Mumbai-Pune Expressway,IN-MUM,18.75,73.25,Kannada,customs_delay,7,CROWD-0149,0.785,False,0.32,16
+VN-00159,2026-03-01 16:40:00,Delhi ICD Tughlakabad,IN-DEL,28.61,77.21,Bengali,road_block,28,CROWD-0083,0.753,False,0.303,20
+VN-00160,2026-03-09 09:30:00,Ahmedabad-Kandla Highway,IN-AMD,23.02,72.57,Telugu,customs_delay,27,CROWD-0061,1.0,False,0.507,14
+VN-00161,2026-03-30 06:14:00,Mumbai-Pune Expressway,IN-MUM,18.75,73.25,Telugu,customs_delay,10,CROWD-0009,0.864,True,0.545,10
+VN-00162,2026-03-06 13:50:00,Delhi ICD Tughlakabad,IN-DEL,28.61,77.21,English,accident,11,CROWD-0026,0.599,False,0.441,2
+VN-00163,2026-03-05 02:25:00,Hyderabad ORR Junction,IN-HYD,17.39,78.49,Telugu,equipment_failure,9,CROWD-0079,0.898,True,0.842,25
+VN-00164,2026-03-17 22:32:00,Hyderabad ORR Junction,IN-HYD,17.39,78.49,Bengali,congestion,26,CROWD-0045,0.578,False,0.711,22
+VN-00165,2026-03-13 03:47:00,Chennai Harbor Road,IN-CHN,13.1,80.3,English,weather,23,CROWD-0006,1.0,False,0.542,10
+VN-00166,2026-03-05 07:21:00,Pune Chakan MIDC,IN-PUN,18.52,73.86,Telugu,strike,23,CROWD-0041,0.587,True,0.311,25
+VN-00167,2026-03-17 05:03:00,Kochi Port Approach Road,IN-KOC,9.93,76.27,Hindi,congestion,13,CROWD-0015,0.651,False,0.244,10
+VN-00168,2026-03-11 22:25:00,Chennai Harbor Road,IN-CHN,13.1,80.3,Bengali,weather,5,CROWD-0100,0.77,True,0.512,6
+VN-00169,2026-03-15 05:35:00,Nhava Sheva Port Gate 4,IN-JNPT,18.95,72.95,Marathi,equipment_failure,21,CROWD-0109,0.797,False,0.629,14
+VN-00170,2026-03-02 00:26:00,Ahmedabad-Kandla Highway,IN-AMD,23.02,72.57,Hindi,congestion,17,CROWD-0094,0.644,True,0.614,13
+VN-00171,2026-03-13 01:23:00,Kolkata Dock Complex,IN-KOL,22.55,88.33,Bengali,weather,16,CROWD-0131,0.881,True,0.335,9
+VN-00172,2026-03-06 04:41:00,Bangalore Whitefield Industrial,IN-BLR,12.97,77.59,Tamil,congestion,17,CROWD-0111,0.599,True,0.438,8
+VN-00173,2026-03-05 11:34:00,Ahmedabad-Kandla Highway,IN-AMD,23.02,72.57,Marathi,congestion,15,CROWD-0046,0.797,False,0.329,7
+VN-00174,2026-03-06 22:35:00,Nhava Sheva Port Gate 4,IN-JNPT,18.95,72.95,Hindi,customs_delay,10,CROWD-0063,0.746,True,0.366,14
+VN-00175,2026-03-07 03:09:00,Bangalore Whitefield Industrial,IN-BLR,12.97,77.59,Tamil,road_block,19,CROWD-0115,0.602,True,0.697,19
+VN-00176,2026-03-08 00:26:00,Bangalore Whitefield Industrial,IN-BLR,12.97,77.59,Bengali,road_block,8,CROWD-0059,0.451,False,0.471,19
+VN-00177,2026-03-20 23:23:00,Nhava Sheva Port Gate 4,IN-JNPT,18.95,72.95,English,weather,22,CROWD-0099,0.711,False,0.456,3
+VN-00178,2026-03-02 14:15:00,Mumbai-Pune Expressway,IN-MUM,18.75,73.25,Marathi,weather,18,CROWD-0083,0.21,True,0.387,21
+VN-00179,2026-03-30 00:06:00,Vizag Outer Harbor,IN-VIZ,17.69,83.29,Telugu,customs_delay,28,CROWD-0032,0.848,True,0.375,9
+VN-00180,2026-03-02 13:32:00,Mumbai-Pune Expressway,IN-MUM,18.75,73.25,Gujarati,weather,8,CROWD-0088,0.647,True,0.328,11
+VN-00181,2026-03-22 03:43:00,Chennai Harbor Road,IN-CHN,13.1,80.3,Tamil,equipment_failure,29,CROWD-0060,0.877,True,0.746,25
+VN-00182,2026-03-15 05:11:00,Bangalore Whitefield Industrial,IN-BLR,12.97,77.59,Tamil,customs_delay,24,CROWD-0084,0.585,False,0.755,14
+VN-00183,2026-03-08 23:10:00,Hyderabad ORR Junction,IN-HYD,17.39,78.49,Gujarati,road_block,7,CROWD-0072,0.691,False,0.479,21
+VN-00184,2026-03-28 03:40:00,Kochi Port Approach Road,IN-KOC,9.93,76.27,Marathi,weather,15,CROWD-0030,0.765,False,0.432,17
+VN-00185,2026-03-27 04:25:00,Chennai Harbor Road,IN-CHN,13.1,80.3,Gujarati,customs_delay,12,CROWD-0086,0.755,False,0.446,14
+VN-00186,2026-03-24 07:59:00,Ahmedabad-Kandla Highway,IN-AMD,23.02,72.57,Gujarati,equipment_failure,27,CROWD-0118,0.71,False,0.728,24
+VN-00187,2026-03-26 08:08:00,Delhi ICD Tughlakabad,IN-DEL,28.61,77.21,Kannada,accident,26,CROWD-0077,0.867,False,0.33,8
+VN-00188,2026-03-10 10:49:00,Bangalore Whitefield Industrial,IN-BLR,12.97,77.59,Gujarati,accident,20,CROWD-0148,0.758,False,0.552,7
+VN-00189,2026-03-04 21:32:00,Vizag Outer Harbor,IN-VIZ,17.69,83.29,Tamil,accident,27,CROWD-0044,0.888,False,0.326,19
+VN-00190,2026-03-19 15:08:00,Bangalore Whitefield Industrial,IN-BLR,12.97,77.59,Tamil,equipment_failure,29,CROWD-0119,0.537,False,0.388,22
+VN-00191,2026-03-04 03:36:00,Bangalore Whitefield Industrial,IN-BLR,12.97,77.59,Tamil,customs_delay,26,CROWD-0014,0.81,False,0.289,1
+VN-00192,2026-03-14 20:32:00,Kolkata Dock Complex,IN-KOL,22.55,88.33,Bengali,road_block,25,CROWD-0079,0.878,False,0.333,3
+VN-00193,2026-03-12 06:15:00,Ahmedabad-Kandla Highway,IN-AMD,23.02,72.57,English,congestion,29,CROWD-0113,0.914,True,0.118,3
+VN-00194,2026-03-19 11:56:00,Bangalore Whitefield Industrial,IN-BLR,12.97,77.59,English,weather,18,CROWD-0144,0.923,False,0.518,17
+VN-00195,2026-03-04 09:07:00,Mundra Port Container Yard,IN-MUN,22.77,69.71,Kannada,strike,12,CROWD-0042,0.686,True,0.241,20
+VN-00196,2026-03-26 05:19:00,Mumbai-Pune Expressway,IN-MUM,18.75,73.25,Kannada,customs_delay,13,CROWD-0095,0.989,True,0.622,24
+VN-00197,2026-03-20 22:12:00,Chennai Harbor Road,IN-CHN,13.1,80.3,Marathi,road_block,24,CROWD-0036,0.643,True,0.621,19
+VN-00198,2026-03-08 22:39:00,Mundra Port Container Yard,IN-MUN,22.77,69.71,Tamil,road_block,5,CROWD-0010,0.916,True,0.416,18
+VN-00199,2026-03-20 18:45:00,Nhava Sheva Port Gate 4,IN-JNPT,18.95,72.95,Tamil,weather,11,CROWD-0015,0.763,False,0.552,1
+VN-00200,2026-03-06 07:16:00,Nhava Sheva Port Gate 4,IN-JNPT,18.95,72.95,Hindi,customs_delay,27,CROWD-0020,0.392,False,0.667,1
+VN-00201,2026-03-09 02:47:00,Delhi ICD Tughlakabad,IN-DEL,28.61,77.21,Telugu,equipment_failure,13,CROWD-0081,1.0,False,0.33,6
+VN-00202,2026-03-11 07:16:00,Vizag Outer Harbor,IN-VIZ,17.69,83.29,Bengali,strike,30,CROWD-0096,0.365,False,0.167,23
+VN-00203,2026-03-16 22:02:00,Ahmedabad-Kandla Highway,IN-AMD,23.02,72.57,Telugu,equipment_failure,12,CROWD-0129,0.77,False,0.464,2
+VN-00204,2026-03-04 01:39:00,Ahmedabad-Kandla Highway,IN-AMD,23.02,72.57,Tamil,customs_delay,14,CROWD-0101,0.606,True,0.567,7
+VN-00205,2026-03-25 16:06:00,Kolkata Dock Complex,IN-KOL,22.55,88.33,Bengali,customs_delay,21,CROWD-0016,0.764,False,0.458,14
+VN-00206,2026-03-08 17:48:00,Nhava Sheva Port Gate 4,IN-JNPT,18.95,72.95,Gujarati,road_block,5,CROWD-0109,0.703,True,0.707,14
+VN-00207,2026-03-18 03:13:00,Ahmedabad-Kandla Highway,IN-AMD,23.02,72.57,Hindi,road_block,8,CROWD-0012,0.766,True,0.21,12
+VN-00208,2026-03-20 18:05:00,Kolkata Dock Complex,IN-KOL,22.55,88.33,Gujarati,accident,17,CROWD-0119,0.669,True,0.333,9
+VN-00209,2026-03-28 13:07:00,Mumbai-Pune Expressway,IN-MUM,18.75,73.25,Gujarati,congestion,27,CROWD-0076,0.647,True,0.426,22
+VN-00210,2026-03-28 21:20:00,Kolkata Dock Complex,IN-KOL,22.55,88.33,Tamil,strike,15,CROWD-0049,0.388,False,0.392,23
+VN-00211,2026-03-30 14:53:00,Nhava Sheva Port Gate 4,IN-JNPT,18.95,72.95,Kannada,accident,26,CROWD-0044,0.805,False,0.265,4
+VN-00212,2026-03-12 01:33:00,Kochi Port Approach Road,IN-KOC,9.93,76.27,Gujarati,road_block,6,CROWD-0040,0.506,False,0.429,8
+VN-00213,2026-03-06 10:28:00,Bangalore Whitefield Industrial,IN-BLR,12.97,77.59,Telugu,strike,18,CROWD-0077,0.624,True,0.389,8
+VN-00214,2026-03-17 16:40:00,Ahmedabad-Kandla Highway,IN-AMD,23.02,72.57,Kannada,weather,29,CROWD-0087,1.0,False,0.337,19
+VN-00215,2026-03-27 02:56:00,Delhi ICD Tughlakabad,IN-DEL,28.61,77.21,Bengali,road_block,15,CROWD-0008,0.788,False,0.697,7
+VN-00216,2026-03-06 03:51:00,Mundra Port Container Yard,IN-MUN,22.77,69.71,Kannada,strike,21,CROWD-0113,0.508,False,0.14,6
+VN-00217,2026-03-16 23:32:00,Kochi Port Approach Road,IN-KOC,9.93,76.27,Marathi,weather,8,CROWD-0098,0.599,False,0.367,7
+VN-00218,2026-03-14 18:54:00,Nhava Sheva Port Gate 4,IN-JNPT,18.95,72.95,English,accident,13,CROWD-0028,0.643,False,0.434,12
+VN-00219,2026-03-21 02:26:00,Kochi Port Approach Road,IN-KOC,9.93,76.27,Tamil,customs_delay,28,CROWD-0143,0.757,False,0.174,19
+VN-00220,2026-03-18 17:03:00,Ahmedabad-Kandla Highway,IN-AMD,23.02,72.57,Hindi,customs_delay,26,CROWD-0027,0.65,False,0.336,25
+VN-00221,2026-03-24 17:09:00,Mundra Port Container Yard,IN-MUN,22.77,69.71,Marathi,equipment_failure,20,CROWD-0148,0.613,False,0.832,3
+VN-00222,2026-03-07 05:42:00,Nhava Sheva Port Gate 4,IN-JNPT,18.95,72.95,Hindi,weather,11,CROWD-0025,0.817,False,0.584,24
+VN-00223,2026-03-25 06:55:00,Hyderabad ORR Junction,IN-HYD,17.39,78.49,Marathi,congestion,12,CROWD-0064,0.714,True,0.305,1
+VN-00224,2026-03-03 02:09:00,Mundra Port Container Yard,IN-MUN,22.77,69.71,English,strike,25,CROWD-0138,0.834,True,0.569,18
+VN-00225,2026-03-10 22:49:00,Chennai Harbor Road,IN-CHN,13.1,80.3,Tamil,accident,12,CROWD-0104,0.673,False,0.442,25
+VN-00226,2026-03-04 19:12:00,Mumbai-Pune Expressway,IN-MUM,18.75,73.25,English,accident,18,CROWD-0059,0.655,False,0.624,19
+VN-00227,2026-03-11 21:46:00,Pune Chakan MIDC,IN-PUN,18.52,73.86,Hindi,weather,12,CROWD-0072,0.708,False,0.355,4
+VN-00228,2026-03-16 07:23:00,Chennai Harbor Road,IN-CHN,13.1,80.3,Hindi,congestion,10,CROWD-0150,0.823,True,0.502,18
+VN-00229,2026-03-17 22:41:00,Ahmedabad-Kandla Highway,IN-AMD,23.02,72.57,Telugu,equipment_failure,8,CROWD-0121,0.628,False,0.711,12
+VN-00230,2026-03-20 19:43:00,Kochi Port Approach Road,IN-KOC,9.93,76.27,Hindi,weather,16,CROWD-0038,1.0,False,0.475,15
+VN-00231,2026-03-26 17:14:00,Mundra Port Container Yard,IN-MUN,22.77,69.71,Bengali,strike,29,CROWD-0138,0.84,False,0.415,3
+VN-00232,2026-03-28 04:13:00,Nhava Sheva Port Gate 4,IN-JNPT,18.95,72.95,Gujarati,equipment_failure,18,CROWD-0140,0.984,False,0.645,17
+VN-00233,2026-03-29 14:25:00,Mumbai-Pune Expressway,IN-MUM,18.75,73.25,Bengali,strike,29,CROWD-0079,1.0,True,0.406,18
+VN-00234,2026-03-06 10:12:00,Kolkata Dock Complex,IN-KOL,22.55,88.33,English,customs_delay,9,CROWD-0058,0.63,False,0.107,24
+VN-00235,2026-03-11 23:45:00,Vizag Outer Harbor,IN-VIZ,17.69,83.29,Kannada,road_block,7,CROWD-0064,0.636,False,0.504,15
+VN-00236,2026-03-25 23:36:00,Nhava Sheva Port Gate 4,IN-JNPT,18.95,72.95,Gujarati,strike,8,CROWD-0111,0.577,True,0.768,19
+VN-00237,2026-03-04 05:26:00,Ahmedabad-Kandla Highway,IN-AMD,23.02,72.57,Marathi,equipment_failure,10,CROWD-0007,1.0,True,0.748,17
+VN-00238,2026-03-12 00:54:00,Delhi ICD Tughlakabad,IN-DEL,28.61,77.21,Marathi,equipment_failure,27,CROWD-0127,0.76,False,0.308,17
+VN-00239,2026-03-20 08:31:00,Kolkata Dock Complex,IN-KOL,22.55,88.33,Marathi,strike,8,CROWD-0075,0.355,True,0.263,13
+VN-00240,2026-03-25 11:51:00,Ahmedabad-Kandla Highway,IN-AMD,23.02,72.57,Hindi,congestion,18,CROWD-0093,0.779,False,0.505,6
+VN-00241,2026-03-25 00:17:00,Ahmedabad-Kandla Highway,IN-AMD,23.02,72.57,Telugu,equipment_failure,26,CROWD-0143,0.718,False,0.397,1
+VN-00242,2026-03-28 17:28:00,Chennai Harbor Road,IN-CHN,13.1,80.3,Marathi,road_block,28,CROWD-0055,0.659,False,0.267,25
+VN-00243,2026-03-20 08:36:00,Mumbai-Pune Expressway,IN-MUM,18.75,73.25,Gujarati,equipment_failure,10,CROWD-0006,0.674,True,0.582,19
+VN-00244,2026-03-18 22:05:00,Mumbai-Pune Expressway,IN-MUM,18.75,73.25,English,accident,20,CROWD-0066,0.608,False,0.398,15
+VN-00245,2026-03-09 13:06:00,Kochi Port Approach Road,IN-KOC,9.93,76.27,Bengali,congestion,23,CROWD-0043,0.599,False,0.267,9
+VN-00246,2026-03-29 01:28:00,Kolkata Dock Complex,IN-KOL,22.55,88.33,Telugu,congestion,16,CROWD-0126,0.848,True,0.266,17
+VN-00247,2026-03-09 09:22:00,Pune Chakan MIDC,IN-PUN,18.52,73.86,English,accident,19,CROWD-0112,0.383,True,0.605,5
+VN-00248,2026-03-17 04:01:00,Ahmedabad-Kandla Highway,IN-AMD,23.02,72.57,Kannada,road_block,29,CROWD-0018,0.677,False,0.701,4
+VN-00249,2026-03-11 01:10:00,Ahmedabad-Kandla Highway,IN-AMD,23.02,72.57,Gujarati,customs_delay,24,CROWD-0139,0.468,False,0.224,16
+VN-00250,2026-03-28 07:19:00,Nhava Sheva Port Gate 4,IN-JNPT,18.95,72.95,Gujarati,equipment_failure,28,CROWD-0045,0.564,True,0.608,4
