@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ResponsiveContainer,
@@ -29,19 +29,16 @@ import { PageWrapper } from "../components/layout/PageWrapper";
 import { Card } from "../components/shared/Card";
 import { StatusBadge } from "../components/shared/StatusBadge";
 import { useNexus } from "../store/nexusStore";
-import { CARRIERS } from "../data/mockCarriers";
 import { NETWORK_NODES } from "../data/mockNetwork";
-import type { Bid } from "../types";
-
-function carrierById(id: string) {
-  return CARRIERS.find((c) => c.id === id)!;
-}
+import type { Bid, CarrierAgent } from "../types";
 
 function nodeName(id: string) {
   return NETWORK_NODES.find((n) => n.id === id)?.name ?? id;
 }
 
 export function RouteMarket() {
+  const [carriers, setCarriers] = useState<CarrierAgent[]>([]);
+
   const {
     urgency,
     setUrgency,
@@ -58,6 +55,32 @@ export function RouteMarket() {
     routeStatus,
   } = useNexus();
 
+  const loadCarriers = useCallback(async () => {
+    try {
+      const res = await fetch("/api/market/agents");
+      if (res.ok) {
+        const data = await res.json();
+        setCarriers(data);
+      }
+    } catch {}
+  }, []);
+
+  useEffect(() => { loadCarriers(); }, [loadCarriers]);
+
+  // Reload carriers after each negotiation (new ones may have been added)
+  useEffect(() => {
+    if (lastNegotiation) loadCarriers();
+  }, [lastNegotiation, loadCarriers]);
+
+  function carrierById(id: string) {
+    return carriers.find((c) => c.id === id) ?? {
+      id, code: id, name: id, agent: "?", riskTolerance: "Balanced" as const,
+      speed: "Medium" as const, costProfile: "Medium" as const, winRate: 0,
+      avgBidDelta: 0, strategy: "unknown", baseRate: 45000,
+      speedScore: 0.7, reliabilityScore: 0.8, color: "#4a6278",
+    };
+  }
+
   const handleRun = async () => {
     await runNegotiation();
   };
@@ -68,7 +91,7 @@ export function RouteMarket() {
 
   const radarData = useMemo(
     () =>
-      CARRIERS.map((c) => ({
+      carriers.map((c) => ({
         carrier: c.code,
         Cost: 1 - c.baseRate / 60000,
         Speed: c.speedScore,
@@ -76,17 +99,27 @@ export function RouteMarket() {
         Reliability: c.reliabilityScore,
         Win: c.winRate,
       })),
-    [],
+    [carriers],
   );
 
   const RADAR_AXES = ["Cost", "Speed", "Safety", "Reliability", "Win"];
+
+  if (carriers.length === 0) {
+    return (
+      <PageWrapper>
+        <div className="flex items-center justify-center h-64 text-text-dim text-sm">
+          Loading carriers…
+        </div>
+      </PageWrapper>
+    );
+  }
 
   return (
     <PageWrapper>
       {/* Market header */}
       <Card
         title="Route Negotiation Market"
-        subtitle="7 carrier agents · Vickrey second-price auction"
+        subtitle={`${carriers.length} carrier agents · Vickrey second-price auction`}
         right={
           <StatusBadge status={negotiating ? "negotiating" : "live"}>
             {negotiating ? "NEGOTIATING" : lastNegotiation ? "SETTLED" : "IDLE"}
@@ -160,7 +193,7 @@ export function RouteMarket() {
               Carrier Agents
             </h3>
             <p className="text-xs text-text-secondary">
-              7 agents · sealed bids → Vickrey reveal
+              {carriers.length} agents · sealed bids → Vickrey reveal
             </p>
           </div>
           <span className="text-[11px] text-text-dim font-mono">
@@ -168,7 +201,7 @@ export function RouteMarket() {
           </span>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-          {CARRIERS.map((c) => {
+          {carriers.map((c) => {
             const bid = lastNegotiation?.bids.find((b) => b.carrier === c.id);
             const isWinner =
               lastNegotiation && lastNegotiation.winnerId === c.id;
@@ -466,7 +499,7 @@ export function RouteMarket() {
           )}
         </Card>
 
-        <Card title="Agent Composite Profile" subtitle="5-axis scoring across all 7 carriers">
+        <Card title="Agent Composite Profile" subtitle={`5-axis scoring across all ${carriers.length} carriers`}>
           <div className="h-[300px] -mx-2">
             <ResponsiveContainer>
               <RadarChart data={RADAR_AXES.map((axis) => {
@@ -481,7 +514,7 @@ export function RouteMarket() {
                 <PolarRadiusAxis domain={[0, 1]} stroke="#4a6278" tick={{ fill: "#4a6278", fontSize: 9 }} axisLine={false} />
                 <Tooltip />
                 <Legend wrapperStyle={{ fontSize: 10 }} />
-                {CARRIERS.map((c) => (
+                {carriers.map((c) => (
                   <Radar
                     key={c.id}
                     name={c.code}

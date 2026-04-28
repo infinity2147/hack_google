@@ -23,6 +23,7 @@ import {
   FileText,
   CheckCircle,
   Loader,
+  Ship,
 } from "lucide-react";
 import { PageWrapper } from "../components/layout/PageWrapper";
 import { Card } from "../components/shared/Card";
@@ -68,11 +69,49 @@ export function DocumentScanner() {
   const [uploadResult, setUploadResult] = useState<UploadResult | null>(null);
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [dragOver, setDragOver] = useState(false);
+  const [carrierRegistered, setCarrierRegistered] = useState(false);
+  const [registering, setRegistering] = useState(false);
+
+  const handleRegisterCarrier = async () => {
+    if (!uploadResult) return;
+    setRegistering(true);
+    try {
+      const name = uploadResult.filename.replace(/\.[^.]+$/, "").replace(/[_-]/g, " ");
+      const baseRate = 35000 + Math.round(uploadResult.anomalyScore * 25000);
+      const speedScore = Math.min(0.95, 0.5 + (1 - uploadResult.anomalyScore) * 0.4);
+      const reliabilityScore = Math.min(0.95, 0.6 + (1 - uploadResult.anomalyScore) * 0.3);
+      const colors = ["#14b8a6", "#a855f7", "#f43f5e", "#06b6d4", "#84cc16", "#f97316"];
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      const risk = uploadResult.anomalyScore > 0.5 ? "Aggressive" : uploadResult.anomalyScore > 0.25 ? "Balanced" : "Conservative";
+      const cost = baseRate > 50000 ? "High" : baseRate > 40000 ? "Medium" : "Low";
+      await fetch("/api/market/carriers", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name || "New Carrier",
+          base_rate: baseRate,
+          speed_score: +speedScore.toFixed(2),
+          reliability_score: +reliabilityScore.toFixed(2),
+          risk_tolerance: risk,
+          speed: speedScore > 0.8 ? "High" : speedScore > 0.6 ? "Medium" : "Low",
+          cost_profile: cost,
+          strategy: "Document-derived",
+          color,
+        }),
+      });
+      setCarrierRegistered(true);
+      logDecision("register_carrier", name, { baseRate, speedScore, reliabilityScore });
+    } catch {
+    } finally {
+      setRegistering(false);
+    }
+  };
 
   const handleUpload = async (file: File) => {
     setUploading(true);
     setUploadResult(null);
     setUploadError(null);
+    setCarrierRegistered(false);
     try {
       const form = new FormData();
       form.append("file", file);
@@ -233,6 +272,25 @@ export function DocumentScanner() {
                     <span>{s}</span>
                   </div>
                 ))}
+              </div>
+              <div className="mt-4 pt-3 border-t border-border">
+                {carrierRegistered ? (
+                  <div className="inline-flex items-center gap-2 text-[11px] text-accent-teal font-semibold">
+                    <CheckCircle size={14} /> Carrier registered — now active in Route Market
+                  </div>
+                ) : (
+                  <button
+                    onClick={handleRegisterCarrier}
+                    disabled={registering}
+                    className="inline-flex items-center gap-2 bg-accent-teal/10 border border-accent-teal/30 text-accent-teal rounded-lg px-3 py-1.5 text-xs font-semibold hover:bg-accent-teal/20 disabled:opacity-50 transition"
+                  >
+                    {registering ? (
+                      <><Loader size={12} className="animate-spin" /> Registering…</>
+                    ) : (
+                      <><Ship size={12} /> Register as Carrier Agent</>
+                    )}
+                  </button>
+                )}
               </div>
             </motion.div>
           )}
