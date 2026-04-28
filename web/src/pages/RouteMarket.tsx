@@ -24,7 +24,6 @@ import {
   Lock,
   ArrowRight,
   Play,
-  ShieldCheck,
 } from "lucide-react";
 import { PageWrapper } from "../components/layout/PageWrapper";
 import { Card } from "../components/shared/Card";
@@ -56,6 +55,7 @@ export function RouteMarket() {
     negotiating,
     R0,
     logDecision,
+    routeStatus,
   } = useNexus();
 
   const handleRun = async () => {
@@ -86,7 +86,7 @@ export function RouteMarket() {
       {/* Market header */}
       <Card
         title="Route Negotiation Market"
-        subtitle="7 carrier agents · Vickrey second-price auction · federated learning"
+        subtitle="7 carrier agents · Vickrey second-price auction"
         right={
           <StatusBadge status={negotiating ? "negotiating" : "live"}>
             {negotiating ? "NEGOTIATING" : lastNegotiation ? "SETTLED" : "IDLE"}
@@ -355,33 +355,49 @@ export function RouteMarket() {
                 b(l) = v(l) − c(l) − π(l) &nbsp;|&nbsp; π = SIR risk premium
               </div>
               <div className="mt-3 flex items-center gap-2">
-                <button
-                  onClick={() => {
-                    logDecision("accept", carrierById(lastNegotiation.winnerId).name, {
-                      carrier: carrierById(lastNegotiation.winnerId).name,
-                      bid: winnerBid.bid,
-                      outcome: "accepted",
-                    });
-                  }}
-                  className="bg-accent-teal text-bg-base font-semibold rounded-lg px-3 py-1.5 text-xs hover:brightness-110"
-                >
-                  ✅ Accept Route
-                </button>
-                <button
-                  onClick={() => {
-                    const alt = lastNegotiation.bids[1];
-                    if (alt) logDecision("alternative", carrierById(alt.carrier).code, { carrier: carrierById(alt.carrier).name, bid: alt.bid, outcome: "alternative" });
-                  }}
-                  className="border border-accent-amber/50 text-accent-amber rounded-lg px-3 py-1.5 text-xs hover:bg-accent-amber/10"
-                >
-                  🔄 Alternative
-                </button>
-                <button
-                  onClick={() => logDecision("reject", "all", { urgency, reason: "all_rejected" })}
-                  className="border border-accent-red/50 text-accent-red rounded-lg px-3 py-1.5 text-xs hover:bg-accent-red/10"
-                >
-                  ❌ Reject All
-                </button>
+                {routeStatus ? (
+                  <div className={`inline-flex items-center gap-2 rounded-lg px-3 py-1.5 text-xs font-semibold ${
+                    routeStatus === "accepted"
+                      ? "bg-accent-teal/20 text-accent-teal"
+                      : routeStatus === "alternative"
+                        ? "bg-accent-amber/20 text-accent-amber"
+                        : "bg-accent-red/20 text-accent-red"
+                  }`}>
+                    {routeStatus === "accepted" && "Route accepted"}
+                    {routeStatus === "alternative" && "Alternative selected"}
+                    {routeStatus === "rejected" && "All bids rejected"}
+                  </div>
+                ) : (
+                  <>
+                    <button
+                      onClick={() => {
+                        logDecision("accept", carrierById(lastNegotiation.winnerId).name, {
+                          carrier: carrierById(lastNegotiation.winnerId).name,
+                          bid: winnerBid.bid,
+                          outcome: "accepted",
+                        });
+                      }}
+                      className="bg-accent-teal text-bg-base font-semibold rounded-lg px-3 py-1.5 text-xs hover:brightness-110"
+                    >
+                      Accept Route
+                    </button>
+                    <button
+                      onClick={() => {
+                        const alt = lastNegotiation.bids[1];
+                        if (alt) logDecision("alternative", carrierById(alt.carrier).code, { carrier: carrierById(alt.carrier).name, bid: alt.bid, outcome: "alternative" });
+                      }}
+                      className="border border-accent-amber/50 text-accent-amber rounded-lg px-3 py-1.5 text-xs hover:bg-accent-amber/10"
+                    >
+                      Alternative
+                    </button>
+                    <button
+                      onClick={() => logDecision("reject", "all", { urgency, reason: "all_rejected" })}
+                      className="border border-accent-red/50 text-accent-red rounded-lg px-3 py-1.5 text-xs hover:bg-accent-red/10"
+                    >
+                      Reject All
+                    </button>
+                  </>
+                )}
                 <button
                   onClick={handleRun}
                   className="border border-border rounded-lg px-3 py-1.5 text-xs text-text-secondary hover:border-accent-teal hover:text-accent-teal ml-auto"
@@ -539,39 +555,6 @@ export function RouteMarket() {
           </div>
         )}
       </Card>
-
-      {/* Federated learning */}
-      <div className="mt-4">
-        <Card
-          title="Federated Learning"
-          subtitle="Privacy-preserving multi-carrier coordination"
-          right={<StatusBadge status="immune">PRIVATE</StatusBadge>}
-        >
-          <div className="space-y-3">
-            <div className="flex items-center gap-3">
-              <ShieldCheck className="text-accent-purple" size={20} />
-              <div>
-                <div className="text-sm text-text-primary">7 agents participating</div>
-                <div className="text-[11px] text-text-dim">
-                  Round 1,247 · last aggregation 4 min ago
-                </div>
-              </div>
-            </div>
-            <div className="rounded-lg border border-border bg-bg-elevated p-3 font-mono text-[11px] text-text-secondary leading-relaxed">
-              <div className="text-accent-teal">FedAvg update</div>
-              <div className="mt-1">w(t+1) = Σ (nₖ/n) · w(t+1)ₖ</div>
-              <div className="mt-2 text-text-dim">
-                No raw cargo data leaves shipper perimeter ✓
-              </div>
-            </div>
-            <div className="text-[11px] text-text-secondary leading-relaxed">
-              Each carrier trains locally on its private order book, then shares
-              only model gradients via Vertex AI federated runtime. Vickrey
-              settlement happens on the aggregated policy.
-            </div>
-          </div>
-        </Card>
-      </div>
 
       {/* Floating gavel illustration */}
       <div className="mt-6 flex items-center justify-center gap-2 text-[11px] text-text-dim">

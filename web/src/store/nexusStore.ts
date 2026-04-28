@@ -2,7 +2,6 @@ import { create } from "zustand";
 import type {
   AlertItem,
   Antibody,
-  Bid,
   DecisionEntry,
   ImmuneScanResult,
   Negotiation,
@@ -14,7 +13,6 @@ import type {
 import { NETWORK_NODES, NETWORK_EDGES } from "../data/mockNetwork";
 import { ANTIBODIES, DEFAULT_SENSOR_EMBEDDING } from "../data/mockAntibodies";
 import { LIVE_ALERTS } from "../data/mockEvents";
-import { CARRIERS } from "../data/mockCarriers";
 import {
   buildAdjacency,
   initRuntime,
@@ -59,6 +57,7 @@ interface NexusState {
   lastNegotiation: Negotiation | null;
   negotiationHistory: Negotiation[];
   negotiating: boolean;
+  routeStatus: null | "accepted" | "alternative" | "rejected";
 
   // decision log (Improvements 3+7)
   decisionLog: DecisionEntry[];
@@ -126,6 +125,7 @@ export const useNexus = create<NexusState>((set, get) => ({
   lastNegotiation: null,
   negotiationHistory: [],
   negotiating: false,
+  routeStatus: null,
 
   decisionLog: [],
 
@@ -253,81 +253,28 @@ export const useNexus = create<NexusState>((set, get) => ({
   },
 
   runNegotiation: async () => {
-    const { urgency, origin, destination, R0, runtime } = get();
+    const { urgency, origin, destination } = get();
     set({ negotiating: true });
-    // Simulate sealed bidding
-    await new Promise((r) => setTimeout(r, 600));
-
-    const orig = NETWORK_NODES.find((n) => n.id === origin);
-    const dest = NETWORK_NODES.find((n) => n.id === destination);
-    const distance =
-      orig && dest
-        ? Math.sqrt(
-            (orig.x - dest.x) ** 2 + (orig.y - dest.y) ** 2,
-          ) / 100
-        : 8;
-
-    const bids: Bid[] = CARRIERS.map((c) => {
-      const random = (Math.random() - 0.5) * 6000;
-      const congestionRisk =
-        ((runtime[origin]?.infection ?? 0) +
-          (runtime[destination]?.infection ?? 0)) /
-        2;
-      const bid =
-        Math.round(
-          (c.baseRate + distance * 1100 + random) *
-            (1 + congestionRisk * 0.15) *
-            (1 + (1 - urgency) * 0.05),
-        );
-      const transit = Math.round(28 - c.speedScore * 12 + (Math.random() - 0.5) * 2);
-      const risk = +(0.45 - c.reliabilityScore * 0.4 + congestionRisk * 0.3).toFixed(2);
-      const score = +(
-        (urgency * c.speedScore + (1 - urgency) * (1 - bid / 70000) +
-          c.reliabilityScore * 0.4 -
-          risk * 0.3) /
-        2 + 0.5
-      ).toFixed(4);
-      return {
-        carrier: c.id,
-        bid,
-        transitDays: transit,
-        riskScore: risk,
-        score,
-      };
-    });
-
-    // Vickrey: highest score wins, pays second-highest score's bid
-    const sorted = [...bids].sort((a, b) => b.score - a.score);
-    const winner = sorted[0];
-    const second = sorted[1];
-    const ts = new Date().toISOString();
-
-    const path = [origin];
-    if (R0 > 1.5) path.push("LK-CMB"); // Colombo transshipment when high R0
-    path.push("SG-HUB");
-    path.push(destination);
-
-    const negotiation: Negotiation = {
-      round: get().negotiationHistory.length + 1,
-      origin,
-      destination,
-      urgency,
-      bids,
-      winnerId: winner.carrier,
-      paymentPrice: second.bid,
-      routePath: path,
-      ts,
-    };
-
-    await new Promise((r) => setTimeout(r, 700));
-    set((s) => ({
-      lastNegotiation: negotiation,
-      negotiationHistory: [negotiation, ...s.negotiationHistory].slice(0, 25),
-      negotiating: false,
-    }));
+    try {
+      const res = await fetch("/api/market/negotiate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ origin, destination, urgency }),
+      });
+      if (!res.ok) throw new Error(`API ${res.status}`);
+      const negotiation: Negotiation = await res.json();
+      set((s) => ({
+        lastNegotiation: negotiation,
+        negotiationHistory: [negotiation, ...s.negotiationHistory].slice(0, 25),
+        negotiating: false,
+        routeStatus: null,
+      }));
+    } catch {
+      set({ negotiating: false });
+    }
   },
 
-  logDecision: (actionType, target, details = {}) => {
+  logDecision: async (actionType, target, details = {}) => {
     const entry: DecisionEntry = {
       id: `DEC-${Date.now()}`,
       timestamp: new Date().toISOString().slice(0, 19).replace("T", " "),
@@ -335,7 +282,22 @@ export const useNexus = create<NexusState>((set, get) => ({
       target,
       details,
     };
-    set((s) => ({ decisionLog: [entry, ...s.decisionLog].slice(0, 200) }));
+    const statusMap: Record<string, "accepted" | "alternative" | "rejected"> = {
+      accept: "accepted",
+      alternative: "alternative",
+      reject: "rejected",
+    };
+    set((s) => ({
+      decisionLog: [entry, ...s.decisionLog].slice(0, 200),
+      routeStatus: statusMap[actionType] ?? null,
+    }));
+    try {
+      await fetch("/api/decisions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action_type: actionType, target, details }),
+      });
+    } catch {}
   },
 
   runScenario: (presetName) => {
