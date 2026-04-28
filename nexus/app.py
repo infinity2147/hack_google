@@ -109,6 +109,18 @@ if "network" not in st.session_state:
     st.session_state.scan_log = []
     st.session_state.shipments_df = load_csv("historical_shipments.csv")
     st.session_state.disruptions_df = load_csv("disruption_events.csv")
+    st.session_state.decision_log = sim.DecisionLog()
+    st.session_state.risk_engine = sim.RiskEngine(
+        st.session_state.network, st.session_state.sir,
+        st.session_state.doc_analyzer, st.session_state.crowd, st.session_state.immune)
+    st.session_state.scenario = sim.ScenarioEngine(st.session_state.network, st.session_state.sir)
+    st.session_state.historical = sim.HistoricalAnalyzer(
+        st.session_state.disruptions_df, st.session_state.shipments_df)
+    st.session_state.briefing = sim.SituationBriefing(
+        st.session_state.risk_engine, st.session_state.decision_log,
+        st.session_state.network, st.session_state.sir,
+        st.session_state.crowd, st.session_state.doc_analyzer)
+    st.session_state.last_scenario = None
 
 net      = st.session_state.network
 sir      = st.session_state.sir
@@ -119,6 +131,11 @@ crowd    = st.session_state.crowd
 explainer= st.session_state.explainer
 ship_df  = st.session_state.shipments_df
 disr_df  = st.session_state.disruptions_df
+dlog     = st.session_state.decision_log
+risk_eng = st.session_state.risk_engine
+scenario = st.session_state.scenario
+historical = st.session_state.historical
+briefing = st.session_state.briefing
 
 # ─── Sidebar ──────────────────────────────────────────────────────────────────
 
@@ -133,7 +150,8 @@ with st.sidebar:
     st.markdown('<div class="nav-label">Pages</div>', unsafe_allow_html=True)
     page = st.radio("Nav", ["Command Center","Global Network","Epidemiological Model",
                             "Immune Intelligence","Route Market","Document Scanner",
-                            "Crowd Intelligence"],
+                            "Crowd Intelligence","Shipment Tracker","Scenario Sandbox",
+                            "Network Trends","Decision History"],
                     label_visibility="collapsed")
 
     st.divider()
@@ -144,6 +162,7 @@ with st.sidebar:
 
     if st.button("⚡ Seed Disruption", use_container_width=True):
         sir.seed(seed_node, seed_sev)
+        dlog.log("seed", seed_node, dict(severity=seed_sev))
         st.toast(f"Seeded at {net.nodes[seed_node].name}", icon="⚡")
 
     c1, c2, c3 = st.columns(3)
@@ -183,7 +202,7 @@ with st.sidebar:
 
 # ═══════════════════════════════════════════════════════════════════════════════
 
-# ─── Command Center ──────────────────────────────────────────────────────────
+# ─── Command Center (Modified) ────────────────────────────────────────────────
 
 if page == "Command Center":
     st.markdown(f"""
@@ -196,9 +215,10 @@ if page == "Command Center":
     rt = sim.generate_alerts(net, sir)
     ds = doc_an.summary()
     cs = crowd.stats()
+    health = risk_eng.network_health()
     kpi_cols = st.columns(6)
     kpis = [
-        ("Network Health",  f"{rt['health']:.0%}",                    C['accent']),
+        ("Network Health",  f"{health:.1f}/100",                      C['accent']),
         ("Disruption Idx",  f"{rt['disruption_idx']:.1%}",            C['warn']),
         ("R effective",     f"{rt['Reff']:.2f}",                      C['crit'] if rt['Reff']>1 else C['accent']),
         ("Active Alerts",   str(len(rt["alerts"])),                   C['crit'] if rt["alerts"] else C['accent']),
@@ -211,16 +231,51 @@ if page == "Command Center":
 
     st.markdown("---")
 
+    # Daily Briefing Section
+    hdr("Daily Briefing", "📡")
+    briefing_text = briefing.generate()
+    st.markdown(f"""
+    <div style="background:{C['card']};padding:18px;border-radius:10px;border:1px solid {C['border']};
+        color:{C['txt2']};font-size:13px;line-height:1.7">{briefing_text.replace(chr(10),'<br>')}</div>
+    """, unsafe_allow_html=True)
+
+    with st.expander("🤖 Generate Gemini Briefing"):
+        api_key = st.text_input("Gemini API Key", type="password", key="gemini_key_cc")
+        if st.button("Generate AI Briefing"):
+            if api_key:
+                with st.spinner("Generating briefing..."):
+                    ai_text = briefing.generate_gemini(api_key)
+                    st.markdown(ai_text)
+            else:
+                st.warning("Enter a Gemini API key to use AI briefing.")
+
+    st.markdown("---")
+
     mc, rc = st.columns([2.4, 1])
     with mc:
         hdr("Global Network Status", "🌐")
         st.plotly_chart(viz.animated_network_map(net, sir.history), use_container_height=True)
 
     with rc:
-        hdr("Live Alert Feed", "📡")
+        # Risk Heat Bar
+        hdr("Node Risk Heatmap", "🔥")
+        risks = risk_eng.all_node_risks()
+        st.plotly_chart(viz.risk_heat_bar(risks), use_container_height=True)
+
+        # Action Queue (replaces alert feed)
+        hdr("Action Queue", "⚡")
         if rt["alerts"]:
             for a in rt["alerts"][:6]:
                 st.markdown(viz.alert_card(a), unsafe_allow_html=True)
+                ac1, ac2 = st.columns(2)
+                with ac1:
+                    if st.button(f"🔀 Reroute", key=f"reroute_{a['node_id']}"):
+                        dlog.log("reroute", a["node_id"], dict(from_node=a["node_id"], action=a["action"]))
+                        st.toast(f"Reroute logged for {a['node']}", icon="🔀")
+                with ac2:
+                    if st.button(f"📋 Monitor", key=f"monitor_{a['node_id']}"):
+                        dlog.log("monitor", a["node_id"], dict(severity=a["severity"]))
+                        st.toast(f"Monitoring {a['node']}", icon="📋")
         else:
             st.markdown(f"""
             <div style="background:{C['green_bg']};padding:20px;border-radius:10px;text-align:center;
@@ -257,8 +312,9 @@ elif page == "Global Network":
 
     hdr("Node Details", "📍")
     rows = [dict(Name=n.name, Type=n.kind, Status=n.status, Lat=n.lat, Lon=n.lon,
-                 Congestion=f"{n.congestion:.0%}", Load=f"{n.load:,}/{n.capacity:,}")
-            for n in net.nodes.values()]
+                 Congestion=f"{n.congestion:.0%}", Load=f"{n.load:,}/{n.capacity:,}",
+                 Risk=risk_eng.node_risk(nid)["composite"])
+            for nid, n in net.nodes.items()]
     st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
 
     hdr("Route Risk Analysis", "🔗")
@@ -408,7 +464,7 @@ elif page == "Immune Intelligence":
                         f"Rate: **{m/len(st.session_state.scan_log):.0%}**")
 
 
-# ─── Route Market ─────────────────────────────────────────────────────────────
+# ─── Route Market (Modified) ─────────────────────────────────────────────────
 
 elif page == "Route Market":
     st.title("🤝 Multi-Agent Route Negotiation")
@@ -438,6 +494,28 @@ elif page == "Route Market":
             </div>
         </div>""", unsafe_allow_html=True)
 
+        # Action buttons for route decision
+        hdr("Route Decision", "🎯")
+        ab1, ab2, ab3 = st.columns(3)
+        with ab1:
+            if st.button("✅ Accept Winner", key="accept_route", use_container_width=True):
+                dlog.log("accept", w["carrier"], dict(carrier=w["carrier"], bid=w["bid"],
+                        route=" → ".join(w["route"]), outcome="accepted"))
+                st.toast(f"Accepted {w['carrier']} at ${w['bid']:,.0f}", icon="✅")
+        with ab2:
+            if st.button("🔄 Alternative Route", key="alt_route", use_container_width=True):
+                if len(st.session_state.last_neg["all_bids"]) > 1:
+                    alt = st.session_state.last_neg["all_bids"][1]
+                    dlog.log("alternative", alt["carrier"], dict(carrier=alt["carrier"], bid=alt["bid"],
+                            route=" → ".join(alt["route"]), outcome="alternative"))
+                    st.toast(f"Switched to {alt['carrier']}", icon="🔄")
+                else:
+                    st.warning("No alternative available.")
+        with ab3:
+            if st.button("❌ Reject All", key="reject_route", use_container_width=True):
+                dlog.log("reject", "all", dict(urgency=urgency, reason="all_rejected"))
+                st.toast("All bids rejected", icon="❌")
+
         g1, g2 = st.columns([1.2, 1])
         with g1: st.plotly_chart(viz.agent_chart(st.session_state.last_neg["all_bids"]), use_container_height=True)
         with g2: st.plotly_chart(viz.agent_radar(st.session_state.last_neg["all_bids"]), use_container_height=True)
@@ -462,7 +540,7 @@ elif page == "Route Market":
         st.dataframe(pd.DataFrame(h), use_container_width=True, hide_index=True)
 
 
-# ─── Document Scanner ────────────────────────────────────────────────────────
+# ─── Document Scanner (Modified) ─────────────────────────────────────────────
 
 elif page == "Document Scanner":
     st.title("📄 Document Intelligence")
@@ -492,6 +570,23 @@ elif page == "Document Scanner":
 
     for d in filtered[:30]:
         st.markdown(viz.doc_card(d), unsafe_allow_html=True)
+        # Action buttons per document
+        db1, db2, db3 = st.columns(3)
+        with db1:
+            if st.button(f"🔍 Investigate", key=f"inv_{d['id']}"):
+                dlog.log("investigate", d["id"], dict(supplier=d.get("supplier",""),
+                        deviation=d.get("deviation",0), status=d["status"]))
+                st.toast(f"Investigating {d['id']}", icon="🔍")
+        with db2:
+            if st.button(f"⚠️ False Positive", key=f"fp_{d['id']}"):
+                dlog.log("false_positive", d["id"], dict(original_status=d["status"]))
+                d["status"] = "normal"
+                st.toast(f"Marked {d['id']} as false positive", icon="⚠️")
+        with db3:
+            if st.button(f"📋 Compliance", key=f"comp_{d['id']}"):
+                dlog.log("compliance", d["id"], dict(supplier=d.get("supplier",""),
+                        amount=d.get("amount",0), signals=d.get("signals",[])))
+                st.toast(f"Compliance review for {d['id']}", icon="📋")
         with st.expander(f"🧠 Analysis — {d['id']}"):
             st.markdown(explainer.explain_document(d))
 
@@ -600,3 +695,315 @@ elif page == "Crowd Intelligence":
     with bc[2]:
         if st.button("🎤 Bengali", use_container_width=True): st.toast("Processing…", icon="🎤")
 
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# NEW PAGES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# ─── Shipment Tracker (Improvement 1) ────────────────────────────────────────
+
+elif page == "Shipment Tracker":
+    st.title("📦 Shipment Tracker")
+    st.markdown("Search, filter, and track shipments with risk flags and reroute actions.")
+
+    if ship_df.empty:
+        st.warning("No shipment data loaded. Run `python generate_data.py` first.")
+    else:
+        # KPIs
+        total = len(ship_df)
+        in_transit = (ship_df["status"] == "in_transit").sum()
+        delayed = (ship_df["status"] == "delayed").sum()
+        disrupted = (ship_df["status"] == "disrupted").sum()
+        on_time_pct = 1 - (ship_df["delay_days"] > 0).mean()
+
+        k1, k2, k3, k4, k5 = st.columns(5)
+        k1.metric("Total Shipments", f"{total:,}")
+        k2.metric("In Transit", f"{in_transit:,}")
+        k3.metric("Delayed", f"{delayed:,}")
+        k4.metric("Disrupted", f"{disrupted:,}")
+        k5.metric("On-Time Rate", f"{on_time_pct:.1%}")
+        st.markdown("---")
+
+        # Filters
+        hdr("Filters", "🔍")
+        f1, f2, f3, f4 = st.columns(4)
+        with f1:
+            search = st.text_input("Search ID / Origin / Dest", "")
+        with f2:
+            status_filter = st.multiselect("Status", ship_df["status"].unique().tolist(),
+                                           default=ship_df["status"].unique().tolist())
+        with f3:
+            commodity_filter = st.multiselect("Commodity", ship_df["commodity"].unique().tolist(),
+                                              default=[])
+        with f4:
+            risk_threshold = st.slider("Min Risk Score", 0.0, 1.0, 0.0, 0.05)
+
+        # Apply filters
+        filtered = ship_df[ship_df["status"].isin(status_filter)].copy()
+        if search:
+            mask = (filtered["shipment_id"].str.contains(search, case=False) |
+                    filtered["origin_name"].str.contains(search, case=False) |
+                    filtered["dest_name"].str.contains(search, case=False))
+            filtered = filtered[mask]
+        if commodity_filter:
+            filtered = filtered[filtered["commodity"].isin(commodity_filter)]
+        if risk_threshold > 0:
+            filtered = filtered[filtered["risk_score"] >= risk_threshold]
+
+        st.caption(f"Showing {len(filtered)} of {total} shipments")
+
+        # Risk-flagged shipments
+        high_risk = filtered[filtered["risk_score"] > 0.3].sort_values("risk_score", ascending=False)
+        if not high_risk.empty:
+            hdr("Risk-Flagged Shipments", "🚩")
+            for _, row in high_risk.head(10).iterrows():
+                risk_info = risk_eng.shipment_risk(row.to_dict())
+                rc = C['crit'] if risk_info["composite"] > 50 else (C['warn'] if risk_info["composite"] > 25 else C['accent'])
+                st.markdown(f"""
+                <div style="background:{C['card']};padding:12px;border-radius:8px;
+                    border-left:3px solid {rc};margin-bottom:8px;border:1px solid {C['border']};
+                    border-left:3px solid {rc}">
+                    <div style="display:flex;justify-content:space-between;align-items:center">
+                        <div style="font-size:13px;color:{C['txt']};font-weight:600">
+                            📦 {row['shipment_id']} — {row['commodity']}
+                        </div>
+                        <div style="font-size:12px;color:{rc};font-weight:700">Risk: {risk_info['composite']}/100</div>
+                    </div>
+                    <div style="font-size:12px;color:{C['txt3']};margin-top:3px">
+                        {row['origin_name']} → {row['dest_name']} | {row['carrier']} | {row['status']} |
+                        Delay: {row['delay_days']}d | TEU: {row['teu']} | ${row['total_cost_usd']:,}
+                    </div>
+                </div>""", unsafe_allow_html=True)
+                rb1, rb2 = st.columns(2)
+                with rb1:
+                    if st.button(f"🔀 Reroute", key=f"ship_reroute_{row['shipment_id']}"):
+                        dlog.log("reroute", row["shipment_id"],
+                                dict(carrier=row["carrier"], origin=row["origin_name"],
+                                     dest=row["dest_name"], predicted_savings=int(row["total_cost_usd"] * 0.15),
+                                     outcome="pending"))
+                        st.toast(f"Reroute requested for {row['shipment_id']}", icon="🔀")
+                with rb2:
+                    if st.button(f"📋 Details", key=f"ship_detail_{row['shipment_id']}"):
+                        st.toast(f"Opening {row['shipment_id']}", icon="📋")
+
+        # Full data table
+        hdr("All Filtered Shipments", "📊")
+        display_cols = ["shipment_id","booking_date","eta","origin_name","dest_name",
+                        "commodity","carrier","status","delay_days","risk_score","total_cost_usd"]
+        show_cols = [c for c in display_cols if c in filtered.columns]
+        st.dataframe(filtered[show_cols].head(200), use_container_width=True, hide_index=True)
+
+
+# ─── Scenario Sandbox (Improvement 4) ────────────────────────────────────────
+
+elif page == "Scenario Sandbox":
+    st.title("🎮 Scenario Sandbox")
+    st.markdown("What-if analysis. Run preset disruptions to see impact on the network. "
+                "**SIR state is fully restored after each run.**")
+
+    preset_names = list(sim.ScenarioEngine.PRESETS.keys())
+    health_now = risk_eng.network_health()
+
+    k1, k2 = st.columns(2)
+    with k1:
+        st.markdown(viz.kpi_html("Current Network Health", f"{health_now:.1f}/100",
+                                  color=C['accent'], icon="🟢"), unsafe_allow_html=True)
+    with k2:
+        st.markdown(viz.kpi_html("Scenarios Available", str(len(preset_names)),
+                                  color=C['blue'], icon="🎮"), unsafe_allow_html=True)
+    st.markdown("---")
+
+    selected = st.selectbox("Select Scenario", preset_names)
+    preset = sim.ScenarioEngine.PRESETS[selected]
+    st.markdown(f"""
+    <div style="background:{C['card']};padding:14px;border-radius:8px;border:1px solid {C['border']};
+        margin-bottom:12px">
+        <div style="font-size:13px;color:{C['txt']};font-weight:600">{selected}</div>
+        <div style="font-size:12px;color:{C['txt3']};margin-top:4px">{preset['description']}</div>
+        <div style="font-size:11px;color:{C['txt4']};margin-top:6px">
+            Seed nodes: {', '.join(preset.get('seed_nodes',[])) or 'None'} |
+            Severity: {preset.get('severity', 0):.0%} |
+            Beta multiplier: {preset.get('beta_mult', 1.0):.1f}x
+        </div>
+    </div>""", unsafe_allow_html=True)
+
+    if st.button("🚀 Run Scenario", use_container_width=True, type="primary"):
+        with st.spinner("Running 30-step simulation..."):
+            result = scenario.run_scenario(selected)
+            st.session_state.last_scenario = result
+            dlog.log("scenario", selected, dict(health_delta=result["health_delta"],
+                                                 cost=result["cost_estimate"]))
+            st.toast(f"Scenario complete: {result['health_delta']:+.1f} health", icon="🚀")
+
+    if st.session_state.last_scenario:
+        r = st.session_state.last_scenario
+
+        hdr("Results", "📊")
+        r1, r2, r3, r4 = st.columns(4)
+        r1.markdown(viz.kpi_html("Before Health", f"{r['before_health']:.1f}",
+                                  color=C['accent'], icon="🟢"), unsafe_allow_html=True)
+        r2.markdown(viz.kpi_html("After Health", f"{r['after_health']:.1f}",
+                                  delta=f"{r['health_delta']:+.1f}",
+                                  color=C['crit'] if r['health_delta'] < -10 else C['warn'],
+                                  icon="🔴"), unsafe_allow_html=True)
+        r3.markdown(viz.kpi_html("Affected Nodes", str(len(r['affected_nodes'])),
+                                  color=C['warn'], icon="📍"), unsafe_allow_html=True)
+        r4.markdown(viz.kpi_html("Cost Estimate", f"${r['cost_estimate']:,}",
+                                  color=C['crit'], icon="💰"), unsafe_allow_html=True)
+
+        g1, g2 = st.columns([1.2, 1])
+        with g1:
+            st.plotly_chart(viz.scenario_comparison(r), use_container_height=True)
+        with g2:
+            if r.get("scenario_history"):
+                st.plotly_chart(viz.sir_curves(r["scenario_history"]), use_container_height=True)
+
+        if r["affected_nodes"]:
+            hdr("Affected Nodes", "📍")
+            for nid in r["affected_nodes"]:
+                nd = net.nodes.get(nid)
+                name = nd.name if nd else nid
+                st.markdown(f"- **{name}** ({nid})")
+
+
+# ─── Network Trends (Improvement 6) ──────────────────────────────────────────
+
+elif page == "Network Trends":
+    st.title("📈 Network Trends & Historical Analysis")
+    st.markdown("Analyze disruption patterns, recovery times, and network health over time.")
+
+    if disr_df.empty:
+        st.warning("No disruption data loaded. Run `python generate_data.py` first.")
+    else:
+        tab1, tab2, tab3, tab4 = st.tabs(["30-Day Health Trend", "Week Comparison",
+                                           "Most Disrupted Corridors", "Fastest Recovery"])
+
+        with tab1:
+            hdr("Network Health — 30 Day Trend", "📉")
+            daily = historical.health_trend_30d()
+            if not daily.empty:
+                st.plotly_chart(viz.health_trend_chart(daily), use_container_height=True)
+                st.dataframe(daily.tail(30), use_container_width=True, hide_index=True)
+            else:
+                st.info("No data available.")
+
+        with tab2:
+            hdr("Week-over-Week Comparison", "📊")
+            wc = historical.week_comparison()
+            w1, w2, w3, w4 = st.columns(4)
+            w1.metric("This Week Events", wc["this_week"])
+            w2.metric("Last Week Events", wc["last_week"])
+            w3.metric("Delta", wc["delta"],
+                      delta_color="inverse" if wc["delta"] > 0 else "normal")
+            w4.metric("This Week Loss", f"${wc['this_loss']:,}")
+
+            w5, w6 = st.columns(2)
+            with w5:
+                st.markdown(viz.kpi_html("This Week Loss", f"${wc['this_loss']:,}",
+                            color=C['crit'] if wc['this_loss'] > wc['last_loss'] else C['accent'],
+                            icon="💰"), unsafe_allow_html=True)
+            with w6:
+                st.markdown(viz.kpi_html("Last Week Loss", f"${wc['last_loss']:,}",
+                            color=C['warn'], icon="💰"), unsafe_allow_html=True)
+
+        with tab3:
+            hdr("Most Disrupted Corridors", "🔴")
+            top_n = st.slider("Show top N", 5, 20, 10, key="top_disrupted")
+            md = historical.most_disrupted(top_n)
+            if not md.empty:
+                st.dataframe(md, use_container_width=True, hide_index=True)
+                if "total_loss" in md.columns:
+                    fig = viz.go.Figure()
+                    fig.add_trace(viz.go.Bar(x=md["port_name"], y=md["total_loss"],
+                                             marker_color=viz.CRIT,
+                                             marker_line=dict(width=0.5, color=viz.WHITE)))
+                    fig.update_layout(**viz._layout(height=350), xaxis_title="Port",
+                                      yaxis_title="Total Loss ($)",
+                                      title=viz._title("Economic Loss by Port"))
+                    st.plotly_chart(fig, use_container_height=True)
+            else:
+                st.info("No data available.")
+
+        with tab4:
+            hdr("Fastest Recovery Times", "⚡")
+            top_n2 = st.slider("Show top N", 5, 20, 10, key="top_recovery")
+            fr = historical.fastest_recovery(top_n2)
+            if not fr.empty:
+                st.dataframe(fr, use_container_width=True, hide_index=True)
+                fig = viz.go.Figure()
+                fig.add_trace(viz.go.Bar(x=fr["port_name"], y=fr["avg_recovery_h"],
+                                         marker_color=viz.ACCENT,
+                                         marker_line=dict(width=0.5, color=viz.WHITE)))
+                fig.update_layout(**viz._layout(height=350), xaxis_title="Port",
+                                  yaxis_title="Avg Recovery (hours)",
+                                  title=viz._title("Fastest Recovery Ports"))
+                st.plotly_chart(fig, use_container_height=True)
+            else:
+                st.info("No data available.")
+
+
+# ─── Decision History (Improvement 7) ────────────────────────────────────────
+
+elif page == "Decision History":
+    st.title("📝 Decision History & Audit Trail")
+    st.markdown("Every action you take is logged. Review past decisions, track outcomes, and measure agent trust.")
+
+    summary = dlog.summary()
+    entries = dlog.entries
+
+    k1, k2 = st.columns(2)
+    k1.metric("Total Decisions", summary["total"])
+    with k2:
+        if summary["by_type"]:
+            type_str = " | ".join(f"{k}: {v}" for k, v in summary["by_type"].items())
+            st.markdown(f"**By Type:** {type_str}")
+        else:
+            st.info("No decisions logged yet.")
+    st.markdown("---")
+
+    if entries:
+        # Filter
+        all_types = list(set(e["action_type"] for e in entries))
+        ft = st.multiselect("Filter by Action Type", all_types, default=all_types)
+        filtered_entries = [e for e in entries if e["action_type"] in ft]
+
+        hdr("Audit Trail", "📜")
+        for entry in reversed(filtered_entries[-50:]):
+            st.markdown(viz.audit_entry_html(entry), unsafe_allow_html=True)
+
+        # Reroute outcomes chart
+        reroutes = dlog.reroute_entries()
+        if reroutes:
+            hdr("Reroute Outcomes", "🔀")
+            st.plotly_chart(viz.reroute_history_chart(reroutes), use_container_height=True)
+
+        # Agent trust scores
+        hdr("Agent Trust Scores", "🏆")
+        trust = dlog.agent_trust_scores(market)
+        if trust:
+            for carrier, score in trust.items():
+                tc = C['accent'] if score > 0.7 else (C['warn'] if score > 0.4 else C['crit'])
+                bar_width = int(score * 100)
+                st.markdown(f"""
+                <div style="margin-bottom:8px">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+                        <span style="font-size:13px;color:{C['txt']};font-weight:600">{carrier}</span>
+                        <span style="font-size:13px;color:{tc};font-weight:700">{score:.0%}</span>
+                    </div>
+                    <div style="background:{C['card']};border-radius:4px;height:8px;overflow:hidden">
+                        <div style="background:{tc};width:{bar_width}%;height:100%;border-radius:4px"></div>
+                    </div>
+                </div>""", unsafe_allow_html=True)
+        else:
+            st.info("Accept or reject routes to build trust scores.")
+    else:
+        st.markdown(f"""
+        <div style="background:{C['card']};padding:30px;border-radius:10px;text-align:center;
+            border:1px solid {C['border']}">
+            <div style="font-size:36px">📋</div>
+            <div style="color:{C['txt']};font-size:16px;font-weight:600;margin-top:8px">No Decisions Yet</div>
+            <div style="color:{C['txt3']};font-size:13px;margin-top:6px;line-height:1.6">
+                Start making decisions to see your audit trail here.<br>
+                Try: seed a disruption, accept/reject routes, investigate documents, or reroute shipments.
+            </div>
+        </div>""", unsafe_allow_html=True)

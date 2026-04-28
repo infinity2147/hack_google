@@ -502,3 +502,113 @@ def doc_card(d: dict) -> str:
         </div>
         {sig}
     </div>"""
+
+
+# ─── Risk & Scenario Charts ───────────────────────────────────────────────────
+
+def risk_heat_bar(risks: list) -> go.Figure:
+    risks = sorted(risks, key=lambda r: r["composite"], reverse=True)[:20]
+    names = [r["node_id"] for r in risks]
+    vals = [r["composite"] for r in risks]
+    cols = [CRIT if v > 60 else (WARN if v > 30 else ACCENT) for v in vals]
+    fig = go.Figure(go.Bar(x=vals, y=names, orientation="h", marker_color=cols,
+                           marker_line=dict(color=WHITE, width=0.5)))
+    layout = _layout(height=420)
+    layout["xaxis_title"] = "Risk Score (0-100)"
+    layout["yaxis"]["autorange"] = "reversed"
+    fig.update_layout(**layout, title=_title("Node Risk Heatmap"))
+    return fig
+
+
+def risk_breakdown_chart(risk: dict) -> go.Figure:
+    bd = risk.get("breakdown", {})
+    labels = ["SIR", "Documents", "Crowd", "Immune"]
+    values = [bd.get("sir", 0), bd.get("docs", 0), bd.get("crowd", 0), bd.get("immune", 0)]
+    colors = [CRIT, WARN, INFO, RECOVER]
+    fig = go.Figure(go.Pie(labels=labels, values=values, hole=0.55,
+                           marker=dict(colors=colors, line=dict(color=WHITE, width=2)),
+                           textfont=dict(size=12, color=TXT)))
+    fig.update_layout(**_layout(height=320), title=_title(f"Risk Breakdown — {risk.get('node_id','')}"),
+                      showlegend=True, legend=dict(font=dict(size=11, color=TXT2)))
+    return fig
+
+
+def scenario_comparison(result: dict) -> go.Figure:
+    cats = ["Health Score", "Affected Nodes", "Cost ($K)"]
+    before = [result.get("before_health", 0),
+              0,
+              0]
+    after = [result.get("after_health", 0),
+             len(result.get("affected_nodes", [])),
+             result.get("cost_estimate", 0) / 1000]
+    fig = go.Figure()
+    fig.add_trace(go.Bar(name="Before", x=cats, y=before, marker_color=ACCENT,
+                         marker_line=dict(width=0.5, color=WHITE)))
+    fig.add_trace(go.Bar(name="After", x=cats, y=after, marker_color=CRIT,
+                         marker_line=dict(width=0.5, color=WHITE)))
+    fig.update_layout(**_layout(height=350), barmode="group",
+                      title=_title(f"Scenario: {result.get('name','')}"),
+                      yaxis_title="Value")
+    return fig
+
+
+def health_trend_chart(daily_df: pd.DataFrame) -> go.Figure:
+    if daily_df.empty:
+        fig = go.Figure()
+        fig.update_layout(**_layout(height=350), title=_title("No data"))
+        return fig
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=daily_df["date"], y=daily_df["health_score"],
+                             name="Health Score", line=dict(color=ACCENT, width=2.5),
+                             fill="tozeroy", fillcolor="rgba(13,148,136,0.06)"))
+    fig.add_trace(go.Scatter(x=daily_df["date"], y=daily_df["event_count"],
+                             name="Events", line=dict(color=WARN, width=2, dash="dot"),
+                             yaxis="y2"))
+    fig.update_layout(**_layout(height=380),
+                      xaxis_title="Date", yaxis_title="Health Score",
+                      yaxis2=dict(overlaying="y", side="right", title="Events",
+                                  gridcolor=GRID, linecolor=BORDER, tickfont=dict(color=TXT3)),
+                      legend=dict(orientation="h", y=1.06, font=dict(size=11, color=TXT2)),
+                      title=_title("Network Health — 30 Day Trend"))
+    return fig
+
+
+def audit_entry_html(entry: dict) -> str:
+    colors = dict(reroute=WARN, investigate=INFO, accept=ACCENT, reject=CRIT,
+                  compliance=RECOVER, false_positive=TXT3, alternative="#d97706")
+    c = colors.get(entry.get("action_type", ""), ACCENT)
+    icons = dict(reroute="🔀", investigate="🔍", accept="✅", reject="❌",
+                 compliance="📋", false_positive="⚠️", alternative="🔄")
+    ic = icons.get(entry.get("action_type", ""), "📝")
+    details_str = " | ".join(f"{k}: {v}" for k, v in (entry.get("details") or {}).items()) if entry.get("details") else ""
+    return f"""
+    <div style="background:{CARD};padding:12px;border-radius:8px;
+        border-left:3px solid {c};margin-bottom:8px;border:1px solid {BORDER};
+        border-left:3px solid {c}">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+            <div style="font-size:13px;color:{TXT};font-weight:600">
+                {ic} {entry.get('action_type','').replace('_',' ').title()} — {entry.get('target','')}
+            </div>
+            <div style="font-size:10px;color:{TXT3}">{entry.get('timestamp','')}</div>
+        </div>
+        {f'<div style="font-size:11px;color:{TXT3};margin-top:4px">{details_str}</div>' if details_str else ''}
+    </div>"""
+
+
+def reroute_history_chart(entries: list) -> go.Figure:
+    if not entries:
+        fig = go.Figure()
+        fig.update_layout(**_layout(height=300), title=_title("No reroute decisions yet"))
+        return fig
+    carriers = [e["details"].get("carrier", "Unknown")[:12] for e in entries[-15:]]
+    predicted = [e["details"].get("predicted_savings", 0) for e in entries[-15:]]
+    actual = [e["details"].get("actual_savings", 0) for e in entries[-15:]]
+    fig = go.Figure()
+    fig.add_trace(go.Bar(name="Predicted Savings", x=carriers, y=predicted,
+                         marker_color=ACCENT, marker_line=dict(width=0.5, color=WHITE)))
+    fig.add_trace(go.Bar(name="Actual Savings", x=carriers, y=actual,
+                         marker_color=WARN, marker_line=dict(width=0.5, color=WHITE)))
+    fig.update_layout(**_layout(height=320), barmode="group",
+                      xaxis_title="Carrier", yaxis_title="Savings ($)",
+                      title=_title("Reroute Outcomes"))
+    return fig

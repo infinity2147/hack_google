@@ -432,6 +432,5 @@ if __name__ == "__main__":
     gen_financial_docs(500)
     gen_sensor_readings(20000)
     gen_voice_notes(250)
-    gen_acoustic_data(800)
     gen_contributors(150)
     print("\nAll datasets generated in nexus/data/")

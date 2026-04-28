@@ -12,6 +12,10 @@ import {
   Play,
   ChevronDown,
   ChevronRight,
+  Package,
+  Gamepad2,
+  TrendingUp,
+  ClipboardList,
 } from "lucide-react";
 import { useState } from "react";
 import { useNexus } from "../../store/nexusStore";
@@ -26,6 +30,10 @@ const NAV = [
   { to: "/market", label: "Route Market", icon: Gavel },
   { to: "/documents", label: "Document Scanner", icon: FileSearch },
   { to: "/crowd", label: "Crowd Intelligence", icon: Users },
+  { to: "/shipments", label: "Shipment Tracker", icon: Package },
+  { to: "/scenarios", label: "Scenario Sandbox", icon: Gamepad2 },
+  { to: "/trends", label: "Network Trends", icon: TrendingUp },
+  { to: "/decisions", label: "Decision History", icon: ClipboardList },
 ];
 
 export function Sidebar() {

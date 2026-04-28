@@ -47,7 +47,7 @@ const sparkline7 = (max: number) =>
   );
 
 export function CommandCenter() {
-  const { alerts, R0, dismissAlert } = useNexus();
+  const { alerts, R0, dismissAlert, logDecision } = useNexus();
 
   const networkHealth = 73;
   const disruptionIdx = 0.34;
@@ -160,6 +160,19 @@ export function CommandCenter() {
       <div className="grid grid-cols-1 xl:grid-cols-5 gap-4 mt-4">
         {/* Left 60% */}
         <div className="xl:col-span-3 space-y-4">
+          {/* Daily Briefing */}
+          <Card title="Daily Briefing" subtitle="Auto-generated situation summary">
+            <div className="text-xs text-text-secondary leading-relaxed space-y-1.5">
+              <p>Network health: <span className="text-accent-teal font-semibold">{networkHealth}%</span> · R-effective: <span className={R0 >= 1 ? "text-accent-red font-semibold" : "text-accent-teal font-semibold"}>{R0.toFixed(2)}</span> · Active alerts: <span className="text-accent-amber font-semibold">{activeAlerts}</span></p>
+              <p>Document anomalies: <span className="text-accent-amber">{docAnomalies}</span> · Crowd reports: <span className="text-accent-teal">{crowdReports}</span> · Monitored containers: <span className="text-accent-blue">{monitoredCtr}</span></p>
+              {R0 > 1 ? (
+                <p className="text-accent-red font-semibold">CASCADE ACTIVE — R-effective {R0.toFixed(2)} &gt; 1. Reroute {R0 > 1 ? ((1 - 1 / R0) * 100).toFixed(0) : "0"}% of volume to achieve herd immunity.</p>
+              ) : (
+                <p className="text-accent-green">Network stable — R-effective below cascade threshold.</p>
+              )}
+              <p className="text-text-dim">Recommendations: 1. Review document anomalies on affected routes 2. Cross-check crowd reports with immune memory 3. Monitor high-risk corridors</p>
+            </div>
+          </Card>
           <Card
             title="Live Disruption Network"
             subtitle="31 nodes · 48 weighted lanes · click to inspect"
@@ -340,12 +353,26 @@ export function CommandCenter() {
                           {a.meta}
                         </div>
                       </div>
+                    </div>
+                    <div className="mt-2 flex items-center gap-2">
+                      <button
+                        onClick={() => logDecision("reroute", a.title, { alert: a.id, detail: a.detail })}
+                        className="text-[10px] bg-accent-teal/10 text-accent-teal border border-accent-teal/30 rounded px-2 py-0.5 hover:bg-accent-teal/20"
+                      >
+                        🔀 Reroute
+                      </button>
+                      <button
+                        onClick={() => logDecision("monitor", a.title, { alert: a.id })}
+                        className="text-[10px] bg-bg-elevated text-text-secondary border border-border rounded px-2 py-0.5 hover:border-accent-teal"
+                      >
+                        📋 Monitor
+                      </button>
                       {a.cta && (
                         <button
                           onClick={() => dismissAlert(a.id)}
-                          className="shrink-0 inline-flex items-center gap-1 text-[11px] text-accent-teal hover:underline"
+                          className="text-[10px] text-accent-teal hover:underline ml-auto"
                         >
-                          {a.cta} <ArrowRight size={10} />
+                          {a.cta} →
                         </button>
                       )}
                     </div>

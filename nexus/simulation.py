@@ -692,12 +692,12 @@ def generate_alerts(network: SupplyChainNetwork, sir: SIRModel) -> dict:
     alerts = []
     for nid, nd in network.nodes.items():
         if nd.status == "disrupted":
-            alerts.append(dict(type="CRITICAL", node=nd.name,
+            alerts.append(dict(type="CRITICAL", node=nd.name, node_id=nid,
                                msg=f"Disruption at {nd.name} ({nd.congestion:.0%})",
                                severity=nd.congestion,
                                action="Activate immune response & reroute"))
         elif nd.status == "stressed":
-            alerts.append(dict(type="WARNING", node=nd.name,
+            alerts.append(dict(type="WARNING", node=nd.name, node_id=nid,
                                msg=f"Stress at {nd.name} ({nd.congestion:.0%})",
                                severity=nd.congestion,
                                action="Monitor & pre-buffer inventory"))
@@ -705,3 +705,284 @@ def generate_alerts(network: SupplyChainNetwork, sir: SIRModel) -> dict:
                 health=1 - np.mean(sir.I),
                 disruption_idx=np.mean(sir.I),
                 Reff=sir._Reff())
+
+
+# ─── Unified Risk Engine ──────────────────────────────────────────────────────
+
+class RiskEngine:
+    """Cross-module composite risk scoring (0-100)."""
+
+    WEIGHTS = dict(sir=0.30, docs=0.25, crowd=0.20, immune=0.25)
+
+    def __init__(self, network, sir, doc_analyzer, crowd, immune):
+        self.net = network
+        self.sir = sir
+        self.docs = doc_analyzer
+        self.crowd = crowd
+        self.immune = immune
+
+    def node_risk(self, node_id: str) -> dict:
+        idx = self.sir.id2idx.get(node_id)
+        sir_score = float(self.sir.I[idx]) * 100 if idx is not None else 0
+
+        flagged = [d for d in self.docs.docs
+                   if node_id in d.get("route", "") and d["status"] in ("alert", "critical")]
+        doc_score = min(100, len(flagged) * 15)
+
+        reports = [v for v in self.crowd.voice_notes
+                   if v.get("node_id") == node_id and v.get("verified")]
+        crowd_score = min(100, np.mean([v["severity"] for v in reports]) * 120) if reports else 0
+
+        immune_score = 0
+        for ab in self.immune.library:
+            if node_id in ab.get("footprint", []):
+                immune_score = max(immune_score, ab["severity"] * 100)
+
+        composite = (self.WEIGHTS["sir"] * sir_score +
+                     self.WEIGHTS["docs"] * doc_score +
+                     self.WEIGHTS["crowd"] * crowd_score +
+                     self.WEIGHTS["immune"] * immune_score)
+        return dict(node_id=node_id, composite=round(composite, 1),
+                    breakdown=dict(sir=round(sir_score, 1), docs=round(doc_score, 1),
+                                   crowd=round(crowd_score, 1), immune=round(immune_score, 1)))
+
+    def all_node_risks(self) -> list:
+        return [self.node_risk(nid) for nid in self.net.nodes]
+
+    def shipment_risk(self, row: dict) -> dict:
+        o = self.node_risk(row.get("origin_id", ""))
+        d = self.node_risk(row.get("dest_id", ""))
+        composite = (o["composite"] + d["composite"]) / 2
+        if row.get("disruption_flag"):
+            composite = min(100, composite * 1.4)
+        return dict(shipment_id=row.get("shipment_id", ""),
+                    origin_risk=o, dest_risk=d, composite=round(composite, 1))
+
+    def network_health(self) -> float:
+        risks = self.all_node_risks()
+        return round(100 - np.mean([r["composite"] for r in risks]), 1)
+
+    def top_risks(self, n=10) -> list:
+        return sorted(self.all_node_risks(), key=lambda r: r["composite"], reverse=True)[:n]
+
+
+# ─── Scenario Sandbox ──────────────────────────────────────────────────────────
+
+class ScenarioEngine:
+    """What-if scenario simulation with state save/restore."""
+
+    PRESETS = {
+        "Suez Canal Closure (7 days)": dict(
+            seed_nodes=["AE-DXB", "NL-RTM", "DE-HAM"], severity=0.95, beta_mult=1.5,
+            description="Simulates Suez Canal blockage affecting EU-Asia trade routes"),
+        "Cyclone hits Gujarat": dict(
+            seed_nodes=["IN-MUN", "IN-KND", "IN-HAZ"], severity=0.90, beta_mult=1.3,
+            description="Cyclone Biparjoy-scale event closing Gujarat ports"),
+        "Fuel price spike 30%": dict(
+            seed_nodes=[], severity=0.0, beta_mult=1.0, cost_mult=1.30,
+            description="Global bunker fuel price increase raising all shipping costs"),
+        "New warehouse in Hyderabad": dict(
+            seed_nodes=[], severity=0.0, beta_mult=0.8,
+            description="Added capacity reduces network strain, improving recovery"),
+    }
+
+    def __init__(self, network, sir):
+        self.net = network
+        self.sir = sir
+
+    def run_scenario(self, preset_name: str) -> dict:
+        config = self.PRESETS[preset_name]
+        before_health = 1 - np.mean(self.sir.I)
+
+        saved_S, saved_I, saved_R = self.sir.S.copy(), self.sir.I.copy(), self.sir.R.copy()
+        saved_beta = self.sir.beta
+        before_hist_len = len(self.sir.history)
+
+        try:
+            if config.get("beta_mult"):
+                self.sir.beta = saved_beta * config["beta_mult"]
+            for nid in config.get("seed_nodes", []):
+                if nid in self.sir.id2idx:
+                    self.sir.seed(nid, config.get("severity", 0.8))
+            for _ in range(30):
+                self.sir.step()
+
+            after_health = 1 - np.mean(self.sir.I)
+            scenario_history = self.sir.history[before_hist_len:]
+            affected = [nid for nid in self.sir.id2idx if self.sir.I[self.sir.id2idx[nid]] > 0.2]
+            cost = len(affected) * 150000
+        finally:
+            self.sir.S, self.sir.I, self.sir.R = saved_S, saved_I, saved_R
+            self.sir.beta = saved_beta
+            self.sir.history = self.sir.history[:before_hist_len]
+            self.sir._sync_nodes()
+
+        return dict(name=preset_name, description=config["description"],
+                    before_health=round(before_health * 100, 1),
+                    after_health=round(after_health * 100, 1),
+                    health_delta=round((after_health - before_health) * 100, 1),
+                    affected_nodes=affected, cost_estimate=cost,
+                    scenario_history=scenario_history)
+
+
+# ─── Decision Audit Log ───────────────────────────────────────────────────────
+
+class DecisionLog:
+    """Audit trail for all user actions with learning feedback."""
+
+    def __init__(self):
+        self.entries: List[dict] = []
+
+    def log(self, action_type: str, target: str, details: dict = None):
+        import datetime as _dt
+        self.entries.append(dict(
+            timestamp=_dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            action_type=action_type, target=target,
+            details=details or {}))
+
+    def reroute_entries(self) -> list:
+        return [e for e in self.entries if e["action_type"] == "reroute"]
+
+    def summary(self) -> dict:
+        types = {}
+        for e in self.entries:
+            types[e["action_type"]] = types.get(e["action_type"], 0) + 1
+        return dict(total=len(self.entries), by_type=types)
+
+    def agent_trust_scores(self, market) -> dict:
+        reroutes = self.reroute_entries()
+        if not reroutes:
+            return {}
+        scores = {}
+        for r in reroutes:
+            carrier = r["details"].get("carrier", "unknown")
+            outcome = r["details"].get("outcome", "pending")
+            if carrier not in scores:
+                scores[carrier] = dict(total=0, positive=0)
+            scores[carrier]["total"] += 1
+            if outcome in ("accepted", "delivered_on_time"):
+                scores[carrier]["positive"] += 1
+        return {k: round(v["positive"] / v["total"], 2) for k, v in scores.items()}
+
+
+# ─── Situation Briefing ────────────────────────────────────────────────────────
+
+class SituationBriefing:
+    """Generates executive situation briefings."""
+
+    def __init__(self, risk_engine, decision_log, network, sir, crowd, doc_analyzer):
+        self.risk = risk_engine
+        self.log = decision_log
+        self.net = network
+        self.sir = sir
+        self.crowd = crowd
+        self.docs = doc_analyzer
+
+    def generate(self) -> str:
+        risks = self.risk.top_risks(5)
+        Reff = self.sir._Reff()
+        health = self.risk.network_health()
+        log_s = self.log.summary()
+        high_risk = [r for r in self.risk.all_node_risks() if r["composite"] > 40]
+        crowd_s = self.crowd.stats()
+        doc_s = self.docs.summary()
+
+        parts = [f"**Network Health:** {health}/100 | **R-effective:** {Reff:.2f} | "
+                 f"**High-Risk Nodes:** {len(high_risk)} | "
+                 f"**Crowd Reports:** {crowd_s['total_reports']:,} | "
+                 f"**Doc Anomalies:** {doc_s['alerts']}"]
+
+        if risks and risks[0]["composite"] > 20:
+            parts.append(f"\n### Top Risk: {self.net.nodes.get(risks[0]['node_id'], type('obj',(object,),{'name':risks[0]['node_id']})()).name} "
+                         f"({risks[0]['composite']}/100)")
+            bd = risks[0]["breakdown"]
+            parts.append(f"SIR: {bd['sir']} | Docs: {bd['docs']} | Crowd: {bd['crowd']} | Immune: {bd['immune']}")
+
+        if Reff > 1.0:
+            pc = self.sir.herd_immunity_threshold()
+            parts.append(f"\n**CRITICAL — Cascade Active.** R-effective {Reff:.2f} > 1. "
+                         f"Reroute {pc:.0%} of volume to achieve herd immunity.")
+        elif high_risk:
+            parts.append(f"\n**Action Required:** {len(high_risk)} nodes above risk threshold 40. "
+                         "Review and prioritize by composite score.")
+
+        if log_s["total"]:
+            parts.append(f"\n**Decisions today:** {log_s['total']} — {log_s['by_type']}")
+
+        parts.append(f"\n### Recommendations")
+        if Reff > 1.0:
+            parts.append("1. Activate herd immunity rerouting immediately")
+        parts.append("2. Review document anomalies on affected trade routes")
+        parts.append("3. Cross-check crowd reports with immune memory matches")
+        if doc_s["alerts"] > 5:
+            parts.append(f"4. Elevated document anomalies ({doc_s['alerts']}) — compliance review needed")
+
+        return "\n".join(parts)
+
+    def generate_gemini(self, api_key: str) -> str:
+        try:
+            import google.generativeai as genai
+            genai.configure(api_key=api_key)
+            model = genai.GenerativeModel("gemini-2.0-flash")
+            context = self.generate()
+            prompt = (f"You are NEXUS, a supply chain intelligence assistant. Based on this data, "
+                     f"write a concise executive briefing with: active disruptions, shipments at risk, "
+                     f"recommended actions, and cost projections. Use bullet points. Data:\n\n{context}")
+            resp = model.generate_content(prompt)
+            return resp.text
+        except Exception as e:
+            return self.generate() + f"\n\n*[Gemini unavailable: {str(e)[:60]}]*"
+
+
+# ─── Historical Trend Analyzer ─────────────────────────────────────────────────
+
+class HistoricalAnalyzer:
+    """Analyzes disruption_events.csv for trends over time."""
+
+    def __init__(self, disruptions_df: pd.DataFrame, shipments_df: pd.DataFrame):
+        self.disr_df = disruptions_df
+        self.ship_df = shipments_df
+
+    def health_trend_30d(self) -> pd.DataFrame:
+        if self.disr_df.empty:
+            return pd.DataFrame()
+        df = self.disr_df.copy()
+        df["date"] = pd.to_datetime(df["timestamp"])
+        df = df.sort_values("date")
+        daily = df.groupby(df["date"].dt.date).agg(
+            event_count=("event_id", "count"),
+            avg_severity=("severity", "mean"),
+            total_loss=("economic_loss_usd", "sum"),
+        ).reset_index()
+        daily["health_score"] = (100 - (daily["avg_severity"] * 100).clip(0, 100)).round(1)
+        return daily
+
+    def week_comparison(self) -> dict:
+        if self.disr_df.empty:
+            return dict(this_week=0, last_week=0, delta=0, this_loss=0, last_loss=0)
+        df = self.disr_df.copy()
+        df["date"] = pd.to_datetime(df["timestamp"])
+        latest = df["date"].max()
+        this_w = df[df["date"] > latest - pd.Timedelta(days=7)]
+        last_w = df[(df["date"] <= latest - pd.Timedelta(days=7)) &
+                     (df["date"] > latest - pd.Timedelta(days=14))]
+        return dict(this_week=len(this_w), last_week=len(last_w),
+                    delta=len(this_w) - len(last_w),
+                    this_loss=int(this_w["economic_loss_usd"].sum()),
+                    last_loss=int(last_w["economic_loss_usd"].sum()))
+
+    def most_disrupted(self, top_n=10) -> pd.DataFrame:
+        if self.disr_df.empty:
+            return pd.DataFrame()
+        return (self.disr_df.groupby("port_name")
+                .agg(events=("event_id", "count"), avg_severity=("severity", "mean"),
+                     total_loss=("economic_loss_usd", "sum"), avg_recovery_h=("recovery_hours", "mean"))
+                .sort_values("events", ascending=False).head(top_n).reset_index())
+
+    def fastest_recovery(self, top_n=10) -> pd.DataFrame:
+        if self.disr_df.empty:
+            return pd.DataFrame()
+        return (self.disr_df[self.disr_df["status"] == "resolved"]
+                .groupby("port_name")
+                .agg(avg_recovery_h=("recovery_hours", "mean"), events=("event_id", "count"))
+                .sort_values("avg_recovery_h").head(top_n).reset_index())

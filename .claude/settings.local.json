@@ -1,17 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm --version)",
-      "Bash(pnpm create *)",
-      "Bash(pnpm install *)",
-      "Bash(pnpm add *)",
-      "Bash(npx tailwindcss *)",
-      "Bash(npx tsc *)",
-      "Bash(npx vite *)"
+      "Bash(python3 *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8501)",
+      "Bash(head -n 602 /Users/anantasati/Desktop/google/nexus/app.py)",
+      "Bash(mv /tmp/nexus_app_trimmed.py /Users/anantasati/Desktop/google/nexus/app.py)",
+      "Bash(grep -E \"\\\\.csv$\")"
     ]
-  },
-  "enableAllProjectMcpServers": true,
-  "enabledMcpjsonServers": [
-    "databricks"
-  ]
+  }
 }

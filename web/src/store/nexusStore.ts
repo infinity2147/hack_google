@@ -3,8 +3,11 @@ import type {
   AlertItem,
   Antibody,
   Bid,
+  DecisionEntry,
   ImmuneScanResult,
   Negotiation,
+  ScenarioPreset,
+  ScenarioResult,
   SIRStep,
   SupplyChainNode,
 } from "../types";
@@ -57,6 +60,13 @@ interface NexusState {
   negotiationHistory: Negotiation[];
   negotiating: boolean;
 
+  // decision log (Improvements 3+7)
+  decisionLog: DecisionEntry[];
+
+  // scenario sandbox (Improvement 4)
+  scenarioResult: ScenarioResult | null;
+  scenarioPresets: ScenarioPreset[];
+
   // actions
   setSeedNode: (id: string) => void;
   setSeedSeverity: (s: number) => void;
@@ -76,6 +86,9 @@ interface NexusState {
   randomizeSensors: () => void;
 
   runNegotiation: () => Promise<void>;
+
+  logDecision: (actionType: string, target: string, details?: Record<string, unknown>) => void;
+  runScenario: (presetName: string) => void;
 
   dismissAlert: (id: string) => void;
   pushAlert: (a: AlertItem) => void;
@@ -113,6 +126,16 @@ export const useNexus = create<NexusState>((set, get) => ({
   lastNegotiation: null,
   negotiationHistory: [],
   negotiating: false,
+
+  decisionLog: [],
+
+  scenarioResult: null,
+  scenarioPresets: [
+    { name: "Suez Canal Closure (7 days)", description: "Simulates Suez Canal blockage affecting EU-Asia trade routes", seedNodes: ["AE-DXB", "NL-RTM", "DE-HAM"], severity: 0.95, betaMult: 1.5 },
+    { name: "Cyclone hits Gujarat", description: "Cyclone Biparjoy-scale event closing Gujarat ports", seedNodes: ["IN-MUN", "IN-KAN", "IN-AHM"], severity: 0.90, betaMult: 1.3 },
+    { name: "Fuel price spike 30%", description: "Global bunker fuel price increase raising all shipping costs", seedNodes: [], severity: 0.0, betaMult: 1.0 },
+    { name: "New warehouse in Hyderabad", description: "Added capacity reduces network strain, improving recovery", seedNodes: [], severity: 0.0, betaMult: 0.8 },
+  ],
 
   setSeedNode: (id) => set({ seedNode: id }),
   setSeedSeverity: (s) => set({ seedSeverity: s }),
@@ -302,6 +325,63 @@ export const useNexus = create<NexusState>((set, get) => ({
       negotiationHistory: [negotiation, ...s.negotiationHistory].slice(0, 25),
       negotiating: false,
     }));
+  },
+
+  logDecision: (actionType, target, details = {}) => {
+    const entry: DecisionEntry = {
+      id: `DEC-${Date.now()}`,
+      timestamp: new Date().toISOString().slice(0, 19).replace("T", " "),
+      actionType,
+      target,
+      details,
+    };
+    set((s) => ({ decisionLog: [entry, ...s.decisionLog].slice(0, 200) }));
+  },
+
+  runScenario: (presetName) => {
+    const { runtime, beta, scenarioPresets } = get();
+    const preset = scenarioPresets.find((p) => p.name === presetName);
+    if (!preset) return;
+
+    const infectedCount = Object.values(runtime).filter((n) => n.state === "I").length;
+    const total = Object.keys(runtime).length;
+    const beforeHealth = +((1 - infectedCount / total) * 100).toFixed(1);
+
+    // Simulate scenario by running 30 steps with modified beta
+    let simRuntime = JSON.parse(JSON.stringify(runtime)) as Record<string, NodeRuntime>;
+    const savedBeta = beta;
+    const scenarioBeta = savedBeta * preset.betaMult;
+
+    // Seed disruption nodes
+    for (const nid of preset.seedNodes) {
+      if (simRuntime[nid]) {
+        simRuntime[nid].state = "I";
+        simRuntime[nid].infection = preset.severity;
+      }
+    }
+
+    // Run 30 steps
+    for (let i = 0; i < 30; i++) {
+      const result = stepSIRNetwork(simRuntime, adjacency, scenarioBeta, get().gamma, i + 1);
+      simRuntime = result.runtime;
+    }
+
+    const afterInfected = Object.values(simRuntime).filter((n) => n.state === "I").length;
+    const afterHealth = +((1 - afterInfected / total) * 100).toFixed(1);
+    const affectedNodes = Object.entries(simRuntime)
+      .filter(([, n]) => n.infection > 0.2)
+      .map(([id]) => id);
+
+    const result: ScenarioResult = {
+      name: presetName,
+      beforeHealth,
+      afterHealth: +afterHealth,
+      healthDelta: +(afterHealth - beforeHealth).toFixed(1),
+      affectedNodes,
+      costEstimate: affectedNodes.length * 150_000,
+    };
+    set({ scenarioResult: result });
+    get().logDecision("scenario", presetName, { healthDelta: result.healthDelta, cost: result.costEstimate });
   },
 
   dismissAlert: (id) => set((s) => ({ alerts: s.alerts.filter((a) => a.id !== id) })),

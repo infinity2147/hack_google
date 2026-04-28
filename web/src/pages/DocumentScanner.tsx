@@ -30,6 +30,7 @@ import { MetricCard } from "../components/shared/MetricCard";
 import { StatusBadge } from "../components/shared/StatusBadge";
 import { SeverityBar } from "../components/shared/SeverityBar";
 import { AIExplanationPanel } from "../components/shared/AIExplanationPanel";
+import { useNexus } from "../store/nexusStore";
 import {
   DOCUMENTS,
   DOCUMENT_TOTAL_COUNT,
@@ -50,6 +51,7 @@ const PIPELINE_STEPS = [
 ];
 
 export function DocumentScanner() {
+  const { logDecision } = useNexus();
   const [statusFilter, setStatusFilter] = useState<Set<StatusFilter>>(
     new Set<StatusFilter>(["normal", "review", "alert", "critical"]),
   );
@@ -484,11 +486,23 @@ export function DocumentScanner() {
                     {expanded ? "Hide AI Analysis" : "AI Analysis"}
                   </button>
                   <div className="flex items-center gap-2">
-                    <button className="text-[11px] text-text-dim hover:text-accent-teal">
-                      Flag
+                    <button
+                      onClick={() => logDecision("investigate", d.id, { supplier: d.supplier, deviation: d.deviationPct, status: d.status })}
+                      className="text-[11px] text-accent-blue hover:underline"
+                    >
+                      🔍 Investigate
                     </button>
-                    <button className="text-[11px] text-text-dim hover:text-accent-teal">
-                      Dismiss
+                    <button
+                      onClick={() => logDecision("false_positive", d.id, { originalStatus: d.status })}
+                      className="text-[11px] text-accent-amber hover:underline"
+                    >
+                      ⚠️ False Positive
+                    </button>
+                    <button
+                      onClick={() => logDecision("compliance", d.id, { supplier: d.supplier, amount: d.value, signals: d.signals })}
+                      className="text-[11px] text-accent-purple hover:underline"
+                    >
+                      📋 Compliance
                     </button>
                   </div>
                 </div>

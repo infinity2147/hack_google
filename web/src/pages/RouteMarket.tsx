@@ -56,6 +56,7 @@ export function RouteMarket() {
     negotiationHistory,
     negotiating,
     R0,
+    logDecision,
   } = useNexus();
 
   const handleRun = async () => {
@@ -355,17 +356,38 @@ export function RouteMarket() {
                 b(l) = v(l) − c(l) − π(l) &nbsp;|&nbsp; π = SIR risk premium
               </div>
               <div className="mt-3 flex items-center gap-2">
-                <button className="bg-accent-teal text-bg-base font-semibold rounded-lg px-3 py-1.5 text-xs hover:brightness-110">
-                  Accept Route
+                <button
+                  onClick={() => {
+                    logDecision("accept", carrierById(lastNegotiation.winnerId).name, {
+                      carrier: carrierById(lastNegotiation.winnerId).name,
+                      bid: winnerBid.bid,
+                      outcome: "accepted",
+                    });
+                  }}
+                  className="bg-accent-teal text-bg-base font-semibold rounded-lg px-3 py-1.5 text-xs hover:brightness-110"
+                >
+                  ✅ Accept Route
+                </button>
+                <button
+                  onClick={() => {
+                    const alt = lastNegotiation.bids[1];
+                    if (alt) logDecision("alternative", carrierById(alt.carrier).code, { carrier: carrierById(alt.carrier).name, bid: alt.bid, outcome: "alternative" });
+                  }}
+                  className="border border-accent-amber/50 text-accent-amber rounded-lg px-3 py-1.5 text-xs hover:bg-accent-amber/10"
+                >
+                  🔄 Alternative
+                </button>
+                <button
+                  onClick={() => logDecision("reject", "all", { urgency, reason: "all_rejected" })}
+                  className="border border-accent-red/50 text-accent-red rounded-lg px-3 py-1.5 text-xs hover:bg-accent-red/10"
+                >
+                  ❌ Reject All
                 </button>
                 <button
                   onClick={handleRun}
-                  className="border border-border rounded-lg px-3 py-1.5 text-xs text-text-secondary hover:border-accent-teal hover:text-accent-teal"
+                  className="border border-border rounded-lg px-3 py-1.5 text-xs text-text-secondary hover:border-accent-teal hover:text-accent-teal ml-auto"
                 >
                   Run Another Round
-                </button>
-                <button className="border border-border rounded-lg px-3 py-1.5 text-xs text-text-secondary hover:border-accent-teal hover:text-accent-teal">
-                  Override Manually
                 </button>
               </div>
             </div>

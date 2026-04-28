@@ -196,3 +196,58 @@ export interface Contributor {
   credibility: number;
   impact: number;
 }
+
+// ─── New types for 7 improvements ─────────────────────────────────────────
+
+export interface DecisionEntry {
+  id: string;
+  timestamp: string;
+  actionType: string;
+  target: string;
+  details: Record<string, unknown>;
+}
+
+export interface ScenarioPreset {
+  name: string;
+  description: string;
+  seedNodes: string[];
+  severity: number;
+  betaMult: number;
+}
+
+export interface ScenarioResult {
+  name: string;
+  beforeHealth: number;
+  afterHealth: number;
+  healthDelta: number;
+  affectedNodes: string[];
+  costEstimate: number;
+}
+
+export interface Shipment {
+  id: string;
+  bookingDate: string;
+  originId: string;
+  originName: string;
+  destId: string;
+  destName: string;
+  commodity: string;
+  carrier: string;
+  status: "delivered" | "in_transit" | "delayed" | "disrupted";
+  transitDaysPlanned: number;
+  transitDaysActual: number;
+  delayDays: number;
+  teu: number;
+  costUSD: number;
+  riskScore: number;
+  disruptionFlag: boolean;
+  transportMode: string;
+}
+
+export interface HealthTrendDay {
+  date: string;
+  healthScore: number;
+  eventCount: number;
+  avgSeverity: number;
+  totalLoss: number;
+}
