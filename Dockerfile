@@ -4,6 +4,7 @@ WORKDIR /app/web
 COPY web/package.json web/package-lock.json* ./
 RUN npm install --legacy-peer-deps react-is prop-types
 COPY web/ ./
+ENV VITE_GOOGLE_MAPS_API_KEY=AIzaSyDZPBLh2NRgbIaud-FQjw7Fbi1f4Pb01PU
 RUN npm run build
 
 # ── Stage 2: Python backend + static frontend ─────────────────────────────────
@@ -27,4 +28,4 @@ COPY --from=frontend /app/web/dist ./static
 ENV PORT=8080
 EXPOSE 8080
 
-CMD uvicorn main:app --host 0.0.0.0 --port ${PORT}
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
