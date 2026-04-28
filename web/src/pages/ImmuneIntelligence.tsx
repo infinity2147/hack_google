@@ -92,8 +92,8 @@ export function ImmuneIntelligence() {
 
   return (
     <PageWrapper>
-      {/* Hero header */}
-      <div className="relative rounded-xl border border-border bg-bg-surface overflow-hidden p-5">
+      {/* Hero header — controls only, no description block */}
+      <div className="relative rounded-xl border border-border bg-bg-surface overflow-hidden p-4">
         <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none" />
         {scanning && (
           <div
@@ -101,26 +101,11 @@ export function ImmuneIntelligence() {
             style={{ animation: "scan-sweep 1.5s linear" }}
           />
         )}
-        <div className="relative flex flex-wrap items-start justify-between gap-4">
-          <div>
-            <div className="flex items-center gap-2 mb-1">
-              <Shield className="text-accent-purple" size={20} />
-              <h2 className="text-display text-xl tracking-tight">
-                Immune Intelligence
-              </h2>
-              <StatusBadge status="scanning" />
-            </div>
-            <p className="text-sm text-text-secondary max-w-2xl leading-relaxed">
-              Antibody memory matches live sensor embeddings against historical
-              disruption patterns. When cosine similarity crosses{" "}
-              <span className="font-mono text-accent-purple">τ = {immuneThreshold}</span>{" "}
-              the immune response fires{" "}
-              <span className="text-accent-teal">before</span> the disruption is
-              physically observable.
-            </p>
-            <p className="mt-2 text-xs text-text-dim italic">
-              "The supply chain that remembers its diseases."
-            </p>
+        <div className="relative flex flex-wrap items-center justify-between gap-3">
+          <div className="flex items-center gap-2">
+            <Shield className="text-accent-purple" size={18} />
+            <h2 className="text-display text-lg tracking-tight">Immune Intelligence</h2>
+            <StatusBadge status="scanning" />
           </div>
           <div className="flex items-center gap-2">
             <button

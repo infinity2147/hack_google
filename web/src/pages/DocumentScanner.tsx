@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ResponsiveContainer,
@@ -15,13 +15,14 @@ import {
   ReferenceLine,
 } from "recharts";
 import {
-  FileSearch,
   Upload,
   AlertTriangle,
   ChevronDown,
   ChevronRight,
   Sparkles,
   FileText,
+  CheckCircle,
+  Loader,
 } from "lucide-react";
 import { PageWrapper } from "../components/layout/PageWrapper";
 import { Card } from "../components/shared/Card";
@@ -40,21 +41,58 @@ import type { FinancialDocument } from "../types";
 type StatusFilter = FinancialDocument["status"];
 type TypeFilter = FinancialDocument["type"];
 
+type UploadResult = {
+  filename: string;
+  docType: string;
+  anomalyScore: number;
+  status: string;
+  signals: string[];
+  size: number;
+  processed: boolean;
+};
+
 export function DocumentScanner() {
   const { logDecision } = useNexus();
   const [statusFilter, setStatusFilter] = useState<Set<StatusFilter>>(
     new Set<StatusFilter>(["normal", "review", "alert", "critical"]),
   );
   const [typeFilter, setTypeFilter] = useState<Set<TypeFilter>>(
-    new Set<TypeFilter>([
-      "invoice",
-      "bill_of_lading",
-      "customs_declaration",
-      "purchase_order",
-    ]),
+    new Set<TypeFilter>(["invoice", "bill_of_lading", "customs_declaration", "purchase_order"]),
   );
   const [search, setSearch] = useState("");
   const [expandedId, setExpandedId] = useState<string | null>(null);
+
+  // Upload state
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = useState(false);
+  const [uploadResult, setUploadResult] = useState<UploadResult | null>(null);
+  const [uploadError, setUploadError] = useState<string | null>(null);
+  const [dragOver, setDragOver] = useState(false);
+
+  const handleUpload = async (file: File) => {
+    setUploading(true);
+    setUploadResult(null);
+    setUploadError(null);
+    try {
+      const form = new FormData();
+      form.append("file", file);
+      const res = await fetch("/api/documents/upload", { method: "POST", body: form });
+      if (!res.ok) throw new Error(`Server error ${res.status}`);
+      const data: UploadResult = await res.json();
+      setUploadResult(data);
+    } catch (err) {
+      setUploadError(err instanceof Error ? err.message : "Upload failed");
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    setDragOver(false);
+    const file = e.dataTransfer.files[0];
+    if (file) handleUpload(file);
+  };
 
   const counts = useMemo(() => {
     const c = { normal: 0, review: 0, alert: 0, critical: 0 };
@@ -95,31 +133,11 @@ export function DocumentScanner() {
     return next;
   };
 
+  const statusColor = (s: string) =>
+    s === "critical" ? "text-accent-red" : s === "alert" ? "text-accent-amber" : s === "review" ? "text-accent-blue" : "text-accent-green";
+
   return (
     <PageWrapper>
-      {/* Header */}
-      <div className="rounded-xl border border-border bg-bg-surface p-5">
-        <div className="flex items-start gap-3">
-          <FileSearch className="text-accent-blue shrink-0 mt-1" size={22} />
-          <div>
-            <div className="flex items-center gap-2">
-              <h2 className="text-display text-xl tracking-tight">
-                Document Intelligence
-              </h2>
-              <StatusBadge status="live" />
-            </div>
-            <p className="text-sm text-text-secondary mt-1 max-w-3xl leading-relaxed">
-              GraphSAGE anomaly detection on trade entity graphs. Detects
-              financial stress 2–3 weeks <span className="text-accent-teal">before</span>{" "}
-              physical disruptions hit the supply chain.
-            </p>
-            <p className="mt-2 text-xs text-text-dim italic">
-              "A supplier about to default changes payment terms. A price spike
-              shows up in invoices before it causes stockouts."
-            </p>
-          </div>
-        </div>
-      </div>
 
       {/* Top metrics */}
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 mt-4">
@@ -147,14 +165,83 @@ export function DocumentScanner() {
         <Card
           className="xl:col-span-2"
           title="Document Upload"
-          subtitle="Gemini → Entity Extraction → Graph → GraphSAGE → Anomaly"
+          subtitle="Upload any trade document · Anomaly scoring via GraphSAGE pipeline"
         >
-          <div className="rounded-lg border-2 border-dashed border-border p-6 text-center hover:border-accent-teal transition-colors">
-            <Upload className="mx-auto text-text-dim" size={28} />
-            <div className="mt-3 text-sm text-text-secondary">
-              Connect to backend to enable document upload processing.
-            </div>
+          <input
+            ref={fileInputRef}
+            type="file"
+            className="hidden"
+            accept=".pdf,.csv,.txt,.json,.xml,.doc,.docx"
+            onChange={(e) => { const f = e.target.files?.[0]; if (f) handleUpload(f); }}
+          />
+          <div
+            onDrop={handleDrop}
+            onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
+            onDragLeave={() => setDragOver(false)}
+            onClick={() => fileInputRef.current?.click()}
+            className={`rounded-lg border-2 border-dashed p-6 text-center cursor-pointer transition-colors ${
+              dragOver ? "border-accent-teal bg-accent-teal/5" : "border-border hover:border-accent-teal"
+            }`}
+          >
+            {uploading ? (
+              <div className="flex flex-col items-center gap-2">
+                <Loader className="mx-auto text-accent-teal animate-spin" size={28} />
+                <div className="text-sm text-text-secondary">Processing document…</div>
+              </div>
+            ) : (
+              <>
+                <Upload className="mx-auto text-text-dim" size={28} />
+                <div className="mt-3 text-sm text-text-secondary">
+                  Drop a document here or <span className="text-accent-teal">click to browse</span>
+                </div>
+                <div className="mt-1 text-[11px] text-text-dim">PDF, CSV, TXT, JSON, XML, DOC</div>
+              </>
+            )}
           </div>
+
+          {/* Upload result */}
+          {uploadResult && (
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mt-4 rounded-lg border border-border bg-bg-elevated p-4"
+            >
+              <div className="flex items-center gap-2 mb-3">
+                <CheckCircle size={14} className="text-accent-teal" />
+                <span className="text-sm text-text-primary font-medium">{uploadResult.filename}</span>
+                <span className={`ml-auto text-[10px] uppercase tracking-wider font-bold ${statusColor(uploadResult.status)}`}>
+                  {uploadResult.status}
+                </span>
+              </div>
+              <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-[11px] mb-3">
+                <span className="text-text-secondary">Doc Type</span>
+                <span className="text-text-primary">{uploadResult.docType}</span>
+                <span className="text-text-secondary">File Size</span>
+                <span className="text-text-primary font-mono">{(uploadResult.size / 1024).toFixed(1)} KB</span>
+              </div>
+              <div className="mb-2">
+                <div className="flex justify-between text-[10px] text-text-secondary mb-1">
+                  <span>Anomaly Score</span>
+                  <span className="font-mono">{uploadResult.anomalyScore.toFixed(3)}</span>
+                </div>
+                <SeverityBar value={uploadResult.anomalyScore} height={5} labelDecimals={3} />
+              </div>
+              <div className="space-y-1 mt-3">
+                {uploadResult.signals.map((s, i) => (
+                  <div key={i} className="flex items-start gap-1.5 text-[11px] text-text-secondary">
+                    <span className={uploadResult.status === "normal" ? "text-accent-teal" : "text-accent-amber"}>⚠</span>
+                    <span>{s}</span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+
+          {uploadError && (
+            <div className="mt-3 rounded-lg border border-accent-red/30 bg-accent-red/5 px-3 py-2 text-[11px] text-accent-red">
+              {uploadError}
+            </div>
+          )}
         </Card>
 
         <Card title="Anomaly Deviation" subtitle="50 most recent · vs historical baseline">
@@ -477,32 +564,6 @@ export function DocumentScanner() {
         </div>
       </Card>
 
-      <div className="mt-4">
-        <Card title="Novel Data Modality" subtitle="Why financial documents predict physical disruption">
-          <ul className="space-y-2 text-xs text-text-secondary leading-relaxed">
-            <li>
-              <span className="text-accent-teal">Payment terms shift</span> →
-              cashflow stress → supplier default risk
-            </li>
-            <li>
-              <span className="text-accent-teal">Quantity/price ratio drift</span> →
-              capacity shortage at origin
-            </li>
-            <li>
-              <span className="text-accent-teal">New intermediary entities</span> →
-              gray-market routing, sanctions evasion
-            </li>
-            <li>
-              <span className="text-accent-teal">Currency/incoterm mismatches</span>{" "}
-              → trade documentation forgery
-            </li>
-            <li>
-              <span className="text-accent-teal">Round-trip transactions</span> →
-              phantom invoicing, money laundering
-            </li>
-          </ul>
-        </Card>
-      </div>
     </PageWrapper>
   );
 }

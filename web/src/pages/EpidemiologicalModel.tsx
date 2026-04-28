@@ -157,7 +157,8 @@ export function EpidemiologicalModel() {
             icon={<TrendingUp size={16} />}
             subtitle={R0 >= 1 ? "Disruption WILL cascade — reroute volume now" : "Self-containing — monitor only"}
           />
-          <div className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-50 w-72 opacity-0 group-hover:opacity-100 transition-opacity duration-150">
+          <div className="pointer-events-none absolute top-full left-0 mt-2 z-50 w-72 opacity-0 group-hover:opacity-100 transition-opacity duration-150">
+            <div className="ml-2 w-2 h-2 bg-bg-elevated border-l border-t border-border rotate-45 -mb-1" />
             <div className="rounded-lg border border-border bg-bg-elevated shadow-xl p-3 text-[11px] text-text-secondary leading-relaxed">
               <div className="flex items-center gap-1.5 mb-1.5">
                 <Info size={11} className="text-accent-teal shrink-0" />
@@ -165,14 +166,14 @@ export function EpidemiologicalModel() {
               </div>
               The effective reproduction number: how many additional supply-chain nodes each currently-infected hub will disrupt. R₀ &gt; 1 means the cascade is growing; R₀ &lt; 1 means it is self-containing. Derived as R₀ = (β/γ) × k̄ where k̄ is the mean degree of the infected subgraph.
             </div>
-            <div className="mx-auto w-2 h-2 bg-bg-elevated border-r border-b border-border rotate-45 -mt-1" />
           </div>
         </div>
 
         {/* β · Transmission with tooltip */}
         <div className="group relative">
           <MetricCard label="β · Transmission" value={beta} decimals={2} color="blue" icon={<Activity size={16} />} subtitle="Fitted per-lane" />
-          <div className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-50 w-64 opacity-0 group-hover:opacity-100 transition-opacity duration-150">
+          <div className="pointer-events-none absolute top-full left-0 mt-2 z-50 w-64 opacity-0 group-hover:opacity-100 transition-opacity duration-150">
+            <div className="ml-2 w-2 h-2 bg-bg-elevated border-l border-t border-border rotate-45 -mb-1" />
             <div className="rounded-lg border border-border bg-bg-elevated shadow-xl p-3 text-[11px] text-text-secondary leading-relaxed">
               <div className="flex items-center gap-1.5 mb-1.5">
                 <Info size={11} className="text-accent-blue shrink-0" />
@@ -180,14 +181,14 @@ export function EpidemiologicalModel() {
               </div>
               Probability per step that an infected hub spreads disruption to a connected susceptible node. Fitted per lane from historical disruption data. Higher β = faster cascade propagation across the network.
             </div>
-            <div className="mx-auto w-2 h-2 bg-bg-elevated border-r border-b border-border rotate-45 -mt-1" />
           </div>
         </div>
 
         {/* γ · Recovery with tooltip */}
         <div className="group relative">
           <MetricCard label="γ · Recovery" value={gamma} decimals={2} color="green" icon={<Activity size={16} />} subtitle="Lanes/day → flow" />
-          <div className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-50 w-64 opacity-0 group-hover:opacity-100 transition-opacity duration-150">
+          <div className="pointer-events-none absolute top-full left-0 mt-2 z-50 w-64 opacity-0 group-hover:opacity-100 transition-opacity duration-150">
+            <div className="ml-2 w-2 h-2 bg-bg-elevated border-l border-t border-border rotate-45 -mb-1" />
             <div className="rounded-lg border border-border bg-bg-elevated shadow-xl p-3 text-[11px] text-text-secondary leading-relaxed">
               <div className="flex items-center gap-1.5 mb-1.5">
                 <Info size={11} className="text-accent-green shrink-0" />
@@ -195,14 +196,14 @@ export function EpidemiologicalModel() {
               </div>
               Mean fraction of infected nodes that recover per simulation step — i.e. lanes returning to normal flow per day. Higher γ shortens the disruption duration and reduces total cascade damage.
             </div>
-            <div className="mx-auto w-2 h-2 bg-bg-elevated border-r border-b border-border rotate-45 -mt-1" />
           </div>
         </div>
 
         {/* Herd Immunity with tooltip */}
         <div className="group relative">
           <MetricCard label="Herd Immunity pₒ" value={herd * 100} unit="%" decimals={1} color="purple" icon={<ShieldAlert size={16} />} subtitle="Reroute fraction" />
-          <div className="pointer-events-none absolute bottom-full right-0 mb-2 z-50 w-64 opacity-0 group-hover:opacity-100 transition-opacity duration-150">
+          <div className="pointer-events-none absolute top-full right-0 mt-2 z-50 w-64 opacity-0 group-hover:opacity-100 transition-opacity duration-150">
+            <div className="mr-4 ml-auto w-2 h-2 bg-bg-elevated border-l border-t border-border rotate-45 -mb-1" />
             <div className="rounded-lg border border-border bg-bg-elevated shadow-xl p-3 text-[11px] text-text-secondary leading-relaxed">
               <div className="flex items-center gap-1.5 mb-1.5">
                 <Info size={11} className="text-accent-purple shrink-0" />
@@ -210,7 +211,6 @@ export function EpidemiologicalModel() {
               </div>
               Minimum fraction of inbound volume that must be rerouted away from infected hubs to flip cascade dynamics (R₀ → &lt; 1). Calculated as pₒ = 1 − 1/R₀. Below this threshold, the disruption will keep spreading.
             </div>
-            <div className="ml-auto mr-4 w-2 h-2 bg-bg-elevated border-r border-b border-border rotate-45 -mt-1" />
           </div>
         </div>
       </div>

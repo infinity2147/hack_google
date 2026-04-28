@@ -1,6 +1,8 @@
-from fastapi import APIRouter, Query
+from fastapi import APIRouter, Query, UploadFile, File, HTTPException
 from simulation import data_loader
 import pandas as pd
+import json
+import re
 
 router = APIRouter()
 
@@ -108,3 +110,65 @@ def get_heatmap():
         grid.append({"row": t, "cells": cells})
 
     return {"types": types, "hours": hours, "grid": grid}
+
+
+@router.post("/upload")
+async def upload_document(file: UploadFile = File(...)):
+    """Accept a document file and return extracted fields + anomaly score."""
+    if not file.filename:
+        raise HTTPException(status_code=400, detail="No file provided")
+
+    content = await file.read()
+    filename = file.filename.lower()
+
+    if "invoice" in filename:
+        doc_type = "Invoice"
+    elif "lading" in filename or "bol" in filename:
+        doc_type = "Bill of Lading"
+    elif "customs" in filename or "declaration" in filename:
+        doc_type = "Customs Declaration"
+    elif "purchase" in filename or "po" in filename or "order" in filename:
+        doc_type = "Purchase Order"
+    elif "packing" in filename:
+        doc_type = "Packing List"
+    elif "credit" in filename or "lc" in filename:
+        doc_type = "Letter of Credit"
+    else:
+        doc_type = "Invoice"
+
+    text = ""
+    try:
+        text = content.decode("utf-8", errors="ignore")
+    except Exception:
+        pass
+
+    score = 0.15
+    signals = []
+    text_lower = text.lower()
+    if any(w in text_lower for w in ["urgent", "overdue", "past due", "penalty"]):
+        score += 0.2
+        signals.append("Payment stress indicators detected")
+    if any(w in text_lower for w in ["new entity", "intermediary", "third party", "agent"]):
+        score += 0.15
+        signals.append("New intermediary entities present")
+    if any(w in text_lower for w in ["discrepancy", "mismatch", "error", "incorrect"]):
+        score += 0.25
+        signals.append("Document discrepancy flagged")
+    if len(re.findall(r"\d{1,3}(?:,\d{3})*(?:\.\d{2})?", text)) > 20:
+        score += 0.1
+        signals.append("High numeric density — possible round-trip transaction")
+    score = min(0.99, score)
+
+    status = "critical" if score > 0.7 else "alert" if score > 0.4 else "review" if score > 0.2 else "normal"
+    if not signals:
+        signals = ["No anomalous signals detected"] if status == "normal" else ["Anomaly pattern detected"]
+
+    return {
+        "filename": file.filename,
+        "docType": doc_type,
+        "anomalyScore": round(score, 3),
+        "status": status,
+        "signals": signals,
+        "size": len(content),
+        "processed": True,
+    }
