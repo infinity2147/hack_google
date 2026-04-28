@@ -22,21 +22,42 @@ import { PageWrapper } from "../components/layout/PageWrapper";
 import { Card } from "../components/shared/Card";
 import { MetricCard } from "../components/shared/MetricCard";
 import { StatusBadge } from "../components/shared/StatusBadge";
-import { useNexus } from "../store/nexusStore";
+import { useScenarioPresets, useRunScenario } from "../api/queries";
 import { NETWORK_NODES } from "../data/mockNetwork";
+import type { ScenarioResult, ScenarioPreset } from "../types";
+
+// Fallback presets from the store (matching the original hardcoded values)
+const FALLBACK_PRESETS: ScenarioPreset[] = [
+  { name: "Suez Canal Closure (7 days)", description: "Simulates Suez Canal blockage affecting EU-Asia trade routes", seedNodes: ["AE-DXB", "NL-RTM", "DE-HAM"], severity: 0.95, betaMult: 1.5 },
+  { name: "Cyclone hits Gujarat", description: "Cyclone Biparjoy-scale event closing Gujarat ports", seedNodes: ["IN-MUN", "IN-KAN", "IN-AHM"], severity: 0.90, betaMult: 1.3 },
+  { name: "Fuel price spike 30%", description: "Global bunker fuel price increase raising all shipping costs", seedNodes: [], severity: 0.0, betaMult: 1.0 },
+  { name: "New warehouse in Hyderabad", description: "Added capacity reduces network strain, improving recovery", seedNodes: [], severity: 0.0, betaMult: 0.8 },
+];
 
 function nodeName(id: string) {
   return NETWORK_NODES.find((n) => n.id === id)?.name ?? id;
 }
 
 export function ScenarioSandbox() {
-  const { scenarioPresets, scenarioResult, runScenario } = useNexus();
-  const [selected, setSelected] = useState(scenarioPresets[0].name);
+  const { data: apiPresets, isLoading: presetsLoading } = useScenarioPresets();
+  const runScenarioMutation = useRunScenario();
 
-  const preset = scenarioPresets.find((p) => p.name === selected)!;
+  const scenarioPresets: ScenarioPreset[] = (apiPresets as ScenarioPreset[] | undefined) ?? FALLBACK_PRESETS;
+  const [selected, setSelected] = useState(scenarioPresets[0]?.name ?? "");
+  const [scenarioResult, setScenarioResult] = useState<ScenarioResult | null>(null);
+
+  const preset = scenarioPresets.find((p) => p.name === selected) ?? scenarioPresets[0];
 
   const handleRun = () => {
-    runScenario(selected);
+    if (!selected) return;
+    runScenarioMutation.mutate(
+      { preset_name: selected },
+      {
+        onSuccess: (data) => {
+          setScenarioResult(data as unknown as ScenarioResult);
+        },
+      },
+    );
   };
 
   const comparisonData = scenarioResult
@@ -83,19 +104,24 @@ export function ScenarioSandbox() {
           </select>
 
           <div className="rounded-lg border border-border bg-bg-elevated p-3 text-xs text-text-secondary">
-            <div className="font-semibold text-text-primary text-sm">{preset.name}</div>
-            <div className="mt-1">{preset.description}</div>
+            <div className="font-semibold text-text-primary text-sm">{preset?.name}</div>
+            <div className="mt-1">{preset?.description}</div>
             <div className="mt-2 font-mono text-[10px] text-text-dim space-y-0.5">
-              <div>Seed nodes: {preset.seedNodes.length > 0 ? preset.seedNodes.map(nodeName).join(", ") : "None"}</div>
-              <div>Severity: {(preset.severity * 100).toFixed(0)}% · Beta multiplier: {preset.betaMult.toFixed(1)}x</div>
+              <div>Seed nodes: {preset && preset.seedNodes.length > 0 ? preset.seedNodes.map(nodeName).join(", ") : "None"}</div>
+              <div>Severity: {preset ? (preset.severity * 100).toFixed(0) : 0}% · Beta multiplier: {preset?.betaMult.toFixed(1) ?? "0"}x</div>
             </div>
           </div>
 
           <button
             onClick={handleRun}
-            className="w-full flex items-center justify-center gap-2 bg-accent-purple text-bg-base font-semibold rounded-lg px-3 py-2.5 text-xs hover:brightness-110 transition"
+            disabled={runScenarioMutation.isPending}
+            className="w-full flex items-center justify-center gap-2 bg-accent-purple text-bg-base font-semibold rounded-lg px-3 py-2.5 text-xs hover:brightness-110 transition disabled:opacity-50"
           >
-            <Play size={14} /> Run Scenario
+            {runScenarioMutation.isPending ? (
+              <>Running...</>
+            ) : (
+              <><Play size={14} /> Run Scenario</>
+            )}
           </button>
         </div>
       </Card>

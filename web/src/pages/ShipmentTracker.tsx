@@ -26,6 +26,7 @@ import { SeverityBar } from "../components/shared/SeverityBar";
 import { useNexus } from "../store/nexusStore";
 import { MOCK_SHIPMENTS } from "../data/mockShipments";
 import { formatCurrency } from "../utils/formatters";
+import { useShipments, useShipmentStats } from "../api/queries";
 import type { Shipment } from "../types";
 
 type StatusFilter = Shipment["status"];
@@ -42,8 +43,13 @@ export function ShipmentTracker() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<Set<StatusFilter>>(new Set(["in_transit", "delayed", "disrupted"]));
 
+  const { data: shipmentsData, isLoading: shipmentsLoading } = useShipments();
+  const { data: statsData, isLoading: statsLoading } = useShipmentStats();
+
+  const shipments: Shipment[] = (shipmentsData?.items as Shipment[] | undefined) ?? MOCK_SHIPMENTS;
+
   const filtered = useMemo(() => {
-    return MOCK_SHIPMENTS.filter(
+    return shipments.filter(
       (s) =>
         statusFilter.has(s.status) &&
         (search
@@ -52,7 +58,7 @@ export function ShipmentTracker() {
             s.destName.toLowerCase().includes(search.toLowerCase())
           : true),
     );
-  }, [search, statusFilter]);
+  }, [shipments, search, statusFilter]);
 
   const highRisk = useMemo(
     () => filtered.filter((s) => s.riskScore > 0.3).sort((a, b) => b.riskScore - a.riskScore),
@@ -75,10 +81,11 @@ export function ShipmentTracker() {
     return buckets;
   }, [filtered]);
 
-  const total = MOCK_SHIPMENTS.length;
-  const inTransit = MOCK_SHIPMENTS.filter((s) => s.status === "in_transit").length;
-  const delayed = MOCK_SHIPMENTS.filter((s) => s.status === "delayed").length;
-  const disrupted = MOCK_SHIPMENTS.filter((s) => s.status === "disrupted").length;
+  const total = statsData?.total ?? shipments.length;
+  const inTransit = statsData?.inTransit ?? shipments.filter((s) => s.status === "in_transit").length;
+  const delayed = statsData?.delayed ?? shipments.filter((s) => s.status === "delayed").length;
+  const disrupted = statsData?.disrupted ?? shipments.filter((s) => s.status === "disrupted").length;
+  const onTimeRate = statsData?.onTimeRate ?? (1 - delayed / total);
 
   const toggleStatus = (s: StatusFilter) => {
     const next = new Set(statusFilter);
@@ -107,7 +114,7 @@ export function ShipmentTracker() {
         <MetricCard label="In Transit" value={inTransit} color="blue" icon={<Truck size={16} />} />
         <MetricCard label="Delayed" value={delayed} color="amber" icon={<Clock size={16} />} />
         <MetricCard label="Disrupted" value={disrupted} color="red" icon={<AlertTriangle size={16} />} />
-        <MetricCard label="On-Time Rate" value={Math.round((1 - delayed / total) * 100)} unit="%" color="green" />
+        <MetricCard label="On-Time Rate" value={Math.round(onTimeRate * 100)} unit="%" color="green" />
       </div>
 
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 mt-4">

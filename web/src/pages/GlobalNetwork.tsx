@@ -23,7 +23,7 @@ import { PageWrapper } from "../components/layout/PageWrapper";
 import { Card } from "../components/shared/Card";
 import { StatusBadge } from "../components/shared/StatusBadge";
 import { SeverityBar } from "../components/shared/SeverityBar";
-import { NetworkGraph } from "../components/network/NetworkGraph";
+import { GeoNetworkMap } from "../components/network/GeoNetworkMap";
 import { useNexus } from "../store/nexusStore";
 import { NETWORK_NODES, NETWORK_EDGES } from "../data/mockNetwork";
 import { HISTORICAL_DISRUPTIONS } from "../data/mockEvents";
@@ -146,9 +146,8 @@ export function GlobalNetwork() {
       >
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-3">
           <div className={`lg:col-span-${selected ? 3 : 4} relative`}>
-            <NetworkGraph
+            <GeoNetworkMap
               height={560}
-              showLabels={showLabels}
               onSelect={(n) => {
                 if (typeFilter !== "all" && n.type !== typeFilter) return;
                 setSelected(n);

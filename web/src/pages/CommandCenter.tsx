@@ -8,11 +8,6 @@ import {
   Users,
   Container,
   Route as RouteIcon,
-  Brain,
-  Shield,
-  Gavel,
-  Eye,
-  ArrowRight,
 } from "lucide-react";
 import {
   ResponsiveContainer,
@@ -30,9 +25,8 @@ import { PageWrapper } from "../components/layout/PageWrapper";
 import { MetricCard } from "../components/shared/MetricCard";
 import { StatusBadge } from "../components/shared/StatusBadge";
 import { Card } from "../components/shared/Card";
-import { LivePulseDot } from "../components/shared/LivePulseDot";
+import { GeoNetworkMap } from "../components/network/GeoNetworkMap";
 import { R0Gauge } from "../components/shared/R0Gauge";
-import { NetworkGraph } from "../components/network/NetworkGraph";
 import { useNexus } from "../store/nexusStore";
 import {
   DISRUPTION_TIMELINE_72H,
@@ -40,6 +34,7 @@ import {
   ANOMALY_HEATMAP,
 } from "../data/mockEvents";
 import { formatCurrency } from "../utils/formatters";
+import { useCommandCenterData, useDocumentHeatmap } from "../api/queries";
 
 const sparkline7 = (max: number) =>
   Array.from({ length: 14 }, (_, i) =>
@@ -49,13 +44,35 @@ const sparkline7 = (max: number) =>
 export function CommandCenter() {
   const { alerts, R0, dismissAlert, logDecision } = useNexus();
 
-  const networkHealth = 73;
-  const disruptionIdx = 0.34;
-  const activeAlerts = alerts.length;
-  const docAnomalies = 23;
-  const crowdReports = 247;
-  const monitoredCtr = 82;
-  const reroutedToday = 9;
+  const { data: ccData, isLoading: ccLoading } = useCommandCenterData();
+  const { data: heatmapData, isLoading: heatmapLoading } = useDocumentHeatmap();
+
+  // Hardcoded fallbacks
+  const fallbackNetworkHealth = 73;
+  const fallbackDisruptionIdx = 0.34;
+  const fallbackDocAnomalies = 23;
+  const fallbackCrowdReports = 247;
+  const fallbackMonitoredCtr = 82;
+  const fallbackReroutedToday = 9;
+
+  const networkHealth = ccData?.networkHealth ?? fallbackNetworkHealth;
+  const disruptionIdx = ccData?.disruptionIndex ?? fallbackDisruptionIdx;
+  const R0Value = ccData?.R0 ?? R0;
+  const activeAlerts = ccData?.activeAlerts ?? alerts.length;
+  const docAnomalies = ccData?.docAnomalies ?? fallbackDocAnomalies;
+  const crowdReports = ccData?.crowdReports ?? fallbackCrowdReports;
+  const monitoredCtr = ccData?.monitoredContainers ?? fallbackMonitoredCtr;
+  const reroutedToday = ccData?.reroutedToday ?? fallbackReroutedToday;
+
+  const heatmap = heatmapData?.grid ?? ANOMALY_HEATMAP;
+
+  // API alerts or fallback to store alerts
+  const apiAlerts = ccData?.alerts ?? alerts;
+
+  const shipments = ccData?.shipments ?? 1247;
+  const cascadesPrevented = ccData?.cascadesPrevented ?? 9;
+  const avgResponseHours = ccData?.avgResponseHours ?? 3.2;
+  const costSaved = ccData?.costSaved ?? 2_300_000;
 
   const heatColor = (n: number) => {
     if (n === 0) return "#0d1521";
@@ -66,8 +83,8 @@ export function CommandCenter() {
   };
 
   const r0Tone =
-    R0 >= 2 ? "red" as const
-    : R0 >= 1 ? "amber" as const
+    R0Value >= 2 ? "red" as const
+    : R0Value >= 1 ? "amber" as const
     : "green" as const;
 
   return (
@@ -107,13 +124,13 @@ export function CommandCenter() {
         <motion.div variants={{ hidden: { opacity: 0, y: 10 }, show: { opacity: 1, y: 0 } }}>
           <MetricCard
             label="R-Effective"
-            value={R0}
+            value={R0Value}
             decimals={2}
             color={r0Tone}
             icon={<TrendingUp size={16} />}
             spark={sparkline7(2)}
-            glow={R0 >= 1.5}
-            subtitle={R0 >= 1 ? "Disruption WILL cascade" : "Self-containing"}
+            glow={R0Value >= 1.5}
+            subtitle={R0Value >= 1 ? "Disruption WILL cascade" : "Self-containing"}
           />
         </motion.div>
         <motion.div variants={{ hidden: { opacity: 0, y: 10 }, show: { opacity: 1, y: 0 } }}>
@@ -160,26 +177,13 @@ export function CommandCenter() {
       <div className="grid grid-cols-1 xl:grid-cols-5 gap-4 mt-4">
         {/* Left 60% */}
         <div className="xl:col-span-3 space-y-4">
-          {/* Daily Briefing */}
-          <Card title="Daily Briefing" subtitle="Auto-generated situation summary">
-            <div className="text-xs text-text-secondary leading-relaxed space-y-1.5">
-              <p>Network health: <span className="text-accent-teal font-semibold">{networkHealth}%</span> · R-effective: <span className={R0 >= 1 ? "text-accent-red font-semibold" : "text-accent-teal font-semibold"}>{R0.toFixed(2)}</span> · Active alerts: <span className="text-accent-amber font-semibold">{activeAlerts}</span></p>
-              <p>Document anomalies: <span className="text-accent-amber">{docAnomalies}</span> · Crowd reports: <span className="text-accent-teal">{crowdReports}</span> · Monitored containers: <span className="text-accent-blue">{monitoredCtr}</span></p>
-              {R0 > 1 ? (
-                <p className="text-accent-red font-semibold">CASCADE ACTIVE — R-effective {R0.toFixed(2)} &gt; 1. Reroute {R0 > 1 ? ((1 - 1 / R0) * 100).toFixed(0) : "0"}% of volume to achieve herd immunity.</p>
-              ) : (
-                <p className="text-accent-green">Network stable — R-effective below cascade threshold.</p>
-              )}
-              <p className="text-text-dim">Recommendations: 1. Review document anomalies on affected routes 2. Cross-check crowd reports with immune memory 3. Monitor high-risk corridors</p>
-            </div>
-          </Card>
           <Card
             title="Live Disruption Network"
             subtitle="31 nodes · 48 weighted lanes · click to inspect"
             right={<StatusBadge status="live">LIVE</StatusBadge>}
           >
             <div className="-mx-4 -mb-2">
-              <NetworkGraph height={420} />
+              <GeoNetworkMap height={420} />
             </div>
           </Card>
 
@@ -202,13 +206,7 @@ export function CommandCenter() {
                     </linearGradient>
                   </defs>
                   <CartesianGrid stroke="#1e2d42" strokeDasharray="3 3" vertical={false} />
-                  <XAxis
-                    dataKey="hour"
-                    stroke="#4a6278"
-                    fontSize={10}
-                    reversed
-                    tickFormatter={(h) => `${h}h`}
-                  />
+                  <XAxis dataKey="hour" stroke="#4a6278" fontSize={10} reversed tickFormatter={(h) => `${h}h`} />
                   <YAxis stroke="#4a6278" fontSize={10} domain={[0, 1]} tickFormatter={(v) => v.toFixed(1)} />
                   <Tooltip />
                   <Area dataKey="S" stroke="#3b82f6" fill="url(#gS)" stackId="1" />
@@ -226,21 +224,11 @@ export function CommandCenter() {
                   <BarChart data={TOP_DISRUPTED_ROUTES} layout="vertical" margin={{ left: 12 }}>
                     <CartesianGrid stroke="#1e2d42" strokeDasharray="3 3" horizontal={false} />
                     <XAxis type="number" domain={[0, 1]} stroke="#4a6278" fontSize={10} />
-                    <YAxis
-                      type="category"
-                      dataKey="route"
-                      stroke="#8fa4c0"
-                      fontSize={10}
-                      width={140}
-                      tick={{ fill: "#8fa4c0" }}
-                    />
+                    <YAxis type="category" dataKey="route" stroke="#8fa4c0" fontSize={10} width={140} tick={{ fill: "#8fa4c0" }} />
                     <Tooltip />
                     <Bar dataKey="severity" radius={[0, 4, 4, 0]}>
                       {TOP_DISRUPTED_ROUTES.map((r, i) => (
-                        <Cell
-                          key={i}
-                          fill={r.severity > 0.7 ? "#ef4444" : r.severity > 0.5 ? "#f59e0b" : "#00d4aa"}
-                        />
+                        <Cell key={i} fill={r.severity > 0.7 ? "#ef4444" : r.severity > 0.5 ? "#f59e0b" : "#00d4aa"} />
                       ))}
                     </Bar>
                   </BarChart>
@@ -249,6 +237,9 @@ export function CommandCenter() {
             </Card>
 
             <Card title="Document Anomaly Heatmap" subtitle="7 doc types × 24 hours">
+              {heatmapLoading ? (
+                <div className="flex items-center justify-center h-[200px] text-text-dim text-xs">Loading...</div>
+              ) : (
               <div className="grid grid-cols-[80px_1fr] gap-1">
                 <div />
                 <div className="grid grid-cols-24 gap-[2px] text-center text-[8px] text-text-dim">
@@ -256,7 +247,7 @@ export function CommandCenter() {
                     <span key={h}>{h % 4 === 0 ? h : ""}</span>
                   ))}
                 </div>
-                {ANOMALY_HEATMAP.map((row) => (
+                {heatmap.map((row) => (
                   <div key={row.row} className="contents">
                     <div className="text-[10px] text-text-secondary self-center pr-1 truncate">
                       {row.row}
@@ -274,14 +265,11 @@ export function CommandCenter() {
                   </div>
                 ))}
               </div>
+              )}
               <div className="mt-3 flex items-center justify-end gap-1.5 text-[10px] text-text-dim">
                 <span>0</span>
                 {[0, 2, 4, 6, 8].map((n) => (
-                  <span
-                    key={n}
-                    className="h-2 w-3 rounded-[2px]"
-                    style={{ backgroundColor: heatColor(n) }}
-                  />
+                  <span key={n} className="h-2 w-3 rounded-[2px]" style={{ backgroundColor: heatColor(n) }} />
                 ))}
                 <span>8+</span>
               </div>
@@ -294,13 +282,13 @@ export function CommandCenter() {
           {/* R0 + alerts */}
           <Card title="R₀ Live Monitor" subtitle="Cascade reproduction number">
             <div className="flex items-center gap-4">
-              <R0Gauge value={R0} size="md" />
+              <R0Gauge value={R0Value} size="md" />
               <div className="flex-1 text-xs space-y-2">
                 <p className="text-text-secondary leading-relaxed">
                   Herd-immunity reroute threshold:
                 </p>
                 <div className="text-display text-xl text-accent-teal">
-                  {R0 > 1 ? `${((1 - 1 / R0) * 100).toFixed(1)}%` : "0%"}
+                  {R0Value > 1 ? `${((1 - 1 / R0Value) * 100).toFixed(1)}%` : "0%"}
                 </div>
                 <p className="text-text-dim text-[10px] leading-relaxed">
                   Reroute this fraction of inbound volume to flip cascade dynamics.
@@ -321,7 +309,7 @@ export function CommandCenter() {
             }
           >
             <div className="space-y-2 max-h-[360px] overflow-y-auto pr-1 -mr-1">
-              {alerts.map((a, i) => {
+              {apiAlerts.map((a, i) => {
                 const tone = a.level === "critical" ? "critical"
                   : a.level === "alert" ? "alert"
                   : a.level === "review" ? "review"
@@ -359,13 +347,13 @@ export function CommandCenter() {
                         onClick={() => logDecision("reroute", a.title, { alert: a.id, detail: a.detail })}
                         className="text-[10px] bg-accent-teal/10 text-accent-teal border border-accent-teal/30 rounded px-2 py-0.5 hover:bg-accent-teal/20"
                       >
-                        🔀 Reroute
+                        Reroute
                       </button>
                       <button
                         onClick={() => logDecision("monitor", a.title, { alert: a.id })}
                         className="text-[10px] bg-bg-elevated text-text-secondary border border-border rounded px-2 py-0.5 hover:border-accent-teal"
                       >
-                        📋 Monitor
+                        Monitor
                       </button>
                       {a.cta && (
                         <button
@@ -379,110 +367,44 @@ export function CommandCenter() {
                   </motion.div>
                 );
               })}
-              {alerts.length === 0 && (
+              {apiAlerts.length === 0 && (
                 <div className="py-8 text-center text-text-dim text-xs">
                   All clear — no alerts pending.
                 </div>
               )}
             </div>
           </Card>
-
-          <Card title="System Organism Status" subtitle="Four interdependent subsystems">
-            <div className="space-y-3">
-              {[
-                { label: "Brain (Gemini LLM)", icon: Brain, pct: 82, status: "live" as const, color: "teal" },
-                { label: "Immune System", icon: Shield, pct: 61, status: "scanning" as const, color: "purple" },
-                { label: "Route Agents (×7)", icon: Gavel, pct: 71, status: "negotiating" as const, color: "blue" },
-                { label: "Sensor Network", icon: Eye, pct: 94, status: "healthy" as const, color: "green" },
-              ].map((row) => (
-                <div key={row.label} className="flex items-center gap-3">
-                  <row.icon size={14} className="text-text-secondary" />
-                  <div className="flex-1">
-                    <div className="flex justify-between items-center text-[11px]">
-                      <span className="text-text-primary">{row.label}</span>
-                      <span className="font-mono text-text-secondary">{row.pct}%</span>
-                    </div>
-                    <div className="mt-1 h-[4px] rounded-full bg-bg-elevated overflow-hidden">
-                      <div
-                        className={`h-full rounded-full ${
-                          row.color === "teal" ? "bg-accent-teal"
-                          : row.color === "purple" ? "bg-accent-purple"
-                          : row.color === "blue" ? "bg-accent-blue"
-                          : "bg-accent-green"
-                        }`}
-                        style={{ width: `${row.pct}%`, transition: "width 0.7s ease-out" }}
-                      />
-                    </div>
-                  </div>
-                  <StatusBadge status={row.status} size="sm" />
-                </div>
-              ))}
-            </div>
-          </Card>
         </div>
       </div>
 
       {/* Bottom row */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+      <div className="mt-4">
         <Card title="Today's Key Stats" subtitle="Live ops summary">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div>
               <div className="text-[10px] uppercase tracking-wider text-text-secondary">Shipments</div>
-              <div className="text-display text-xl text-text-primary mt-1">1,247</div>
+              <div className="text-display text-xl text-text-primary mt-1">
+                {ccLoading ? "..." : shipments.toLocaleString()}
+              </div>
             </div>
             <div>
               <div className="text-[10px] uppercase tracking-wider text-text-secondary">Cascades Prevented</div>
-              <div className="text-display text-xl text-accent-teal mt-1">9</div>
+              <div className="text-display text-xl text-accent-teal mt-1">
+                {ccLoading ? "..." : cascadesPrevented}
+              </div>
             </div>
             <div>
               <div className="text-[10px] uppercase tracking-wider text-text-secondary">Avg Response</div>
-              <div className="text-display text-xl text-accent-teal mt-1 glow-teal">3.2h</div>
-              <div className="text-[10px] text-text-dim">vs 67h industry</div>
+              <div className="text-display text-xl text-accent-teal mt-1">
+                {ccLoading ? "..." : `${avgResponseHours}h`}
+              </div>
             </div>
             <div>
               <div className="text-[10px] uppercase tracking-wider text-text-secondary">Cost Saved</div>
-              <div className="text-display text-xl text-accent-green mt-1">{formatCurrency(2_300_000)}</div>
-            </div>
-          </div>
-        </Card>
-
-        <Card title="Headline Improvement" subtitle="Industry response time vs NEXUS">
-          <div className="flex items-center gap-4">
-            <div>
-              <div className="text-[10px] uppercase tracking-widest text-text-secondary">Industry baseline</div>
-              <div className="text-display text-2xl text-text-secondary line-through">67h</div>
-            </div>
-            <ArrowRight className="text-accent-teal" />
-            <div>
-              <div className="text-[10px] uppercase tracking-widest text-text-secondary">NEXUS</div>
-              <div className="text-display text-2xl text-accent-teal glow-teal">3.2h</div>
-            </div>
-          </div>
-          <div className="mt-3 text-xs text-text-secondary leading-relaxed">
-            <span className="text-accent-teal font-semibold">21× faster.</span>{" "}
-            From physical observation to pre-emptive immune response.
-          </div>
-        </Card>
-
-        <Card title="Powered by Google" subtitle="Stack at a glance">
-          <div className="grid grid-cols-2 gap-2 text-[11px] text-text-secondary">
-            {[
-              "Gemini 1.5 Pro",
-              "Vertex AI",
-              "Google Cloud",
-              "BigQuery",
-              "Maps Platform",
-              "Flutter (driver app)",
-              "WhatsApp Business API",
-              "Pub/Sub + Cloud Run",
-            ].map((p) => (
-              <div
-                key={p}
-                className="rounded border border-border bg-bg-elevated px-2 py-1.5 flex items-center gap-1.5"
-              >
-                <LivePulseDot color="teal" size={6} active={false} /> {p}
+              <div className="text-display text-xl text-accent-green mt-1">
+                {ccLoading ? "..." : formatCurrency(costSaved)}
               </div>
-            ))}
+            </div>
           </div>
         </Card>
       </div>

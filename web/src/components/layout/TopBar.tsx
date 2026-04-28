@@ -10,7 +10,7 @@ const PAGE_TITLES: Record<string, { title: string; sub: string }> = {
   "/immune": { title: "Immune Intelligence", sub: "Antibody memory · cosine similarity τ = 0.82" },
   "/market": { title: "Route Market", sub: "Multi-agent Vickrey auction · 7 carriers" },
   "/documents": { title: "Document Intelligence", sub: "GraphSAGE on trade entity graphs" },
-  "/crowd": { title: "Crowd & Acoustic Intelligence", sub: "Waze for supply chains · 8 languages" },
+  "/crowd": { title: "Crowd Intelligence", sub: "Waze for supply chains · 8 languages" },
 };
 
 export function TopBar() {

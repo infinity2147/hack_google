@@ -18,7 +18,6 @@ import {
   FileSearch,
   Upload,
   AlertTriangle,
-  Check,
   ChevronDown,
   ChevronRight,
   Sparkles,
@@ -29,7 +28,6 @@ import { Card } from "../components/shared/Card";
 import { MetricCard } from "../components/shared/MetricCard";
 import { StatusBadge } from "../components/shared/StatusBadge";
 import { SeverityBar } from "../components/shared/SeverityBar";
-import { AIExplanationPanel } from "../components/shared/AIExplanationPanel";
 import { useNexus } from "../store/nexusStore";
 import {
   DOCUMENTS,
@@ -41,14 +39,6 @@ import type { FinancialDocument } from "../types";
 
 type StatusFilter = FinancialDocument["status"];
 type TypeFilter = FinancialDocument["type"];
-
-const PIPELINE_STEPS = [
-  { label: "Uploading…", duration: 300 },
-  { label: "Gemini extracting entities (12 companies, 5 ports)…", duration: 1000 },
-  { label: "Building trade entity graph…", duration: 700 },
-  { label: "GraphSAGE neighborhood scoring…", duration: 800 },
-  { label: "Anomaly detection complete", duration: 400 },
-];
 
 export function DocumentScanner() {
   const { logDecision } = useNexus();
@@ -65,9 +55,6 @@ export function DocumentScanner() {
   );
   const [search, setSearch] = useState("");
   const [expandedId, setExpandedId] = useState<string | null>(null);
-
-  const [pipelineStep, setPipelineStep] = useState<number | null>(null);
-  const [pipelineDone, setPipelineDone] = useState<{ score: number; status: FinancialDocument["status"] } | null>(null);
 
   const counts = useMemo(() => {
     const c = { normal: 0, review: 0, alert: 0, critical: 0 };
@@ -106,19 +93,6 @@ export function DocumentScanner() {
     if (next.has(value)) next.delete(value);
     else next.add(value);
     return next;
-  };
-
-  const runUploadDemo = async () => {
-    setPipelineDone(null);
-    for (let i = 0; i < PIPELINE_STEPS.length; i++) {
-      setPipelineStep(i);
-      await new Promise((r) => setTimeout(r, PIPELINE_STEPS[i].duration));
-    }
-    setPipelineStep(null);
-    const score = +(0.2 + Math.random() * 0.5).toFixed(2);
-    const status: FinancialDocument["status"] =
-      score >= 0.75 ? "critical" : score >= 0.55 ? "alert" : score >= 0.3 ? "review" : "normal";
-    setPipelineDone({ score, status });
   };
 
   return (
@@ -176,68 +150,10 @@ export function DocumentScanner() {
           subtitle="Gemini → Entity Extraction → Graph → GraphSAGE → Anomaly"
         >
           <div className="rounded-lg border-2 border-dashed border-border p-6 text-center hover:border-accent-teal transition-colors">
-            <Upload className="mx-auto text-accent-teal" size={28} />
-            <div className="mt-3 text-sm text-text-primary">
-              Drop invoice, bill of lading, or customs declaration
+            <Upload className="mx-auto text-text-dim" size={28} />
+            <div className="mt-3 text-sm text-text-secondary">
+              Connect to backend to enable document upload processing.
             </div>
-            <div className="text-xs text-text-secondary mt-1">
-              Supported: PDF, CSV, TXT
-            </div>
-            <button
-              onClick={runUploadDemo}
-              disabled={pipelineStep !== null}
-              className="mt-4 inline-flex items-center gap-2 bg-accent-teal text-bg-base font-semibold rounded-lg px-3 py-2 text-xs hover:brightness-110 disabled:opacity-50"
-            >
-              <Upload size={14} /> Simulate Upload
-            </button>
-          </div>
-
-          <div className="mt-4 space-y-2">
-            <div className="text-[10px] uppercase tracking-wider text-text-secondary">
-              Processing Pipeline
-            </div>
-            {PIPELINE_STEPS.map((step, i) => {
-              const active = pipelineStep === i;
-              const done = pipelineStep != null && pipelineStep > i;
-              return (
-                <div
-                  key={step.label}
-                  className={`flex items-center gap-2 text-xs px-3 py-2 rounded-lg transition-colors ${
-                    active
-                      ? "border border-accent-teal/50 bg-accent-teal/5 text-text-primary"
-                      : done
-                        ? "border border-border bg-bg-elevated text-accent-green"
-                        : "border border-border bg-bg-elevated text-text-dim"
-                  }`}
-                >
-                  {done ? (
-                    <Check size={14} />
-                  ) : active ? (
-                    <span className="inline-block h-2 w-2 rounded-full bg-accent-teal dot-pulse" />
-                  ) : (
-                    <span className="inline-block h-2 w-2 rounded-full bg-text-dim" />
-                  )}
-                  <span>{step.label}</span>
-                </div>
-              );
-            })}
-            {pipelineDone && (
-              <motion.div
-                initial={{ opacity: 0, y: 6 }}
-                animate={{ opacity: 1, y: 0 }}
-                className={`mt-3 rounded-lg border px-3 py-2 text-xs ${
-                  pipelineDone.status === "critical"
-                    ? "border-accent-red/50 bg-accent-red/10 text-accent-red"
-                    : pipelineDone.status === "alert"
-                      ? "border-accent-amber/50 bg-accent-amber/10 text-accent-amber"
-                      : "border-accent-green/50 bg-accent-green/10 text-accent-green"
-                }`}
-              >
-                ✅ Analysis complete — score{" "}
-                <span className="font-mono font-semibold">{pipelineDone.score}</span> ·{" "}
-                {pipelineDone.status.toUpperCase()}
-              </motion.div>
-            )}
           </div>
         </Card>
 
@@ -561,26 +477,7 @@ export function DocumentScanner() {
         </div>
       </Card>
 
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 mt-4">
-        <AIExplanationPanel
-          title="Financial Early Warning"
-          confidence={0.81}
-          sources="GraphSAGE on trade entity graph · GDELT-validated ground truth"
-        >
-          <p>
-            No commercial supply-chain platform ingests financial documents as
-            a predictive signal source. Closest analog: hedge funds using
-            satellite imagery of parking lots to predict retail earnings —{" "}
-            <span className="text-accent-teal">alpha-generating</span> before
-            mainstream observability.
-          </p>
-          <p>
-            Detection lead time: <span className="font-mono text-accent-teal">2–3 weeks</span>{" "}
-            before physical disruption · false positive rate{" "}
-            <span className="font-mono">8.3%</span> · true positive rate{" "}
-            <span className="font-mono">81%</span> on held-out events.
-          </p>
-        </AIExplanationPanel>
+      <div className="mt-4">
         <Card title="Novel Data Modality" subtitle="Why financial documents predict physical disruption">
           <ul className="space-y-2 text-xs text-text-secondary leading-relaxed">
             <li>

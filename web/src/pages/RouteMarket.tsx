@@ -29,7 +29,6 @@ import {
 import { PageWrapper } from "../components/layout/PageWrapper";
 import { Card } from "../components/shared/Card";
 import { StatusBadge } from "../components/shared/StatusBadge";
-import { AIExplanationPanel } from "../components/shared/AIExplanationPanel";
 import { useNexus } from "../store/nexusStore";
 import { CARRIERS } from "../data/mockCarriers";
 import { NETWORK_NODES } from "../data/mockNetwork";
@@ -541,50 +540,8 @@ export function RouteMarket() {
         )}
       </Card>
 
-      {/* Federated learning + AI explanation */}
-      <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 mt-4">
-        <div className="xl:col-span-2">
-          <AIExplanationPanel
-            title="Route Justification"
-            confidence={0.91}
-            sources="7 carrier bids · live SIR risk · 1,247 historical rounds"
-          >
-            {lastNegotiation && winnerBid ? (
-              <>
-                <p>
-                  <span className="font-semibold text-text-primary">
-                    {carrierById(lastNegotiation.winnerId).name}
-                  </span>{" "}
-                  selected for {nodeName(lastNegotiation.origin)} →{" "}
-                  {nodeName(lastNegotiation.destination)}.
-                </p>
-                <p>
-                  Urgency factor (
-                  <span className="font-mono">{lastNegotiation.urgency.toFixed(2)}</span>
-                  ) weighted the composite score toward transit time over cost.{" "}
-                  {carrierById(lastNegotiation.winnerId).code}'s {winnerBid.transitDays}-day
-                  transit and risk premium π = {winnerBid.riskScore.toFixed(2)} (against
-                  current network R₀ = {R0.toFixed(2)}) produced the highest score.
-                </p>
-                <p>
-                  Vickrey mechanism preserves incentive compatibility:{" "}
-                  {carrierById(lastNegotiation.winnerId).code} pays{" "}
-                  <span className="font-mono text-accent-teal">
-                    ${lastNegotiation.paymentPrice.toLocaleString("en-US")}
-                  </span>{" "}
-                  (the second-highest sealed bid), not their own{" "}
-                  <span className="font-mono">${winnerBid.bid.toLocaleString("en-US")}</span>.
-                </p>
-              </>
-            ) : (
-              <p>
-                Run a negotiation round to generate sealed bids and see the
-                Vickrey settlement explained step-by-step.
-              </p>
-            )}
-          </AIExplanationPanel>
-        </div>
-
+      {/* Federated learning */}
+      <div className="mt-4">
         <Card
           title="Federated Learning"
           subtitle="Privacy-preserving multi-carrier coordination"

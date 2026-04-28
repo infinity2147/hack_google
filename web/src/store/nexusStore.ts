@@ -246,7 +246,7 @@ export const useNexus = create<NexusState>((set, get) => ({
 
   randomizeSensors: () => {
     const next: number[] = [];
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 7; i++) {
       next.push(+Math.max(0, Math.min(1, 0.3 + Math.random() * 0.6)).toFixed(2));
     }
     set({ sensorEmbedding: next });

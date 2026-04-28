@@ -16,7 +16,8 @@ import {
 import { PageWrapper } from "../components/layout/PageWrapper";
 import { Card } from "../components/shared/Card";
 import { MetricCard } from "../components/shared/MetricCard";
-import { useNexus } from "../store/nexusStore";
+import { useDecisionLog, useLogDecision } from "../api/queries";
+import type { DecisionEntry } from "../types";
 
 const TYPE_ICONS: Record<string, string> = {
   reroute: "🔀",
@@ -45,7 +46,11 @@ const TYPE_COLORS: Record<string, string> = {
 };
 
 export function DecisionHistory() {
-  const { decisionLog } = useNexus();
+  const { data: apiDecisionLog, isLoading } = useDecisionLog();
+  const logDecisionMutation = useLogDecision();
+
+  const decisionLog: DecisionEntry[] = (apiDecisionLog as DecisionEntry[] | undefined) ?? [];
+
   const [filter, setFilter] = useState<string>("all");
 
   const allTypes = useMemo(() => [...new Set(decisionLog.map((e) => e.actionType))], [decisionLog]);
@@ -85,6 +90,10 @@ export function DecisionHistory() {
       total: data.total,
     }));
   }, [decisionLog]);
+
+  const handleLogDecision = (actionType: string, target: string, details?: Record<string, unknown>) => {
+    logDecisionMutation.mutate({ action_type: actionType, target, details });
+  };
 
   return (
     <PageWrapper>

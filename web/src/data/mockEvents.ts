@@ -53,15 +53,6 @@ export const LIVE_ALERTS: AlertItem[] = [
     ago: "4h",
   },
   {
-    id: "ALT-5",
-    level: "alert",
-    title: "Acoustic anomaly: refrigeration",
-    detail: "Container CTR-0047 on JNPT → Singapore",
-    meta: "Score 0.83 · lead time ~6h · 5h ago",
-    cta: "View Spectrogram",
-    ago: "5h",
-  },
-  {
     id: "ALT-6",
     level: "normal",
     title: "Route negotiation settled",

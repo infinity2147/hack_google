@@ -29,7 +29,6 @@ import { MetricCard } from "../components/shared/MetricCard";
 import { StatusBadge } from "../components/shared/StatusBadge";
 import { SeverityBar } from "../components/shared/SeverityBar";
 import { EquationBlock, EqLine } from "../components/shared/EquationBlock";
-import { AIExplanationPanel } from "../components/shared/AIExplanationPanel";
 import { useNexus } from "../store/nexusStore";
 import { NETWORK_NODES } from "../data/mockNetwork";
 import { HISTORICAL_DISRUPTIONS } from "../data/mockEvents";
@@ -548,28 +547,6 @@ export function EpidemiologicalModel() {
           </table>
         </div>
       </Card>
-
-      <div className="mt-4">
-        <AIExplanationPanel
-          title="Epidemiological Reading"
-          confidence={0.92}
-          sources="12 historical cascade events · network adjacency from live trade volumes"
-        >
-          <p>
-            Current network reproduction number{" "}
-            <span className="font-mono text-accent-amber font-semibold">
-              R₀ = {R0.toFixed(2)}
-            </span>{" "}
-            with <span className="text-accent-teal">{counts.I}</span> infected nodes.{" "}
-            {R0 >= 1
-              ? `Cascade dynamics dominate — to flip the trajectory, reroute at least ${(herd * 100).toFixed(1)}% of inbound volume around the most-connected infected hubs (typically JNPT and Singapore on the India trade corridor).`
-              : "Cascade is self-containing. Continue monitoring at 15-minute cadence; no pre-emptive reroute required."}
-          </p>
-          <p>
-            Historical fits show this β/γ regime maps closely to the September 2025 JNPT congestion event (peak R₀ = 2.1, $290M loss, 6 cascade hops).
-          </p>
-        </AIExplanationPanel>
-      </div>
     </PageWrapper>
   );
 }

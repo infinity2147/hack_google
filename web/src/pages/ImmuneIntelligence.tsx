@@ -9,12 +9,11 @@ import {
   PolarRadiusAxis,
   Tooltip,
 } from "recharts";
-import { Shield, ShieldCheck, Zap, RefreshCw, Sparkles, Check } from "lucide-react";
+import { Shield, ShieldCheck, Zap, RefreshCw, Check } from "lucide-react";
 import { PageWrapper } from "../components/layout/PageWrapper";
 import { Card } from "../components/shared/Card";
 import { StatusBadge } from "../components/shared/StatusBadge";
 import { SeverityBar } from "../components/shared/SeverityBar";
-import { AIExplanationPanel } from "../components/shared/AIExplanationPanel";
 import { useNexus } from "../store/nexusStore";
 import { SIGNAL_DIMENSIONS } from "../data/mockAntibodies";
 import { cosineSimilarity } from "../utils/cosineSimilarity";
@@ -468,42 +467,6 @@ export function ImmuneIntelligence() {
           </div>
         </div>
       </Card>
-
-      {/* AI explanation */}
-      <div className="mt-4">
-        <AIExplanationPanel
-          title="Immune Intelligence"
-          confidence={lastScan ? Math.min(0.99, similarityToSelected) : 0.84}
-          sources={`${antibodies.length} antibody patterns · 14-month immune memory`}
-        >
-          <p>
-            Current sensor embedding shows elevated{" "}
-            <span className="font-mono text-accent-amber">
-              {SIGNAL_DIMENSIONS[
-                sensorEmbedding.indexOf(Math.max(...sensorEmbedding))
-              ]}
-            </span>{" "}
-            ({Math.max(...sensorEmbedding).toFixed(2)}) coupled with{" "}
-            <span className="font-mono text-accent-amber">Port Congestion</span>{" "}
-            ({sensorEmbedding[1].toFixed(2)}). Best antibody match is{" "}
-            <span className="font-mono text-text-primary">{selected.code}</span>{" "}
-            with cosine similarity{" "}
-            <span className="font-mono text-accent-teal">
-              {similarityToSelected.toFixed(3)}
-            </span>
-            .
-          </p>
-          <p>
-            {similarityToSelected >= immuneThreshold
-              ? `Pattern matches the τ = ${immuneThreshold} threshold. Pre-emptive recommendation: reroute 53% of JNPT-bound volume to Mundra (28%) and Chennai (25%) within the next 48-72 hours, ahead of physical observability of the disruption.`
-              : `Pattern below τ = ${immuneThreshold}. No pre-emptive action required. Sensor delta will be re-evaluated in 15 minutes.`}
-          </p>
-          <div className="mt-2 flex items-center gap-2 text-[11px] text-text-dim">
-            <Sparkles size={12} className="text-accent-purple" />
-            Memory recall: vector index over 800+ historical disruption embeddings.
-          </div>
-        </AIExplanationPanel>
-      </div>
     </PageWrapper>
   );
 }

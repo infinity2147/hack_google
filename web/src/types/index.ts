@@ -133,24 +133,6 @@ export interface VoiceNote {
   nearbyReports: number;
 }
 
-export interface AcousticReading {
-  id: string;
-  containerId: string;
-  route: string;
-  anomalyType:
-    | "none"
-    | "refrigeration"
-    | "structural"
-    | "vibration"
-    | "compressor";
-  anomalyScore: number;
-  feature1: number; // mel band 1 (PCA)
-  feature2: number; // mel band 2 (PCA)
-  alertStatus: "normal" | "warning" | "critical";
-  detectedAt: string;
-  leadTimeHours: number;
-}
-
 export interface DisruptionEvent {
   id: string;
   type:

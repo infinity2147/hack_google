@@ -1,6 +1,6 @@
 import type { Antibody } from "../types";
 
-// 8 dimensions: AIS, Port Congestion, Weather, News, Invoice, Customs, Crowd, Acoustic
+// 7 dimensions: AIS, Port Congestion, Weather, News, Invoice, Customs, Crowd
 export const SIGNAL_DIMENSIONS = [
   "AIS Anomaly",
   "Port Congestion",
@@ -9,7 +9,6 @@ export const SIGNAL_DIMENSIONS = [
   "Invoice Anomaly",
   "Customs Delay",
   "Crowd Reports",
-  "Acoustic Signal",
 ] as const;
 
 export const ANTIBODIES: Antibody[] = [
@@ -19,7 +18,7 @@ export const ANTIBODIES: Antibody[] = [
     type: "Port Congestion",
     location: "Western India (JNPT)",
     severity: 0.78,
-    pattern: [0.88, 0.82, 0.40, 0.55, 0.28, 0.62, 0.40, 0.20],
+    pattern: [0.88, 0.82, 0.40, 0.55, 0.28, 0.62, 0.40],
     lastTriggered: "2025-09-14",
     matchConfidence: 0.94,
   },
@@ -29,7 +28,7 @@ export const ANTIBODIES: Antibody[] = [
     type: "Port Strike",
     location: "Western India",
     severity: 0.86,
-    pattern: [0.42, 0.85, 0.10, 0.78, 0.30, 0.60, 0.85, 0.10],
+    pattern: [0.42, 0.85, 0.10, 0.78, 0.30, 0.60, 0.85],
     lastTriggered: "2024-03-12",
     matchConfidence: 0.91,
   },
@@ -39,7 +38,7 @@ export const ANTIBODIES: Antibody[] = [
     type: "Severe Weather",
     location: "Bay of Bengal",
     severity: 0.92,
-    pattern: [0.35, 0.55, 0.95, 0.60, 0.10, 0.20, 0.70, 0.15],
+    pattern: [0.35, 0.55, 0.95, 0.60, 0.10, 0.20, 0.70],
     lastTriggered: "2025-05-21",
     matchConfidence: 0.89,
   },
@@ -49,7 +48,7 @@ export const ANTIBODIES: Antibody[] = [
     type: "Geopolitical",
     location: "Red Sea Corridor",
     severity: 0.83,
-    pattern: [0.55, 0.40, 0.05, 0.92, 0.65, 0.50, 0.20, 0.05],
+    pattern: [0.55, 0.40, 0.05, 0.92, 0.65, 0.50, 0.20],
     lastTriggered: "2024-11-30",
     matchConfidence: 0.87,
   },
@@ -59,7 +58,7 @@ export const ANTIBODIES: Antibody[] = [
     type: "Labor Dispute",
     location: "Pan-India (Inland)",
     severity: 0.61,
-    pattern: [0.20, 0.40, 0.05, 0.75, 0.10, 0.55, 0.92, 0.08],
+    pattern: [0.20, 0.40, 0.05, 0.75, 0.10, 0.55, 0.92],
     lastTriggered: "2025-07-04",
     matchConfidence: 0.82,
   },
@@ -69,7 +68,7 @@ export const ANTIBODIES: Antibody[] = [
     type: "Customs Delay",
     location: "All India Ports",
     severity: 0.58,
-    pattern: [0.25, 0.55, 0.10, 0.45, 0.42, 0.92, 0.40, 0.05],
+    pattern: [0.25, 0.55, 0.10, 0.45, 0.42, 0.92, 0.40],
     lastTriggered: "2025-12-01",
     matchConfidence: 0.85,
   },
@@ -79,7 +78,7 @@ export const ANTIBODIES: Antibody[] = [
     type: "Cyber Incident",
     location: "Carrier IT (Maersk-class)",
     severity: 0.72,
-    pattern: [0.65, 0.60, 0.05, 0.85, 0.55, 0.40, 0.20, 0.10],
+    pattern: [0.65, 0.60, 0.05, 0.85, 0.55, 0.40, 0.20],
     lastTriggered: "2024-06-19",
     matchConfidence: 0.79,
   },
@@ -89,7 +88,7 @@ export const ANTIBODIES: Antibody[] = [
     type: "Equipment Failure",
     location: "Major Port Cranes",
     severity: 0.65,
-    pattern: [0.30, 0.78, 0.12, 0.30, 0.10, 0.45, 0.30, 0.85],
+    pattern: [0.30, 0.78, 0.12, 0.30, 0.10, 0.45, 0.30],
     lastTriggered: "2025-10-08",
     matchConfidence: 0.81,
   },
@@ -97,5 +96,5 @@ export const ANTIBODIES: Antibody[] = [
 
 // Default current sensor embedding (live)
 export const DEFAULT_SENSOR_EMBEDDING = [
-  0.74, 0.71, 0.32, 0.48, 0.30, 0.55, 0.45, 0.18,
+  0.74, 0.71, 0.32, 0.48, 0.30, 0.55, 0.45,
 ];
