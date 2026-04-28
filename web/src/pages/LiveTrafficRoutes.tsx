@@ -14,8 +14,7 @@ import { MetricCard } from "../components/shared/MetricCard";
 import { StatusBadge } from "../components/shared/StatusBadge";
 import { SeverityBar } from "../components/shared/SeverityBar";
 import { useNexus } from "../store/nexusStore";
-import { NETWORK_NODES, NETWORK_EDGES } from "../data/mockNetwork";
-import { formatCurrency } from "../utils/formatters";
+import { NETWORK_NODES } from "../data/mockNetwork";
 import type { SupplyChainNode } from "../types";
 
 const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY as string || "";

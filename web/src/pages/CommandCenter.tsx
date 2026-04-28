@@ -239,7 +239,7 @@ export function CommandCenter() {
                       tickFormatter={(v) => `${(v * 100).toFixed(0)}%`}
                     />
                     <Tooltip
-                      formatter={(v: number, name: string) => [`${(v * 100).toFixed(1)}%`, name]}
+                      formatter={(v) => [`${(+(v ?? 0) * 100).toFixed(1)}%`]}
                       contentStyle={{ background: "#0d1521", border: "1px solid #1e2d42", borderRadius: 6 }}
                     />
                     <Area dataKey="S" stroke="#3b82f6" fill="url(#gS)" stackId="1" name="Susceptible" />
@@ -272,7 +272,7 @@ export function CommandCenter() {
                       tick={{ fill: "#8fa4c0" }}
                     />
                     <Tooltip
-                      formatter={(v: number) => [v.toFixed(2), "Severity"]}
+                      formatter={(v) => [(+(v ?? 0)).toFixed(2), "Severity"]}
                       contentStyle={{ background: "#0d1521", border: "1px solid #1e2d42", borderRadius: 6 }}
                     />
                     <Bar dataKey="severity" radius={[0, 4, 4, 0]}>

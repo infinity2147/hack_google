@@ -16,7 +16,7 @@ import {
 import { PageWrapper } from "../components/layout/PageWrapper";
 import { Card } from "../components/shared/Card";
 import { MetricCard } from "../components/shared/MetricCard";
-import { useDecisionLog, useLogDecision } from "../api/queries";
+import { useDecisionLog } from "../api/queries";
 import type { DecisionEntry } from "../types";
 
 const TYPE_ICONS: Record<string, string> = {
@@ -46,8 +46,7 @@ const TYPE_COLORS: Record<string, string> = {
 };
 
 export function DecisionHistory() {
-  const { data: apiDecisionLog, isLoading } = useDecisionLog();
-  const logDecisionMutation = useLogDecision();
+  const { data: apiDecisionLog } = useDecisionLog();
 
   const decisionLog: DecisionEntry[] = (apiDecisionLog as DecisionEntry[] | undefined) ?? [];
 
@@ -90,10 +89,6 @@ export function DecisionHistory() {
       total: data.total,
     }));
   }, [decisionLog]);
-
-  const handleLogDecision = (actionType: string, target: string, details?: Record<string, unknown>) => {
-    logDecisionMutation.mutate({ action_type: actionType, target, details });
-  };
 
   return (
     <PageWrapper>

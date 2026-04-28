@@ -43,8 +43,8 @@ export function ShipmentTracker() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<Set<StatusFilter>>(new Set(["in_transit", "delayed", "disrupted"]));
 
-  const { data: shipmentsData, isLoading: shipmentsLoading } = useShipments();
-  const { data: statsData, isLoading: statsLoading } = useShipmentStats();
+  const { data: shipmentsData } = useShipments();
+  const { data: statsData } = useShipmentStats();
 
   const shipments: Shipment[] = (shipmentsData?.items as Shipment[] | undefined) ?? MOCK_SHIPMENTS;
 

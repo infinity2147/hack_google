@@ -39,7 +39,7 @@ function nodeName(id: string) {
 }
 
 export function ScenarioSandbox() {
-  const { data: apiPresets, isLoading: presetsLoading } = useScenarioPresets();
+  const { data: apiPresets } = useScenarioPresets();
   const runScenarioMutation = useRunScenario();
 
   const scenarioPresets: ScenarioPreset[] = (apiPresets as ScenarioPreset[] | undefined) ?? FALLBACK_PRESETS;

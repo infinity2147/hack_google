@@ -18,7 +18,6 @@ import {
   TrendingUp,
   ShieldAlert,
   Search,
-  ChevronRight,
   Play,
   Info,
 } from "lucide-react";

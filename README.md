@@ -190,6 +190,55 @@ Requires **Maps JavaScript API** enabled in Google Cloud Console.
 
 ---
 
+## Deploy to Google Cloud Run
+
+### Prerequisites
+
+- [Google Cloud SDK](https://cloud.google.com/sdk/docs/install) installed and authenticated
+- A GCP project with billing enabled
+- Artifact Registry and Cloud Run APIs enabled
+
+### One-command deploy
+
+```bash
+# Set your project ID
+gcloud config set project YOUR_PROJECT_ID
+
+# Deploy
+gcloud run deploy nexus \
+  --source . \
+  --region us-central1 \
+  --allow-unauthenticated \
+  --memory 512Mi \
+  --set-env-vars "VITE_GOOGLE_MAPS_API_KEY=your_key_here"
+```
+
+### Alternative: Manual Docker build
+
+```bash
+# Build and push
+docker build -t gcr.io/YOUR_PROJECT_ID/nexus .
+docker push gcr.io/YOUR_PROJECT_ID/nexus
+
+# Deploy
+gcloud run deploy nexus \
+  --image gcr.io/YOUR_PROJECT_ID/nexus \
+  --region us-central1 \
+  --allow-unauthenticated \
+  --port 8080 \
+  --memory 512Mi
+```
+
+### Using Cloud Build (CI/CD)
+
+```bash
+gcloud builds submit --config cloudbuild.yaml
+```
+
+Cloud Run will provide a public URL like `https://nexus-xxxxx-uc.a.run.app`.
+
+---
+
 ## How It Works
 
 1. **Monitor** — The SIR model continuously simulates disruption spread across 31 supply chain nodes. The Command Center shows real-time health metrics and alerts.

@@ -9,7 +9,9 @@ import math
 import json
 from typing import Optional
 
-DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data")
+DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
+if not os.path.isdir(DATA_DIR):
+    DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data")
 
 # ─── Network Topology ────────────────────────────────────────────────────────
 

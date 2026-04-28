@@ -106,10 +106,8 @@ export function GeoNetworkMap({ height = 480, onSelect }: Props) {
               onMouseLeave={() => setHover(null)}
               onClick={() => onSelect?.(n)}
               style={{
-                cursor: "pointer",
-                opacity: isHi ? 1 : 0.3,
-                default: { outline: "none" },
-                hover: { outline: "none" },
+                default: { outline: "none", cursor: "pointer", opacity: isHi ? 1 : 0.3 },
+                hover: { outline: "none", cursor: "pointer" },
               }}
             >
               {state === "I" && (
