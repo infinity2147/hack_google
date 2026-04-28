@@ -58,19 +58,7 @@ export function LiveTrafficRoutes() {
   if (!API_KEY) {
     return (
       <PageWrapper>
-        <div className="rounded-xl border border-border bg-bg-surface p-5">
-          <div className="flex items-start gap-3">
-            <Navigation className="text-accent-teal shrink-0 mt-1" size={22} />
-            <div>
-              <h2 className="text-display text-xl tracking-tight">Live Traffic & Routes</h2>
-              <p className="text-sm text-text-secondary mt-1">
-                Real-time congestion, shipment routes, and port status on Google Maps.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-4 rounded-xl border border-accent-amber/30 bg-accent-amber/5 p-6 text-center">
+        <div className="rounded-xl border border-accent-amber/30 bg-accent-amber/5 p-6 text-center">
           <Navigation className="mx-auto text-accent-amber mb-3" size={32} />
           <h3 className="text-lg text-text-primary font-semibold">Google Maps API Key Required</h3>
           <p className="text-sm text-text-secondary mt-2 max-w-lg mx-auto">
@@ -141,18 +129,6 @@ export function LiveTrafficRoutes() {
   // Full Google Maps view
   return (
     <PageWrapper>
-      <div className="rounded-xl border border-border bg-bg-surface p-5">
-        <div className="flex items-start gap-3">
-          <Navigation className="text-accent-teal shrink-0 mt-1" size={22} />
-          <div>
-            <h2 className="text-display text-xl tracking-tight">Live Traffic & Routes</h2>
-            <p className="text-sm text-text-secondary mt-1">
-              Real-time congestion, shipment routes, and port status on Google Maps.
-            </p>
-          </div>
-        </div>
-      </div>
-
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mt-4">
         <MetricCard label="Network Health" value={Math.round((1 - sirCounts.I / 31) * 100)} unit="%" color="teal" icon={<Activity size={16} />} />
         <MetricCard label="Congestion Zones" value={CONGESTION_ZONES.length} color="amber" icon={<AlertTriangle size={16} />} />

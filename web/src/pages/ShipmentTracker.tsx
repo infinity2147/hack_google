@@ -123,7 +123,7 @@ export function ShipmentTracker() {
             {highRisk.slice(0, 20).map((s) => {
               const originRisk = nodeRisk(s.originId);
               const destRisk = nodeRisk(s.destId);
-              const compositeRisk = ((originRisk + destRisk) / 2) * 100;
+              const compositeRisk = Math.round((s.riskScore * 0.7 + ((originRisk + destRisk) / 2) * 0.3) * 100);
               const riskColor = compositeRisk > 50 ? "red" : compositeRisk > 25 ? "amber" : "green";
               return (
                 <motion.div

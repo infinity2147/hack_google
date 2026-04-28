@@ -25,6 +25,7 @@ const PAGE_TITLES: Record<string, { title: string; sub: string }> = {
   "/market": { title: "Route Market", sub: "Multi-agent Vickrey auction · 7 carriers" },
   "/documents": { title: "Document Intelligence", sub: "GraphSAGE on trade entity graphs" },
   "/traffic": { title: "Live Traffic & Routes", sub: "Real-time congestion · shipment tracking · Google Maps" },
+  "/shipments": { title: "Shipment Tracker", sub: "Track shipments with risk flags and reroute actions" },
 };
 
 export function TopBar() {
