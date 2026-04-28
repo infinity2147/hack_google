@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.100.5",
+    "@vis.gl/react-google-maps": "^1.8.3",
     "d3-force": "^3.0.0",
     "d3-geo": "^3.1.1",
     "framer-motion": "^12.38.0",

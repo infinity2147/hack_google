@@ -8,7 +8,7 @@ import { EpidemiologicalModel } from "./pages/EpidemiologicalModel";
 import { ImmuneIntelligence } from "./pages/ImmuneIntelligence";
 import { RouteMarket } from "./pages/RouteMarket";
 import { DocumentScanner } from "./pages/DocumentScanner";
-import { CrowdIntelligence } from "./pages/CrowdIntelligence";
+import { LiveTrafficRoutes } from "./pages/LiveTrafficRoutes";
 import { ShipmentTracker } from "./pages/ShipmentTracker";
 import { ScenarioSandbox } from "./pages/ScenarioSandbox";
 import { NetworkTrends } from "./pages/NetworkTrends";
@@ -25,7 +25,7 @@ function AnimatedRoutes() {
         <Route path="/immune" element={<ImmuneIntelligence />} />
         <Route path="/market" element={<RouteMarket />} />
         <Route path="/documents" element={<DocumentScanner />} />
-        <Route path="/crowd" element={<CrowdIntelligence />} />
+        <Route path="/traffic" element={<LiveTrafficRoutes />} />
         <Route path="/shipments" element={<ShipmentTracker />} />
         <Route path="/scenarios" element={<ScenarioSandbox />} />
         <Route path="/trends" element={<NetworkTrends />} />

@@ -1,8 +1,47 @@
 from fastapi import APIRouter, Query
 from simulation import data_loader
-import numpy as np
+import pandas as pd
 
 router = APIRouter()
+
+DOC_MAP = {
+    "doc_id": "id",
+    "doc_type": "type",
+    "anomaly_score": "anomalyScore",
+    "payment_terms": "paymentTerms",
+}
+
+DOC_TYPE_MAP = {
+    "Insurance Certificate": "insurance",
+    "Bill of Lading": "bill_of_lading",
+    "Customs Declaration": "customs_declaration",
+    "Purchase Order": "purchase_order",
+    "Invoice": "invoice",
+    "Letter of Credit": "letter_of_credit",
+    "Packing List": "packing_list",
+}
+
+
+def map_doc(row: dict) -> dict:
+    out = {}
+    for k, v in row.items():
+        key = DOC_MAP.get(k, k)
+        if hasattr(v, "item"):
+            out[key] = v.item()
+        else:
+            out[key] = v
+    # Parse signals from string to array
+    if "signals" in out and isinstance(out["signals"], str):
+        out["signals"] = [s.strip() for s in out["signals"].split(",") if s.strip()] if out["signals"] else []
+    elif "signals" not in out or out.get("signals") is None:
+        out["signals"] = []
+    # Map doc_type to frontend-expected values
+    if "type" in out and out["type"] in DOC_TYPE_MAP:
+        pass  # keep original type from CSV, frontend can handle it
+    # Add deviation field
+    if "deviation" in out:
+        out["deviationPct"] = round(float(out["deviation"]) * 100, 1) if out["deviation"] else 0
+    return out
 
 
 @router.get("")
@@ -25,7 +64,7 @@ def get_documents(
         df = df[mask]
     total = len(df)
     start = (page - 1) * page_size
-    items = df.iloc[start:start + page_size].to_dict(orient="records")
+    items = [map_doc(r) for r in df.iloc[start:start + page_size].to_dict(orient="records")]
     return {"items": items, "total": total, "page": page, "pageSize": page_size}
 
 
@@ -48,7 +87,7 @@ def get_summary():
 
 @router.get("/heatmap")
 def get_heatmap():
-    """Real anomaly heatmap: doc_type × hour-of-day from financial_documents.csv."""
+    """Real anomaly heatmap: doc_type x hour-of-day from financial_documents.csv."""
     df = data_loader.documents
     if df.empty:
         return {"types": [], "hours": list(range(24)), "grid": []}
@@ -69,6 +108,3 @@ def get_heatmap():
         grid.append({"row": t, "cells": cells})
 
     return {"types": types, "hours": hours, "grid": grid}
-
-
-import pandas as pd

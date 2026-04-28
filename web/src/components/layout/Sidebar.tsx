@@ -29,7 +29,7 @@ const NAV = [
   { to: "/immune", label: "Immune Intelligence", icon: Shield },
   { to: "/market", label: "Route Market", icon: Gavel },
   { to: "/documents", label: "Document Scanner", icon: FileSearch },
-  { to: "/crowd", label: "Crowd Intelligence", icon: Users },
+  { to: "/traffic", label: "Live Traffic & Routes", icon: Users },
   { to: "/shipments", label: "Shipment Tracker", icon: Package },
   { to: "/scenarios", label: "Scenario Sandbox", icon: Gamepad2 },
   { to: "/trends", label: "Network Trends", icon: TrendingUp },

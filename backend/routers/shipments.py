@@ -3,6 +3,37 @@ from simulation import data_loader
 
 router = APIRouter()
 
+SHIPMENT_MAP = {
+    "shipment_id": "id",
+    "booking_date": "bookingDate",
+    "transit_days_planned": "transitDaysPlanned",
+    "transit_days_actual": "transitDaysActual",
+    "delay_days": "delayDays",
+    "origin_id": "originId",
+    "origin_name": "originName",
+    "dest_id": "destId",
+    "dest_name": "destName",
+    "total_cost_usd": "costUSD",
+    "risk_score": "riskScore",
+    "disruption_flag": "disruptionFlag",
+    "transport_mode": "transportMode",
+}
+
+
+def map_shipment(row: dict) -> dict:
+    out = {}
+    for k, v in row.items():
+        key = SHIPMENT_MAP.get(k, k)
+        if isinstance(v, bool):
+            out[key] = v
+        elif hasattr(v, "item"):
+            out[key] = v.item()
+        else:
+            out[key] = v
+    # Ensure disruptionFlag is boolean
+    out["disruptionFlag"] = bool(out.get("disruptionFlag", 0))
+    return out
+
 
 @router.get("")
 def get_shipments(
@@ -25,7 +56,7 @@ def get_shipments(
         df = df[mask]
     total = len(df)
     start = (page - 1) * page_size
-    items = df.iloc[start:start + page_size].to_dict(orient="records")
+    items = [map_shipment(r) for r in df.iloc[start:start + page_size].to_dict(orient="records")]
     return {"items": items, "total": total}
 
 

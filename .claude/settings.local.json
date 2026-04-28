@@ -25,7 +25,10 @@
       "Bash(curl -s http://localhost:8000/api/shipments/stats)",
       "Bash(npx *)",
       "Bash(curl -s http://localhost:5173)",
-      "Bash(curl -s http://localhost:5173/api/health/command-center)"
+      "Bash(curl -s http://localhost:5173/api/health/command-center)",
+      "Bash(curl -s http://localhost:8000/api/shipments?page_size=2)",
+      "Bash(curl -s \"http://localhost:8000/api/shipments?page_size=2\")",
+      "Bash(curl -s \"http://localhost:8000/api/shipments?page_size=1\")"
     ]
   }
 }
