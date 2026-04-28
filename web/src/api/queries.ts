@@ -256,6 +256,14 @@ export function useMostDisrupted() {
   });
 }
 
+export function useTopDisruptedRoutes() {
+  return useQuery({
+    queryKey: ["disruptions", "top-routes"],
+    queryFn: () => apiFetch<Array<{ route: string; severity: number; r0: number; events: number }>>("/disruptions/top-routes"),
+    refetchInterval: 15000,
+  });
+}
+
 export function useFastestRecovery() {
   return useQuery({
     queryKey: ["disruptions", "fastest-recovery"],

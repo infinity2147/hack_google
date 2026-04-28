@@ -1,10 +1,10 @@
+import { useMemo } from "react";
 import { motion } from "framer-motion";
 import {
   Activity,
   AlertTriangle,
   Bell,
   TrendingUp,
-  FileSearch,
   Users,
   Container,
   Route as RouteIcon,
@@ -28,13 +28,8 @@ import { Card } from "../components/shared/Card";
 import { GeoNetworkMap } from "../components/network/GeoNetworkMap";
 import { R0Gauge } from "../components/shared/R0Gauge";
 import { useNexus } from "../store/nexusStore";
-import {
-  DISRUPTION_TIMELINE_72H,
-  TOP_DISRUPTED_ROUTES,
-  ANOMALY_HEATMAP,
-} from "../data/mockEvents";
 import { formatCurrency } from "../utils/formatters";
-import { useCommandCenterData, useDocumentHeatmap } from "../api/queries";
+import { useCommandCenterData, useTopDisruptedRoutes } from "../api/queries";
 
 const sparkline7 = (max: number) =>
   Array.from({ length: 14 }, (_, i) =>
@@ -42,45 +37,62 @@ const sparkline7 = (max: number) =>
   );
 
 export function CommandCenter() {
-  const { alerts, R0, dismissAlert, logDecision } = useNexus();
+  // ── Live SIR state from nexus store (same source as Epi Model page) ──
+  const { alerts, R0, runtime, history, dismissAlert, logDecision } = useNexus();
 
+  // ── API data for operational metrics (alerts, shipments, etc.) ──
   const { data: ccData, isLoading: ccLoading } = useCommandCenterData();
-  const { data: heatmapData, isLoading: heatmapLoading } = useDocumentHeatmap();
+  const { data: topRoutesData } = useTopDisruptedRoutes();
 
-  // Hardcoded fallbacks
-  const fallbackNetworkHealth = 73;
-  const fallbackDisruptionIdx = 0.34;
-  const fallbackDocAnomalies = 23;
-  const fallbackCrowdReports = 247;
-  const fallbackMonitoredCtr = 82;
-  const fallbackReroutedToday = 9;
+  // ── Live SIR counts derived from runtime (same as GlobalNetwork & EpiModel) ──
+  const sirCounts = useMemo(() => {
+    let S = 0; let I = 0; let R = 0;
+    for (const id of Object.keys(runtime)) {
+      const s = runtime[id].state;
+      if (s === "S") S++;
+      else if (s === "I") I++;
+      else R++;
+    }
+    return { S, I, R };
+  }, [runtime]);
 
-  const networkHealth = ccData?.networkHealth ?? fallbackNetworkHealth;
-  const disruptionIdx = ccData?.disruptionIndex ?? fallbackDisruptionIdx;
-  const R0Value = ccData?.R0 ?? R0;
+  const totalNodes = Object.keys(runtime).length || 31;
+
+  // ── Live metrics derived from runtime ──
+  const networkHealth = totalNodes > 0
+    ? Math.round((1 - sirCounts.I / totalNodes) * 1000) / 10
+    : (ccData?.networkHealth ?? 73);
+
+  const disruptionIdx = totalNodes > 0
+    ? Math.round((sirCounts.I / totalNodes) * 100) / 100
+    : (ccData?.disruptionIndex ?? 0.34);
+
+  const networkIndex = totalNodes > 0
+    ? Math.round(((sirCounts.I + sirCounts.R * 0.3) / totalNodes) * 100) / 100
+    : 0.27;
+
+  // R0 live from store
+  const R0Value = R0;
+
+  // ── SIR history → timeline (same series as Epi Model) ──
+  const timelineData = useMemo(
+    () => history.map((h) => ({ step: h.step, S: h.S, I: h.I, R: h.R })),
+    [history],
+  );
+
+  // ── Operational metrics from API ──
   const activeAlerts = ccData?.activeAlerts ?? alerts.length;
-  const docAnomalies = ccData?.docAnomalies ?? fallbackDocAnomalies;
-  const crowdReports = ccData?.crowdReports ?? fallbackCrowdReports;
-  const monitoredCtr = ccData?.monitoredContainers ?? fallbackMonitoredCtr;
-  const reroutedToday = ccData?.reroutedToday ?? fallbackReroutedToday;
-
-  const heatmap = heatmapData?.grid ?? ANOMALY_HEATMAP;
-
-  // API alerts or fallback to store alerts
-  const apiAlerts = ccData?.alerts ?? alerts;
-
-  const shipments = ccData?.shipments ?? 1247;
+  const crowdReports  = ccData?.crowdReports ?? 247;
+  const monitoredCtr  = ccData?.monitoredContainers ?? 82;
+  const reroutedToday = ccData?.reroutedToday ?? 9;
+  const apiAlerts     = ccData?.alerts ?? alerts;
+  const shipments     = ccData?.shipments ?? 1247;
   const cascadesPrevented = ccData?.cascadesPrevented ?? 9;
-  const avgResponseHours = ccData?.avgResponseHours ?? 3.2;
-  const costSaved = ccData?.costSaved ?? 2_300_000;
+  const avgResponseHours  = ccData?.avgResponseHours ?? 3.2;
+  const costSaved         = ccData?.costSaved ?? 2_300_000;
 
-  const heatColor = (n: number) => {
-    if (n === 0) return "#0d1521";
-    if (n <= 2) return "#1a3148";
-    if (n <= 4) return "#3b6f8c";
-    if (n <= 6) return "#f59e0b";
-    return "#ef4444";
-  };
+  // Top disrupted routes from API
+  const topRoutes = topRoutesData ?? [];
 
   const r0Tone =
     R0Value >= 2 ? "red" as const
@@ -89,15 +101,12 @@ export function CommandCenter() {
 
   return (
     <PageWrapper>
-      {/* Hero metrics */}
+      {/* Hero metrics — all live */}
       <motion.div
         className="grid grid-cols-2 lg:grid-cols-4 gap-3"
         initial="hidden"
         animate="show"
-        variants={{
-          hidden: {},
-          show: { transition: { staggerChildren: 0.08 } },
-        }}
+        variants={{ hidden: {}, show: { transition: { staggerChildren: 0.08 } } }}
       >
         <motion.div variants={{ hidden: { opacity: 0, y: 10 }, show: { opacity: 1, y: 0 } }}>
           <MetricCard
@@ -148,10 +157,11 @@ export function CommandCenter() {
       {/* Secondary metrics */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mt-3">
         <MetricCard
-          label="Document Anomalies"
-          value={docAnomalies}
-          color="amber"
-          icon={<FileSearch size={16} />}
+          label="Network Index"
+          value={networkIndex}
+          decimals={2}
+          color="blue"
+          icon={<Activity size={16} />}
         />
         <MetricCard
           label="Crowd Reports"
@@ -187,114 +197,137 @@ export function CommandCenter() {
             </div>
           </Card>
 
-          <Card title="Disruption Timeline · 72h" subtitle="Aggregate S/I/R fractions over the last 72 hours">
+          {/* Disruption Timeline — live SIR history from nexus store */}
+          <Card
+            title="Disruption Timeline · SIR"
+            subtitle="Live S/I/R fractions · updates with every simulation step"
+          >
             <div className="h-[180px] -mx-2">
-              <ResponsiveContainer>
-                <AreaChart data={DISRUPTION_TIMELINE_72H}>
-                  <defs>
-                    <linearGradient id="gS" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#3b82f6" stopOpacity={0.5} />
-                      <stop offset="100%" stopColor="#3b82f6" stopOpacity={0} />
-                    </linearGradient>
-                    <linearGradient id="gI" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#ef4444" stopOpacity={0.7} />
-                      <stop offset="100%" stopColor="#ef4444" stopOpacity={0.05} />
-                    </linearGradient>
-                    <linearGradient id="gR" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#22c55e" stopOpacity={0.5} />
-                      <stop offset="100%" stopColor="#22c55e" stopOpacity={0} />
-                    </linearGradient>
-                  </defs>
-                  <CartesianGrid stroke="#1e2d42" strokeDasharray="3 3" vertical={false} />
-                  <XAxis dataKey="hour" stroke="#4a6278" fontSize={10} reversed tickFormatter={(h) => `${h}h`} />
-                  <YAxis stroke="#4a6278" fontSize={10} domain={[0, 1]} tickFormatter={(v) => v.toFixed(1)} />
-                  <Tooltip />
-                  <Area dataKey="S" stroke="#3b82f6" fill="url(#gS)" stackId="1" />
-                  <Area dataKey="R" stroke="#22c55e" fill="url(#gR)" stackId="1" />
-                  <Area dataKey="I" stroke="#ef4444" fill="url(#gI)" stackId="1" />
-                </AreaChart>
-              </ResponsiveContainer>
+              {timelineData.length === 0 ? (
+                <div className="flex items-center justify-center h-full text-text-dim text-xs">
+                  Seed a disruption to populate the timeline
+                </div>
+              ) : (
+                <ResponsiveContainer>
+                  <AreaChart data={timelineData}>
+                    <defs>
+                      <linearGradient id="gS" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#3b82f6" stopOpacity={0.5} />
+                        <stop offset="100%" stopColor="#3b82f6" stopOpacity={0} />
+                      </linearGradient>
+                      <linearGradient id="gI" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#ef4444" stopOpacity={0.7} />
+                        <stop offset="100%" stopColor="#ef4444" stopOpacity={0.05} />
+                      </linearGradient>
+                      <linearGradient id="gR" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#00d4aa" stopOpacity={0.5} />
+                        <stop offset="100%" stopColor="#00d4aa" stopOpacity={0} />
+                      </linearGradient>
+                    </defs>
+                    <CartesianGrid stroke="#1e2d42" strokeDasharray="3 3" vertical={false} />
+                    <XAxis
+                      dataKey="step"
+                      stroke="#4a6278"
+                      fontSize={10}
+                      tick={{ fill: "#4a6278" }}
+                      label={{ value: "Step", position: "insideBottomRight", fill: "#4a6278", fontSize: 10 }}
+                    />
+                    <YAxis
+                      stroke="#4a6278"
+                      fontSize={10}
+                      tick={{ fill: "#4a6278" }}
+                      tickFormatter={(v) => `${(v * 100).toFixed(0)}%`}
+                    />
+                    <Tooltip
+                      formatter={(v: number, name: string) => [`${(v * 100).toFixed(1)}%`, name]}
+                      contentStyle={{ background: "#0d1521", border: "1px solid #1e2d42", borderRadius: 6 }}
+                    />
+                    <Area dataKey="S" stroke="#3b82f6" fill="url(#gS)" stackId="1" name="Susceptible" />
+                    <Area dataKey="I" stroke="#ef4444" fill="url(#gI)" stackId="1" name="Infected" />
+                    <Area dataKey="R" stroke="#00d4aa" fill="url(#gR)" stackId="1" name="Recovered" />
+                  </AreaChart>
+                </ResponsiveContainer>
+              )}
             </div>
           </Card>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Card title="Top Disrupted Routes" subtitle="By cascade severity (live)">
-              <div className="h-[180px]">
+          {/* Top Disrupted Routes — live from API */}
+          <Card title="Top Disrupted Routes" subtitle="By cascade severity · live from disruption data">
+            <div className="h-[200px]">
+              {topRoutes.length === 0 ? (
+                <div className="flex items-center justify-center h-full text-text-dim text-xs">
+                  Loading routes...
+                </div>
+              ) : (
                 <ResponsiveContainer>
-                  <BarChart data={TOP_DISRUPTED_ROUTES} layout="vertical" margin={{ left: 12 }}>
+                  <BarChart data={topRoutes} layout="vertical" margin={{ left: 12 }}>
                     <CartesianGrid stroke="#1e2d42" strokeDasharray="3 3" horizontal={false} />
                     <XAxis type="number" domain={[0, 1]} stroke="#4a6278" fontSize={10} />
-                    <YAxis type="category" dataKey="route" stroke="#8fa4c0" fontSize={10} width={140} tick={{ fill: "#8fa4c0" }} />
-                    <Tooltip />
+                    <YAxis
+                      type="category"
+                      dataKey="route"
+                      stroke="#8fa4c0"
+                      fontSize={10}
+                      width={140}
+                      tick={{ fill: "#8fa4c0" }}
+                    />
+                    <Tooltip
+                      formatter={(v: number) => [v.toFixed(2), "Severity"]}
+                      contentStyle={{ background: "#0d1521", border: "1px solid #1e2d42", borderRadius: 6 }}
+                    />
                     <Bar dataKey="severity" radius={[0, 4, 4, 0]}>
-                      {TOP_DISRUPTED_ROUTES.map((r, i) => (
-                        <Cell key={i} fill={r.severity > 0.7 ? "#ef4444" : r.severity > 0.5 ? "#f59e0b" : "#00d4aa"} />
+                      {topRoutes.map((r, i) => (
+                        <Cell
+                          key={i}
+                          fill={r.severity > 0.7 ? "#ef4444" : r.severity > 0.5 ? "#f59e0b" : "#00d4aa"}
+                        />
                       ))}
                     </Bar>
                   </BarChart>
                 </ResponsiveContainer>
-              </div>
-            </Card>
-
-            <Card title="Document Anomaly Heatmap" subtitle="7 doc types × 24 hours">
-              {heatmapLoading ? (
-                <div className="flex items-center justify-center h-[200px] text-text-dim text-xs">Loading...</div>
-              ) : (
-              <div className="grid grid-cols-[80px_1fr] gap-1">
-                <div />
-                <div className="grid grid-cols-24 gap-[2px] text-center text-[8px] text-text-dim">
-                  {Array.from({ length: 24 }, (_, h) => (
-                    <span key={h}>{h % 4 === 0 ? h : ""}</span>
-                  ))}
-                </div>
-                {heatmap.map((row) => (
-                  <div key={row.row} className="contents">
-                    <div className="text-[10px] text-text-secondary self-center pr-1 truncate">
-                      {row.row}
-                    </div>
-                    <div className="grid grid-cols-24 gap-[2px]">
-                      {row.cells.map((c, i) => (
-                        <div
-                          key={i}
-                          title={`${row.row} · ${i}:00 — ${c} anomalies`}
-                          className="aspect-square rounded-[2px]"
-                          style={{ backgroundColor: heatColor(c) }}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
               )}
-              <div className="mt-3 flex items-center justify-end gap-1.5 text-[10px] text-text-dim">
-                <span>0</span>
-                {[0, 2, 4, 6, 8].map((n) => (
-                  <span key={n} className="h-2 w-3 rounded-[2px]" style={{ backgroundColor: heatColor(n) }} />
-                ))}
-                <span>8+</span>
-              </div>
-            </Card>
-          </div>
+            </div>
+          </Card>
         </div>
 
         {/* Right 40% */}
         <div className="xl:col-span-2 space-y-4">
-          {/* R0 + alerts */}
-          <Card title="R₀ Live Monitor" subtitle="Cascade reproduction number">
+          {/* R0 Monitor — fully live from nexus store */}
+          <Card title="R₀ Live Monitor" subtitle="Cascade reproduction number · live from SIR model">
             <div className="flex items-center gap-4">
               <R0Gauge value={R0Value} size="md" />
               <div className="flex-1 text-xs space-y-2">
-                <p className="text-text-secondary leading-relaxed">
-                  Herd-immunity reroute threshold:
-                </p>
-                <div className="text-display text-xl text-accent-teal">
-                  {R0Value > 1 ? `${((1 - 1 / R0Value) * 100).toFixed(1)}%` : "0%"}
+                <div className="flex justify-between text-[10px]">
+                  <span className="text-text-dim">Network Index</span>
+                  <span className="text-accent-amber font-mono">{networkIndex.toFixed(2)}</span>
                 </div>
-                <p className="text-text-dim text-[10px] leading-relaxed">
-                  Reroute this fraction of inbound volume to flip cascade dynamics.
-                  When R₀ &gt; 1 the disruption will spread; reroute targets infected
-                  hubs.
-                </p>
+                <div className="flex justify-between text-[10px]">
+                  <span className="text-text-dim">Disruption Index</span>
+                  <span className="text-accent-red font-mono">{disruptionIdx.toFixed(2)}</span>
+                </div>
+                <div className="flex justify-between text-[10px]">
+                  <span className="text-text-dim">R-Effective</span>
+                  <span className={`font-mono ${R0Value >= 1 ? "text-accent-red" : "text-accent-green"}`}>
+                    {R0Value.toFixed(2)}
+                  </span>
+                </div>
+                <div className="flex justify-between text-[10px]">
+                  <span className="text-text-dim">Infected Nodes</span>
+                  <span className="text-accent-amber font-mono">{sirCounts.I} / {totalNodes}</span>
+                </div>
+                <div className="flex justify-between text-[10px]">
+                  <span className="text-text-dim">Recovered</span>
+                  <span className="text-accent-teal font-mono">{sirCounts.R}</span>
+                </div>
+                <div className="border-t border-border pt-2">
+                  <p className="text-text-secondary leading-relaxed">Herd-immunity reroute threshold:</p>
+                  <div className="text-display text-xl text-accent-teal">
+                    {R0Value > 1 ? `${((1 - 1 / R0Value) * 100).toFixed(1)}%` : "0%"}
+                  </div>
+                  <p className="text-text-dim text-[10px] leading-relaxed mt-1">
+                    Reroute this fraction of inbound volume to flip cascade dynamics.
+                  </p>
+                </div>
               </div>
             </div>
           </Card>
@@ -310,11 +343,12 @@ export function CommandCenter() {
           >
             <div className="space-y-2 max-h-[360px] overflow-y-auto pr-1 -mr-1">
               {apiAlerts.map((a, i) => {
-                const tone = a.level === "critical" ? "critical"
-                  : a.level === "alert" ? "alert"
-                  : a.level === "review" ? "review"
-                  : a.level === "immune" ? "immune"
-                  : "normal";
+                const tone =
+                  a.level === "critical" ? "critical" as const
+                  : a.level === "alert" ? "alert" as const
+                  : a.level === "review" ? "review" as const
+                  : a.level === "immune" ? "immune" as const
+                  : "normal" as const;
                 return (
                   <motion.div
                     key={a.id}
@@ -323,23 +357,15 @@ export function CommandCenter() {
                     transition={{ delay: i * 0.04 }}
                     className="rounded-lg border border-border bg-bg-elevated p-3 hover:border-border-bright transition-colors"
                   >
-                    <div className="flex items-start justify-between gap-2">
+                    <div className="flex items-start gap-2">
                       <div className="min-w-0">
                         <div className="flex items-center gap-2">
-                          <StatusBadge status={tone}>
-                            {a.level.toUpperCase()}
-                          </StatusBadge>
+                          <StatusBadge status={tone}>{a.level.toUpperCase()}</StatusBadge>
                           <span className="text-[10px] text-text-dim">{a.ago} ago</span>
                         </div>
-                        <div className="text-sm text-text-primary mt-1 leading-snug">
-                          {a.title}
-                        </div>
-                        <div className="text-[11px] text-text-secondary leading-snug">
-                          {a.detail}
-                        </div>
-                        <div className="text-[10px] text-text-dim font-mono mt-1">
-                          {a.meta}
-                        </div>
+                        <div className="text-sm text-text-primary mt-1 leading-snug">{a.title}</div>
+                        <div className="text-[11px] text-text-secondary leading-snug">{a.detail}</div>
+                        <div className="text-[10px] text-text-dim font-mono mt-1">{a.meta}</div>
                       </div>
                     </div>
                     <div className="mt-2 flex items-center gap-2">

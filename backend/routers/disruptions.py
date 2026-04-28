@@ -103,6 +103,33 @@ def get_most_disrupted():
     return items
 
 
+@router.get("/top-routes")
+def get_top_routes():
+    """Top disrupted routes by cascade severity derived from disruption events."""
+    df = data_loader.disruptions
+    if df.empty:
+        return []
+    # Build route label from port_name + disruption_type, aggregate severity
+    df = df.copy()
+    df["route"] = df["port_name"].str[:22]
+    agg = (
+        df.groupby("route")
+        .agg(severity=("severity", "max"), r0=("r_number", "max"), events=("event_id", "count"))
+        .sort_values("severity", ascending=False)
+        .head(8)
+        .reset_index()
+    )
+    result = []
+    for _, row in agg.iterrows():
+        result.append({
+            "route": row["route"],
+            "severity": round(float(row["severity"]), 2),
+            "r0": round(float(row["r0"]), 2),
+            "events": int(row["events"]),
+        })
+    return result
+
+
 @router.get("/fastest-recovery")
 def get_fastest_recovery():
     df = data_loader.disruptions
